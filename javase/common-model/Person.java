@@ -36,6 +36,14 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "name='" + name + '\'' + ", age=" + age + '}';
+        return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
+    }
+
+    // test for Reflect
+    public void testReflect() {
+        System.out.println("Reflect");
+    }
+    public void testReflect2( String str, Integer integer) {
+        System.out.println("Reflect2: "+str+"-"+integer);
     }
 }
