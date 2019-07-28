@@ -31,7 +31,7 @@ public class Sender {
 
             String message = String.join(" ", Constants.WORK_QUEUE_MESSAGE);
 
-            for(int i =0;i< 1000; i++) {
+            for(int i =0;i< 100; i++) {
 
                 channel.basicPublish("", Constants.WORK_QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
                 LOG.info(" [x] Sent '" + message + "'");

@@ -21,7 +21,7 @@ public class Receiver {
     private static Connection connection = ConnectionUtils.getConnection();
 
     public static void main(String[] argv) {
-        for (int i=0; i<1000; i++) {
+        for (int i=0; i<10; i++) {
             receiveMsg();
         }
     }
