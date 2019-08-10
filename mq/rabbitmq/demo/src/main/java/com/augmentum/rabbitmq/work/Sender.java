@@ -29,7 +29,15 @@ public class Sender {
             channel = connection.createChannel();
             channel.queueDeclare(Constants.WORK_QUEUE_NAME, true, false, false, null);
 
-            String message = String.join(" ", Constants.WORK_QUEUE_MESSAGE);
+            String message = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope\">\n" +
+                    "<soapenv:Header/>\n" +
+                    "<soapenv:Body>\n" +
+                    "  <p:greet xmlns:p=\"http://greet.service.kishanthan.org\">\n" +
+                    "     <in>" + "zack" + "</in>\n" +
+                    "  </p:greet>\n" +
+                    "</soapenv:Body>\n" +
+                    "</soapenv:Envelope>";
+//            String message = String.join(" ", Constants.WORK_QUEUE_MESSAGE);
 
             for(int i =0;i< 100; i++) {
 

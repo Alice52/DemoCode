@@ -2,7 +2,6 @@ package com.augmentum.rabbitmq.rpc;
 
 import com.augmentum.Constants;
 import com.augmentum.rabbitmq.Utils.ConnectionUtils;
-import com.augmentum.rabbitmq.publishsubscribe.TopicsSender;
 import com.rabbitmq.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeoutException;
 
 /**
  * @author zack
