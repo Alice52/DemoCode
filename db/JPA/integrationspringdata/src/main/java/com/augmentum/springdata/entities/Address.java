@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * @create 2019-08-11 0:48
  * @function
  */
-@Table(name="address")
+@Table(name = "address")
 @Entity
 public class Address {
     private Integer id;
@@ -41,5 +41,14 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

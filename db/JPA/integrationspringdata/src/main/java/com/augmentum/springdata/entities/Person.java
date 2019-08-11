@@ -19,6 +19,17 @@ public class Person {
     private int age;
     private Address address;
 
+    private Integer addressId;
+
+    @Column(name = "add_id")
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
     @JoinColumn(name="address_id")
     @ManyToOne
     public Address getAddress() {

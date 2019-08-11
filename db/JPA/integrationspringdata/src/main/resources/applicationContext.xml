@@ -60,29 +60,32 @@
         </property>
         <property name="jpaPropertyMap">
             <map>
+                <!-- 将Hibernate查询中的符号映射到SQL查询中的符号 (符号可能是函数名或常量名字). 取值 hqlLiteral=SQL_LITERAL, hqlFunction=SQLFUNC -->
                 <entry key="hibernate.query.substitutions" value="true 1, false 0"/>
+                <!--为Hibernate关联的批量抓取设置默认数量.取值 建议的取值为4, 8, 和16-->
                 <entry key="hibernate.default_batch_fetch_size" value="16"/>
-                <entry key="hibernate.max_fetch_depth" value="2"/>
+                <!-- 如果开启, Hibernate将收集有助于性能调节的统计数据. -->
                 <entry key="hibernate.generate_statistics" value="true"/>
+
+                <!-- 非零值，允许Hibernate使用JDBC2的批量更新. 取值 建议取5到30之间的值 -->
+                <!-- The first property tells Hibernate to collect inserts in batches of four. The order_inserts property tells Hibernate to take the time to group inserts by entity, creating larger batches. -->
+                <entry key="hibernate.jdbc.batch_size" value="16"/>
+                <entry key=" hibernate.order_inserts" value="true"/>
+
+                <!-- 为单向关联(一对一, 多对一)的外连接抓取（outer join fetch）树设置最大深度. 值为0意味着将关闭默认的外连接抓取. 取值 建议在0到3之间取值 -->
+                <entry key="hibernate.max_fetch_depth" value="2"/>
+                <!-- 开启CGLIB来替代运行时反射机制(系统级属性). 反射机制有时在除错时比较有用. 注意即使关闭这个优化, Hibernate还是需要CGLIB. 你不能在hibernate.cfg.xml中设置此属性. 取值 true | false -->
                 <entry key="hibernate.bytecode.use_reflection_optimizer" value="true"/>
+                <!-- 能用来完全禁止使用二级缓存. 对那些在类的映射定义中指定<cache>的类，会默认开启二级缓存. 取值 true|false -->
                 <entry key="hibernate.cache.use_second_level_cache" value="false"/>
+                <!-- 允许查询缓存, 个别查询仍然需要被设置为可缓存的. 取值 true|false -->
                 <entry key="hibernate.cache.use_query_cache" value="false"/>
+                <!-- the strategy genrerate table in db  -->
                 <entry key="hibernate.hbm2ddl.auto" value="update"/>
+                <!-- 输出所有SQL语句到控制台. 有一个另外的选择是把org.hibernate.SQL这个log category设为debug。 eg. true | false -->
                 <entry key="hibernate.show_sql" value="true"/>
             </map>
         </property>
-
-
-      <!---->
-        <!--&lt;!&ndash; 配置 JPA 的基本属性. 例如 JPA 实现产品的属性 &ndash;&gt;-->
-        <!--<property name="jpaProperties">-->
-            <!--<props>-->
-                <!--<prop key="hibernate.show_sql">true</prop>-->
-                <!--<prop key="hibernate.format_sql">true</prop>-->
-                <!--&lt;!&ndash; 建表 create、create-drop、update、validate、none &ndash;&gt;-->
-                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
-            <!--</props>-->
-        <!--</property>-->
     </bean>
 
     <!-- 3. 配置事务管理器 -->

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
@@ -15,8 +16,8 @@ import java.util.List;
  * @create 2019-08-11 0:23
  * @function
  */
-//@RepositoryDefinition(domainClass=Person.class,idClass=Integer.class)
-public interface PersonRepository extends JpaRepository<Person, Integer>, JpaSpecificationExecutor<Person>{
+@RepositoryDefinition(domainClass=Person.class,idClass=Integer.class)
+public interface PersonRepository extends JpaRepository<Person, Integer>, JpaSpecificationExecutor<Person>, PersonDao{
 
     //根据 lastName 来获取对应的 Person
     Person getByLastName(String lastName);
@@ -55,7 +56,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer>, JpaSpe
     List<Person> testQueryAnnotationLikeParam2(@Param("email") String email, @Param("lastName") String lastName);
 
     //设置 nativeQuery=true 即可以使用原生的 SQL 查询
-    @Query(value="SELECT count(id) FROM jpa_persons", nativeQuery=true)
+    @Query(value="SELECT count(id) FROM person", nativeQuery=true)
     long getTotalCount();
 
     //可以通过自定义的 JPQL 完成 UPDATE 和 DELETE 操作. 注意: JPQL 不支持使用 INSERT
