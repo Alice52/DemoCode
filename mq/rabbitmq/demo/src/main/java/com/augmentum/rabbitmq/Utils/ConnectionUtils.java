@@ -29,11 +29,10 @@ public class ConnectionUtils {
         Connection connection;
         ConnectionFactory connectionFactory = new ConnectionFactory();
 
-        connectionFactory.setHost("101.132.45.28");
+        connectionFactory.setHost("101.37.174.197");
         connectionFactory.setPort(5672);
-        connectionFactory.setVirtualHost("/vhost_zack");
-        connectionFactory.setUsername("zack");
-        connectionFactory.setPassword("Yu1252068782?");
+        connectionFactory.setUsername("guest");
+        connectionFactory.setPassword("guest");
 
         try {
             connection = connectionFactory.newConnection();
