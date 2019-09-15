@@ -24,4 +24,8 @@ public class Constants {
     public static final String EXCHANGE_TOPICS_NAME = "log_topics_exchange" ;
     public static final String ROUTING_DIRECT_KEY = "directKey";
     public static final String RPC_QUEUE_NAME = "rpc_queue";
+
+
+    public static final String QUEUE_DIRECT_NAME = "queue_direct";
+    public static final String ROUTING_KEY_DIRECT = "routing_key_direct";
 }
