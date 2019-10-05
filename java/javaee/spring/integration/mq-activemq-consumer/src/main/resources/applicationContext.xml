@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="cn.edu.ntu.spring.integration.activemq"/>
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <!-- config producer -->
+    <bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="${activemq.url}"/>
+                <!-- for create connection: bug -->
+                <!--<property name="clientID" value="spring-subscriber01"/>-->
+            </bean>
+        </property>
+        <property name="reconnectOnException" value="true"/>
+        <property name="maxConnections" value="100"/>
+    </bean>
+
+    <!-- config queue -->
+    <bean id="destinationQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="p2p_queue"/>
+    </bean>
+    <!-- config topic -->
+    <bean id="destinationTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg index="0" value="sub_topic"/>
+    </bean>
+
+    <!-- config JMS tool -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="jmsFactory"/>
+        <property name="defaultDestination" ref="destinationQueue"/>
+        <property name="messageConverter">
+            <bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+        </property>
+    </bean>
+    <!-- config queue listener: do not need start consumer -->
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="jmsFactory"/>
+        <property name="destination" ref="destinationQueue"/>
+        <property name="messageListener" ref="consumerListener"/>
+    </bean>
+
+    <!-- config subscriber01 -->
+    <bean  id="backOff" class="org.springframework.util.backoff.FixedBackOff">
+        <property name="maxAttempts" value="3"/>
+    </bean>
+
+    <bean id="subscriber01" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="jmsFactory"/>
+        <property name="destination" ref="destinationTopic"/>
+        <property name="messageListener" ref="consumerListener"/>
+        <property name="sessionAcknowledgeMode" value="1"/>
+        <!--<property name="pubSubDomain" value="true"/>-->
+        <!--<property name="subscriptionDurable" value="false"/>-->
+        <!--<property name="backOff" ref="backOff"/>-->
+        <!---这里是设置接收客户端的ID，在持久化时，但这个客户端不在线时，消息就存在数据库里，直到被这个ID的客户端消费掉-->
+        <!--<property name="clientId" value="subscriber01-topic"/>-->
+    </bean>
+
+    <!-- config subscriber02 -->
+    <bean id="subscriber02" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="jmsFactory"/>
+        <property name="destination" ref="destinationTopic"/>
+        <property name="messageListener" ref="consumerListener"/>
+        <property name="sessionAcknowledgeMode" value="1"/>
+        <!--<property name="pubSubDomain" value="true"/>-->
+        <!--<property name="subscriptionDurable" value="false"/>-->
+        <!--<property name="backOff" ref="backOff"/>-->
+        <!---这里是设置接收客户端的ID，在持久化时，但这个客户端不在线时，消息就存在数据库里，直到被这个ID的客户端消费掉-->
+        <!--<property name="clientId" value="subscriber02-topic"/>-->
+    </bean>
+</beans>
