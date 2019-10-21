@@ -28,7 +28,7 @@ public class ActiveMQUtil {
   public static Connection getConnection() {
     // 1. create connection factory
     ActiveMQConnectionFactory activeMQConnectionFactory =
-        new ActiveMQConnectionFactory(Constants.ACTIVEMQ_URL);
+        new ActiveMQConnectionFactory(Constants.NIO_ACTIVEMQ_URL);
     Connection connection = null;
     // 2. create connection
     try {

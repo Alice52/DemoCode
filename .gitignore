@@ -185,10 +185,6 @@ venv.bak/
 .pydevproject
 *.egg
 *.txt
-*.jpg
-*.png
-*.jpeg
-
 
 ## csharp
 # Prerequisites

@@ -6,7 +6,8 @@ package com.augmentum.mq.activemq;
  * @function
  */
 public final class Constants {
-  public static final String ACTIVEMQ_URL = "tcp://101.37.174.197:61616";
+  public static final String TCP_ACTIVEMQ_URL = "tcp://101.37.174.197:61616";
+  public static final String NIO_ACTIVEMQ_URL = "nio://101.37.174.197:61613";
   public static final String BROKER_ACTIVEMQ_URL = "tcp://localhost:61616";
 
   public static final String QUEUE_NAME = "p2p_queue";

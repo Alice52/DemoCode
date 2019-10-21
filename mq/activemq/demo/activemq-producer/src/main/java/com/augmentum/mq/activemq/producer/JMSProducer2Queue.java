@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
 
+import static com.augmentum.mq.activemq.Constants.QUEUE_NAME;
+
 /**
  * @author zack
  * @create 2019-10-03 10:50
@@ -13,7 +15,6 @@ import javax.jms.*;
  */
 public class JMSProducer2Queue {
   private static final Logger LOGGER = LoggerFactory.getLogger(JMSProducer2Queue.class);
-  private static final String QUEUE_NAME = "p2p_queue";
 
   public static void main(String[] args) throws JMSException {
     // 1. create session
