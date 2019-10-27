@@ -8,5 +8,6 @@ package cn.edu.ntu.spring.constants;
 public  final class Constants {
 
     public static final String APPLICATION_CONTEXT_XML_PATH ="ApplicationContext.xml";
+    public static final String APPLICATION_CONTEXT_MVC_XML_PATH="ApplicationContext4MVC.xml";
 
 }

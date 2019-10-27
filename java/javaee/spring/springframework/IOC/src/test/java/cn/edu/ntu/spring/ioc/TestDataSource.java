@@ -1,7 +1,8 @@
 package cn.edu.ntu.spring.ioc;
 
 import cn.edu.ntu.spring.constants.Constants;
-import cn.edu.ntu.spring.entity.Person;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.DataSources;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -11,21 +12,23 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author zack
- * @create 2019-10-27 15:04
+ * @create 2019-10-27 21:43
  * @function
  */
-public class TestIOC {
+public class TestDataSource {
+
     private ApplicationContext ctx;
-    private static final Logger LOG = LoggerFactory.getLogger(TestIOC.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TestDataSource.class);
 
     @Before
     public void init() {
         ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_XML_PATH);
     }
 
+
     @Test
-    public void testFactoryBean() {
-        Person person = ctx.getBean("person4FactoryBean", Person.class);
-        LOG.info("get person bean: {} from FactoryBean success.", person.toString());
+    public void  testConnection() {
+        ComboPooledDataSource comboPooledDataSource = ctx.getBean("dataSource", ComboPooledDataSource.class);
+        LOG.info("get dataSource connection bean: {} from IOC container success.", comboPooledDataSource);
     }
 }
