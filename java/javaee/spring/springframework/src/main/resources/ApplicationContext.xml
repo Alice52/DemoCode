@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="address" class="cn.edu.ntu.spring.entity.Address" p:province="jiangsu" p:city="xuzhou" p:zipCode="222000"/>
+
+    <bean id="person" class="cn.edu.ntu.spring.entity.Person">
+        <property name="email" value="zzhang_xz@163.com"/>
+        <property name="name" value="zack"/>
+        <property name="gender" value="0"/>
+        <property name="age" value="20"/>
+        <property name="birthDay">
+            <null/>
+        </property>
+        <property name="address" ref="address"/>
+        <property name="address.street" value="suining"/>
+        <property name="bookName">
+            <value><![CDATA[<<受活>>]]></value>
+        </property>
+    </bean>
+</beans>
