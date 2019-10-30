@@ -19,6 +19,7 @@ public class ArithmeticCalculatorImpl implements ArithmeticCalculator {
   @Override
   public int add(int a, int b) {
     int result = a + b;
+    int aa =5/0;
     return result;
   }
 

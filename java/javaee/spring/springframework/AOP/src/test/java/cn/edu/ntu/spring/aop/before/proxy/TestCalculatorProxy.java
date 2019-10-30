@@ -21,6 +21,6 @@ public class TestCalculatorProxy {
 
   @Test
   public void testCalculatorProxy() {
-    calculatorProxy.add(1, 3);
+    calculatorProxy.mul(1, 3);
   }
 }

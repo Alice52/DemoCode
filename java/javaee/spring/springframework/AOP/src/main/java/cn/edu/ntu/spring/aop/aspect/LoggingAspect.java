@@ -2,14 +2,13 @@ package cn.edu.ntu.spring.aop.aspect;
 
 import cn.edu.ntu.spring.utils.AspectUtil;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +23,15 @@ public class LoggingAspect {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
 
-  @Before(value = "execution(* cn.edu.ntu.spring.aop.before.proxy.*.*(..))")
+  @Pointcut(value = "execution(* cn.edu.ntu.spring.aop.before.proxy.*.*(..))")
+  public void pointCut() {}
+
+  /**
+   * @function preAdvice
+   * @param joinPoint
+   * @apiNote preAdvice cannot obtain result
+   */
+  @Before("pointCut()")
   public void preAdvice(JoinPoint joinPoint) {
     String methodName = joinPoint.getSignature().getName();
     Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
@@ -35,14 +42,72 @@ public class LoggingAspect {
         getTargetArgs(joinPoint, methodName));
   }
 
+  /**
+   * @function postAdvice
+   * @param joinPoint
+   * @apiNote postAdvice cannot obtain result and will execute always
+   */
+  @After(value = "pointCut()")
+  public void postAdvice(JoinPoint joinPoint) {
+    Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
+    String methodName = joinPoint.getSignature().getName();
+
+    LOG.info("After Advice, exec method {} end", methodName);
+  }
+
+  /**
+   * @functin reAdvice can obtain method result
+   * @param joinPoint
+   * @param result
+   */
+  @AfterReturning(value = "pointCut()", returning = "result")
+  public void reAdvice(JoinPoint joinPoint, Object result) {
+    Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
+    String methodName = joinPoint.getSignature().getName();
+
+    LOG.info("Return Advice, exec method {} end and result is {}", methodName, result);
+  }
+
+  /**
+   * @function throwingAdvice can specify exception to execute throwingAdvice method
+   * @param joinPoint
+   * @param ex
+   */
+  @AfterThrowing(value = "pointCut()", throwing = "ex")
+  public void throwingAdvice(JoinPoint joinPoint, Exception ex) {
+    Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
+    String methodName = joinPoint.getSignature().getName();
+
+    LOG.error("Throwing Advice, exec method {} occurs exception {}", methodName, ex);
+  }
+
+  @Around(value = "pointCut()")
+  public void aroundAdvice(ProceedingJoinPoint joinPoint) {
+
+    try {
+      // PreAdvice
+      Object proceed = joinPoint.proceed();
+      // ReturnAdvice
+    } catch (Throwable throwable) {
+      // ThrowingAdvice
+    } finally {
+      // PostAdvice
+    }
+  }
+
   public static String getTargetArgs(JoinPoint joinPoint, String methodName) {
     // TODO args is object will not specify value
     Object[] args = joinPoint.getArgs();
-    Map<String, Object> keyAndValue = getKeyAndValue(args, methodName);
-
+    Map<String, Object> keyAndValue = new HashMap<>();
+    try {
+      keyAndValue = getKeyAndValue(args, methodName);
+    } catch (Exception e) {
+      LOGGER.error("Get getKeyAndValue failed, message {}", e);
+    }
     return keyAndValue.toString();
   }
 
+  // TODO return json and argument should be specify
   public static Map<String, Object> getKeyAndValue(Object[] objs, String methodName) {
 
     Map<String, Object> map = new HashMap<>();
