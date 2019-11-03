@@ -11,6 +11,7 @@ namespace AspEfCore.Domain
             Cities = new List<City>();
         }
 
+        // default: Id[autoincreasement] and ProvinceId will be set as Primary Key
         public int Id { get; set; }
         public string Name { get; set; }
         public int Population { get; set; }

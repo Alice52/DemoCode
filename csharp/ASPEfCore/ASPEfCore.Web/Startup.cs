@@ -16,6 +16,11 @@ using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using AspEfCore.Data.Db;
+using AspEfCore.Data.Models;
+using AspEfCore.Data.Repsoitories;
+using EntityFramework.DbContextScope.Interfaces;
+using EntityFramework.DbContextScope;
 
 namespace ASPEfCore.Web
 {
@@ -32,8 +37,8 @@ namespace ASPEfCore.Web
 
             SwaggerConfig = new SwaggerConfig();
             Configuration.GetSection("SwaggerConfig").Bind(SwaggerConfig);
-
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
             // register Mvc
@@ -45,20 +50,30 @@ namespace ASPEfCore.Web
                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
            });
 
-            // Register DbContext
+            // Register DbContext: 
+            // ServiceLifetime.Scoped: generate a new instance for per request
+            // ServiceLifetime.Transient: generate a new instance for per used
+
             services.AddDbContext<CampDbContext>(
                 options =>
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("CampCommon"), option => option.CommandTimeout(30));
-                });
+                    options.EnableSensitiveDataLogging(true);
+                    options.UseSqlServer(Configuration.GetConnectionString("demo"),
+                        option =>
+                        {
+                            option.CommandTimeout(30);
+                            option.MaxBatchSize(1000);
+                        });
+                }, ServiceLifetime.Scoped);
 
             // Register Swagger
             InjectSwagger(services);
-
-           
+            // Register Repositiries
+            InjectRepositiries(services);
+            InjectDbContextScope(services);
         }
 
-       
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -72,7 +87,8 @@ namespace ASPEfCore.Web
             {
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Casino Data Service V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Asp EFCore Web Service V1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Asp EFCore Web Service V2");
                     c.RoutePrefix = "swagger";
                 });
 
@@ -91,11 +107,29 @@ namespace ASPEfCore.Web
         {
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info { Title = "Casino Data Service Api", Version = "v1" });
+                options.SwaggerDoc("v1", new Info { Title = "Asp EFCore Web Service Api", Version = "v1" });
+                options.SwaggerDoc("v2", new Info { Title = "Asp EFCore Web Service Api", Version = "v2" });
 
                 var filePath = Path.Combine(System.AppContext.BaseDirectory, "AspEfCore.Web.xml");
                 options.IncludeXmlComments(filePath);
             });
+        }
+
+        private void InjectRepositiries(IServiceCollection services)
+        {
+            services.AddTransient<IProvinceRepository, ProvinceRepository>();
+            services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<IMajorRepository, MajorRepository>();
+        }
+
+        private void InjectDbContextScope(IServiceCollection services)
+        {
+            services.AddSingleton<IDbContextFactory, CampDbContextFactory>();
+            services.AddSingleton<IDbContextScopeFactory, DbContextScopeFactory>();
+            services.AddSingleton<IAmbientDbContextLocator, AmbientDbContextLocator>();
+
+            services.AddScoped<IReadDbFacade, ReadDbFacade>();
         }
     }
 }
