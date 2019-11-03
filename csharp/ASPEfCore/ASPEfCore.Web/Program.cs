@@ -19,7 +19,7 @@ namespace ASPEfCore.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            //.UseDefaultServiceProvider(options => { options.ValidateScopes = false; })
+            .UseDefaultServiceProvider(options => { options.ValidateScopes = false; })
                 .UseStartup<Startup>();
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Hangfire;
 
 namespace AspEfCore.Web.Controllers
 {
@@ -14,11 +15,13 @@ namespace AspEfCore.Web.Controllers
     public class EfCoreControllerBasic : ControllerBase
     {
         private readonly CampDbContext _compDbContext;
+        private readonly IBackgroundJobClient _backgroungJobClient;
 
-        public EfCoreControllerBasic(CampDbContext compDbContext)
+        public EfCoreControllerBasic(CampDbContext compDbContext, IBackgroundJobClient backgroungJobClient)
         {
             // Inject
             _compDbContext = compDbContext;
+            _backgroungJobClient = backgroungJobClient;
         }
 
 

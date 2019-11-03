@@ -21,19 +21,35 @@ using AspEfCore.Data.Models;
 using AspEfCore.Data.Repsoitories;
 using EntityFramework.DbContextScope.Interfaces;
 using EntityFramework.DbContextScope;
+using Hangfire;
+using Hangfire.SqlServer;
+using System.Net.Http;
+using AspEfCore.Web.Services;
+using AspEfCore.Web.Jobs;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Hangfire.Client;
+using Hangfire.Common;
+using Hangfire.Server;
+using Hangfire.States;
 
 namespace ASPEfCore.Web
 {
     public class Startup
     {
+       
         private readonly ILogger<Startup> _logger;
+        //private readonly IHttpClientFactory _httpClientFactory;
+
         public IConfiguration Configuration { get; }
         public SwaggerConfig SwaggerConfig { get; set; }
 
-        public Startup(IConfiguration configuration, ILogger<Startup> logger)
+        public Startup(IConfiguration configuration, ILogger<Startup> logger
+            //, IHttpClientFactory httpClientFactory
+            )
         {
             Configuration = configuration;
             _logger = logger;
+            //_httpClientFactory = httpClientFactory;
 
             SwaggerConfig = new SwaggerConfig();
             Configuration.GetSection("SwaggerConfig").Bind(SwaggerConfig);
@@ -53,7 +69,6 @@ namespace ASPEfCore.Web
             // Register DbContext: 
             // ServiceLifetime.Scoped: generate a new instance for per request
             // ServiceLifetime.Transient: generate a new instance for per used
-
             services.AddDbContext<CampDbContext>(
                 options =>
                 {
@@ -66,15 +81,22 @@ namespace ASPEfCore.Web
                         });
                 }, ServiceLifetime.Scoped);
 
+
+
             // Register Swagger
             InjectSwagger(services);
             // Register Repositiries
             InjectRepositiries(services);
             InjectDbContextScope(services);
+
+            // Inject Hangfire
+            InjectHangfire(services);
+
+            InjectServices(services);
         }
 
-
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        // config for UI
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs)
         {
             if (env.IsDevelopment())
             {
@@ -82,7 +104,21 @@ namespace ASPEfCore.Web
             }
 
             app.UseStaticFiles();
+            // HangFire UI
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions());
 
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                HeartbeatInterval = new System.TimeSpan(0, 1, 0),
+                ServerCheckInterval = new System.TimeSpan(0, 1, 0),
+                SchedulePollingInterval = new System.TimeSpan(0, 1, 0)
+            });
+            backgroundJobs.Schedule(() => Console.WriteLine("Hello world from Hangfire3!"), new System.TimeSpan(0, 1, 0));
+
+           RecurringJob.AddOrUpdate(() => Console.WriteLine("Hello world RecurringJob!"), Cron.Minutely());
+
+
+            // Swagger UI
             if (SwaggerConfig.IsEnabled)
             {
                 app.UseSwaggerUI(c =>
@@ -102,6 +138,14 @@ namespace ASPEfCore.Web
             //    await context.Response.WriteAsync("Hello World!");
             //});
         }
+
+
+        //public async Task TestAsync()
+        //{
+        //    HttpClient client = _httpClientFactory.CreateClient();
+        //    client.BaseAddress = new Uri("http://api.github.com");
+        //    string result = await client.GetStringAsync("/");
+        //}
 
         private void InjectSwagger(IServiceCollection services)
         {
@@ -130,6 +174,47 @@ namespace ASPEfCore.Web
             services.AddSingleton<IAmbientDbContextLocator, AmbientDbContextLocator>();
 
             services.AddScoped<IReadDbFacade, ReadDbFacade>();
+        }
+
+        private void InjectHangfire(IServiceCollection services)
+        {
+            // Add Hangfire services.
+            services.AddHangfire(configuration => configuration
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"), new SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    UsePageLocksOnDequeue = true,
+                    DisableGlobalLocks = true
+                }));
+
+
+            services.TryAddSingleton<IBackgroundJobFactory>(x => new CustomBackgroundJobFactory(
+                       new BackgroundJobFactory(x.GetRequiredService<IJobFilterProvider>())));
+
+            services.TryAddSingleton<IBackgroundJobPerformer>(x => new CustomBackgroundJobPerformer(
+                new BackgroundJobPerformer(
+                    x.GetRequiredService<IJobFilterProvider>(),
+                    x.GetRequiredService<JobActivator>(),
+                    TaskScheduler.Default)));
+
+            services.TryAddSingleton<IBackgroundJobStateChanger>(x => new CustomBackgroundJobStateChanger(
+                           new BackgroundJobStateChanger(x.GetRequiredService<IJobFilterProvider>())));
+
+            services.AddHostedService<RecurringJobsService>();
+
+            services.AddHangfireServer();
+        }
+
+        private void InjectServices(IServiceCollection services)
+        {
+            services.AddTransient<IInsertDataService, InsertDataService>();
+            //services.AddTransient<ReccuringJob, ReccuringJob>();
         }
     }
 }

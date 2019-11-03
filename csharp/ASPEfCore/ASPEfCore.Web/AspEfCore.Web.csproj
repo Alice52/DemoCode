@@ -19,6 +19,11 @@
     <!-- Swagger -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" />
+
+    <!-- hangfire -->
+    <PackageReference Include="Hangfire.Core" Version="1.7.0" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.0" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.0" />
   </ItemGroup>
 
   <ItemGroup>
