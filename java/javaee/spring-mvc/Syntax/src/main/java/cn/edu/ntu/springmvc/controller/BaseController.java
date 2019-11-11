@@ -1,8 +1,19 @@
 package cn.edu.ntu.springmvc.controller;
 
 import cn.edu.ntu.springmvc.common.response.JsonResult;
+import org.springframework.context.ApplicationContext;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author zack
@@ -14,14 +25,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/base")
 public class BaseController {
 
-    @RequestMapping("/hello")
-    public JsonResult hello(){
+    // http://***/base/hello/1?name=zack&age=18
+    @RequestMapping(value = "/hello/{Id}"
+            , method = {RequestMethod.DELETE, RequestMethod.GET}
+            , params = {"!UserCode", "Access_Token", "age=12"}
+            , headers = "Accept-Language"
+            , consumes = {MediaType.TEXT_PLAIN_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public JsonResult hello(
+            HttpServletRequest request // need servlet-api dependency
+            , HttpServletResponse reqponse // need servlet-api dependency
+            , @ModelAttribute("user") Object user
+            , @PathVariable("Id") String id
+            , @RequestParam("name") String name
+            , @RequestParam(value = "age", required = false, defaultValue = "0") int age
+            , @RequestHeader(value = "Accept-Language", required = false, defaultValue = "0") String acceptLanguage
+            , @CookieValue(value = "JSESSIONID", required = false, defaultValue = "0") String sessionId) throws ServletException, IOException {
+
 
         JsonResult result = new JsonResult();
 
         result.setJsonData(null);
         result.setMessage("ok");
         result.setSuccess(1);
+
+        request.getRequestDispatcher("URL").forward(request, reqponse);
+        reqponse.sendRedirect("URL");
+
+        return result;
+    }
+
+
+    @RequestMapping(value = "/servlet/{Id}")
+    public JsonResult getContainerFServletContext(
+            HttpSession session) throws ServletException, IOException {
+
+        JsonResult result = new JsonResult();
+
+        ServletContext servletContext = session.getServletContext();
+
+        ApplicationContext ctx = (ApplicationContext) servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
         return result;
     }
