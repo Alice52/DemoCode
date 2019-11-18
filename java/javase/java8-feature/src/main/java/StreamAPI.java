@@ -23,7 +23,6 @@ public class StreamAPI {
     // 1. 通过 Collection 系列集合的 stream() 或 parallelStream()
     List<String> stringList = new ArrayList<>();
     Stream<String> stringStream = stringList.stream();
-
     // 2. 通过 Arrays 中的静态方法 stream() 获取数组流
     Employee[] emps = new Employee[10];
     Stream<Employee> employeeStream = Arrays.stream(emps);
