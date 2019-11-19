@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -59,5 +61,33 @@ public class TestStream {
     Stream<String> stringStream = stream.flatMap(Arrays::stream);
 
     stringStream.forEach(System.out::println);
+  }
+
+  @Test
+  public void testMatch() {
+    boolean anyMatch = integers.stream().anyMatch(i -> i > 4);
+    assert anyMatch : "exist element gt 4";
+
+    boolean matched = integers.stream().allMatch(i -> i < 6);
+    assert matched : "all element lt 6";
+
+    boolean noneMatch = integers.stream().noneMatch(i -> i < 1);
+    assert noneMatch : "no element lt 1";
+  }
+
+  @Test
+  public void testFind() {
+    Optional<Integer> optionalInteger = integers.stream().filter(i -> i == 2).findAny();
+    Optional<Integer> optionalInteger1 = integers.stream().filter(i -> i == 2).findFirst();
+  }
+
+  @Test
+  public void testMap() {
+    int a = 3;
+    IntStream.rangeClosed(1, 100)
+        .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
+        .boxed()
+        .map(b -> new int[] {a, b, (int) Math.sqrt(a * a + b * b)})
+        .forEach(arr -> System.out.println("a: " + arr[0] + ", b: " + arr[1] + " c:" + arr[2]));
   }
 }
