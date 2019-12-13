@@ -27,3 +27,10 @@
   </parent>
   ```
 - sub module how to use parent project config
+
+
+### delay send is error
+```log
+<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.data}" schedulerSupport="true">
+error: Attribute "schedulerSupport" was already specified for element "broker".
+```

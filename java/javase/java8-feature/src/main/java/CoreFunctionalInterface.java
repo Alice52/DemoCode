@@ -9,8 +9,11 @@ import java.util.function.Supplier;
 /**
  * @author zack
  * @create 2019-05-29 16:53
- * @function 测试 java 内置的四大核心函数式接口 1. Consumer<T>: void accept(T t) 2. Supplier<T>: T get() 3.
- *     Function<T, R>: R apply(T t) 4. Predicate<T>: bool test(T t)
+ * @function 测试 java 内置的四大核心函数式接口
+ *    1. Consumer<T>: void accept(T t)
+ *    2. Supplier<T>: T get()
+ *    3. Function<T, R>: R apply(T t)
+ *    4. Predicate<T>: bool test(T t)
  */
 public class CoreFunctionalInterface {
   /**
@@ -61,7 +64,6 @@ public class CoreFunctionalInterface {
 
   /**
    * Function<T, R>: R apply(T t)
-   *
    * @function: h获取字符长度
    */
   public Integer strHandler(String str, Function<String, Integer> func) {
@@ -101,7 +103,6 @@ public class CoreFunctionalInterface {
 
   /**
    * Predicate<T>: bool test(T t): 断言型接口
-   *
    * @function: 将满足条件的字符串, 过滤满足条件的字符串.
    */
   public List<String> filterStrings(List<String> strs, Predicate<String> predicate) {
