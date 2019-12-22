@@ -38,6 +38,6 @@ public enum HttpErrorCode {
 
   @Override
   public String toString() {
-    return "HttpErrorCode{" + "errorCode=" + errorCode + ", message='" + message + '\'' + '}';
+    return "Sea_Enumeration [desc=" + message + ", errorCode=" + errorCode + "]";
   }
 }

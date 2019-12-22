@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ImportResource(locations = {"classpath:beans.xml"})
 public class SpringBootIntegrationApplication {
 
   public static void main(String[] args) {

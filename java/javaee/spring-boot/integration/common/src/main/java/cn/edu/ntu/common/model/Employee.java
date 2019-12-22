@@ -1,7 +1,6 @@
 package cn.edu.ntu.common.model;
 
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Employee extends Person {
@@ -28,7 +27,7 @@ public class Employee extends Person {
   public Employee(
       int age,
       String name,
-      LocalDate birthDay,
+      Date birthDay,
       String country,
       boolean gender,
       long idCard,
