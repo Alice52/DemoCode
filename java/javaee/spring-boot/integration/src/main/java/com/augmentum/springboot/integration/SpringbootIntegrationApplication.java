@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableScheduling
-public class SpringbootIntegrationApplication {
+public class SpringBootIntegrationApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(SpringbootIntegrationApplication.class, args);
+    SpringApplication.run(SpringBootIntegrationApplication.class, args);
   }
 }
