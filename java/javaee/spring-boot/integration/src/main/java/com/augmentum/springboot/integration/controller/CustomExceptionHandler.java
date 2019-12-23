@@ -1,9 +1,7 @@
 package com.augmentum.springboot.integration.controller;
 
 import cn.edu.ntu.common.constants.HttpConstants;
-import cn.edu.ntu.common.model.JsonObject;
 import com.augmentum.springboot.integration.exception.UserNotExistException;
-import com.sun.xml.internal.bind.api.AccessorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
