@@ -1,19 +1,22 @@
 package cn.edu.ntu.common.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
+// this can inspect value to person object, then put it to IOC container.
+//@PropertySource(value = { "classpath:person.properties" })
+//@ConfigurationProperties(prefix = "person")
 public class Person {
 
   private int age;
   private String name;
-  private Date birthDay;
+  private LocalDate birthDay;
   private String country;
   private boolean gender;
   private long IdCard;
 
   public Person() {}
 
-  public Person(int age, String name, Date birthDay, String country, boolean gender, long idCard) {
+  public Person(int age, String name, LocalDate birthDay, String country, boolean gender, long idCard) {
     this.age = age;
     this.name = name;
     this.birthDay = birthDay;
@@ -38,11 +41,11 @@ public class Person {
     this.name = name;
   }
 
-  public Date getBirthDay() {
+  public LocalDate getBirthDay() {
     return birthDay;
   }
 
-  public void setBirthDay(Date birthDay) {
+  public void setBirthDay(LocalDate birthDay) {
     this.birthDay = birthDay;
   }
 
