@@ -20,11 +20,22 @@ public class CustomExceptionHandler {
   private static final Logger LOG = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
   @ExceptionHandler(UserNotExistException.class)
-  public String handleException(Exception e, HttpServletRequest request) {
+  public String handleUserNotExistException(UserNotExistException e, HttpServletRequest request) {
     Map<String, Object> map = new HashMap<>();
     request.setAttribute("javax.servlet.error.status_code", 500);
     map.put("code", "user not found");
     map.put("message", e);
+
+    request.setAttribute("ext", map);
+    return "forward:/error";
+  }
+
+  @ExceptionHandler(Exception.class)
+  public String handleException(Exception e, HttpServletRequest request) {
+    Map<String, Object> map = new HashMap<>();
+    request.setAttribute("javax.servlet.error.status_code", 500);
+    map.put("code", "9999");
+    map.put("message", "system exception");
 
     request.setAttribute("ext", map);
     return "forward:/error";
