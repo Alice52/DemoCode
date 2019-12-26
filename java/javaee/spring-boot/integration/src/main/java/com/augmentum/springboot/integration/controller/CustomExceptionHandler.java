@@ -1,6 +1,9 @@
 package com.augmentum.springboot.integration.controller;
 
+import cn.edu.ntu.common.constants.HttpConstants;
+import cn.edu.ntu.common.model.JsonObject;
 import com.augmentum.springboot.integration.exception.UserNotExistException;
+import com.sun.xml.internal.bind.api.AccessorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,20 +23,23 @@ public class CustomExceptionHandler {
   private static final Logger LOG = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
   @ExceptionHandler(UserNotExistException.class)
-  public String handleUserNotExistException(UserNotExistException e, HttpServletRequest request) {
+  public HttpServletRequest handleUserNotExistException(
+      UserNotExistException e, HttpServletRequest request) {
     Map<String, Object> map = new HashMap<>();
-    request.setAttribute("javax.servlet.error.status_code", 500);
-    map.put("code", "user not found");
+
+    map.put("code", "runtime error");
     map.put("message", e);
 
-    request.setAttribute("ext", map);
-    return "forward:/error";
+    request.setAttribute(HttpConstants.EXT, map);
+    request.setAttribute(HttpConstants.SERVER_CODE, 405);
+
+    return request;
   }
 
   @ExceptionHandler(Exception.class)
   public String handleException(Exception e, HttpServletRequest request) {
     Map<String, Object> map = new HashMap<>();
-    request.setAttribute("javax.servlet.error.status_code", 500);
+    request.setAttribute(HttpConstants.JAVAX_SERVLET_ERROR_STATUS_CODE, 500);
     map.put("code", "9999");
     map.put("message", "system exception");
 
