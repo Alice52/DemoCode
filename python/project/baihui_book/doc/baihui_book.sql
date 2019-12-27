@@ -3,7 +3,7 @@ Navicat MySQL Data Transfer
 
 Source Server         : aliyun
 Source Server Version : 50724
-Source Host           : 101.132.45.28:3306
+Source Host           : *.*.*.*:3306
 Source Database       : baihui_book
 
 Target Server Type    : MYSQL
