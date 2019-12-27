@@ -124,9 +124,9 @@ def get_xpath_data(url):
 
 def get_db_connection(url):
     config = {
-        "host": "101.132.45.28",
+        "host": "*.*.*.*",
         "user": "root",
-        "password": "Yu1252068782?",
+        "password": "Yu***?",
         "database": "baihui_book",
         "port": 3306,
         "charset": "utf8"
@@ -224,7 +224,7 @@ class SendEmail():
     def __init__(self, receiver_list=None, subject=None, content=None):
         self.stm_server = 'smtp.163.com'
         self.send_addr = 'zzhang_xz@163.com'
-        self.password = 'Yu1252068782'
+        self.password = 'Yu***?'
         self.receiver_list = receiver_list
         self.subject = subject
         self.content = content
