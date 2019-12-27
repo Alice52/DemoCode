@@ -17,6 +17,7 @@
         <module>java-IO</module>
         <module>java-reflect</module>
         <module>java-juc</module>
+        <module>java-jvm</module>
     </modules>
 
     <dependencies>
