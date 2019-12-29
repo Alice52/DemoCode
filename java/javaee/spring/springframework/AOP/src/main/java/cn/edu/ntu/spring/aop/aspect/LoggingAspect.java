@@ -19,6 +19,7 @@ import java.util.Map;
  */
 @Component
 @Aspect
+@Deprecated
 public class LoggingAspect {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);

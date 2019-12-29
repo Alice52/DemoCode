@@ -1,7 +1,13 @@
 package com.augmentum.springboot.integration.configuration;
 
+import com.augmentum.springboot.integration.component.CustomLocaleResolver;
+import com.augmentum.springboot.integration.component.LoginInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -12,7 +18,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
   @Override
-  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {}
 
+  @Override
+  public void addViewControllers(ViewControllerRegistry registry) {}
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry
+        .addInterceptor(new LoginInterceptor())
+        .addPathPatterns("/**")
+        .excludePathPatterns("/", "/index.html", "/user/login", "/static/**", "/webjars/**");
+  }
+
+  @Bean
+  public LocaleResolver localeResolver() {
+
+    return new CustomLocaleResolver();
   }
 }

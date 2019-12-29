@@ -23,6 +23,7 @@
         <module>rabbitmq-receiver</module>
         <module>rabbitmq-sender</module>
         <module>common</module>
+        <module>jdbc</module>
     </modules>
 
     <properties>
@@ -56,7 +57,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- log -->

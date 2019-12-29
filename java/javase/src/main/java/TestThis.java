@@ -23,6 +23,6 @@ public class TestThis {
     public static void main(String[] args) {
         TestThis test1 = new TestThis();
         test1.test(5);
-        System.out.println(test1.a);  //26
+        System.out.println(test1.a);  //560
     }
 }
