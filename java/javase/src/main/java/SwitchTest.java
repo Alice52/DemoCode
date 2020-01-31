@@ -3,9 +3,9 @@ import java.util.Scanner;
 /**
  * @author zack
  * @create 2019-06-10 11:43
- * @function
+ * @function Using case with no break, it will execute each case followed by.
  */
-public class TestSwitch {
+public class SwitchTest {
     public static void main(String[] args) {
         int i = 1;
         int days = 0;

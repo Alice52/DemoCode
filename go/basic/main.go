@@ -102,7 +102,7 @@ func main()  {
     for {
         // break goto return panic to exit
         fmt.Println(1)
-        break
+        //break
     }
 }
 

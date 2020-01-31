@@ -16,7 +16,7 @@ import java.util.TreeMap;
  * 统计TXT文件中每个单次出现的次数：
  */
 @SuppressWarnings("unused")
-public class TestMap {
+public class MapTest {
     private static final String TEST_DATA_PATH = "F:\\repository\\algs4-data\\movies.txt";
     private static final String SPACE = " ";
     private static final String SPACE_AND_POT = ", ";

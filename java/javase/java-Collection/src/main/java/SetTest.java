@@ -6,7 +6,10 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 
-public class TestSet {
+/**
+ * @author zack
+ */
+public class SetTest {
 
     @Test
     public void TestHashSet() {
@@ -18,7 +21,8 @@ public class TestSet {
         persons.add(new Person("DD", 13));
         persons.add(new Person("EE", 14));
         persons.add(new Person("EE", 15));
-        System.out.println(persons.size());  // 6
+        // 6
+        System.out.println(persons.size());
 
         persons.forEach(person -> System.out.println(person));
     }
@@ -33,16 +37,19 @@ public class TestSet {
         persons.add(new Person("CC", 12));
         persons.add(new Person("DD", 13));
         persons.add(new Person("DD", 13));
-        System.out.println(persons.size());  // 6
+        // 6
+        System.out.println(persons.size());
 
         persons.forEach(person -> System.out.println(person));
     }
 
 
-    // 方法一: 这里 Person 类实现 Comparable 接口中的 CompareTo 方法
-    // 方法二: 自定义 Comparator
+    /**
+     *  方法一: 这里 Person 类实现 Comparable 接口中的 CompareTo 方法<br>
+     *  方法二: 自定义 Comparator
+     */
     @Test
-    public void TestTreeSet2() {
+    public void testTreeSet2() {
 
         Set<Person> persons = new TreeSet<>(Comparator.comparing(Person::getName));
 
@@ -52,7 +59,8 @@ public class TestSet {
         persons.add(new Person("BB", 11));
         persons.add(new Person("CC", 12));
         persons.add(new Person("CC", 15));
-        System.out.println(persons.size());  //5
+        //5
+        System.out.println(persons.size());
 
         persons.forEach(person -> System.out.println(person));
     }

@@ -4,9 +4,10 @@ import org.slf4j.LoggerFactory;
 /**
  * @author zack
  * @create 2019-12-13 22:15
- * @function 1. using parent static field will not trigger subClass init, but superClass will init.
- *     2. using as DataType to new array will not trigger this class init. 3. constants are stored
- *     in the callee constant pool during compilation, so it will not init constants class
+ * @function
+ *      1. using parent static field will not trigger subClass init, but superClass will init.
+ *      2. using as DataType to new array will not trigger this class init.
+ *      3. constants are stored in the callee constant pool during compilation, so it will not init constants class
  */
 public class ClassInitialization {
   private static final Logger LOG = LoggerFactory.getLogger(ClassInitialization.class);
