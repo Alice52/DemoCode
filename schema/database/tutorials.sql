@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-02-02 20:26:41
+Date: 2020-02-03 16:46:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,6 +37,43 @@ CREATE TABLE `article` (
 INSERT INTO `article` VALUES ('1', '1', '1', '1', '1', 0x31, '1');
 INSERT INTO `article` VALUES ('2', '2', '2', '2', '2', 0x32, '2');
 INSERT INTO `article` VALUES ('3', '1', '1', '3', '3', 0x33, '3');
+
+-- ----------------------------
+-- Table structure for BigData_dept
+-- ----------------------------
+DROP TABLE IF EXISTS `BigData_dept`;
+CREATE TABLE `BigData_dept` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `deptno` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `dname` varchar(20) NOT NULL DEFAULT '',
+  `loc` varchar(13) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of BigData_dept
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for BigData_emp
+-- ----------------------------
+DROP TABLE IF EXISTS `BigData_emp`;
+CREATE TABLE `BigData_emp` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `empno` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `ename` varchar(20) NOT NULL DEFAULT '',
+  `job` varchar(9) NOT NULL DEFAULT '',
+  `mgr` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `hiredate` date NOT NULL,
+  `sal` decimal(7,2) NOT NULL,
+  `comm` decimal(7,2) NOT NULL,
+  `deptno` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of BigData_emp
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for book
@@ -206,6 +243,23 @@ INSERT INTO `tb_emp` VALUES ('7', 's8', '4');
 INSERT INTO `tb_emp` VALUES ('8', 's9', '51');
 
 -- ----------------------------
+-- Table structure for tblA
+-- ----------------------------
+DROP TABLE IF EXISTS `tblA`;
+CREATE TABLE `tblA` (
+  `age` int(11) DEFAULT NULL,
+  `birth` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `IDX_TBLA_AGE_BIRTH` (`age`,`birth`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of tblA
+-- ----------------------------
+INSERT INTO `tblA` VALUES ('22', '2020-02-03 12:11:13');
+INSERT INTO `tblA` VALUES ('23', '2020-02-03 12:11:13');
+INSERT INTO `tblA` VALUES ('24', '2020-02-03 12:11:14');
+
+-- ----------------------------
 -- Table structure for test03
 -- ----------------------------
 DROP TABLE IF EXISTS `test03`;
@@ -228,3 +282,77 @@ INSERT INTO `test03` VALUES ('2', 'b1', 'b2', 'b3', 'b4', 'b5');
 INSERT INTO `test03` VALUES ('3', 'c1', 'c2', 'c3', 'c4', 'c5');
 INSERT INTO `test03` VALUES ('4', 'd1', 'd2', 'd3', 'd4', 'd5');
 INSERT INTO `test03` VALUES ('5', 'e1', 'e2', 'e3', 'e4', 'e5');
+
+-- ----------------------------
+-- Procedure structure for insert_dept
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_dept`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `insert_dept`(IN start INT(10),IN max_num INT(10))
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET autocommit = 0;
+    REPEAT
+      SET i = i + 1;
+      INSERT INTO BigData_dept(deptno, dname, loc)
+          VALUES((start + i), rand_string(10), rand_string(8));
+      UNTIL i = max_num
+    END REPEAT;
+    COMMIT;
+  END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for insert_emp
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `insert_emp`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `insert_emp`(IN START INT(10),IN max_num INT(10))
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    # set autocommit =0把autocommit设置成0
+    SET autocommit= 0;
+    REPEAT
+      SET i=i+ 1;
+      INSERT INTO BigData_emp(empno, ename, job, mgr, hiredate, sal, comm, deptno)
+          VALUES((START+i), rand_string(6), 'SALESMAN', 0001, CURDATE(), 2000, 400, rand_num());
+      UNTIL i= max_num
+    END REPEAT;
+  COMMIT;
+  END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for rand_num
+-- ----------------------------
+DROP FUNCTION IF EXISTS `rand_num`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` FUNCTION `rand_num`( ) RETURNS int(5)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET i= FLOOR(100 + RAND() * 10);
+    RETURN i;
+  END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for rand_string
+-- ----------------------------
+DROP FUNCTION IF EXISTS `rand_string`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` FUNCTION `rand_string`(n INT) RETURNS varchar(255) CHARSET utf8mb4
+BEGIN
+    DECLARE chars_str VARCHAR(100) DEFAULT ' abcdefghijklmnopqrstuVwxyzABCDEFJHIJKLMNOPQRSTUVWXYZ';
+    DECLARE return_str VARCHAR(255) DEFAULT '';
+    DECLARE i INT DEFAULT 0;
+    WHILE i < n DO
+    SET return_str = CONCAT(return_str, SUBSTRING(chars_str, FLOOR(1+RAND()*52),1));
+    SET i = i + 1;
+  END WHILE;
+RETURN return_str;
+END
+;;
+DELIMITER ;

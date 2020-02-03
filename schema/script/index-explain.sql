@@ -32,6 +32,7 @@ show index from tb_emp;
 explain select * from tb_emp , tb_dept where tb_emp.deptId = tb_dept.id;
 
 
+## where
 -- const
 explain select * from tb_dept where id=1;
 -- const ref
@@ -253,7 +254,7 @@ explain select c1, c2, c3, c4 from test03 where c1 = 'a1' ;
 
 
 
-## Range
+#### Range
 -- valid, and type: range, extra: Using where; Using index
 explain select c1, c2, c3, c4 from test03 where c1 = 'a1' and c2 = 'a2' and c3 > 'a3' and  c4 = 'a4';
 explain select c1, c2, c3, c4 from test03 where c1 = 'a1' and c2 = 'a2' and  c4 = 'a4' and c3 > 'a3';
@@ -268,7 +269,7 @@ explain select c1, c2, c3, c4, c5 from test03 where c1 = 'a1' and c2 = 'a2' and 
 
 
 
-## order by
+#### order by
 -- type: ref, ref: 2, because c3 break, and c3 used to order by
 explain select c1, c2, c3, c4, c5 from test03 where c1 = 'a1' and c2 = 'a2' and  c4 = 'a4' order by c3;
 explain select c1, c2, c3, c4 from test03 where c1 = 'a1' and c2 = 'a2' and  c4 = 'a4' order by c3;
@@ -297,10 +298,235 @@ explain select c1, c2, c3, c4 from test03 where c1 = 'a1' and c2 = 'a2' and c5 =
 
 
 
-## group by
+#### group by
 -- type: ref, extra: Using where; Using index
 explain select c1, c2, c3, c4 from test03 where c1 = 'a1' and c4 = 'a4' group by c2, c3;
 explain select c1, c2, c3 from test03 where c1 = 'a1' group by c2, c3;
 -- type: ref, extra: Using where; Using index; Using temporary; Using filesort
 explain select c1, c2, c3, c4 from test03 where c1 = 'a1' and c4 = 'a4' group by c3, c2;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## oder by
+
+-- 1. 小表驱动大表
+-- book should little: ? but book table donot load first
+explain SELECT * FROM class WHERE id IN (SELECT bookid FROM book);
+-- class should little: ? but class table donot load first
+explain SELECT * FROM class WHERE EXISTS (SELECT 1 FROM book WHERE class.id = book.bookid);
+
+
+-- 2. order by
+
+CREATE TABLE tblA(
+  #id int primary key not null auto_increment,
+  age INT,
+  birth TIMESTAMP NOT NULL
+);
+INSERT INTO tblA(age,birth) VALUES(22,NOW());
+INSERT INTO tblA(age,birth) VALUES(23,NOW());
+INSERT INTO tblA(age ,birth) VALUES(24,NOW());
+CREATE INDEX IDX_TBLA_AGE_BIRTH ON tblA(age,birth);
+SELECT * FROM tblA;
+
+-- conclusion: order by column ordinal recommend same as index ordinal
+-- type: index, extra: Using where; Using index
+explain select age, birth from tblA where age > 20 order by age;      -- index valid
+-- type: index, extra: Using where; Using index
+explain select age, birth from tblA where age > 20 order by age desc;  -- index valid
+-- type: index, extra: Using where; Using index; Using filesort
+explain select age, birth from tblA where age > 20 order by birth;      -- index valid
+-- type: index, extra: Using where; Using index; Using filesort
+explain select age, birth from tblA where birth > 20 order by birth;  -- index valid
+-- type: index, extra: Using where; Using index
+explain select age, birth from tblA where birth > 20 order by age;  -- index valid
+-- type: index, extra: Using where; Using index
+explain select age, birth from tblA where birth > 20 order by age, birth;  -- index valid
+-- type: index, extra: Using where; Using index; Using filesort
+explain select age, birth from tblA where birth > 20 order by birth, age;  -- index valid
+
+-- type: index, extra: Using where; Using index; Using filesort
+explain select age, birth from tblA where age > 20 order by age asc, birth desc ;  -- index valid
+
+-- type: ref, extra: Using index condition
+explain select c1, c2, c3, c4, c5 from test03 where c1 = 'a1' and c2 = 'a2' order by c3, c4;
+-- type: ref, extra: Using where; Using index
+explain select c1, c2, c3, c4 from test03 where c1 = 'a1' and c2 = 'a2' order by c2, c3;
+-- type: index, extra: Using where; Using index; Using filesort
+explain select c1, c2, c3, c4, c5 from test03 where c1 = 'a1' and c2 = 'a2' order by c3, c4, c5;
+
+
+
+
+show variables like '%engine';
+SHOW VARIABLES LIKE '%slow_query_log%';
+SET GLOBAL SLOW_QUERY_LOG=1;
+show variables like '%long_query_time%';
+SET GLOBAL long_query_time = 3;
+show global status like '%slow_queries%';
+
+select  sleep(14);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## bulk insert
+create database bigData2;
+use bigData2;
+
+CREATE TABLE BigData_dept(
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
+  dname VARCHAR(20) NOT NULL DEFAULT '',
+  loc VARCHAR(13) NOT NULL DEFAULT ''
+) ENGINE=INNODB;
+
+select * from BigData_dept;
+
+
+CREATE TABLE BigData_emp(
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  empno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0, /*编号*/
+  ename VARCHAR(20) NOT NULL DEFAULT '', /*名字*/
+  job VARCHAR(9) NOT NULL DEFAULT '',/*工作*/
+  mgr MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,/*.上级编号*/
+  hiredate DATE NOT NULL,/*入职时间*/
+  sal DECIMAL(7,2) NOT NULL,/*薪水*/
+  comm DECIMAL(7 ,2) NOT NULL,/*红利*/
+  deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0/*部门编号*/
+)ENGINE=INNODB;
+
+select * from BigData_emp;
+
+
+
+show variables like '%log_bin_trust_function_creators%';
+
+
+
+-- generate random string: rags: is length
+DELIMITER $$
+CREATE FUNCTION rand_string(n INT) RETURNS VARCHAR (255)
+  BEGIN
+    DECLARE chars_str VARCHAR(100) DEFAULT ' abcdefghijklmnopqrstuVwxyzABCDEFJHIJKLMNOPQRSTUVWXYZ';
+    DECLARE return_str VARCHAR(255) DEFAULT '';
+    DECLARE i INT DEFAULT 0;
+    WHILE i < n DO
+    SET return_str = CONCAT(return_str, SUBSTRING(chars_str, FLOOR(1+RAND()*52),1));
+    SET i = i + 1;
+  END WHILE;
+RETURN return_str;
+END $$
+
+-- drop function rand_string;
+
+-- generate random num: 100 - 110
+DELIMITER $$
+CREATE FUNCTION rand_num( ) RETURNS INT(5)
+  BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET i= FLOOR(100 + RAND() * 10);
+    RETURN i;
+  END $$
+
+-- drop function rand_num;
+
+
+-- bulk insert emp
+DELIMITER $$
+CREATE PROCEDURE insert_emp(IN start INT(10),IN end INT(10))
+  BEGIN
+    DECLARE i INT DEFAULT 0;
+    # set autocommit = 0把 autocommit 设置成0
+    SET autocommit = 0;
+    REPEAT
+      SET i = i + 1;
+      INSERT INTO BigData_emp(empno, ename, job, mgr, hiredate, sal, comm, deptno)
+      VALUES((start + i), rand_string(6), 'SALESMAN', 0001, CURDATE(), 2000, 400, rand_num());
+    UNTIL i = end
+    END REPEAT;
+    COMMIT;
+  END $$
+
+-- bulk insert dept
+DELIMITER $$
+CREATE PROCEDURE insert_dept(IN start INT(10),IN max_num INT(10))
+  BEGIN
+    DECLARE i INT DEFAULT 0;
+    SET autocommit = 0;
+    REPEAT
+      SET i = i + 1;
+      INSERT INTO BigData_dept(deptno, dname, loc)
+          VALUES((start + i), rand_string(10), rand_string(8));
+      UNTIL i = max_num
+    END REPEAT;
+    COMMIT;
+  END $$
+
+
+-- call
+-- call insert_dept(100, 10);
+select * from BigData_dept;
+select * from BigData_emp where ename = 'ZkRFDa';
+
+-- call insert_emp(1000001, 500000);
+select * from BigData_emp;
+
+drop database bigData;
+
+show index from BigData_emp;
+
+create index IDX_EMP_NEME on BigData_emp(ename);
+create index IDX_EMP_NO on BigData_emp(empno);
+create index IDX_EMP_DEPTNO on BigData_emp(deptno) ;
+
+create index IDX_DEPT_NO on BigData_dept(deptno) ;
+
+
+explain select emp.id from BigData_emp emp left join BigData_dept dept on emp.deptno = dept.deptno;
+explain select emp.id from BigData_dept dept left join BigData_emp emp on emp.deptno = dept.deptno;
+
+explain select emp.id from BigData_emp emp where emp.deptno in (select deptno from BigData_dept dept);
+explain select emp.id from BigData_emp emp where exists (select deptno from BigData_dept dept where dept.deptno=emp.empno);
+
+explain select dept.id from BigData_dept dept where dept.deptno in (select deptno from BigData_emp emp);
+explain select dept.id from BigData_dept dept where exists (select deptno from BigData_emp emp where emp.deptno=dept.deptno);
+
+
+
+
+show variables like '%profiling%';
+
+show profiles
