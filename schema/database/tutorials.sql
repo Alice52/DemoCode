@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-02-03 16:46:08
+Date: 2020-02-04 16:02:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -88,7 +88,7 @@ CREATE TABLE `book` (
 -- ----------------------------
 -- Records of book
 -- ----------------------------
-INSERT INTO `book` VALUES ('1', '6');
+INSERT INTO `book` VALUES ('1', '12');
 INSERT INTO `book` VALUES ('2', '19');
 INSERT INTO `book` VALUES ('3', '17');
 INSERT INTO `book` VALUES ('4', '7');
@@ -142,6 +142,25 @@ INSERT INTO `class` VALUES ('17', '16');
 INSERT INTO `class` VALUES ('18', '14');
 INSERT INTO `class` VALUES ('19', '2');
 INSERT INTO `class` VALUES ('20', '6');
+
+-- ----------------------------
+-- Table structure for mylock
+-- ----------------------------
+DROP TABLE IF EXISTS `mylock`;
+CREATE TABLE `mylock` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of mylock
+-- ----------------------------
+INSERT INTO `mylock` VALUES ('1', 'q');
+INSERT INTO `mylock` VALUES ('2', 'b');
+INSERT INTO `mylock` VALUES ('3', 'c');
+INSERT INTO `mylock` VALUES ('4', 'd');
+INSERT INTO `mylock` VALUES ('5', 'e');
 
 -- ----------------------------
 -- Table structure for phone
@@ -258,6 +277,30 @@ CREATE TABLE `tblA` (
 INSERT INTO `tblA` VALUES ('22', '2020-02-03 12:11:13');
 INSERT INTO `tblA` VALUES ('23', '2020-02-03 12:11:13');
 INSERT INTO `tblA` VALUES ('24', '2020-02-03 12:11:14');
+
+-- ----------------------------
+-- Table structure for test_innodb_lock
+-- ----------------------------
+DROP TABLE IF EXISTS `test_innodb_lock`;
+CREATE TABLE `test_innodb_lock` (
+  `a` int(11) DEFAULT NULL,
+  `b` varchar(16) DEFAULT NULL,
+  KEY `IDX_INNODB_LOCK_A` (`a`),
+  KEY `IDX_INNODB_LOCK_B` (`b`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of test_innodb_lock
+-- ----------------------------
+INSERT INTO `test_innodb_lock` VALUES ('1', 'b2');
+INSERT INTO `test_innodb_lock` VALUES ('3', '40001');
+INSERT INTO `test_innodb_lock` VALUES ('4', '40001');
+INSERT INTO `test_innodb_lock` VALUES ('5', '40001');
+INSERT INTO `test_innodb_lock` VALUES ('6', '6000');
+INSERT INTO `test_innodb_lock` VALUES ('7', '7000');
+INSERT INTO `test_innodb_lock` VALUES ('8', '8000');
+INSERT INTO `test_innodb_lock` VALUES ('9', '9000');
+INSERT INTO `test_innodb_lock` VALUES ('1', 'b1');
 
 -- ----------------------------
 -- Table structure for test03

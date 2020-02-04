@@ -530,3 +530,43 @@ explain select dept.id from BigData_dept dept where exists (select deptno from B
 show variables like '%profiling%';
 
 show profiles
+
+
+create table mylock (
+  id   int not null primary key auto_increment,
+  name varchar(20)
+)
+  engine myisam;
+
+insert into mylock (name) values ('a');
+insert into mylock (name) values ('b');
+insert into mylock (name) values ('c');
+insert into mylock (name) values ('d');
+insert into mylock (name) values ('e');
+
+select *
+from mylock;
+
+show open tables ;
+
+create table test_innodb_lock(a int(11),b varchar(16))engine=innodb;
+insert into test_innodb_lock values(1,'b2');
+insert into test_innodb_lock values(3,'3');
+insert into test_innodb_lock values(4,'4000');
+insert into test_innodb_lock values(5,'5000');
+insert into test_innodb_lock values(6,'6000');
+insert into test_innodb_lock values(7,'7000');
+insert into test_innodb_lock values(8,'8000');
+insert into test_innodb_lock values(9,'9000');
+insert into test_innodb_lock values(1,'b1');
+create index IDX_INNODB_LOCK_A on test_innodb_lock(a);
+create index IDX_INNODB_LOCK_B on test_innodb_lock(b);
+
+
+update test_innodb_lock set a=40001 where b = 4000;
+-- type: all, extra: Using where
+explain update test_innodb_lock set a=40001 where b = 4000; -- index invalid
+-- type: range, extra: Using where
+explain update test_innodb_lock set a=40001 where b = '4000';  -- index valid
+
+show status like 'innodb_row_lock%';
