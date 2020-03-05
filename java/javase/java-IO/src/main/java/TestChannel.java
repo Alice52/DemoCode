@@ -40,7 +40,8 @@ public class TestChannel {
             ByteBuffer buffer2 = ByteBuffer.allocate(2048);
             ByteBuffer[] bufs = {buffer1, buffer2};
 
-            while (inChannel.read(bufs) != -1) {//3.分散写入
+            //3.分散写入
+            while (inChannel.read(bufs) != -1) {
                 //4.flip()将写模式转换为读
                 for (ByteBuffer byteBuffer : bufs) {
                     byteBuffer.flip();

@@ -39,11 +39,11 @@ public class TestParallel {
         "parallel stream built in add consume time: "
             + testCompareParallel(TestParallel::testParallelBuiltin2, 10000000));
 
-    //      normal add consume time: 3589700
-    //      iterate stream add consume time: 90266100
-    //      parallel stream without box add consume time: 80533400
-    //      parallel stream built in add consume time: 1355000
-    //      parallel stream built in add consume time: 8340600
+    //      normal add consume time:                            3589700
+    //      iterate stream add consume time:                   90266100
+    //      parallel stream without box add consume time:      80533400
+    //      parallel stream built in add consume time:          1355000
+    //      parallel stream built in add consume time:          8340600
 
   }
 

@@ -1,43 +1,56 @@
 package com.augmentum.springboot.integration.configuration;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.ResourceServlet;
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class DruidConfiguration {
   private static final Logger LOG = LoggerFactory.getLogger(DruidConfiguration.class);
 
-  //    @ConfigurationProperties("spring.datasource")
-  //    @Bean
-  //    public DataSource druid() {
-  //        return new DruidDataSource();
-  //    }
+  @Bean
+  @ConfigurationProperties(prefix = "spring.datasource")
+  public DruidDataSource configDruid() {
+    return new DruidDataSource();
+  }
 
-  //    @Bean
-  //    public ServletRegistrationBean<StatViewServlet> statViewServlet() {
-  //        ServletRegistrationBean<StatViewServlet> bean = new
-  // ServletRegistrationBean<StatViewServlet>(new StatViewServlet(), "/druid/*");
-  //        Map<String, String> initParams = new HashMap<>();
-  //        initParams.put("loginUsername", "zack");
-  //        initParams.put("loginPassword", "1252068782");
-  //        initParams.put("allow", "");// 默认就是允许所有访问
-  //        initParams.put("deny", "192.168.1.102");
-  //        bean.setInitParameters(initParams);
-  //
-  //        return bean;
-  //    }
+  // datasource management
+  @Bean
+  public ServletRegistrationBean<StatViewServlet> configStatViewServlet() {
+    ServletRegistrationBean<StatViewServlet> statServletBean =
+            new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
+    Map<String, String> initParams = new HashMap<>();
+    initParams.put(ResourceServlet.PARAM_NAME_USERNAME, "admin");
+    initParams.put(ResourceServlet.PARAM_NAME_PASSWORD, "admin");
+    initParams.put(ResourceServlet.PARAM_NAME_ALLOW, "");
+    initParams.put(ResourceServlet.PARAM_NAME_DENY, "192.168.43.143");
+    statServletBean.setInitParameters(initParams);
 
-  //    @Bean
-  //    public FilterRegistrationBean<WebStatFilter> webStatFilter() {
-  //        FilterRegistrationBean<WebStatFilter> bean = new
-  // FilterRegistrationBean<WebStatFilter>();
-  //        bean.setFilter(new WebStatFilter());
-  //        Map<String, String> initParams = new HashMap<>();
-  //        initParams.put("exclusions", "*.js,*.css,/druid/*");
-  //        bean.setInitParameters(initParams);
-  //        bean.setUrlPatterns(Arrays.asList("/*"));
-  //
-  //        return bean;
-  //    }
+    return statServletBean;
+  }
+
+  @Bean
+  public FilterRegistrationBean<WebStatFilter> configWebStatFilter() {
+    FilterRegistrationBean<WebStatFilter> webFilterBean = new FilterRegistrationBean<>();
+    webFilterBean.setFilter(new WebStatFilter());
+    Map<String, String> initParams = new HashMap<>();
+    initParams.put(WebStatFilter.PARAM_NAME_EXCLUSIONS, "*.js,*.css,/druid/*");
+
+    webFilterBean.setInitParameters(initParams);
+    webFilterBean.setUrlPatterns(Arrays.asList("/*"));
+
+    return webFilterBean;
+  }
 }

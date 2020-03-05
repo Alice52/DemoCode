@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 public class JVM {
   private static final Logger LOG = LoggerFactory.getLogger(JVM.class);
 
-  /*
+  /**
     21:50:11.525 [main] INFO JVM - Machine core number: 8
     21:50:11.531 [main] INFO JVM - [-Xms]JVM init memory 981 Mb
     21:50:11.531 [main] INFO JVM - [-Xmx]JVM max memory 981 Mb

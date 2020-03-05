@@ -18,6 +18,7 @@
         <module>java-reflect</module>
         <module>java-juc</module>
         <module>java-jvm</module>
+        <module>javase.enumeration</module>
     </modules>
 
     <dependencies>

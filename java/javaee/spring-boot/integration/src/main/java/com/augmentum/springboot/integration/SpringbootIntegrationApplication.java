@@ -7,9 +7,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ImportResource(locations = {"classpath:beans.xml"})
-public class SpringBootIntegrationApplication {
+public class SpringbootIntegrationApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(SpringBootIntegrationApplication.class, args);
+    SpringApplication.run(SpringbootIntegrationApplication.class, args);
   }
 }

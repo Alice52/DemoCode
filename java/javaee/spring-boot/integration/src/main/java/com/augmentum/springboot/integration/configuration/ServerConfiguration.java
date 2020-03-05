@@ -49,7 +49,7 @@ public class ServerConfiguration {
     return (factory) -> {
       ConfigurableWebServerFactory configurableWebServerFactory =
           (ConfigurableWebServerFactory) factory;
-      configurableWebServerFactory.setPort(8083);
+      configurableWebServerFactory.setPort(8080);
     };
   }
 }
