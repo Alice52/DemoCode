@@ -24,7 +24,7 @@ public class PaymentController {
   @PostMapping(value = "/payment/create")
   public JsonResult create(Payment payment) {
 
-    int result = paymentService.create(payment);
+    var result = paymentService.create(payment);
     log.info("Create: {}", result);
 
     return result > 0
@@ -39,7 +39,7 @@ public class PaymentController {
     log.info("Query: {}", payment);
 
     return payment == null
-        ? new JsonResult(999, "falied", null)
+        ? new JsonResult(999, "failed", null)
         : new JsonResult(200, "success", payment);
   }
 }

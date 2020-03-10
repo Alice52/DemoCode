@@ -21,7 +21,6 @@ public class JsonResult<T> {
   private T data;
 
   public JsonResult(Integer code, String message) {
-    this.code = code;
-    this.message = message;
+   this(code, message, null);
   }
 }
