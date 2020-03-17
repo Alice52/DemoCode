@@ -1,10 +1,29 @@
+### stand-alone
+#server:
+#  port: 7001
+#
+#eureka:
+#  instance:
+#    # eureka instance name
+#    hostname: localhost
+#  client:
+#    # false indicate itself donot register
+#    register-with-eureka: false
+#    # indicate itself is register center, it's duty is maintain service instances,
+#    # and donot retrieve register info from  server
+#    fetch-registry: false # indicates whether this client should fetch eureka registry information from eureka server.
+#    # set interaction URI, and query service address and resister is all dependence on this URI
+#    service-url:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+## HA
 server:
   port: 7001
 
 eureka:
   instance:
     # eureka instance name
-    hostname: localhost
+    hostname: eureka7001.com
   client:
     # false indicate itself donot register
     register-with-eureka: false
@@ -13,4 +32,11 @@ eureka:
     fetch-registry: false # indicates whether this client should fetch eureka registry information from eureka server.
     # set interaction URI, and query service address and resister is all dependence on this URI
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://eureka7002.com:7002/eureka/
+  server:
+      # disable self protect
+      enable-self-preservation: false
+      # remove instance interval time
+      eviction-interval-timer-in-ms: 2000
+
+
