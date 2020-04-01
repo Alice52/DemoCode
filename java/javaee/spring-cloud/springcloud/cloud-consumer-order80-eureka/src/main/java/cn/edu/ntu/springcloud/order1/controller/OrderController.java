@@ -31,4 +31,10 @@ public class OrderController {
   public JsonResult getPaymentById(@PathVariable("id") Long id) {
     return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, JsonResult.class);
   }
+
+  @GetMapping(value = "/payment/getEntity/{id}")
+  public JsonResult getPaymentById2(@PathVariable("id") Long id) {
+    return new JsonResult(
+        200, "ok", restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, JsonResult.class));
+  }
 }

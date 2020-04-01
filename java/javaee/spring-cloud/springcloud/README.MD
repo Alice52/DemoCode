@@ -32,14 +32,18 @@
 
 2.  cloud-consumer-order81
 
-    - is standalone consumer
+    - is standalone consumer, can call payment service by RestTemplate success. 
 
 3.  eureka
 
-    - cloud-consumer-order80
+    - cloud-consumer-order80-eureka
 
       - **consumer**: is cluster consumer, register to `cloud-eureka-server700, cloud-eureka-server7002`
       - and service provide is `cloud-provider-payment8001, cloud-provider-payment8002`
+     
+    - cloud-consumer-order80-customlb
+        
+        - this module is implement ribbon algorithms: CAS + Spin Lock
 
     - cloud-eureka-server7001
     - cloud-eureka-server7002
@@ -48,6 +52,7 @@
       - self protect and heartbeat setting
       - and comment has standalone config
       - **it is broken server**
+      - cluster guideline is contain others eureka server besides itself 
 
     - cloud-provider-payment8001
     - cloud-provider-payment8002

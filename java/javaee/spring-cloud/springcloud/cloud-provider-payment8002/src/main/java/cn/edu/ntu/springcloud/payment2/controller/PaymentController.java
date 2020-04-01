@@ -30,7 +30,7 @@ public class PaymentController {
     log.info("Create: {}", result);
 
     return result > 0
-            ? new JsonResult<>(200, "success, and port: " + port, result)
+        ? new JsonResult<>(200, "success, and port: " + port, result)
         : new JsonResult(999, "failed", null);
   }
 
@@ -38,11 +38,16 @@ public class PaymentController {
   public JsonResult getPaymentById(@PathVariable("id") Long id) {
     Payment payment = paymentService.getPaymentById(id);
     log.info("Query: {}", payment);
-    ClassLoader.getSystemClassLoader().
-            setDefaultAssertionStatus(true);
+    ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
 
     return payment == null
         ? new JsonResult(999, "failed", null)
         : new JsonResult(200, "success, and port: " + port, payment);
+  }
+
+  @GetMapping(value = "/lb")
+  public JsonResult getPaymentLB() {
+
+    return new JsonResult(200, port);
   }
 }

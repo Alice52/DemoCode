@@ -38,7 +38,7 @@ public class PaymentController {
   }
 
   @GetMapping(value = "/get/{id}")
-  public JsonResult getPaymentById(@PathVariable("id") Long id) {
+  public JsonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
     Payment payment = paymentService.getPaymentById(id);
     log.info("Query: {}", payment);
     ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -64,6 +64,12 @@ public class PaymentController {
                         + ", uri: "
                         + x.getUri()));
 
-  return this.discoveryClient;
+    return this.discoveryClient;
+  }
+
+  @GetMapping(value = "/lb")
+  public JsonResult getPaymentLB() {
+
+    return new JsonResult(200, port);
   }
 }

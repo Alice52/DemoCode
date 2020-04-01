@@ -13,13 +13,14 @@
         <module>cloud-consumer-order81</module>
         <module>cloud-provider-payment8001</module>
         <module>cloud-provider-payment8002</module>
-        <module>cloud-consumer-eureka-order80</module>
+        <module>cloud-consumer-order80-eureka</module>
         <module>cloud-eureka-server7001</module>
         <module>cloud-eureka-server7002</module>
         <module>cloud-consumer-order84-zookeeper</module>
         <module>cloud-provider-payment8004-zookeeper</module>
         <module>cloud-provider-payment8006-consul</module>
         <module>cloud-consumer-order86-consul</module>
+        <module>cloud-consumer-order80-customlb</module>
     </modules>
 
     <!-- jar version control -->
