@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zack <br>
@@ -70,6 +71,13 @@ public class PaymentController {
   @GetMapping(value = "/lb")
   public JsonResult getPaymentLB() {
 
+    return new JsonResult(200, port);
+  }
+
+  @GetMapping(value = "/feign/timeout")
+  public JsonResult paymentTimeout() throws InterruptedException {
+
+    TimeUnit.SECONDS.sleep(5);
     return new JsonResult(200, port);
   }
 }

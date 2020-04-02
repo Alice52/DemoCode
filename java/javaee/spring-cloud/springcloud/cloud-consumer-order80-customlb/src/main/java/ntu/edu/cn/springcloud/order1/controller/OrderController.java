@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequestMapping(value = "/consumer")
 public class OrderController {
 
-  private static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
+  private static final String PAYMENT_URL = "http://CLOUD-PROVIDER-PAYMENT-SERVICE";
   @Resource private RestTemplate restTemplate;
   @Resource private DiscoveryClient discoveryClient;
   @Resource private CustomLoadBalancer customLoadBalancer;

@@ -21,6 +21,10 @@
         <module>cloud-provider-payment8006-consul</module>
         <module>cloud-consumer-order86-consul</module>
         <module>cloud-consumer-order80-customlb</module>
+        <module>cloud-consumer-order80-feign</module>
+        <module>cloud-provider-payment8010-hystrix</module>
+        <module>cloud-consumer-order80-hystrix</module>
+        <module>cloud-provider-payment8011-hystrix</module>
     </modules>
 
     <!-- jar version control -->

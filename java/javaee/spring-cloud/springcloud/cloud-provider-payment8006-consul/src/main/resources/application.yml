@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: cloud-payment-service
+    name: cloud-provider-payment-service-consul
   cloud:
     consul:
       host: 101.132.45.28

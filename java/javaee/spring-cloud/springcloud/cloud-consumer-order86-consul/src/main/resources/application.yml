@@ -2,7 +2,7 @@ server:
   port: 86
 spring:
   application:
-    name: cloud-order-service
+    name: cloud-consumer-order-service
   cloud:
     consul:
       host: 101.132.45.28
