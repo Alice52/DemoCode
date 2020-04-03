@@ -1,6 +1,6 @@
 # demo code
 
-[![Build Status](https://travis-ci.com/Alice52/tutorials-sample.svg?branch=feat-test-travis)](https://travis-ci.com/Alice52/tutorials-sample)
+![Build Status](https://travis-ci.com/Alice52/tutorials-sample.svg?branch=feat-test-travis)
 
 This repository is exist for other note [repository](https://github.com/Alice52/java-ocean), and it is all sample.
 
