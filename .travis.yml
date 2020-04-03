@@ -1,18 +1,20 @@
 language: java
 
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 cache:
   directories:
   - '$HOME/.m2/repository'
 
 script:
+  - echo $HOME
+  - echo $GH_REF
   - cd ./java/javaee/spring-boot/integration
   - mvn clean package -DskipTests=true
 
 after_success:
-  - cd ./  
+  - cd /
   - bash <(curl -s https://codecov.io/bash)  
 
 branches:
