@@ -1,5 +1,7 @@
 # demo code
 
+[![Build Status](https://travis-ci.com/Alice52/tutorials-sample.svg?branch=master)](https://travis-ci.com/Alice52/tutorials-sample)
+
 This repository is exist for other note [repository](https://github.com/Alice52/java-ocean), and it is all sample.
 
 ## content
