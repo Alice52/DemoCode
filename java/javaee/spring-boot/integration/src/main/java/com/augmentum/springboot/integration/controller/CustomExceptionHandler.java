@@ -1,6 +1,6 @@
 package com.augmentum.springboot.integration.controller;
 
-import cn.edu.ntu.common.constants.HttpConstants;
+import com.augmentum.springboot.integration.constants.HttpConstants;
 import com.augmentum.springboot.integration.exception.UserNotExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

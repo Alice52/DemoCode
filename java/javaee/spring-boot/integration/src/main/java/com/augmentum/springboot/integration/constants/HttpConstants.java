@@ -1,4 +1,4 @@
-package cn.edu.ntu.common.constants;
+package com.augmentum.springboot.integration.constants;
 
 public class HttpConstants {
   public static final String SERVER_CODE = "server_code";

@@ -1,4 +1,4 @@
-package cn.edu.ntu.common.enumeration;
+package com.augmentum.springboot.integration.enumeration;
 
 /**
  * @author zack

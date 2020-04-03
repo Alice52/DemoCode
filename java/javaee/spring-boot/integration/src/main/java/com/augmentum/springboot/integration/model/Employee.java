@@ -1,4 +1,4 @@
-package cn.edu.ntu.common.model;
+package com.augmentum.springboot.integration.model;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;

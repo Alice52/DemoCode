@@ -1,0 +1,27 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+  - '$HOME/.m2/repository'
+
+script:
+  - cd ./java/javaee/spring-boot/integration
+  - mvn clean package -DskipTests=true
+
+after_success:
+  - cd ./  
+  - bash <(curl -s https://codecov.io/bash)  
+
+branches:
+  only:
+    - feat-zack
+
+notifications:
+  email: yes
+
+env:
+  global:
+  - GH_REF=git@github.com:Alice52/tutorials-sample.git

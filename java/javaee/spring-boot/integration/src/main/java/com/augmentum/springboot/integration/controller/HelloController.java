@@ -1,7 +1,7 @@
 package com.augmentum.springboot.integration.controller;
 
-import cn.edu.ntu.common.enumeration.HttpErrorCode;
-import cn.edu.ntu.common.model.JsonObject;
+import com.augmentum.springboot.integration.enumeration;
+import com.augmentum.springboot.integration.model.JsonObject;
 import com.augmentum.springboot.integration.exception.UserNotExistException;
 import com.augmentum.springboot.integration.model.Person;
 import com.augmentum.springboot.integration.service.HelloService;

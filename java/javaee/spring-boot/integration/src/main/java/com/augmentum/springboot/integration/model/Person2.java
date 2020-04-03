@@ -1,11 +1,11 @@
-package cn.edu.ntu.common.model;
+package com.augmentum.springboot.integration.model;
 
 import java.time.LocalDate;
 
 // this can inspect value to person object, then put it to IOC container.
 //@PropertySource(value = { "classpath:person.properties" })
 //@ConfigurationProperties(prefix = "person")
-public class Person {
+public class Person2 {
 
   private int age;
   private String name;

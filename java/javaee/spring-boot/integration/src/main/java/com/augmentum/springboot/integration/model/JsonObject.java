@@ -1,6 +1,6 @@
-package cn.edu.ntu.common.model;
+package com.augmentum.springboot.integration.model;
 
-import cn.edu.ntu.common.enumeration.HttpErrorCode;
+import com.augmentum.springboot.integration.enumeration;
 
 import javax.validation.constraints.NotNull;
 

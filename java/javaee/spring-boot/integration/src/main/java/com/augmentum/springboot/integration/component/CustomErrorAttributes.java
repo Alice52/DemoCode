@@ -1,6 +1,6 @@
 package com.augmentum.springboot.integration.component;
 
-import cn.edu.ntu.common.constants.HttpConstants;
+import com.augmentum.springboot.integration.constants.HttpConstants;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
