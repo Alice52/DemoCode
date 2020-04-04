@@ -11,7 +11,7 @@ script:
   - echo $HOME
   - echo $PWD
   - echo $GH_REF
-  - echo PWD
+  - echo $project_home
   - cd ./java/javaee/spring-boot/integration
   - mvn clean package -DskipTests=true
 
