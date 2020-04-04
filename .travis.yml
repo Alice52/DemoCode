@@ -1,30 +1,30 @@
 language: java
 
+services:
+  - docker
+
 jdk:
   - openjdk8
 
 cache:
   directories:
-  - '$HOME/.m2/repository'
-
-script:
-  - echo $HOME
-  - echo $PWD
-  - echo $GH_REF
-  - echo $project_home
-  - cd ./java/javaee/spring-boot/integration
-  - mvn clean package -DskipTests=true
-
-after_success:
-  - echo $pwd
-  - echo $project_home
-  - cd $project_home
-  - echo $pwd
- 
+    - '$HOME/.m2/repository'
 
 branches:
   only:
     - feat-test-travis
+
+jobs:
+  include:
+    - stage: build-spring-boot
+      script:
+        - cd $project_home/java/javaee/spring-boot/integration
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-cloud
+      script:
+        - cd $project_home/java/javaee/spring-cloud/springcloud
+        - mvn clean package -DskipTests=true
 
 notifications:
   email: yes
@@ -32,4 +32,4 @@ notifications:
 env:
   project_home: $PWD
   global:
-  - GH_REF=git@github.com:Alice52/tutorials-sample.git
+    - GH_REF=git@github.com:Alice52/tutorials-sample.git
