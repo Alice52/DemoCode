@@ -33,5 +33,6 @@ notifications:
 
 env:
   project_home: $PWD
+  commit_id: `git rev-parse --short HEAD`
   global:
     - GH_REF=git@github.com:Alice52/tutorials-sample.git
