@@ -14,14 +14,11 @@ branches:
   only:
     - feat-test-travis
 
-before_script:
-  script:
-    - commit_id=`git rev-parse --short HEAD`
-
 jobs:
   include:
     - stage: build-spring-boot
       script:
+        - commit_id=`git rev-parse --short HEAD`
         - echo $commit_id
         - git rev-parse --short HEAD
         - cd $project_home/java/javaee/spring-boot/integration
