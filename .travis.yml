@@ -9,7 +9,9 @@ cache:
 
 script:
   - echo $HOME
+  - echo $PWD
   - echo $GH_REF
+  - echo PWD
   - cd ./java/javaee/spring-boot/integration
   - mvn clean package -DskipTests=true
 
