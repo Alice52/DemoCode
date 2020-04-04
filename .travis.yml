@@ -14,6 +14,10 @@ branches:
   only:
     - feat-test-travis
 
+before_script:
+  script:
+    - commit_id=`git rev-parse --short HEAD`
+
 jobs:
   include:
     - stage: build-spring-boot
@@ -33,6 +37,6 @@ notifications:
 
 env:
   project_home: $PWD
-  commit_id: `git rev-parse --short HEAD`
+  commit_id: 000
   global:
     - GH_REF=git@github.com:Alice52/tutorials-sample.git
