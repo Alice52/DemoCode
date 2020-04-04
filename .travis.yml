@@ -18,7 +18,7 @@ jobs:
   include:
     - stage: build-spring-boot
       script:
-        - echo git rev-parse --short HEAD
+        - echo $commit_id
         - git rev-parse --short HEAD
         - cd $project_home/java/javaee/spring-boot/integration
         - mvn clean package -DskipTests=true
