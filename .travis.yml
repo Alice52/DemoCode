@@ -18,12 +18,8 @@ jobs:
   include:
     - stage: build-spring-boot
       script:
-        - echo `git rev-parse --short HEAD`
-        - commit_id=`git rev-parse --short HEAD`
-        - echo $commit_id=`git rev-parse --short HEAD`
         - echo $commit_id
-        - echo $commit_id2
-        - git rev-parse --short HEAD
+        - echo $image_tag
         - cd $project_home/java/javaee/spring-boot/integration
         - mvn clean package -DskipTests=true
 
@@ -37,6 +33,8 @@ notifications:
 
 env:
   project_home: $PWD
-  commit_id2: 'git rev-parse --short HEAD'
+  # if this tag is exist, we should delete it, then build new one.
+  image_tag: `date +%Y%m%d`.`git rev-parse --short HEAD`
+  commit_id: `git rev-parse --short HEAD`
   global:
     - GH_REF=git@github.com:Alice52/tutorials-sample.git
