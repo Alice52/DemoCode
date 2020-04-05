@@ -31,7 +31,7 @@ jobs:
       script:
         # - env
         - commit_id=${TRAVIS_COMMIT:0-7:7}
-        - image_tag=`date +%Y%m%d`.commit_id
+        - image_tag=`date +%Y%m%d`.$commit_id
         - echo $image_tag
         - echo $commit_id
         - cd $project_home/java/javaee/spring-boot/integration
@@ -51,7 +51,7 @@ jobs:
     - stage: build-spring-cloud-relevant
       script:
         - commit_id=${TRAVIS_COMMIT:0-7:7}
-        - image_tag=`date +%Y%m%d`.commit_id
+        - image_tag=`date +%Y%m%d`.$commit_id
         - cd $project_home/java/javaee/spring-cloud/relevant
         - mvn clean package -DskipTests=true
 
