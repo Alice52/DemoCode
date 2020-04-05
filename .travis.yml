@@ -30,15 +30,15 @@ jobs:
         - cd $project_home/java/javase/
         - mvn clean package -DskipTests=true
 
-    # - stage: build-spring-boot
-    #   script:
-    #     # - env
-    #     - commit_id=${TRAVIS_COMMIT:0:7}
-    #     - image_tag=`date +%Y%m%d`.$commit_id
-    #     - echo $commit_id
-    #     - echo $image_tag
-    #     - cd $project_home/java/javaee/spring-boot/integration
-    #     - mvn clean package -DskipTests=true
+    - stage: build-spring-boot
+      script:
+        # - env
+        - commit_id=${TRAVIS_COMMIT:0:7}
+        - image_tag=`date +%Y%m%d`.$commit_id
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring-boot/integration
+        - mvn clean package -DskipTests=true
 
     - stage: build-spring-cloud
       script:
