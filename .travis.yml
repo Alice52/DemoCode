@@ -14,12 +14,15 @@ branches:
   only:
     - feat-test-travis
 
-script:
-  - commit_id=`git rev-parse --short HEAD`
-  - echo $commit_id
-
 jobs:
   include:
+  - stage: prepare-env
+      script:
+        - commit_id=`git rev-parse --short HEAD`
+        - echo $commit_id
+        - image_tag=`date +%Y%m%d`.`git rev-parse --short HEAD`
+        - echo $image_tag
+        
     - stage: build-spring-boot
       script:
         - echo $commit_id
