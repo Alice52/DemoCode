@@ -16,6 +16,7 @@ branches:
 
 script:
   - commit_id=`git rev-parse --short HEAD`
+  - echo $commit_id
 
 jobs:
   include:
