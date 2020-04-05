@@ -50,6 +50,16 @@ jobs:
         - cd $project_home/java/javaee/spring/integration
         - mvn clean package -DskipTests=true
 
+    - stage: build-spring-mvc
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring-mvc
+        - mvn clean package -DskipTests=true
+
     - stage: build-spring-boot
       script:
         # - env
