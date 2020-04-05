@@ -1,29 +1,69 @@
 language: java
 
+git:
+  depth: 3
+
+services:
+  - docker
+
 jdk:
   - openjdk8
 
 cache:
   directories:
-  - '$HOME/.m2/repository'
-
-script:
-  - echo $HOME
-  - echo $GH_REF
-  - cd ./java/javaee/spring-boot/integration
-  - mvn clean package -DskipTests=true
-
-after_success:
-  - cd /
-  - bash <(curl -s https://codecov.io/bash)  
+    - '$HOME/.m2/repository'
 
 branches:
   only:
     - feat-test-travis
 
+jobs:
+  include:
+    - stage: build-javase
+      script:
+        # - env
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $image_tag
+        - echo $commit_id
+        - cd $project_home/java/javase/
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-boot
+      script:
+        # - env
+        - commit_id=${TRAVIS_COMMIT:0:7}
+        - image_tag=`date +%Y%m%d`.$commit_id
+        - echo $image_tag
+        - echo $commit_id
+        - cd $project_home/java/javaee/spring-boot/integration
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-cloud
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $image_tag
+        - echo $commit_id
+
+        - cd $project_home/java/javaee/spring-cloud/springcloud
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-cloud-relevant
+      script:
+        - commit_id=${TRAVIS_COMMIT:0:7}
+        - image_tag=`date +%Y%m%d`.$commit_id
+        - cd $project_home/java/javaee/spring-cloud/relevant
+        - mvn clean package -DskipTests=true
+
 notifications:
   email: yes
 
 env:
+  project_home: $PWD
+  commit_id: 000
+  image_tag: 000
   global:
-  - GH_REF=git@github.com:Alice52/tutorials-sample.git
+    - GH_REF=git@github.com:Alice52/tutorials-sample.git
