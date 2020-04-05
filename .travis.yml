@@ -99,6 +99,16 @@ jobs:
         - cd $project_home/job/job
         - mvn clean package -DskipTests=true
 
+    - stage: build-mq
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/mq
+        - mvn clean package -DskipTests=true
+
 notifications:
   email: $NOTIFICATION_EMAIL
 
