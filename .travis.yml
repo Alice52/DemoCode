@@ -15,16 +15,11 @@ branches:
     - feat-test-travis
 
 jobs:
-  include:
-    - stage: prepare-env
-      script:
-        - export commit_id=`git rev-parse --short HEAD`
-        - echo $commit_id
-        - export image_tag=`date +%Y%m%d`.`git rev-parse --short HEAD`
-        - echo $image_tag
-        
+  include:        
     - stage: build-spring-boot
       script:
+        - chmod +x $PWD/export.var.sh
+        - ./$PWD/export.var.sh
         - echo $commit_id
         - cd $project_home/java/javaee/spring-boot/integration
         - mvn clean package -DskipTests=true
