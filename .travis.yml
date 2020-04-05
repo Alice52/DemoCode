@@ -15,22 +15,44 @@ branches:
     - feat-test-travis
 
 jobs:
-  include:        
+  include:
+    #  - stage: build-javase
+    #     script:
+    #       # - env
+    #       - chmod +x $PWD/export.var.sh
+    #       - bash $PWD/export.var.sh
+    #       - source $PWD/export.var.sh
+    #       - echo $image_tag
+    #       - echo $commit_id
+    #       - cd $project_home/java/javase/
+    #       - mvn clean package -DskipTests=true
+
     - stage: build-spring-boot
       script:
-        - env
-        - chmod +x $PWD/export.var.sh
-        - bash $PWD/export.var.sh
-        - source $PWD/export.var.sh
-        - echo $commit_id
-        - image_tag=`date +%Y%m%d`.${commit_id:0-7:7}
+        # - env
+        - commit_id=${TRAVIS_COMMIT:0-7:7}
+        - image_tag=`date +%Y%m%d`.commit_id
         - echo $image_tag
+        - echo $commit_id
         - cd $project_home/java/javaee/spring-boot/integration
         - mvn clean package -DskipTests=true
 
     - stage: build-spring-cloud
       script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $image_tag
+        - echo $commit_id
+
         - cd $project_home/java/javaee/spring-cloud/springcloud
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-cloud-relevant
+      script:
+        - commit_id=${TRAVIS_COMMIT:0-7:7}
+        - image_tag=`date +%Y%m%d`.commit_id
+        - cd $project_home/java/javaee/spring-cloud/relevant
         - mvn clean package -DskipTests=true
 
 notifications:
@@ -38,7 +60,7 @@ notifications:
 
 env:
   project_home: $PWD
-  commit_id: $TRAVIS_COMMIT
+  commit_id: 000
   image_tag: 000
   global:
     - GH_REF=git@github.com:Alice52/tutorials-sample.git
