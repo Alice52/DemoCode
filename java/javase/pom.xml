@@ -4,44 +4,70 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.edu.ntu</groupId>
+    <groupId>cn.edu.ntu.java</groupId>
     <artifactId>javase</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>common-model</module>
-        <module>java8-feature</module>
-        <module>java-ClassLoader</module>
-        <module>java-Collection</module>
-        <module>java-Generic</module>
-        <module>java-IO</module>
-        <module>java-reflect</module>
-        <module>java-juc</module>
-        <module>java-jvm</module>
-        <module>javase.enumeration</module>
+        <module>javase-common</module>
+        <module>javase-syntax</module>
+        <module>javase-java8</module>
+        <module>javase-classloader</module>
+        <module>javase-collection</module>
+        <module>javase-generic</module>
+        <module>javase-io</module>
+        <module>javase-juc</module>
+        <module>javase-jvm</module>
+        <module>javase-reflect</module>
+        <module>javase-enumeration</module>
     </modules>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <!-- junit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-    </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
+        <junit.version>4.12</junit.version>
+        <slf4j.api.version>1.7.25</slf4j.api.version>
+        <logback.core.version>1.2.3</logback.core.version>
+        <logback.classic.version>1.2.3</logback.classic.version>
+        <lombok.version>1.18.12</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!-- logger -->
+            <dependency>
+                <artifactId>slf4j-api</artifactId>
+                <groupId>org.slf4j</groupId>
+                <version>${slf4j.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.classic.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
