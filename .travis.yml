@@ -16,7 +16,7 @@ branches:
 
 jobs:
   include:
-  - stage: prepare-env
+    - stage: prepare-env
       script:
         - commit_id=`git rev-parse --short HEAD`
         - echo $commit_id
