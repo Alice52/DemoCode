@@ -89,8 +89,18 @@ jobs:
         - cd $project_home/java/javaee/spring-cloud/relevant
         - mvn clean package -DskipTests=true
 
+    - stage: build-job
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/job/job
+        - mvn clean package -DskipTests=true
+
 notifications:
-  email: yes
+  email: $NOTIFICATION_EMAIL
 
 env:
   project_home: $PWD

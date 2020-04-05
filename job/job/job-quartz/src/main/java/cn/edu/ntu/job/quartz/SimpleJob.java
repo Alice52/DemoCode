@@ -1,6 +1,6 @@
-package com.augmentum.job;
+package cn.edu.ntu.job.quartz;
 
-import com.augmentum.job.utils.UTCTimeUtil;
+import cn.edu.ntu.job.quartz.utils.UTCTimeUtil;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;

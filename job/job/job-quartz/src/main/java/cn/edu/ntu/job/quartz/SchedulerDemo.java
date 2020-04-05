@@ -1,4 +1,4 @@
-package com.augmentum.job;
+package cn.edu.ntu.job.quartz;
 
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
