@@ -19,7 +19,7 @@ jobs:
     - stage: build-spring-boot
       script:
         - chmod +x $PWD/export.var.sh
-        - .$PWD/export.var.sh
+        - bash $PWD/export.var.sh
         - echo $commit_id
         - cd $project_home/java/javaee/spring-boot/integration
         - mvn clean package -DskipTests=true
