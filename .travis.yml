@@ -21,7 +21,7 @@ jobs:
         - env
         - chmod +x $PWD/export.var.sh
         - bash $PWD/export.var.sh
-        - bash source $PWD/export.var.sh
+        - source $PWD/export.var.sh
         - echo $commit_id
         - image_tag=`date +%Y%m%d`.${commit_id:0-7:7}
         - echo $image_tag
