@@ -18,6 +18,7 @@ jobs:
   include:        
     - stage: build-spring-boot
       script:
+        - env
         - chmod +x $PWD/export.var.sh
         - bash $PWD/export.var.sh
         - echo $commit_id
