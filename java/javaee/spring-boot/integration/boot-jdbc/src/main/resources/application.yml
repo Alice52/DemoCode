@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    username: root
+    password: Yu1252068782?
+    url: jdbc:mysql://101.132.45.28:3306/tutorials
+    driver-class-name: com.mysql.jdbc.Driver
+
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # Configure monitoring statistics interception filters.
+    # If removed, the monitoring interface sql cannot collect statistics.
+    # Wall is used for the firewall
+    filters: stat,wall, slf4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500

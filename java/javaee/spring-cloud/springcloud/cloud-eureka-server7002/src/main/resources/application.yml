@@ -14,3 +14,4 @@ eureka:
     # set interaction URI, and query service address and resister is all dependence on this URI
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/
+
