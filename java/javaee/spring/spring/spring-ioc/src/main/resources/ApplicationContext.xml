@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:property-placeholder location="classpath*:data-source.properties"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="driverClass" value="${jdbc.driverClass}"></property>
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+        <!-- other property -->
+    </bean>
+
+    <bean id="person4FactoryBean" class="cn.edu.ntu.javaee.spring.ioc.PersonFactoryBean"/>
+
+    <bean id="person4LifeCycle" class="cn.edu.ntu.javaee.spring.ioc.Person" init-method="init" destroy-method="destroy">
+        <property name="name" value="zack"/>
+        <property name="age" value="20"/>
+        <property name="gender" value="0"/>
+    </bean>
+
+    <!-- config post processor -->
+    <bean class="cn.edu.ntu.javaee.spring.ioc.CustomBeanPostProcessor"/>
+
+    <!--config autowire-->
+    <bean id="address" class="cn.edu.ntu.javaee.spring.common.entity.Address" p:zipCode="220000" p:province="JiangSu" p:city="XuZhou"/>
+    <bean id="person" class="cn.edu.ntu.javaee.spring.common.entity.Person" autowire="byName">
+        <property name="gender" value="true"/>
+        <property name="age" value="18"/>
+        <property name="name" value="zack"/>
+        <property name="bookName">
+            <value><![CDATA[<<受活>>]]]></value>
+        </property>
+        <property name="email" value="zzhang_xz@163.com"/>
+    </bean>
+
+</beans>
