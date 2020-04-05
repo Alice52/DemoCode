@@ -19,9 +19,11 @@ jobs:
     - stage: build-spring-boot
       script:
         - env
-        - chmod +x $PWD/export.var.sh
-        - bash $PWD/export.var.sh
+        # - chmod +x $PWD/export.var.sh
+        # - bash $PWD/export.var.sh
         - echo $commit_id
+        - image_tag=`date +%Y%m%d`.${commit_id:0-7:7}
+        - echo $image_tag
         - cd $project_home/java/javaee/spring-boot/integration
         - mvn clean package -DskipTests=true
 
@@ -35,7 +37,7 @@ notifications:
 
 env:
   project_home: $PWD
-  commit_id: 000
+  commit_id: $TRAVIS_COMMIT
   image_tag: 000
   global:
     - GH_REF=git@github.com:Alice52/tutorials-sample.git
