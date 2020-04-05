@@ -18,8 +18,8 @@ jobs:
   include:
     - stage: build-spring-boot
       script:
-        - commit_id=`git rev-parse --short HEAD`
         - echo $commit_id
+        - echo $commit_id2
         - git rev-parse --short HEAD
         - cd $project_home/java/javaee/spring-boot/integration
         - mvn clean package -DskipTests=true
@@ -34,6 +34,6 @@ notifications:
 
 env:
   project_home: $PWD
-  commit_id: 000
+  commit_id2: 'git rev-parse --short HEAD'
   global:
     - GH_REF=git@github.com:Alice52/tutorials-sample.git
