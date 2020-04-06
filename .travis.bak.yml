@@ -1,0 +1,120 @@
+language: java
+
+git:
+  depth: 3
+
+services:
+  - docker
+
+jdk:
+  - openjdk8
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+
+branches:
+  only:
+    - feat-zack
+    - master
+
+jobs:
+  include:
+    - stage: build-javase
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javase/
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring/spring
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring/integration
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-mvc
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring-mvc
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-boot
+      script:
+        # - env
+        - commit_id=${TRAVIS_COMMIT:0:7}
+        - image_tag=`date +%Y%m%d`.$commit_id
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring-boot/integration
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-cloud
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring-cloud/springcloud
+        - mvn clean package -DskipTests=true
+
+    - stage: build-spring-cloud-relevant
+      script:
+        - commit_id=${TRAVIS_COMMIT:0:7}
+        - image_tag=`date +%Y%m%d`.$commit_id
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/java/javaee/spring-cloud/relevant
+        - mvn clean package -DskipTests=true
+
+    - stage: build-job
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/job/job
+        - mvn clean package -DskipTests=true
+
+    - stage: build-mq
+      script:
+        - chmod +x $PWD/export.var.sh
+        - bash $PWD/export.var.sh
+        - source $PWD/export.var.sh
+        - echo $commit_id
+        - echo $image_tag
+        - cd $project_home/mq
+        - mvn clean package -DskipTests=true
+
+notifications:
+  email: $NOTIFICATION_EMAIL
+
+env:
+  project_home: $PWD
+  commit_id: 000
+  image_tag: 000
+  global:
+    - GH_REF=git@github.com:Alice52/tutorials-sample.git
