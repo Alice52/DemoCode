@@ -1,0 +1,20 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order-service
+
+ribbon:
+  # the time should more than provider service
+  ReadTimeout: 3500
+  connectionTimeout: 3500
+
+eureka:
+  client:
+    # the feign is just client, so can donot register to eureka
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+

@@ -1,7 +1,7 @@
 package cn.edu.ntu.springcloud.payment.hystrix.service;
 
 /**
- * the two method will aslo become slow due to high concurrent<br>
+ * the two method will also become slow due to high concurrent<br>
  *
  * @author zack <br>
  * @create 2020-04-02 22:30 <br>

@@ -32,45 +32,82 @@
 
 2.  cloud-consumer-order81
 
-    - is standalone consumer, can call payment service by RestTemplate success. 
+    - is standalone consumer, can call payment service by RestTemplate success.
 
 3.  eureka
 
-    - cloud-consumer-order80-eureka
+    - service discovery: eureka
 
-      - **consumer**: is cluster consumer, register to `cloud-eureka-server700, cloud-eureka-server7002`
-      - and service provide is `cloud-provider-payment8001, cloud-provider-payment8002`
-     
-    - cloud-consumer-order80-customlb
-        
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+        - **register center**: accept service provider and consumer registration
+        - self protect and heartbeat setting
+        - and comment has standalone config
+        - **it is broken server**
+        - cluster guideline is contain others eureka server besides itself
+
+    - service provider:
+
+      - cloud-provider-payment8001
+      - cloud-provider-payment8002
+        - **service provider**, register to `cloud-eureka-server700, cloud-eureka-server7002`
+        - config actuator info, such as IP, service name, heartbeat etcs
+
+    - service consumer:
+
+      - cloud-consumer-order80-eureka-ribbon
+        - **consumer**: is cluster consumer, register to `cloud-eureka-server700, cloud-eureka-server7002`
+        - and service provide is `cloud-provider-payment8001, cloud-provider-payment8002`
+
+4.  ribbon
+
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - provider:
+
+      - cloud-provider-payment8001
+        - provider fall backservice
+      - cloud-provider-payment8002
+        - nature service and not provider fall backservice
+
+    - consumer:
+
+      - cloud-consumer-order80-customlb
         - this module is implement ribbon algorithms: CAS + Spin Lock
+      - cloud-consumer-order80-eureka-ribbon
 
-    - cloud-eureka-server7001
-    - cloud-eureka-server7002
+5.  zookeeper
 
-      - **register center**: accept service provider and consumer registration
-      - self protect and heartbeat setting
-      - and comment has standalone config
-      - **it is broken server**
-      - cluster guideline is contain others eureka server besides itself 
+    - service discovery: zookeeper installed in server
 
-    - cloud-provider-payment8001
-    - cloud-provider-payment8002
+    - provider:
 
-      - **service provider**, register to `cloud-eureka-server700, cloud-eureka-server7002`
-      - config actuator info, such as IP, service name, heartbeat etcs
+      - cloud-provider-payment8004-zookeeper
 
-4.  zookeeper
+    - consumer:
 
-    - cloud-provider-payment8004
-    - cloud-consumer-order84-zookeeper
-      - integration with zookeeper
-      - zookeeper version should be consistent with jar
+      - cloud-consumer-order84-zookeeper
+        - integration with zookeeper
+        - zookeeper version should be consistent with jar
 
-5.  consul
+6.  consul
 
-    - cloud-consumer-order86-consul
-    - cloud-provider-payment8006-consul
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - provider:
+
+      - cloud-provider-payment8006-consul
+
+    - consumer:
+
+      - cloud-consumer-order86-consul
+
     - notice: Heartbeat detection and health check are two different method
       - When we configure `spring.cloud.consul.discovery.heartbeat.enabled` = true,
         spring cloud uses the heartbeat check push mechanism
@@ -83,6 +120,42 @@
       ```
     - https://blog.csdn.net/swordcenter/article/details/99286423
 
+7.  feign
+
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - provider:
+
+      - cloud-provider-payment8001
+      - cloud-provider-payment8002
+
+    - consumer:
+
+      - cloud-consumer-order80-feign
+
+8.  hystrix
+
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - provider:
+
+      - cloud-provider-payment8010-hystrix
+      - cloud-provider-payment8011-hystrix
+
+    - consumer:
+
+      - cloud-consumer-order80-hystrix-feign
+        - it demo timeout issue
+      - cloud-consumer-order80-feign-hystrix
+        - TODO: how to resolve timeout issue if is more than 1s?
+        - this is decoupling, and need enable feign's hystrix in yml
+
 ---
 
 ## Issues
@@ -91,3 +164,27 @@
 
    - may JDK version
    - **may dependency version: ** my issue is cause by lombok version error
+
+2. [expensive]hystrix: if provider and consumer all do service fallback:
+
+   - project module: `cloud-consumer-order80-hystrix-feign`
+   - provider fallback timeout: 3s, but the method execute cost 5s, so it will trigger this fallback in 3s
+   - consumer fallback timeout: 4s, so what happened?
+
+     - phenomenon is consumer triggered itself fallback when 1s, why??
+
+   - **`the question is cause by ribbon and hystrix timeout issue`**
+   - this is because ribbon default timeout is 1s, and hystrix default timeout is also 1s, so if change the args with 1s, everything is fine
+   - if the args is more than 1s, should do follow change
+
+     - consumer client should add the below code: **`because hystrix and ribbon work together, it will determine by that shortest`**
+
+     ```yml
+     ribbon:
+       # the time should more than provider service
+       ReadTimeout: 3500
+       connectionTimeout: 3500
+     ```
+
+   - if consumer hystrix timeout set 20s, and ribbon timeout set 40s; provider hystrix time set 30s, and method execute costs 50s, so consumer will trigge itself fallback when 20s
+   - if consumer hystrix timeout set 40s, and ribbon timeout set 20s; provider hystrix time set 30s, and method execute costs 50s, so consumer will trigge itself fallback when 20s

@@ -32,4 +32,10 @@ public class PaymentController {
       throws InterruptedException {
     return new JsonResult(200, "port: " + port, paymentService.getPaymentInfoTimeout(port));
   }
+
+  @GetMapping("/hystrix/error-info")
+  public JsonResult getPaymentInfoError()
+          throws InterruptedException {
+    return new JsonResult(200, "port: " + port, paymentService.getPaymentInfoError(port));
+  }
 }

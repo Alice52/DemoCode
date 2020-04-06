@@ -13,7 +13,7 @@
         <module>cloud-consumer-order81</module>
         <module>cloud-provider-payment8001</module>
         <module>cloud-provider-payment8002</module>
-        <module>cloud-consumer-order80-eureka</module>
+        <module>cloud-consumer-order80-eureka-ribbon</module>
         <module>cloud-eureka-server7001</module>
         <module>cloud-eureka-server7002</module>
         <module>cloud-consumer-order84-zookeeper</module>
@@ -23,8 +23,9 @@
         <module>cloud-consumer-order80-customlb</module>
         <module>cloud-consumer-order80-feign</module>
         <module>cloud-provider-payment8010-hystrix</module>
-        <module>cloud-consumer-order80-hystrix</module>
+        <module>cloud-consumer-order80-hystrix-feign</module>
         <module>cloud-provider-payment8011-hystrix</module>
+        <module>cloud-consumer-order80-feign-hystrix</module>
     </modules>
 
     <!-- jar version control -->

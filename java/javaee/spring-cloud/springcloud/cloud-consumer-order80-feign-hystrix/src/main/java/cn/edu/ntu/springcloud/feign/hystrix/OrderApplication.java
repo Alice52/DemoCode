@@ -1,20 +1,20 @@
-package cn.edu.ntu.springcloud.payment.hystrix;
+package cn.edu.ntu.springcloud.feign.hystrix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author zack <br>
- * @create 2020-04-02 22:29 <br>
+ * @create 2020-04-02 23:35 <br>
  */
 @SpringBootApplication
+@EnableFeignClients
 @EnableCircuitBreaker
-public class PaymentApplication {
+public class OrderApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(PaymentApplication.class, args);
+    SpringApplication.run(OrderApplication.class, args);
   }
 }
