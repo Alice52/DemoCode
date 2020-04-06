@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
+ * this annotation @EnableDiscoveryClient make no sense
+ *
  * @author zack <br>
  * @create 2020-04-02 23:45 <br>
  */

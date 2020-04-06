@@ -1,0 +1,20 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order-service
+
+eureka:
+  client:
+    # the feign is just client, so can donot register to eureka
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+
+# this is used with @FeignClient(value = "CLOUD-PROVIDER-PAYMENT-HYSTRIX", fallback = HystrixServiceHandler.class), otherwise consumer will loss fallback
+# it will make @HystrixCommand() annotation in caller[controller] make no sense, and it no help to timeout issue
+feign:
+  hystrix:
+    enabled: true
