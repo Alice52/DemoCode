@@ -145,11 +145,13 @@
 
     - provider:
 
-      - cloud-provider-payment8010-hystrix
-      - cloud-provider-payment8011-hystrix
+      - cloud-provider-payment8010-hystrix-fallback: contain fallback handle
+      - cloud-provider-payment8011-hystrix-circuit-breaker: contain circuit breaker handler
 
     - consumer:
 
+      - cloud-consumer-dashboard-hystrix9001
+        - it monitor provider service
       - cloud-consumer-order80-hystrix-feign
         - it demo timeout issue
       - cloud-consumer-order80-feign-hystrix
