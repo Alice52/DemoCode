@@ -158,6 +158,34 @@
         - TODO: how to resolve timeout issue if is more than 1s?
         - this is decoupling, and need enable feign's hystrix in yml
 
+    - monitor:
+      - cloud-consumer-dashboard-hystrix9001
+
+9.  gateway
+
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - provider:
+
+      - cloud-provider-payment8001
+
+    - gateway
+      - cloud-gateway-gateway9001
+
+10. config
+
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - config center
+      - cloud-config-center3344: server
+      - cloud-config-center3355: client
+
 ---
 
 ## Issues

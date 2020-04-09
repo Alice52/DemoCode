@@ -12,6 +12,7 @@
         <module>integration-mq-activemq-consumer</module>
         <module>integration-mq-activemq-producer</module>
         <module>integration-common</module>
+        <module>integration-jpa</module>
     </modules>
 
     <properties>
@@ -27,10 +28,15 @@
         <logback.core.version>1.2.3</logback.core.version>
         <logback.classic.version>1.2.3</logback.classic.version>
         <lombok.version>1.18.12</lombok.version>
+        <alibaba.fastjson.version>1.2.59</alibaba.fastjson.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- jpa -->
+
+
             <!-- activemq -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -53,7 +59,7 @@
                 <version>${activemq.broker.version}</version>
             </dependency>
 
-            <!--1. SPRING-->
+            <!--1. spring-->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
@@ -83,6 +89,7 @@
                 <version>${junit.version}</version>
             </dependency>
 
+            <!-- logger -->
             <dependency>
                 <artifactId>slf4j-api</artifactId>
                 <groupId>org.slf4j</groupId>
@@ -104,6 +111,13 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <optional>true</optional>
+            </dependency>
+
+            <!-- json -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${alibaba.fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
