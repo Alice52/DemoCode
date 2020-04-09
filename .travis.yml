@@ -65,8 +65,11 @@ jobs:
         - mvn clean package -DskipTests=true
 
 notifications:
-  email: $NOTIFICATION_EMAIL
-
+  email:
+    recipients:
+      - zzhang_xz@163.com
+    on_success: always # default: change
+    on_failure: always # default: always
 env:
   project_home: $PWD
   commit_id: 000
