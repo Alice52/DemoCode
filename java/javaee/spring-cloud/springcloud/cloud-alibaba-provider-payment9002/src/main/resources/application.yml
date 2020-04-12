@@ -1,0 +1,17 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: cloud-provider-payment-service
+  cloud:
+    nacos:
+      discovery:
+        # server-addr: 101.132.45.28:8848
+        server-addr: 101.132.45.28 # nginx --> nacos cluster
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

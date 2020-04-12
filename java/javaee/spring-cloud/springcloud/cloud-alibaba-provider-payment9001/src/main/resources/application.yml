@@ -1,0 +1,16 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: cloud-provider-payment-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.132.45.28:8848
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

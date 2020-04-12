@@ -29,11 +29,15 @@
         <module>cloud-consumer-dashboard-hystrix9001</module>
         <module>cloud-gateway-gateway9001</module>
         <module>cloud-config-center3344</module>
-        <module>cloud-config-center3355</module>
-        <module>cloud-config-center3366</module>
+        <module>cloud-config-client3355</module>
+        <module>cloud-config-client3366</module>
         <module>cloud-stream-rabbitmq-provider8801</module>
         <module>cloud-stream-rabbitmq-consumer8811</module>
         <module>cloud-stream-rabbitmq-consumer8812</module>
+        <module>cloud-alibaba-provider-payment9001</module>
+        <module>cloud-alibaba-provider-payment9002</module>
+        <module>cloud-alibaba-consumer-order91</module>
+        <module>cloud-alibaba-config-client3377</module>
     </modules>
 
     <!-- jar version control -->
