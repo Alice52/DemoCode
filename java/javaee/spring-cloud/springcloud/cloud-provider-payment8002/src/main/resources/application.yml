@@ -12,6 +12,12 @@ spring:
     password: Yu1252068782?
     druid:
       validation-query: SELECT 1
+  zipkin:
+    base-url: http://101.132.45.28:9411
+  sleuth:
+    sampler:
+      # Probability of requests that should be sampled
+      probability: 1
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

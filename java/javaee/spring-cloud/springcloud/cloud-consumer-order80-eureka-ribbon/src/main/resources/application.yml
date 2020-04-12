@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: cloud-consumer-order-service
+  zipkin:
+    base-url: http://101.132.45.28:9411
+  sleuth:
+    sampler:
+      # Probability of requests that should be sampled
+      probability: 1
 
 eureka:
   client:

@@ -1,19 +1,16 @@
 server:
-  port: 3344
+  port: 3366
 
 spring:
   application:
-    name: cloud-config-center-service
+    name: cloud-config-client-service
   cloud:
     config:
-      server:
-        git:
-          # http://localhost:3344/[master]/dev-config.yml
-          uri: https://gitee.com/alice52_xz/cloud-config.git
-          search-paths:
-            # this is folder of git from root content
-            - tutorial-sample
       label: master
+      name: config
+      profile: dev
+      uri: http://localhost:3344
+      # http://localhost:3344/master/config-dev.yml
   # add bus support for dynamic refresh
   rabbitmq:
     addresses: 101.132.45.28
@@ -22,6 +19,7 @@ spring:
     username: guest
     password: guest
 
+
 eureka:
   client:
     fetch-registry: true
@@ -29,9 +27,10 @@ eureka:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
 
-# this is about actuator jar, config to expose bus refresh endpoint
+# this is about actuator jar, config to expose endpoint
 management:
   endpoints:
     web:
       exposure:
-        include: "bus-refresh"
+        include: "*"
+
