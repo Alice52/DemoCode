@@ -69,9 +69,9 @@
     - provider:
 
       - cloud-provider-payment8001
-        - provider fall backservice
+        - provider fallback service
       - cloud-provider-payment8002
-        - nature service and not provider fall backservice
+        - nature service and not provider fallback service
 
     - consumer:
 
@@ -183,8 +183,41 @@
       - cloud-eureka-server7002
 
     - config center
-      - cloud-config-center3344: server
-      - cloud-config-center3355: client
+
+      - cloud-config-center3344: contain dynamic refresh
+
+    - config client
+      - cloud-config-center3355: donot contain dynamic refresh, should call api to notice this service
+      - cloud-config-center3355: contain dynamic refresh, can refresh by call api to notice config center
+
+11. stream
+
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - provider
+
+      - cloud-stream-rabbitmq-provider8801
+
+    - consumer
+      - cloud-stream-rabbitmq-consumer8811
+      - cloud-stream-rabbitmq-consumer8812
+
+12. sleuth
+
+    - service discovery: eureka
+
+      - cloud-eureka-server7001
+      - cloud-eureka-server7002
+
+    - provider
+
+      - cloud-stream-rabbitmq-provider8801
+
+    - consumer
+      - cloud-consumer-order80-eureka-ribbon
 
 ---
 

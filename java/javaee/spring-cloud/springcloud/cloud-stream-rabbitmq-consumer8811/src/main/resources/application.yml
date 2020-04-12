@@ -1,0 +1,43 @@
+server:
+  port: 8811
+
+spring:
+  application:
+    name: cloud-stream-consumer-service
+  cloud:
+    stream:
+      binders: # define config mq info
+        tutorial-rabbitmq: # for integration binding
+          type: rabbit # mq type
+          environment: # config mq
+            spring:
+              rabbitmq:
+                address: 101.132.45.28
+                host: 101.132.45.28
+                port: 5672
+                username: guest
+                password: guest
+      bindings: # service integration
+        input: #  mark as producer
+          destination: tutorial-exchange
+          content-type: application/json
+          binder: tutorial-rabbitmq
+          group: tutorial-exchange-rabbitmq-consumer
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2 # heartbeat time, default 30s
+    lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
+    instance-id: stream-consumer:8811  # to be registered with eureka and show as host name
+    prefer-ip-address: true # make the access path becomes an IP address
+
+# disable rabbit mq health check
+management:
+  health:
+    rabbit:
+      enabled: false

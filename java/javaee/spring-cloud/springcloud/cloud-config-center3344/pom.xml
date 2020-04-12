@@ -12,16 +12,23 @@
     <artifactId>cloud-config-center3344</artifactId>
 
     <dependencies>
+        <!-- add bus support for dynamic refresh-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+        <!-- config server  -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
-
+        <!-- service register center -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <!-- common -->
         <dependency>
             <groupId>cn.edu.ntu</groupId>
             <artifactId>cloud-api-commons</artifactId>
