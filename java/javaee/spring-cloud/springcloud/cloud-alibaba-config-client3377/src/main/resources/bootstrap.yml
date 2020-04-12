@@ -1,0 +1,28 @@
+server:
+  port: 3377
+
+custom-config:
+  server-addr: 101.132.45.28:8848
+  namespace: c079f421-6100-4440-be40-b30802d2db24
+  group: DEV_GROUP
+
+
+spring:
+  application:
+    name: cloud-config-client-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${custom-config.server-addr}
+        # discovery no group type
+        # group: ${custom-config.group}
+        namespace: ${custom-config.namespace}
+      config:
+        server-addr: ${custom-config.server-addr}
+        file-extension: yaml
+        group: ${custom-config.group}
+        namespace: ${custom-config.namespace}
+
+
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# cloud-config-client-service-dev.yaml

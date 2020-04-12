@@ -1,0 +1,14 @@
+server:
+  port: 91
+
+spring:
+  application:
+    name: cloud-consumer-order-service
+  cloud:
+    nacos:
+      discovery:
+        # server-addr: 101.132.45.28:8848
+        server-addr: 101.132.45.28 # nginx --> nacos cluster
+
+service-url:
+  nacos-payment-service: http://cloud-provider-payment-service

@@ -187,8 +187,8 @@
       - cloud-config-center3344: contain dynamic refresh
 
     - config client
-      - cloud-config-center3355: donot contain dynamic refresh, should call api to notice this service
-      - cloud-config-center3355: contain dynamic refresh, can refresh by call api to notice config center
+      - cloud-config-client3355: donot contain dynamic refresh, should call api to notice this service
+      - cloud-config-client3355: contain dynamic refresh, can refresh by call api to notice config center
 
 11. stream
 
@@ -218,6 +218,25 @@
 
     - consumer
       - cloud-consumer-order80-eureka-ribbon
+
+13. nacos register center
+
+    - service discovery: nacos in docker and can be cluster
+    - provider
+      - cloud-alibaba-provider-payment9001
+      - cloud-alibaba-provider-payment9002
+    - consumer
+      - cloud-alibaba-consumer-order91
+
+14. nacos config center
+
+    - service discovery: nacos in docker and can be cluster
+    - config center: nacos in docker and can be cluster
+
+      - cloud-config-center3344: contain dynamic refresh
+
+    - config client
+      - cloud-alibaba-config-client3377
 
 ---
 
