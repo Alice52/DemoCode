@@ -238,6 +238,14 @@
     - config client
       - cloud-alibaba-config-client3377
 
+15. sentinel
+
+    - server: run in docker ot local
+    - snetinel
+      -cloud-alibaba-sentinel8401
+
+16. seata
+
 ---
 
 ## Issues

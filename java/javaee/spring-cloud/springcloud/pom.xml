@@ -38,6 +38,7 @@
         <module>cloud-alibaba-provider-payment9002</module>
         <module>cloud-alibaba-consumer-order91</module>
         <module>cloud-alibaba-config-client3377</module>
+        <module>cloud-alibaba-sentinel8401</module>
     </modules>
 
     <!-- jar version control -->

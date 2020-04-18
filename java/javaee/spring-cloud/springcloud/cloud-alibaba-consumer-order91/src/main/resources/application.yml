@@ -7,7 +7,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        # server-addr: 101.132.45.28:8848
+#        server-addr: 101.132.45.28:8848
         server-addr: 101.132.45.28 # nginx --> nacos cluster
 
 service-url:
