@@ -1,0 +1,42 @@
+server:
+  port: 8401
+
+custom-config:
+  server-addr: 101.132.45.28:8848
+
+spring:
+  application:
+    name: cloud-sentinel-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${custom-config.server-addr}
+    sentinel:
+      transport:
+#        dashboard: 101.37.174.197:8849
+        dashboard: 127.0.0.1:8080
+        port: 8719
+      datasource:
+        paymentds:
+          nacos:
+            server-addr: ${custom-config.server-addr}
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+
+
+service-url:
+  nacos-payment-service: http://cloud-provider-payment-service
+
+# feign config, no this config is also work
+feign:
+  sentinel:
+    enabled: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
