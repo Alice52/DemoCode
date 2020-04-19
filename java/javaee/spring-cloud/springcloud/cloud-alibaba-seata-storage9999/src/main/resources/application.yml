@@ -1,0 +1,28 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: cloud-seata-storage-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.132.45.28
+    alibaba:
+      seata:
+        tx-service-group: cloud_seata_tx_group
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://101.132.45.28:3306/cloud-seata-storage
+    username: root
+    password: Yu1252068782?
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+
+

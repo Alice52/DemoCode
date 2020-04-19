@@ -1,0 +1,32 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: cloud-seata-account-service
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: cloud_seata_tx_group
+    nacos:
+      discovery:
+        server-addr: 101.132.45.28
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://101.132.45.28:3306/cloud-seata-account
+    username: root
+    password: Yu1252068782?
+
+feign:
+  hystrix:
+    enabled: false
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+
+

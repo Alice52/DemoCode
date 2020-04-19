@@ -39,6 +39,9 @@
         <module>cloud-alibaba-consumer-order91</module>
         <module>cloud-alibaba-config-client3377</module>
         <module>cloud-alibaba-sentinel8401</module>
+        <module>cloud-alibaba-seata-order80</module>
+        <module>cloud-alibaba-seata-account8888</module>
+        <module>cloud-alibaba-seata-storage9999</module>
     </modules>
 
     <!-- jar version control -->
@@ -82,6 +85,11 @@
                 <version>${cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>

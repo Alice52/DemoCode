@@ -246,6 +246,17 @@
 
 16. seata
 
+    - seata server: config file.conf and register.conf, then start
+    - order:
+      - cloud-alibaba-seata-order80
+      - config file.conf and register.conf
+    - account
+      - cloud-alibaba-seata-account8888
+      - config file.conf and register.conf
+    - storage
+      - cloud-alibaba-seata-storage9999
+      - config file.conf and register.conf
+
 ---
 
 ## Issues
@@ -278,3 +289,19 @@
 
    - if consumer hystrix timeout set 20s, and ribbon timeout set 40s; provider hystrix time set 30s, and method execute costs 50s, so consumer will trigge itself fallback when 20s
    - if consumer hystrix timeout set 40s, and ribbon timeout set 20s; provider hystrix time set 30s, and method execute costs 50s, so consumer will trigge itself fallback when 20s
+
+3. seata: if no global transaction, call success, if use global transaction will get follow error
+
+   ```log
+   2020-04-18 23:20:28.256 ERROR 14864 --- [nio-9999-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.jdbc.UncategorizedSQLException:
+   ### Error updating database.  Cause: java.sql.SQLException: io.seata.core.exception.RmTransactionException: Response[ TransactionException[Could not register branch into global session xid = 192.168.43.143:8091:2040948511 status = Rollbacking whi ]
+   ### The error may involve defaultParameterMap
+   ### The error occurred while setting parameters
+   ### SQL: UPDATE             t_storage         SET             used = used + ?,residue = residue - ?         WHERE             product_id = ?
+   ### Cause: java.sql.SQLException: io.seata.core.exception.RmTransactionException: Response[ TransactionException[Could not register branch into global session xid = 192.168.43.143:8091:2040948511 status = Rollbacking whi ]
+   ; uncategorized SQLException; SQL state [null]; error code [0]; io.seata.core.exception.RmTransactionException: Response[ TransactionException[Could not register branch into global session xid = 192.168.43.143:8091:2040948511 status = Rollbacking whi ]; nested exception is java.sql.SQLException: io.seata.core.exception.RmTransactionException: Response[ TransactionException[Could not register branch into global session xid = 192.168.43.143:8091:2040948511 status = Rollbacking whi ]] with root cause
+
+   io.seata.core.exception.RmTransactionException: Response[ TransactionException[Could not register branch into global session xid = 192.168.43.143:8091:2040948511 status = Rollbacking whi ]
+   ....
+   Caused by: java.io.IOException: An established connection was aborted by the software in your host machine
+   ```
