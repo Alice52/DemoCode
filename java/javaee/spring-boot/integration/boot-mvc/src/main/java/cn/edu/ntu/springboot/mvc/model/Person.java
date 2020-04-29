@@ -1,24 +1,22 @@
-package cn.edu.ntu.javaee.boot.common.model;
+package cn.edu.ntu.springboot.mvc.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
-// this can inspect value to person object, then put it to IOC container.
-// @PropertySource(value = { "classpath:person.properties" })
-// @ConfigurationProperties(prefix = "person")
+@Component
+@PropertySource(value = {"classpath:person.properties"})
+// function as @Value, but bulk
+@ConfigurationProperties(value = "person")
 public class Person {
-
   private int age;
+  private String name;
 
-  @NotBlank private String name;
   private LocalDate birthDay;
 
-  @ApiModelProperty(value = "country", required = true)
   private String country;
-
   private boolean gender;
   private long IdCard;
 
@@ -80,33 +78,6 @@ public class Person {
 
   public void setIdCard(long idCard) {
     IdCard = idCard;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Person)) return false;
-
-    Person person = (Person) o;
-
-    if (age != person.age) return false;
-    if (gender != person.gender) return false;
-    if (IdCard != person.IdCard) return false;
-    if (name != null ? !name.equals(person.name) : person.name != null) return false;
-    if (birthDay != null ? !birthDay.equals(person.birthDay) : person.birthDay != null)
-      return false;
-    return country != null ? country.equals(person.country) : person.country == null;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = age;
-    result = 31 * result + (name != null ? name.hashCode() : 0);
-    result = 31 * result + (birthDay != null ? birthDay.hashCode() : 0);
-    result = 31 * result + (country != null ? country.hashCode() : 0);
-    result = 31 * result + (gender ? 1 : 0);
-    result = 31 * result + (int) (IdCard ^ (IdCard >>> 32));
-    return result;
   }
 
   @Override

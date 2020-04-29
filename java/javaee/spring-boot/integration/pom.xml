@@ -18,6 +18,9 @@
         <module>boot-jdbc</module>
         <module>boot-mybatis</module>
         <module>boot-syntax</module>
+        <module>boot-swagger2</module>
+        <module>boot-exception</module>
+        <module>boot-mvc</module>
     </modules>
 
     <properties>

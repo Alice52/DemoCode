@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: boot-integration-swagger2
+
+swagger2:
+  enable: true
