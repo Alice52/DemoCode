@@ -23,10 +23,15 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {}
 
+  @Bean
+  public LoginInterceptor loginInterceptor() {
+    return new LoginInterceptor();
+  }
+
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry
-        .addInterceptor(new LoginInterceptor())
+        .addInterceptor(loginInterceptor())
         .addPathPatterns("/**")
         .excludePathPatterns("/", "/index.html", "/user/login", "/static/**", "/webjars/**");
   }

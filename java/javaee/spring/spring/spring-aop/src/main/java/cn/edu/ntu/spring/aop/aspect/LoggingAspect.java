@@ -36,7 +36,7 @@ public class LoggingAspect {
   @Before("pointCut()")
   public void preAdvice(JoinPoint joinPoint) {
     String methodName = joinPoint.getSignature().getName();
-    Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
+    Logger LOG = AspectUtil.getTargetLogger(LOGGER, joinPoint);
 
     LOG.info(
         "Before Advice, exec method {} with args {}",
@@ -52,7 +52,7 @@ public class LoggingAspect {
    */
   @After(value = "pointCut()")
   public void postAdvice(JoinPoint joinPoint) {
-    Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
+    Logger LOG = AspectUtil.getTargetLogger(LOGGER, joinPoint);
     String methodName = joinPoint.getSignature().getName();
 
     LOG.info("After Advice, exec method {} end", methodName);
@@ -66,7 +66,7 @@ public class LoggingAspect {
    */
   @AfterReturning(value = "pointCut()", returning = "result")
   public void reAdvice(JoinPoint joinPoint, Object result) {
-    Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
+    Logger LOG = AspectUtil.getTargetLogger(LOGGER, joinPoint);
     String methodName = joinPoint.getSignature().getName();
 
     LOG.info("Return Advice, exec method {} end and result is {}", methodName, result);
@@ -80,7 +80,7 @@ public class LoggingAspect {
    */
   @AfterThrowing(value = "pointCut()", throwing = "ex")
   public void throwingAdvice(JoinPoint joinPoint, Exception ex) {
-    Logger LOG = AspectUtil.getTargetLogger(this.LOGGER, joinPoint);
+    Logger LOG = AspectUtil.getTargetLogger(LOGGER, joinPoint);
     String methodName = joinPoint.getSignature().getName();
 
     LOG.error("Throwing Advice, exec method {} occurs exception {}", methodName, ex);
@@ -92,7 +92,7 @@ public class LoggingAspect {
     try {
       // PreAdvice
       Object proceed = joinPoint.proceed();
-      // ReturnAdvice
+      // ReturnAdvicexec method
     } catch (Throwable throwable) {
       // ThrowingAdvice
     } finally {
@@ -113,7 +113,8 @@ public class LoggingAspect {
   }
 
   // TODO return json and argument should be specify
-  public static Map<String, Object> getKeyAndValue(Object[] objs, String methodName) {
+  @Deprecated
+  private static Map<String, Object> getKeyAndValue(Object[] objs, String methodName) {
 
     Map<String, Object> map = new HashMap<>();
 
