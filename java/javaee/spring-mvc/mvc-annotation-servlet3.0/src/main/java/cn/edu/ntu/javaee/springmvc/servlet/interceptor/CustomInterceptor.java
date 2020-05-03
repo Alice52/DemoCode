@@ -1,35 +1,43 @@
-package cn.edu.ntu.javaee.mvc.syntax.interceptor;
+package cn.edu.ntu.javaee.springmvc.servlet.interceptor;
 
-import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
-// execute sequence according to config sequence, same as Filter
-public class CustomerInterceptor implements HandlerInterceptor {
+/**
+ * @author zack <br>
+ * @create 2020-05-03 18:48 <br>
+ */
+@Slf4j
+public class CustomInterceptor implements HandlerInterceptor {
 
   @Override
-  // from first to last
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
-    return false;
+    log.info(request.getRequestURI());
+    log.info("CustomInterceptor...preHandle...");
+    return true;
   }
 
   @Override
-  // from last to first
   public void postHandle(
       HttpServletRequest request,
       HttpServletResponse response,
       Object handler,
       ModelAndView modelAndView)
-      throws Exception {}
+      throws Exception {
+    log.info("CustomInterceptor...postHandle...");
+  }
 
   @Override
-  // from last to first
   public void afterCompletion(
       HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-      throws Exception {}
+      throws Exception {
+    log.info("CustomInterceptor...afterCompletion...");
+  }
 }

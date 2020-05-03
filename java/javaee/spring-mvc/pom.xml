@@ -11,6 +11,10 @@
     <modules>
         <module>mvc-syntax</module>
         <module>mvc-common</module>
+        <module>mvc-crud</module>
+        <module>mvc-component</module>
+        <module>servlet3.0</module>
+        <module>mvc-annotation-servlet3.0</module>
     </modules>
 
     <properties>
@@ -39,6 +43,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <!--spring mvc-->

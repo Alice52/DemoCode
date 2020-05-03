@@ -1,5 +1,6 @@
 package cn.edu.ntu.springboot.mvc.component;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -12,6 +13,7 @@ import java.util.Locale;
  * @create 2019-12-25 22:37
  * @function
  */
+@Component
 public class CustomLocaleResolver implements LocaleResolver {
 
   @Override

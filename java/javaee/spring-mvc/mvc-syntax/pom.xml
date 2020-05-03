@@ -12,6 +12,12 @@
     <artifactId>mvc-syntax</artifactId>
 
     <dependencies>
+        <!--spring mvc-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>cn.edu.ntu</groupId>
             <artifactId>mvc-common</artifactId>

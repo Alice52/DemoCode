@@ -1,6 +1,6 @@
 package cn.edu.ntu.javaee.mvc.syntax.controller;
 
-import cn.edu.ntu.javaee.mvc.common.model.JsonResult;
+import cn.edu.ntu.javaee.mvc.common.model.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -24,47 +24,35 @@ import java.io.IOException;
 @RequestMapping("/base")
 public class BaseController {
 
-  // http://***/base/hello/1?name=zack&age=18
   @RequestMapping(
-      value = "/hello/{Id}",
-      method = {RequestMethod.DELETE, RequestMethod.GET},
-      params = {"!UserCode", "Access_Token", "age=12"},
-      headers = "Accept-Language",
-      consumes = {MediaType.TEXT_PLAIN_VALUE, MediaType.APPLICATION_JSON_VALUE})
-  public JsonResult hello(
-      HttpServletRequest request // need servlet-api dependency
-          ,
-      HttpServletResponse reqponse // need servlet-api dependency
-          ,
-      @ModelAttribute("user") Object user,
-      @PathVariable("Id") String id,
+      value = "/hello",
+      method = {RequestMethod.DELETE, RequestMethod.GET})
+  public String hello() {
+    return "index";
+  }
+
+  /** http://--/base/hello/1?name=zack&age=18 */
+  @GetMapping("/hello/{id}")
+  public String hello(
+      // need servlet-api dependency
+      HttpServletRequest request,
+      HttpServletResponse response,
+      @ModelAttribute("user") User user,
+      @PathVariable("id") String id,
       @RequestParam("name") String name,
       @RequestParam(value = "age", required = false, defaultValue = "0") int age,
       @RequestHeader(value = "Accept-Language", required = false, defaultValue = "0")
           String acceptLanguage,
-      @CookieValue(value = "JSESSIONID", required = false, defaultValue = "0") String sessionId)
-      throws ServletException, IOException {
+      @CookieValue(value = "JSESSIONID", required = false, defaultValue = "0") String sessionId) {
 
-    JsonResult result = new JsonResult();
-
-    result.setJsonData(null);
-    result.setMessage("ok");
-    result.setSuccess(1);
-
-    request.getRequestDispatcher("URL").forward(request, reqponse);
-    reqponse.sendRedirect("URL");
-
-    return result;
+    return "index";
   }
 
-  @RequestMapping(value = "/servlet/{Id}")
-  public JsonResult getContainerFServletContext(HttpSession session)
+  @RequestMapping(value = "/servlet/{id}")
+  public String getContainerFServletContext(HttpSession session, @PathVariable("id") String id)
       throws ServletException, IOException {
 
-    JsonResult result = new JsonResult();
-
     ServletContext servletContext = session.getServletContext();
-
     ApplicationContext ctx =
         (ApplicationContext)
             servletContext.getAttribute(
@@ -72,6 +60,6 @@ public class BaseController {
     WebApplicationContext webApplicationContext =
         WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
-    return result;
+    return "index";
   }
 }

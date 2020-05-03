@@ -21,26 +21,26 @@ import java.util.Arrays;
 @Configuration
 public class ServerConfiguration {
 
-  @Bean
-  public ServletRegistrationBean customServlet() {
+  @Bean(value = "servletRegistrationBean")
+  public ServletRegistrationBean customServlet(CustomServlet customServlet) {
     ServletRegistrationBean registrationBean =
-        new ServletRegistrationBean(new CustomServlet(), "/customServlet");
+        new ServletRegistrationBean(customServlet, "/customServlet");
     registrationBean.setLoadOnStartup(1);
     return registrationBean;
   }
 
-  @Bean
-  public FilterRegistrationBean customFilter() {
+  @Bean(value = "filterRegistrationBean")
+  public FilterRegistrationBean customFilter(CustomFilter customFilter) {
     FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-    registrationBean.setFilter(new CustomFilter());
+    registrationBean.setFilter(customFilter);
     registrationBean.setUrlPatterns(Arrays.asList("/person"));
     return registrationBean;
   }
 
-  @Bean
-  public ServletListenerRegistrationBean myListener() {
+  @Bean(value = "servletListenerRegistrationBean")
+  public ServletListenerRegistrationBean myListener(CustomListener customListener) {
     ServletListenerRegistrationBean<CustomListener> registrationBean =
-        new ServletListenerRegistrationBean<>(new CustomListener());
+        new ServletListenerRegistrationBean<>(customListener);
     return registrationBean;
   }
 
