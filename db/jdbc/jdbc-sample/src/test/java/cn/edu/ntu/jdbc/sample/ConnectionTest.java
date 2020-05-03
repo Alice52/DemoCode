@@ -18,7 +18,7 @@ import java.util.Properties;
 public class ConnectionTest {
 
   private static final String USERNAME = "root";
-  private static final String PASSWORD = "Yu1252068782?";
+  private static final String PASSWORD = "Yu**?";
   private static final String CONNECTION_URL = "jdbc:mysql://101.132.45.28:3306/tutorials";
 
   @Test

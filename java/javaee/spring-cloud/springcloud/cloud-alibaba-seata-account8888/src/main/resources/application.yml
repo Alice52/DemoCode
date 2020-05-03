@@ -1,6 +1,10 @@
 server:
   port: 8888
 
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
 spring:
   application:
     name: cloud-seata-account-service
@@ -14,8 +18,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://101.132.45.28:3306/cloud-seata-account
-    username: root
-    password: Yu1252068782?
+    username: ENC(BwY8lruwIy91OWqgQvsUBeLXjY2TIX7jHcODK0BTCaz9OKaqEi+hxA/NEKu1/W3w)
+    password: ENC(c88y1WxnkXsyGM+GTWEovba6qtfUcQ5zv1LV8IOn51Gjf/SCmtCvPAqOlI+i5M7B)
 
 feign:
   hystrix:
@@ -28,5 +32,3 @@ logging:
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
-
-

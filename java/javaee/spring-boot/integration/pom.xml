@@ -21,6 +21,7 @@
         <module>boot-swagger2</module>
         <module>boot-exception</module>
         <module>boot-mvc</module>
+        <module>boot-encrypt-password</module>
     </modules>
 
     <properties>
@@ -40,6 +41,7 @@
         <jquery.version>3.3.1</jquery.version>
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
         <hutool.all.version>5.2.0</hutool.all.version>
+        <jasypt.encrtpy.version>3.0.2</jasypt.encrtpy.version>
         <mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
     </properties>
 
@@ -123,6 +125,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.encrtpy.version}</version>
             </dependency>
 
             <dependency>
