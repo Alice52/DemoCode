@@ -1,6 +1,10 @@
 server:
   port: 8001
 
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
 spring:
   application:
     name: cloud-provider-payment-service
@@ -8,8 +12,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: org.gjt.mm.mysql.Driver
     url: jdbc:mysql://101.132.45.28:3306/tutorials?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: Yu1252068782?
+    username: ENC(BwY8lruwIy91OWqgQvsUBeLXjY2TIX7jHcODK0BTCaz9OKaqEi+hxA/NEKu1/W3w)
+    password: ENC(c88y1WxnkXsyGM+GTWEovba6qtfUcQ5zv1LV8IOn51Gjf/SCmtCvPAqOlI+i5M7B)
     druid:
       validation-query: SELECT 1
   cloud:
@@ -43,7 +47,3 @@ eureka:
     lease-renewal-interval-in-seconds: 1
     # eureka will remove this instance after this time if no heartbeat
     lease-expiration-duration-in-seconds: 2
-
-
-
-

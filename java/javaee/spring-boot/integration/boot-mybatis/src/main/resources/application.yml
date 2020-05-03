@@ -1,7 +1,11 @@
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
 spring:
   datasource:
-    username: root
-    password: Yu1252068782?
+    username: ENC(BwY8lruwIy91OWqgQvsUBeLXjY2TIX7jHcODK0BTCaz9OKaqEi+hxA/NEKu1/W3w)
+    password: ENC(c88y1WxnkXsyGM+GTWEovba6qtfUcQ5zv1LV8IOn51Gjf/SCmtCvPAqOlI+i5M7B)
     url: jdbc:mysql://101.132.45.28:3306/tutorials
     driver-class-name: com.mysql.jdbc.Driver
 
