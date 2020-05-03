@@ -32,13 +32,13 @@ public class HelloController {
   private long IdCard;
 
   @GetMapping(value = "/person")
-  public JsonObject hello() {
+  public Person hello() {
     LOG.info("Autowired person: {}", person);
     Person person = new Person();
     person.setName(name);
     person.setAge(age);
     person.setIdCard(IdCard);
     person.setCountry("China");
-    return new JsonObject(HttpErrorCode.OK, "get person[" + name + "] info success", person);
+    return person;
   }
 }

@@ -2,10 +2,13 @@ package cn.edu.ntu.springboot.mvc.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import java.io.IOException;
 
+/** @author zack */
+@Component
 public class CustomFilter implements Filter {
   private static final Logger LOG = LoggerFactory.getLogger(CustomFilter.class);
 

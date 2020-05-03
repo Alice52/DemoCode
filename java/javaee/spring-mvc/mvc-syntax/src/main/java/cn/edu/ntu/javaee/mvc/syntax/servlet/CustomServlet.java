@@ -1,6 +1,7 @@
-package cn.edu.ntu.javaee.mvc.syntax.sample;
+package cn.edu.ntu.javaee.mvc.syntax.servlet;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,7 +15,8 @@ import java.io.IOException;
  * @create 2019-11-11 21:23
  * @function controller handler means servlet
  */
-public class CustomerServlet extends HttpServlet {
+@Component
+public class CustomServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)

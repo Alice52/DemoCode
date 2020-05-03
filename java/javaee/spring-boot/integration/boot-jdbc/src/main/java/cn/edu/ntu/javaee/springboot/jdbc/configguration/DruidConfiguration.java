@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/** @author zack */
 @Configuration
 public class DruidConfiguration {
   private static final Logger LOG = LoggerFactory.getLogger(DruidConfiguration.class);
@@ -26,7 +27,7 @@ public class DruidConfiguration {
     return new DruidDataSource();
   }
 
-  // datasource management
+  /** datasource management */
   @Bean
   public ServletRegistrationBean<StatViewServlet> configStatViewServlet() {
     ServletRegistrationBean<StatViewServlet> statServletBean =

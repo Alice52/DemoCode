@@ -7,21 +7,29 @@
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="cn.edu.ntu.*">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <context:component-scan base-package="cn.edu.ntu.*" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-    <!-- enable aspectj with annotation: generate proxy for Aspect's Advice-->
-    <aop:aspectj-autoproxy/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
     <mvc:interceptors>
         <!-- intercept all request -->
-        <ref bean="customerInterceptor"/>
+        <ref bean="customInterceptor"/>
 
         <!-- intercept specify request -->
         <mvc:interceptor>
             <mvc:mapping path="/users"/>
             <mvc:exclude-mapping path="/list"/>
-            <ref bean="customerInterceptor"/>
+            <ref bean="customInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!-- Jump to target page directly  -->
+    <mvc:view-controller path="viewController" view-name="ok"/>
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
 </beans>

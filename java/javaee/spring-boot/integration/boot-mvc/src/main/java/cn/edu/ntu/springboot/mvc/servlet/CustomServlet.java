@@ -2,12 +2,15 @@ package cn.edu.ntu.springboot.mvc.servlet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/** @author zack */
+@Component
 public class CustomServlet extends HttpServlet {
   private static final Logger LOG = LoggerFactory.getLogger(CustomServlet.class);
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,13 +18,15 @@ import java.util.List;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-  @Autowired private PersonRepository personRepository;
+  @Resource private PersonRepository personRepository;
 
+  @Override
   @Transactional
   public void savePersons(List<Person> persons) {
     personRepository.saveAll(persons);
   }
 
+  @Override
   @Transactional
   public void updatePersonEmail(String email, Integer id) {
     personRepository.updatePersonEmail(id, email);
