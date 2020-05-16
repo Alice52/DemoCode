@@ -7,8 +7,8 @@ jasypt:
 
 spring:
   datasource:
-    username: ENC(BwY8lruwIy91OWqgQvsUBeLXjY2TIX7jHcODK0BTCaz9OKaqEi+hxA/NEKu1/W3w)
-    password: ENC(c88y1WxnkXsyGM+GTWEovba6qtfUcQ5zv1LV8IOn51Gjf/SCmtCvPAqOlI+i5M7B)
+    username: ENC(3+5Pg+H9L0s1ATmg/xTWLbNt9OeMFguochuRyTl9a4BGbD4lL2SLM8351rdHYhC2)
+    password: ENC(MkGdNTchUL+OnF+nvm5YSSjWc7XeHLNab+KV9Wr3fqF1fAbEVLB2urZotLn8nAk1)
     url: jdbc:mysql://101.132.45.28:3306/tutorials
     driver-class-name: com.mysql.jdbc.Driver
 
