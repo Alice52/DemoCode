@@ -19,10 +19,10 @@ import org.springframework.util.StringValueResolver;
  - ProxyTransactionManagementConfiguration will use `step 1` to intercept bean init
   1. add AnnotationTransactionAttributeSource to parse annotation metadata
   2. TransactionInterceptor(**`MethodInterceptor`**): save database transaction info and transaction manager, which will do rollback or commit transaction
-  3. due to MethodInterceptor, so target method exectue work flow is below
+  3. due to MethodInterceptor, so target method execute work flow is below
     - get transaction info, such as propagation, rollbackfor, etcs
     - get PlatformTransactionManager: get from `@Transactional(transactionManager = ""), else get from beanfactory by type of PlatformTransactionManager
-    - excute target method by proxy
+    - execute target method by proxy
     - if occurs exception, will use transactionManager to rollback, else use tm commit transaction
  *
  * @author zack <br>

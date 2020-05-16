@@ -43,8 +43,8 @@ public class SpringBootConfigEncryptApplication implements CommandLineRunner {
     System.out.println("MySQL密码解密后的结果为：" + decrypt(mysqlEncryptedPswd));
   }
 
-  private String encrypt(String originPassord) {
-    String encryptStr = codeSheepEncryptorBean.encrypt(originPassord);
+  private String encrypt(String originPassword) {
+    String encryptStr = codeSheepEncryptorBean.encrypt(originPassword);
     return encryptStr;
   }
 

@@ -6,4 +6,4 @@ jasypt:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
     #bean: CustomEncryptorConfigBean
 
-zack: ***
+zack: Yu1252068782?
