@@ -10,6 +10,10 @@
 
     <artifactId>cloud-api-commons</artifactId>
 
+    <properties>
+        <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
