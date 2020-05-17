@@ -1,0 +1,7 @@
+starter:
+  enable: true
+
+stater:
+  hello:
+    prefix: prefix
+    suffix: suffix
