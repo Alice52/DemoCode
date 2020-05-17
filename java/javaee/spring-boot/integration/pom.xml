@@ -22,6 +22,10 @@
         <module>boot-exception</module>
         <module>boot-mvc</module>
         <module>boot-encrypt-password</module>
+        <module>boot-starter</module>
+        <module>boot-workflow</module>
+        <module>boot-starter-autoconfigure</module>
+        <module>boot-starter-test</module>
     </modules>
 
     <properties>

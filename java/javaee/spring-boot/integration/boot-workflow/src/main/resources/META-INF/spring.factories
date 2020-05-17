@@ -1,0 +1,7 @@
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+cn.edu.ntu.javaee.springboot.workflow.initializer.CustomApplicationContextInitializer
+
+# Application Listeners
+org.springframework.boot.SpringApplicationRunListener=\
+cn.edu.ntu.javaee.springboot.workflow.listener.CustomSpringApplicationRunListener
