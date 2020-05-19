@@ -1,8 +1,8 @@
 package cn.edu.ntu.boot.exception.controller;
 
 import cn.edu.ntu.boot.exception.exception.UserNotExistException;
-import cn.edu.ntu.javaee.boot.common.model.ErrorMessage;
 import cn.edu.ntu.javaee.boot.common.model.JsonObject;
+import cn.edu.ntu.javaee.boot.common.response.ErrorResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +19,7 @@ public class ExceptionController {
   }
 
   @GetMapping(value = "/runtimeException")
-  public ErrorMessage exception() {
+  public ErrorResponse exception() {
     throw new RuntimeException();
   }
 }

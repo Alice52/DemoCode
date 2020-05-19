@@ -45,7 +45,7 @@ public class SwaggerConfig {
         new ResponseMessageBuilder()
             .code(400)
             .message("Internal Error")
-            .responseModel(new ModelRef("ErrorMessage"))
+            .responseModel(new ModelRef("ErrorResponse"))
             .build());
     responseMessageList.add(new ResponseMessageBuilder().code(401).message("Unauthorized").build());
 
