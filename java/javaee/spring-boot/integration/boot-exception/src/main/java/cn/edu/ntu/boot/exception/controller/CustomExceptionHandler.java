@@ -2,7 +2,8 @@ package cn.edu.ntu.boot.exception.controller;
 
 import cn.edu.ntu.boot.exception.exception.UserNotExistException;
 import cn.edu.ntu.javaee.boot.common.constants.HttpConstants;
-import cn.edu.ntu.javaee.boot.common.model.ErrorMessage;
+import cn.edu.ntu.javaee.boot.common.response.ErrorMessageEnum;
+import cn.edu.ntu.javaee.boot.common.response.ErrorResponse;
 import cn.hutool.core.map.MapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,15 +40,12 @@ public class CustomExceptionHandler {
 
   @ExceptionHandler(RuntimeException.class)
   @ResponseBody
-  public ErrorMessage handleRuntimeException(RuntimeException e, HttpServletRequest request) {
+  public ErrorResponse handleRuntimeException(RuntimeException e, HttpServletRequest request) {
 
-    ErrorMessage message = new ErrorMessage();
+    ErrorResponse errorResponse = ErrorResponse.error(ErrorMessageEnum.UNKNOWN_EXCEPTION);
+    errorResponse.setParameters(MapUtil.of("Cause", e.getCause()));
 
-    message.setCode(400L);
-    message.setMessage(e.getMessage());
-    message.setParameters(MapUtil.of("Cause", e.getCause()));
-
-    return message;
+    return errorResponse;
   }
 
   @ExceptionHandler(Exception.class)
