@@ -7,6 +7,8 @@ import cn.edu.ntu.javaee.boot.common.response.ErrorResponse;
 import cn.hutool.core.map.MapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,6 +48,24 @@ public class CustomExceptionHandler {
     errorResponse.setParameters(MapUtil.of("Cause", e.getCause()));
 
     return errorResponse;
+  }
+
+  /**
+   * <code>ResponseEntity</code> is status and (T) body, so we can put our response to body, and
+   * specify http status code.
+   *
+   * @param e
+   * @param request
+   * @return <code>ResponseEntity</code> , and response body is <code>ErrorResponse</code>
+   */
+  @ExceptionHandler(RuntimeException.class)
+  public ResponseEntity handleRuntimeException2(RuntimeException e, HttpServletRequest request) {
+    HttpStatus status = HttpStatus.BAD_REQUEST;
+
+    ErrorResponse errorResponse = ErrorResponse.error(ErrorMessageEnum.UNKNOWN_EXCEPTION);
+    errorResponse.setParameters(MapUtil.of("Cause", e.getCause()));
+
+    return new ResponseEntity<>(errorResponse, status);
   }
 
   @ExceptionHandler(Exception.class)
