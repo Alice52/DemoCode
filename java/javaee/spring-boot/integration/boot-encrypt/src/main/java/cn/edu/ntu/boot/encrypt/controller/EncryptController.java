@@ -18,7 +18,9 @@ import javax.annotation.Resource;
  */
 @Api
 @RestController
-@ApiResponses({@ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)})
+@ApiResponses({
+  @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
+})
 public class EncryptController {
 
   @Resource private ApplicationContext appCtx;
@@ -26,11 +28,15 @@ public class EncryptController {
   @Resource private StringEncryptor encryptBean;
 
   @GetMapping("/encrypt")
-  public String doEncrypt(@RequestParam("word") String word) {
+  public String doEncrypt(@RequestParam("encryptWord") String encryptWord) {
 
-    String mysqlEncryptedPswd = encrypt(word);
+    return encrypt(encryptWord);
+  }
 
-    return mysqlEncryptedPswd;
+  @GetMapping("/decrypt")
+  public String doDecrypt(@RequestParam("decryWord") String decryWord) {
+
+    return decrypt(decryWord);
   }
 
   private String encrypt(String originPassword) {
