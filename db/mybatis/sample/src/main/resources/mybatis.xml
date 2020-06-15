@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        1. mybatis 可以使用 properties 来引入外部 properties 配置文件的内容:
+            resource: 引入类路径下的资源
+            url: 引入网络路径或者磁盘路径下的资源
+	  -->
+    <properties resource="dbconfig.properties"></properties>
+
+    <!--
+        2. settings包含很多重要的设置项
+            setting: 用来设置每一个设置项
+            name: 设置项名
+            value: 设置项取值
+    -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <package name="cn.edu.ntu.mybatis.common.entity"/>
+    </typeAliases>
+
+    <!--
+        4. environments: mybatis 可以配置多种环境, default 指定使用某种环境
+                environment: 配置一个具体的环境信息: 必须有两个标签, id代表当前环境的唯一标识
+                transactionManager:事务管理器;
+                    type: 事务管理器的类型, JDBC(JdbcTransactionFactory) | MANAGED(ManagedTransactionFactory)
+                    自定义事务管理器: 实现 TransactionFactory 接口. type 指定为全类名
+                dataSource: 数据源
+                    type: 数据源类型
+                        - UNPOOLED (UnpooledDataSourceFactory)
+                        - POOLED(PooledDataSourceFactory)
+                        - JNDI(JndiDataSourceFactory)
+                    自定义数据源: 实现 DataSourceFactory 接口, type是全类名
+		 -->
+
+    <environments default="dev_mysql">
+        <environment id="dev_mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="dev_oracle">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${oracle.driver}"/>
+                <property name="url" value="${oracle.url}"/>
+                <property name="username" value="${oracle.username}"/>
+                <property name="password" value="${oracle.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--
+        5. databaseIdProvider: 支持多数据库厂商的
+            type="DB_VENDOR"：VendorDatabaseIdProvider
+            作用就是得到数据库厂商的标识(驱动getDatabaseProductName()), mybatis就能根据数据库厂商标识来执行不同的sql;
+            MySQL, Oracle, SQL Server, xxxx
+    -->
+    <databaseIdProvider type="DB_VENDOR">
+        <!-- 为不同的数据库厂商起别名 -->
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle"/>
+        <property name="SQL Server" value="sqlserver"/>
+    </databaseIdProvider>
+
+    <mappers>
+        <mapper resource="EmployeeMapper.xml"/>
+        <mapper resource="DepartmentMapper.xml"/>
+        <!-- <mapper resource="mybatis/mapper/EmployeeMapper.xml"/> -->
+        <!-- <mapper class="cn.edu.ntu.mybatis.sample.EmployeeMapper"/> -->
+        <!-- 批量注册: -->
+        <!-- <package name="cn.edu.ntu.mybatis.sample"/>-->
+    </mappers>
+</configuration>
