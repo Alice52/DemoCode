@@ -18,5 +18,11 @@ public interface DepartmentMapper {
    */
   Department getDeptById(@Param("id") Integer id);
 
+  /**
+   * Get step.
+   *
+   * @param id
+   * @return
+   */
   Department getDeptByIdStep(@Param("id") Integer id);
 }

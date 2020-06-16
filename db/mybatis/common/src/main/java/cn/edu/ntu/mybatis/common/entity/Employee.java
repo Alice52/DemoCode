@@ -1,5 +1,7 @@
 package cn.edu.ntu.mybatis.common.entity;
 
+import javax.validation.constraints.Email;
+
 /**
  * @author zack <br>
  * @create 2020-06-15 20:46 <br>
@@ -8,7 +10,10 @@ package cn.edu.ntu.mybatis.common.entity;
 public class Employee {
   private Integer id;
   private String lastName;
-  private String email;
+
+  /** this annotation just work for controller?? */
+  @Email private String email;
+
   private String gender;
   private Department dept;
 

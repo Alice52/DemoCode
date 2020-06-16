@@ -18,6 +18,12 @@
     -->
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+
+        <!--显式的指定每个我们需要更改的配置的值，即使他是默认的。防止版本更新带来的问题  -->
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <typeAliases>
@@ -76,6 +82,7 @@
     <mappers>
         <mapper resource="EmployeeMapper.xml"/>
         <mapper resource="DepartmentMapper.xml"/>
+        <mapper resource="EmployeeDynamicSQLMapper.xml"/>
         <!-- <mapper resource="mybatis/mapper/EmployeeMapper.xml"/> -->
         <!-- <mapper class="cn.edu.ntu.mybatis.sample.EmployeeMapper"/> -->
         <!-- 批量注册: -->
