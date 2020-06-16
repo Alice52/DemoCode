@@ -4,16 +4,23 @@ import cn.edu.ntu.mybatis.common.entity.Department;
 import cn.edu.ntu.mybatis.common.entity.Employee;
 import cn.edu.ntu.mybatis.sample.DepartmentMapper;
 import cn.edu.ntu.mybatis.sample.EmployeeMapper;
+import cn.hutool.core.map.MapUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -24,10 +31,20 @@ import java.util.stream.Stream;
 @Slf4j
 public class MyBatisTest {
 
-  public SqlSessionFactory getSqlSessionFactory() throws IOException {
+  private SqlSession openSession;
+
+  @Before
+  public void getSqlSessionFactory() throws IOException {
     String resource = "mybatis.xml";
     InputStream inputStream = Resources.getResourceAsStream(resource);
-    return new SqlSessionFactoryBuilder().build(inputStream);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    this.openSession = sqlSessionFactory.openSession();
+  }
+
+  @After
+  public void close() {
+    openSession.commit();
+    this.openSession.close();
   }
 
   /**
@@ -44,76 +61,104 @@ public class MyBatisTest {
     // 2. 获取sqlSession实例, 能直接执行已经映射的sql语句
     // sql的唯一标识: statement Unique identifier matching the statement to use.
     // 执行sql要用的参数: parameter A parameter object to pass to the statement.
-    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-
-    SqlSession openSession = sqlSessionFactory.openSession();
-    try {
-      Employee employee =
-          openSession.selectOne("cn.edu.ntu.mybatis.sample.EmployeeMapper.getEmpById", 1);
-      log.info(String.valueOf(employee));
-    } finally {
-      openSession.close();
-    }
+    Employee employee =
+        openSession.selectOne("cn.edu.ntu.mybatis.sample.EmployeeMapper.getEmpById", 1);
+    log.info(String.valueOf(employee));
   }
 
   @Test
   public void test01() throws IOException {
-    // 1. 获取sqlSessionFactory对象
-    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-    // 2. 获取sqlSession对象
-    SqlSession openSession = sqlSessionFactory.openSession();
-    try {
-      // 3. 获取接口的实现类对象
-      // 会为接口自动的创建一个代理对象, 代理对象去执行增删改查方法
-      EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-      Employee employee = mapper.getEmpById(1);
-      log.info(String.valueOf(mapper.getClass()));
-      log.info(String.valueOf(employee));
-    } finally {
-      openSession.close();
-    }
+    // 3. 获取接口的实现类对象 会为接口自动的创建一个代理对象, 代理对象去执行增删改查方法
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+    Employee employee = mapper.getEmpById(1);
+    log.info(String.valueOf(mapper.getClass()));
+    log.info(String.valueOf(employee));
   }
 
   @Test
   public void testGetByName() throws IOException {
-    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-    SqlSession openSession = sqlSessionFactory.openSession();
-    try {
-      EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-      Employee employee = mapper.getEmpByName("zack");
-      log.info(String.valueOf(mapper.getClass()));
-      log.info(String.valueOf(employee));
-    } finally {
-      openSession.close();
-    }
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+    Employee employee = mapper.getEmpByName("zack");
+    log.info(String.valueOf(mapper.getClass()));
+    log.info(String.valueOf(employee));
   }
 
   @Test
   public void testReturnMap() throws IOException {
-    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-    SqlSession openSession = sqlSessionFactory.openSession();
-    try {
-      EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-      Map<String, Employee> employees = mapper.getEmpByLastNameLikeReturnMap("zack");
-      Stream.of(employees).forEach(employee -> log.info(String.valueOf(employee)));
-
-    } finally {
-      openSession.close();
-    }
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+    Map<String, Employee> employees = mapper.getEmpByLastNameLikeReturnMap("zack");
+    Stream.of(employees).forEach(employee -> log.info(String.valueOf(employee)));
   }
 
   @Test
   public void test02() throws IOException {
-    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+    Map<String, Object> empByIdReturnMap = mapper.getEmpByIdReturnMap(1);
 
-    SqlSession openSession = sqlSessionFactory.openSession();
-    try {
-      EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-      Map<String, Object> empByIdReturnMap = mapper.getEmpByIdReturnMap(1);
-      log.info(String.valueOf(mapper.getClass()));
-      Stream.of(empByIdReturnMap).forEach(employee -> log.info(String.valueOf(employee)));
-    } finally {
-      openSession.close();
-    }
+    Set<String> strings = empByIdReturnMap.keySet();
+    log.info(strings.toString());
+
+    Collection<Object> values = empByIdReturnMap.values();
+    log.info(values.toString());
+
+    log.info(String.valueOf(mapper.getClass()));
+    Stream.of(empByIdReturnMap).forEach(employee -> log.info(String.valueOf(employee)));
+  }
+
+  @Test
+  public void testGetsByLastNameLike() throws IOException {
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+    List<Employee> zack = mapper.getEmpsByLastNameLike("zack");
+    zack.stream().forEach(x -> log.info(String.valueOf(x)));
+  }
+
+  @Test
+  public void testGetByMap() {
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+
+    Map<String, Object> map = MapUtil.of("id", 1);
+    map.put("lastName", "zack");
+    map.put("tableName", "`mybatis.employee`");
+
+    Employee emp = mapper.getEmpByMap(map);
+    log.info(emp.toString());
+  }
+
+  @Test
+  public void testAddEmp() {
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+
+    Employee employee = new Employee();
+    employee.setEmail("zz@163.com");
+    employee.setGender("1");
+    employee.setLastName("zack02");
+
+    mapper.addEmp(employee);
+  }
+
+  @Test
+  public void testUpdateEmp() {
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+
+    Employee employee = new Employee();
+    employee.setEmail("163.com");
+    employee.setGender("1");
+    employee.setId(1);
+    employee.setLastName("zack02");
+
+    mapper.updateEmp(employee);
+  }
+
+  @Test
+  public void testDeleteEmpById() {
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+    mapper.deleteEmpById(2);
+  }
+
+  @Test
+  public void testGetEmpAndDept() {
+    EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+    Employee empAndDept = mapper.getEmpAndDept(1);
+    log.info(empAndDept.toString());
   }
 }

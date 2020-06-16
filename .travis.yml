@@ -72,6 +72,14 @@ jobs:
         - cd $project_home/mq
         - mvn clean package -DskipTests=true
 
+        - echo "DB-JDBC"
+        - cd $project_home/db/jdbc
+        - mvn clean package -DskipTests=true
+
+        - echo "DB-MYBATIS"
+        - cd $project_home/db/mybatis
+        - mvn clean package -DskipTests=true
+
 notifications:
   email:
     recipients:
