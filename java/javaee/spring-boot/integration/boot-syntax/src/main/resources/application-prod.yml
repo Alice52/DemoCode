@@ -12,7 +12,6 @@ spring:
     password: ENC(c88y1WxnkXsyGM+GTWEovba6qtfUcQ5zv1LV8IOn51Gjf/SCmtCvPAqOlI+i5M7B)
     url: jdbc:mysql://101.132.45.28:3306/tutorials
     driver-class-name: com.mysql.jdbc.Driver
-
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5
     minIdle: 5
@@ -20,7 +19,7 @@ spring:
     maxWait: 60000
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAnavL
+    validationQuery: SELECT 1 FROM DUAL
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false

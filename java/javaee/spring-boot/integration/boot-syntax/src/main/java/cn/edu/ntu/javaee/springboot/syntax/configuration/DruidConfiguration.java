@@ -26,7 +26,6 @@ public class DruidConfiguration {
     return new DruidDataSource();
   }
 
-  // datasource management
   @Bean
   public ServletRegistrationBean<StatViewServlet> configStatViewServlet() {
     ServletRegistrationBean<StatViewServlet> statServletBean =

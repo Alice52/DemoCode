@@ -9,28 +9,27 @@ spring:
   datasource:
     username: ENC(3+5Pg+H9L0s1ATmg/xTWLbNt9OeMFguochuRyTl9a4BGbD4lL2SLM8351rdHYhC2)
     password: ENC(MkGdNTchUL+OnF+nvm5YSSjWc7XeHLNab+KV9Wr3fqF1fAbEVLB2urZotLn8nAk1)
-    url: jdbc:mysql://101.132.45.28:3306/tutorials
+    url: ENC(Q4Af4sMB/79w+7BWwaZFOMs+iGVUoAJCh2rNNqmbvMY2JEAWVI1zyMfm7CuNjic6sP9IJR6YVj2kZAIER4iIjNh9IYtd2OGevt7w6cqJqaY=)
     driver-class-name: com.mysql.jdbc.Driver
-    druid:
-      type: com.alibaba.druid.pool.DruidDataSource
-      initialSize: 5
-      minIdle: 5
-      maxActive: 20
-      maxWait: 60000
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: SELECT 1 FROM DUAL
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: false
-      # Configure monitoring statistics interception filters.
-      # If removed, the monitoring interface sql cannot collect statistics.
-      # Wall is used for the firewall
-      filters: stat,wall,slf4j
-      maxPoolPreparedStatementPerConnectionSize: 20
-      useGlobalDataSourceStat: true
-      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    # Configure monitoring statistics interception filters.
+    # If removed, the monitoring interface sql cannot collect statistics.
+    # Wall is used for the firewall
+    filters: stat,wall,slf4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
 logging:
   level:
