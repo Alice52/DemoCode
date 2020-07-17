@@ -39,7 +39,9 @@ public class Person {
     this.bookName = bookName;
   }
 
-  public Person() {}
+  public Person() {
+    System.out.println("ads");
+  }
 
   public Person(
       int age,
