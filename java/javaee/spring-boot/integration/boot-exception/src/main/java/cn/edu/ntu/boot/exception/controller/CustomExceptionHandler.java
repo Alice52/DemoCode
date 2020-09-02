@@ -12,9 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.management.BadStringOperationException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Map;
 
 /**
@@ -26,6 +29,13 @@ import java.util.Map;
 public class CustomExceptionHandler {
   private static final Logger LOG = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
+  /**
+   * will handle by CustomErrorAttributes
+   *
+   * @param e
+   * @param request
+   * @return
+   */
   @ExceptionHandler(UserNotExistException.class)
   public HttpServletRequest handleUserNotExistException(
       UserNotExistException e, HttpServletRequest request) {
@@ -40,6 +50,27 @@ public class CustomExceptionHandler {
     return request;
   }
 
+  /**
+   * will handle by CustomErrorAttributes
+   *
+   * @param e
+   * @param request
+   * @return
+   */
+  @ExceptionHandler(BadStringOperationException.class)
+  public ModelAndView handleBadStringOperationException(
+      BadStringOperationException e, HttpServletRequest request) {
+
+    return new ModelAndView(new String());
+  }
+
+  /**
+   * will not handle by CustomErrorAttributes
+   *
+   * @param e
+   * @param request
+   * @return
+   */
   @ExceptionHandler(RuntimeException.class)
   @ResponseBody
   public ErrorResponse handleRuntimeException(RuntimeException e, HttpServletRequest request) {
@@ -51,15 +82,18 @@ public class CustomExceptionHandler {
   }
 
   /**
-   * <code>ResponseEntity</code> is status and (T) body, so we can put our response to body, and
+   * will not handle by CustomErrorAttributes
+   *
+   * <p><code>ResponseEntity</code> is status and (T) body, so we can put our response to body, and
    * specify http status code.
    *
    * @param e
    * @param request
    * @return <code>ResponseEntity</code> , and response body is <code>ErrorResponse</code>
    */
-  @ExceptionHandler(RuntimeException.class)
-  public ResponseEntity handleRuntimeException2(RuntimeException e, HttpServletRequest request) {
+  @ExceptionHandler(InvalidPropertiesFormatException.class)
+  public ResponseEntity handleRuntimeException2(
+      InvalidPropertiesFormatException e, HttpServletRequest request) {
     HttpStatus status = HttpStatus.BAD_REQUEST;
 
     ErrorResponse errorResponse = ErrorResponse.error(ErrorMessageEnum.UNKNOWN_EXCEPTION);
@@ -68,6 +102,13 @@ public class CustomExceptionHandler {
     return new ResponseEntity<>(errorResponse, status);
   }
 
+  /**
+   * will handle by CustomErrorAttributes
+   *
+   * @param e
+   * @param request
+   * @return
+   */
   @ExceptionHandler(Exception.class)
   public String handleException(Exception e, HttpServletRequest request) {
     Map<String, Object> map = new HashMap<>(16);
