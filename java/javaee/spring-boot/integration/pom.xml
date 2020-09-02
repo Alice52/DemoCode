@@ -26,6 +26,7 @@
         <module>boot-workflow</module>
         <module>boot-starter-autoconfigure</module>
         <module>boot-starter-test</module>
+        <module>boot-rocketmq</module>
     </modules>
 
     <properties>

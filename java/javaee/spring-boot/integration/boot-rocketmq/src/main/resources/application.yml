@@ -1,0 +1,7 @@
+apache:
+  rocketmq:
+    consumer:
+      pushConsumer: testConsumer
+    producer:
+      producerGroup: testProduce
+    namesrvAddr: ***:9876

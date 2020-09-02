@@ -6,6 +6,9 @@ import cn.edu.ntu.javaee.boot.common.response.ErrorResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.management.BadStringOperationException;
+import java.util.InvalidPropertiesFormatException;
+
 /**
  * @author zack <br>
  * @create 2020-04-27 20:30 <br>
@@ -19,7 +22,22 @@ public class ExceptionController {
   }
 
   @GetMapping(value = "/runtimeException")
-  public ErrorResponse exception() {
+  public ErrorResponse runtimeException() {
     throw new RuntimeException();
+  }
+
+  @GetMapping(value = "/exception")
+  public ErrorResponse exception() throws Exception {
+    throw new Exception();
+  }
+
+  @GetMapping(value = "/bad-string-operation-exception")
+  public Object badStringOperationException() throws Exception {
+    throw new BadStringOperationException("");
+  }
+
+  @GetMapping(value = "/invalid-properties-format-exception")
+  public Object invalidPropertiesFormatException() throws Exception {
+    throw new InvalidPropertiesFormatException("");
   }
 }

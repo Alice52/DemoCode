@@ -57,6 +57,15 @@ def rename_cell_folder(folder_name):
                     new_file_path = os.path.join(folder_name, str(file_name + suffix))
                 print("do rename: use " + new_file_path + " replace old name: " + new_file_path)
                 os.rename(old_file_path, new_file_path)
+            if '.mp4' in _file:
+                old_file_path = os.path.join(folder_name, _file)
+                suffix = _file[_file.rfind('_'):]  # _10.flv
+                if len(suffix) <= 1:
+                    new_file_path = os.path.join(folder_name, str(file_name + '.flv'))
+                else:
+                    new_file_path = os.path.join(folder_name, str(file_name + suffix))
+                print("do rename: use " + new_file_path + " replace old name: " + new_file_path)
+                os.rename(old_file_path, new_file_path)
             else:
                 pass
 
