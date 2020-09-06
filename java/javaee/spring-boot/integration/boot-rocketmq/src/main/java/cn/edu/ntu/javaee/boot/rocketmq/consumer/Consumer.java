@@ -17,23 +17,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class Consumer implements CommandLineRunner {
 
-  /** 消费者 */
   @Value("${apache.rocketmq.consumer.pushConsumer}")
   private String pushConsumer;
-
-  /** NameServer 地址 */
   @Value("${apache.rocketmq.namesrvAddr}")
   private String namesrvAddr;
 
-  /** 初始化RocketMq的监听信息，渠道信息 */
   public void messageListener() {
-
     DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(pushConsumer);
-
     consumer.setNamesrvAddr(namesrvAddr);
     try {
 
-      // 订阅PushTopic下Tag为push的消息,都订阅消息
+      // subscribe PushTopic topic and tag is push messages
       consumer.subscribe("PushTopic", "push");
 
       // 程序第一次启动从消息队列头获取数据
@@ -45,7 +39,6 @@ public class Consumer implements CommandLineRunner {
       consumer.registerMessageListener(
           (MessageListenerConcurrently)
               (msgs, context) -> {
-
                 // 会把不同的消息分别放置到不同的队列中
                 for (Message msg : msgs) {
 
