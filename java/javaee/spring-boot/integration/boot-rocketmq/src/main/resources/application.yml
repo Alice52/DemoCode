@@ -1,7 +1,14 @@
+server:
+  port: 8080
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
 apache:
   rocketmq:
     consumer:
       pushConsumer: testConsumer
     producer:
       producerGroup: testProduce
-    namesrvAddr: ***:9876
+    namesrvAddr: ENC(JVAarAQvh/fYIGZBds+0CE2YdiujnnFKgcIzADLGsJrNW4feMiHDNSn7zSWrkdLMQZcSSGWm2ud3vQtz1c0w/Q==)
