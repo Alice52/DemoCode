@@ -75,6 +75,12 @@
                 <version>${aspectjrt.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${springframework.version}</version>
+            </dependency>
+
             <!-- junit -->
             <dependency>
                 <groupId>org.springframework</groupId>
