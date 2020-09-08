@@ -19,6 +19,7 @@
         <module>javase-jvm</module>
         <module>javase-reflect</module>
         <module>javase-enumeration</module>
+        <module>javas-jhm</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -34,6 +35,7 @@
         <logback.core.version>1.2.3</logback.core.version>
         <logback.classic.version>1.2.3</logback.classic.version>
         <lombok.version>1.18.12</lombok.version>
+        <openjdk.jmh.version>1.19</openjdk.jmh.version>
     </properties>
 
     <dependencyManagement>
@@ -67,6 +69,18 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <optional>true</optional>
+            </dependency>
+
+            <!-- jmh -->
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core</artifactId>
+                <version>${openjdk.jmh.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-annprocess</artifactId>
+                <version>${openjdk.jmh.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
