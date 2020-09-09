@@ -5,6 +5,7 @@ import cn.edu.ntu.json.model.UserTreeNode;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.core.type.ResolvedType;
 import com.fasterxml.jackson.core.type.TypeReference;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -21,9 +22,25 @@ public class UserObjectCodec extends ObjectCodec {
     return null;
   }
 
+  @SneakyThrows
   @Override
   public <T> T readValue(JsonParser jsonParser, Class<T> aClass) throws IOException {
-    return null;
+
+    User user = (User) aClass.newInstance();
+
+    // 只要还没结束"}"，就一直读
+    while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
+      String fieldName = jsonParser.getCurrentName();
+      if ("name".equals(fieldName)) {
+        jsonParser.nextToken();
+        user.setName(jsonParser.getText());
+      } else if ("age".equals(fieldName)) {
+        jsonParser.nextToken();
+        user.setAge(jsonParser.getIntValue());
+      }
+    }
+
+    return (T) user;
   }
 
   @Override
