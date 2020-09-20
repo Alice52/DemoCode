@@ -20,6 +20,7 @@
         <module>javase-reflect</module>
         <module>javase-enumeration</module>
         <module>javas-jhm</module>
+        <module>javase-agent</module>
     </modules>
     <packaging>pom</packaging>
 
