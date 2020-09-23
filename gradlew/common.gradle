@@ -1,0 +1,7 @@
+// this is common gradle configuration, such as dependency
+ext {
+    java_version = ['javaVersion': JavaVersion.VERSION_1_8]
+    dependencies = [
+            'common'           : ':common',
+    ]
+}

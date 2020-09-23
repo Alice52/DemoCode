@@ -1,0 +1,198 @@
+/*===================== required ========================*/
+
+/*===================== buildscript ========================*/
+//buildscript { ScriptHandler scriptHandler ->
+//    scriptHandler.repositories { RepositoryHandler repositoryHandler ->
+//        repositoryHandler.maven { MavenArtifactRepository mavenArtifactRepository ->
+//            name 'aliyun'
+//            url "https://maven.aliyun.com/repository/central"
+//            credentials {
+//                username = 'admin'
+//                password = 'abc123_'
+//            }
+//        }
+//        jcenter()
+//        mavenCentral()
+//        mavenLocal()
+//    }
+//}
+//
+buildscript {
+/*===================== repositories ========================*/
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+    }
+/*===================== dependency ========================*/
+    dependencies {
+        classpath 'net.sourceforge.jtds:jtds:1.2.4'
+    }
+}
+
+
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = 1.8
+
+/*===================== gradlew ========================*/
+wrapper {
+    gradleVersion = '5.2.1' // version required
+}
+
+/*===================== lifecycle ========================*/
+/**
+ * 配置阶段之前的监听回调
+ */
+this.beforeEvaluate {}
+
+/**
+ * * 配置阶段之后的监听回调
+ */
+this.afterEvaluate {}
+
+/**
+ * gradle 执行完毕之后的监听
+ */
+this.gradle.buildFinished {
+    getAllProjects()
+}
+
+def getAllProjects() {
+    this.getSubprojects().eachWithIndex { Project project, int i ->
+        println "get-subprojects: ${project.name}"
+    }
+}
+
+/**
+ * beforeEvaluate
+ */
+this.gradle.beforeProject {
+}
+
+/**
+ * afterEvaluate
+ */
+this.gradle.afterProject {}
+
+// add listener for monitor
+
+/*===================== customize project ========================*/
+/**
+ * 对指定项目进行配置
+ */
+project('groovy') { Project project ->
+    println "groovy: ${project.name}"
+}
+
+/**
+ * 所有项目公共的配置
+ */
+allprojects {
+    group 'cn.ntu.edu'
+    version '1.0-SNAPSHOT'
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+}
+
+println "groovy-group: ${project('groovy').group}"
+
+/**
+ * 所有子项目通用的配置, 脚本执行目录是子目录
+ */
+subprojects { Project project ->
+    println "subprojects: ${project.name}"
+    if (!project.plugins.hasPlugin('com.android.libary')) {
+        // 引入外部 publishToMaven 文件
+        apply from: '../publishToMaven.gradle'
+    }
+}
+
+
+/*===================== property ========================*/
+
+// 扩展属性: ext
+ext {
+    project_version = 1.5
+    project_author = 'zack'
+}
+println "ext property: ${this.project_version}"
+
+subprojects {
+    ext {
+        project_version = 1.5
+    }
+}
+println "groovy-project-version: ${project('groovy').project_version}"
+
+// 引入扩展属性, 在所有的项目中都有效
+apply from: this.file('common.gradle')
+println "common.gradle property: ${this.java_version}"
+
+if (hasProperty('author') ? author.toUpperCase() : 'zack.zhang') {
+    println "gradle property: ${this.author}"
+}
+
+/*===================== file ========================*/
+
+// 1. path
+println "file-- root dir: ${this.getRootDir()}"
+println "file-- build dir: ${this.getBuildDir()}"
+println "file-- project dir: ${this.getProjectDir().absolutePath}"
+
+// 2. content
+println getContent('common.gradle')
+
+/**
+ * @param path 相对路径
+ * @return
+ */
+def getContent(String path) {
+    try {
+        def fi = file(path)
+        return fi.text
+    } catch (GradleException e) {
+        println "${path} file not found.."
+    }
+}
+
+// 3. copy
+copy {
+    from file('groovy/')
+    into(getBuildDir().absolutePath + '/groovy-source-code')
+    // exclude {}
+    // rename {}
+}
+
+// 4. fileTree
+fileTree('groovy/') { FileTree fileTree ->
+    fileTree.visit { FileTreeElement element ->
+        println "fileTree file name: ${element.name}"
+    }
+}
+
+fileTree('groovy/') {
+    visit { FileTreeElement element ->
+        println "fileTree file name: ${element.name}"
+    }
+}
+
+// 5. execute outer command
+task(name: 'copyJar') {
+    doLast {
+        def sourcePath = this.buildDir.path + '/libs/'
+        def distPath = 'D:/tmp/libs/'
+        def command = "mv -f ${sourcePath} ${distPath}"
+        exec {
+            try {
+                executable 'bash'
+                args '-c', command
+                println 'command execute finished'
+            } catch (GradleException e) {
+                println 'command execute failed'
+            }
+        }
+    }
+}
+
