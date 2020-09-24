@@ -25,6 +25,7 @@ buildscript {
 /*===================== dependency ========================*/
     dependencies {
         classpath 'net.sourceforge.jtds:jtds:1.2.4'
+        classpath 'org.codehaus.groovy:groovy-all:2.3.11'
     }
 }
 
@@ -44,12 +45,16 @@ wrapper {
 /**
  * 配置阶段之前的监听回调
  */
-this.beforeEvaluate {}
+this.project.beforeEvaluate {
+    println 'beforeEvaluate'
+}
 
 /**
  * * 配置阶段之后的监听回调
  */
-this.afterEvaluate {}
+this.project.afterEvaluate {
+    println 'afterEvaluate'
+}
 
 /**
  * gradle 执行完毕之后的监听
@@ -135,7 +140,6 @@ if (hasProperty('author') ? author.toUpperCase() : 'zack.zhang') {
 }
 
 /*===================== file ========================*/
-
 // 1. path
 println "file-- root dir: ${this.getRootDir()}"
 println "file-- build dir: ${this.getBuildDir()}"
@@ -168,20 +172,21 @@ copy {
 // 4. fileTree
 fileTree('groovy/') { FileTree fileTree ->
     fileTree.visit { FileTreeElement element ->
-        println "fileTree file name: ${element.name}"
+        // println "fileTree file name: ${element.name}"
     }
 }
 
 fileTree('groovy/') {
     visit { FileTreeElement element ->
-        println "fileTree file name: ${element.name}"
+        // println "fileTree file name: ${element.name}"
     }
 }
 
 // 5. execute outer command
-task(name: 'copyJar') {
+task copyJar(group: 'gradlew', description: 'gradlew tasks') {
     doLast {
-        def sourcePath = this.buildDir.path + '/libs/'
+
+        def sourcePath = this.buildDir.path
         def distPath = 'D:/tmp/libs/'
         def command = "mv -f ${sourcePath} ${distPath}"
         exec {
@@ -196,3 +201,6 @@ task(name: 'copyJar') {
     }
 }
 
+
+/*===================== task ========================*/
+apply from: this.file('task.gradle')

@@ -1,0 +1,239 @@
+import groovy.xml.MarkupBuilder
+
+/*===================== task execute ========================*/
+task helloTask(group: 'gradlew', description: 'gradlew tasks') {
+    println "helloTask ${this.author}"
+    doFirst {
+        println "inner helloTask doFirst ${this.author}"
+    }
+}
+
+helloTask.doFirst {
+    println "outer helloTask doFirst ${this.author}"
+}
+
+this.tasks.create(name: 'hello') {
+    setGroup('gradlew')
+    setDescription('gradlew tasks')
+    println "hello ${this.author}"
+}
+
+
+/*===================== task demo 01 ========================*/
+def startBuildTime, endBuildTime
+this.gradle.afterProject { Project project ->
+    def preBuildTask = project.tasks.findByName('assemble')
+    preBuildTask.doFirst {
+        startBuildTime = System.nanoTime()
+    }
+
+    def buildTask = project.tasks.findByName('build')
+    buildTask.doLast {
+        endBuildTime = System.nanoTime()
+        println "build spend times: ${endBuildTime - startBuildTime}"
+    }
+}
+
+/*===================== task sequence: dependsOn ========================*/
+
+//1. static sequence
+task taskX(group: 'gradlew', description: 'gradlew tasks') {
+    doLast {
+        println 'taskX'
+    }
+}
+task taskY(group: 'gradlew', description: 'gradlew tasks') {
+    doLast {
+        println 'taskY'
+    }
+}
+task taskZ(group: 'gradlew', description: 'gradlew tasks', dependsOn: ['taskX', 'taskY']) {
+    doLast {
+        println 'taskZ'
+    }
+}
+
+// 2. dynamic
+task lib1(group: 'gradlew', description: 'gradlew tasks') {
+    doLast {
+        println 'lib1'
+    }
+}
+task lib2(group: 'gradlew', description: 'gradlew tasks') {
+    doLast {
+        println 'lib2'
+    }
+}
+task noLib(group: 'gradlew', description: 'gradlew tasks') {
+    doLast {
+        println 'noLib'
+    }
+}
+task taskLib(group: 'gradlew', description: 'dependency all task start with libxx', dependsOn: ['taskX', 'taskY', 'taskZ']) {
+    dependsOn this.tasks.findAll { task ->
+        return task.name.startsWith('lib')
+    }
+    doLast {
+        println 'taskLib'
+    }
+}
+
+/*===================== task demo 02 ========================*/
+
+/**
+ * releases.xml 拆分成多个文件
+ */
+task handleReleaseFile(group: 'gradlew', description: 'gradlew tasks') {
+    def srcFile = file('releases.xml')
+    def destDir = new File(this.buildDir, 'release/')
+
+    doLast {
+        println 'start handleReleaseFile ...'
+        destDir.mkdir()
+        def releases = new XmlParser().parse(srcFile)
+        releases.release.each { releaseNode ->
+            // 解析节点
+            def versionName = releaseNode.versionName.text()
+            def versionCode = releaseNode.versionCode.text()
+            def versionInfo = releaseNode.versionInfo.text()
+
+            // 创建节点并写入数据
+            def destFile = new File(destDir, "release-${versionName}.txt")
+            destFile.withWriter { writer ->
+                writer.write("${versionName} -> ${versionCode} -> ${versionInfo} ")
+            }
+        }
+
+        println 'finish handleReleaseFile ...'
+    }
+}
+
+task handleReleaseFileTest(group: 'gradlew', description: 'gradlew tasks', dependsOn: handleReleaseFile) {
+    def dir = fileTree(this.buildDir.path + 'release/')
+    doLast {
+        dir.each {
+            println 'file name: ' + it
+        }
+
+        println 'finish handleReleaseFileTest'
+    }
+}
+
+
+/*===================== task sequence: input-output ========================*/
+
+// 1. readTask 和 writeTask 通过共有的属性 `destFile` 关联起来: 所以 writeTask 会优先执行
+ext {
+    versionCode = '100'
+    versionName = '1.0.0'
+    versionInfo = 'App的第1个版本 , 上线了一些最基础核心的功能'
+
+    destFile = file('releases.xml')
+    if (destFile != null && !destFile.exists()) {
+        destFile.createNewFile()
+    }
+}
+
+task taskTest(group: 'gradlew', description: 'gradlew tasks', dependsOn: ['readTask', 'writeTask']) {
+    doLast {
+        println '输入输出任务执行完成'
+    }
+}
+
+task readTask(group: 'gradlew', description: 'gradlew tasks') {
+    inputs.files destFile
+    doLast {
+        def file = inputs.files.singleFile
+        println file.text
+    }
+}
+
+task writeTask(group: 'gradlew', description: 'gradlew tasks') {
+    // 指定输入
+    inputs.property('versionCode', this.versionCode)
+    inputs.property('versionName', this.versionName)
+    inputs.property('versionInfo', this.versionInfo)
+
+    // 指定输出
+    outputs.file this.destFile
+
+    doLast {
+        def data = inputs.getProperties()
+        File file = outputs.getFiles().getSingleFile()
+        // 将 map 转换为 model
+        def versionMsg = new VersionMsg(data)
+
+        def sw = new StringWriter()
+        def xmlBuilder = new MarkupBuilder(sw)
+
+
+        if (file.text != null && file.text.size() <= 0) {
+            // 文件中没有数据
+            xmlBuilder.releases {
+                release {
+                    versionName(versionMsg.versionName)
+                    versionCode(versionMsg.versionCode)
+                    versionInfo(versionMsg.versionInfo)
+                }
+            }
+
+            file.withWriter { writer ->
+                writer.append(sw.toString())
+            }
+        } else {
+            xmlBuilder.release {
+                versionName(versionMsg.versionName)
+                versionCode(versionMsg.versionCode)
+                versionInfo(versionMsg.versionInfo)
+            }
+
+            def lines = file.readLines()
+            def length = lines.size() - 1
+            file.withWriter { writer ->
+                lines.eachWithIndex { String line, int index ->
+                    if (index != length) {
+                        writer.write(line + '\r\n')
+                    } else {
+                        writer.append('\r\r\n' + sw.toString() + '\r\n')
+                        writer.append(lines.get(length))
+                    }
+                }
+            }
+        }
+    }
+}
+
+class VersionMsg {
+    String versionCode
+    String versionName
+    String versionInfo
+}
+
+
+/*===================== task sequence: api ========================*/
+
+task taskXX(group: 'gradlew', description: 'gradlew tasks') {
+    doLast {
+        println 'taskXX'
+    }
+}
+task taskYY(group: 'gradlew', description: 'gradlew tasks') {
+    mustRunAfter taskXX
+    doLast {
+        println 'taskYY'
+    }
+}
+task taskZZ(group: 'gradlew', description: 'gradlew tasks') {
+    mustRunAfter taskYY
+    doLast {
+        println 'taskZZ'
+    }
+}
+
+this.project.afterEvaluate {
+    def buildTask = project.tasks.findByName('build')
+    if (buildTask == null) {
+        throw new GradleScriptException('the build task is not found')
+    }
+    buildTask.dependsOn(writeTask)
+}
