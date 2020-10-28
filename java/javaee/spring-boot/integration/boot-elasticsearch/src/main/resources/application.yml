@@ -1,0 +1,8 @@
+demo:
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: 49.235.91.10:9200
+      index:
+        number-of-replicas: 0
+        number-of-shards: 2

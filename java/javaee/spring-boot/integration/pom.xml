@@ -28,6 +28,7 @@
         <module>boot-starter-test</module>
         <module>boot-rocketmq</module>
         <module>boot-validation</module>
+        <module>boot-elasticsearch</module>
     </modules>
 
     <properties>
@@ -51,6 +52,7 @@
         <hutool.all.version>5.2.0</hutool.all.version>
         <jasypt.encrtpy.version>3.0.2</jasypt.encrtpy.version>
         <mybatis.spring.boot.version>2.1.1</mybatis.spring.boot.version>
+        <elasticsearch.version>7.6.2</elasticsearch.version>
     </properties>
 
     <dependencyManagement>
@@ -155,6 +157,22 @@
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.elasticsearch.client</groupId>
+                        <artifactId>elasticsearch-rest-client</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.elasticsearch</groupId>
+                        <artifactId>elasticsearch</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
