@@ -15,7 +15,7 @@ cache:
 
 branches:
   only:
-    - feat-zack
+    - feature-zack
     - master
 
 jobs:
