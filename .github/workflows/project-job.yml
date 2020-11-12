@@ -1,4 +1,4 @@
-name: Build Database Tutorial
+name: Build Job
 
 on: [push]
 jobs:
@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     env: # define constant
-      PROJECT_PREFIX: db
+      PROJECT_PREFIX: job
     steps:
       - name: Export Global Var
         # define global var, then put to GITHUB_ENV
@@ -28,20 +28,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build Jdbc Tutorial
+      - name: Build Job Tutorial
         run: |
-          PROJECT_NAME=jdbc
-          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
-          mvn clean package -DskipTests=true
-
-      - name: Build Jpa Integration Tutorial
-        run: |
-          PROJECT_NAME=jpa-integration
-          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
-          mvn clean package -DskipTests=true
-
-      - name: Build Mybatis Tutorial
-        run: |
-          PROJECT_NAME=mybatis
+          PROJECT_NAME=job
           cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
           mvn clean package -DskipTests=true

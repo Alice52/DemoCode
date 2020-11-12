@@ -1,0 +1,71 @@
+name: Build JavaEE
+
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    env: # define constant
+      PROJECT_PREFIX: java/javaee
+    steps:
+      - name: Export Global Var
+        # define global var, then put to GITHUB_ENV
+        run: |
+          echo "PROJECT_HOME=$PWD" >> $GITHUB_ENV
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          # architecture: x64
+
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build Spring-Annotation Tutorial
+        run: |
+          PROJECT_NAME=annotation
+          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
+          mvn clean package -DskipTests=true
+
+      - name: Build Spring-Integration Tutorial
+        run: |
+          PROJECT_NAME=spring/integration
+          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
+          mvn clean package -DskipTests=true
+
+      - name: Build Spring-Spring Tutorial
+        run: |
+          PROJECT_NAME=spring/spring
+          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
+          mvn clean package -DskipTests=true
+
+      - name: Build Boot-Integration Tutorial
+        run: |
+          PROJECT_NAME=spring-boot/integration
+          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
+          mvn clean package -DskipTests=true
+
+      - name: Build Cloud-Relevant Tutorial
+        run: |
+          PROJECT_NAME=spring-cloud/relevant
+          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
+          mvn clean package -DskipTests=true
+
+      - name: Build Cloud-Cloud Tutorial
+        run: |
+          PROJECT_NAME=spring-cloud/springcloud
+          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
+          mvn clean package -DskipTests=true
+
+      - name: Build Spring-Mvc Tutorial
+        run: |
+          PROJECT_NAME=spring-mvc
+          cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
+          mvn clean package -DskipTests=true

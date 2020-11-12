@@ -51,10 +51,10 @@ jobs:
         # push image to ali register center
         - image_tag=tutorial-$encrypt_module_name:`date +%Y%m%d`.${TRAVIS_COMMIT:0:7}
         - cd $project_home/java/javaee/spring-boot/integration/$encrypt_module_name
-        - docker build -f Dockerfile -t $image_tag .
-        - sudo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD $DOCKER_REPO
-        - sudo docker tag $image_tag $DOCKER_REPO/alice52/$image_tag
-        - travis_wait $travis_wait sudo docker push $DOCKER_REPO/alice52/$image_tag
+        # - docker build -f Dockerfile -t $image_tag .
+        # - sudo docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD $DOCKER_REPO
+        # - sudo docker tag $image_tag $DOCKER_REPO/alice52/$image_tag
+        # - travis_wait $travis_wait sudo docker push $DOCKER_REPO/alice52/$image_tag
 
         - echo "BUILD-SPRING-CLOUD"
         - cd $project_home/java/javaee/spring-cloud/springcloud
