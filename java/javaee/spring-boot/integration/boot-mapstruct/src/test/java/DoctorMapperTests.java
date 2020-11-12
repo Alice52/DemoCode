@@ -1,7 +1,7 @@
-import converter.DoctorMapper;
+import cn.edu.ntu.javaee.springboot.mapstruct.converter.DoctorMapper;
 import lombok.extern.slf4j.Slf4j;
-import model.Doctor;
-import model.DoctorDto;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.Doctor;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.DoctorDto;
 import org.junit.Test;
 
 /**

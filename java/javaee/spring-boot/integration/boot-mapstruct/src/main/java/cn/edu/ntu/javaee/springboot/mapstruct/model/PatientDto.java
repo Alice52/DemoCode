@@ -1,4 +1,4 @@
-package model;
+package cn.edu.ntu.javaee.springboot.mapstruct.model;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
  * @project springboot <br>
  */
 @Data
-public class Patient {
+public class PatientDto {
   private int id;
   private String name;
 }

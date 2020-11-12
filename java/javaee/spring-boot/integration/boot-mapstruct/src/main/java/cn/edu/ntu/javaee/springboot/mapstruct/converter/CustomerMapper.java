@@ -1,12 +1,12 @@
-package converter;
+package cn.edu.ntu.javaee.springboot.mapstruct.converter;
 
-import model.Customer;
-import model.CustomerDto;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.Customer;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.CustomerDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
-import utils.BooleanStrFormat;
+import cn.edu.ntu.javaee.springboot.mapstruct.utils.BooleanStrFormat;
 
 /**
  * @author zack <br>

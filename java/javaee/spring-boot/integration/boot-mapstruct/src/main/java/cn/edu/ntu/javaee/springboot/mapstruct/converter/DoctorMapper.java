@@ -1,8 +1,8 @@
-package converter;
+package cn.edu.ntu.javaee.springboot.mapstruct.converter;
 
-import model.Doctor;
-import model.DoctorDto;
-import model.Education;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.Doctor;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.DoctorDto;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.Education;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

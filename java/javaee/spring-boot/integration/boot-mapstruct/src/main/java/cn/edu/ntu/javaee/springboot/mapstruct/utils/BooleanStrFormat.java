@@ -1,4 +1,4 @@
-package utils;
+package cn.edu.ntu.javaee.springboot.mapstruct.utils;
 
 import org.springframework.stereotype.Component;
 

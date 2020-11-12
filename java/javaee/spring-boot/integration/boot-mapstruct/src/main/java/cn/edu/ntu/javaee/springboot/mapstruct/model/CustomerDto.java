@@ -1,4 +1,4 @@
-package model;
+package cn.edu.ntu.javaee.springboot.mapstruct.model;
 
 import lombok.Data;
 

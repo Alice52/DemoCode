@@ -1,7 +1,7 @@
-package converter;
+package cn.edu.ntu.javaee.springboot.mapstruct.converter;
 
-import model.Patient;
-import model.PatientDto;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.Patient;
+import cn.edu.ntu.javaee.springboot.mapstruct.model.PatientDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
