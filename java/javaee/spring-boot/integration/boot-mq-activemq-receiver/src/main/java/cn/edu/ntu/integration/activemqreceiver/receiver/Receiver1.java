@@ -13,9 +13,8 @@ import javax.jms.TextMessage;
 /**
  * @author zack
  * @create 2019-10-05 18:40
- * @function
- *           false + destination = queue; will declare queue
- *           true + destination = queue; will declare topic
+ * @function false + destination = queue; will declare queue true + destination = queue; will
+ *     declare topic
  */
 @Component
 public class Receiver1 {
@@ -29,7 +28,7 @@ public class Receiver1 {
 
   @JmsListener(destination = "${queue-name}")
   // @SendTo("${queue-reply}")
-  @SendTo("${topic-name}")  // false + destination = queue; will declare queue
+  @SendTo("${topic-name}") // false + destination = queue; will declare queue
   public String receiveFromQueue(TextMessage textMessage) {
     if (textMessage != null) {
       String message;

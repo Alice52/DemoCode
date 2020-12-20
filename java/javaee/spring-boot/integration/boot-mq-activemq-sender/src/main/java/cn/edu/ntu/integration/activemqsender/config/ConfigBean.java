@@ -34,6 +34,4 @@ public class ConfigBean {
   public Topic topic() {
     return new ActiveMQTopic(topicName);
   }
-
-
 }

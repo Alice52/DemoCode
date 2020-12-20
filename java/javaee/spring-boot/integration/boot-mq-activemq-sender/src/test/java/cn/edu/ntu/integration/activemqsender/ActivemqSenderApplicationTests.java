@@ -13,8 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class ActivemqSenderApplicationTests {
 
-  @Autowired
-  private Sender2Queue sender2Queue;
+  @Autowired private Sender2Queue sender2Queue;
 
   @Test
   public void testSender() {

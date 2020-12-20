@@ -1,12 +1,12 @@
-//package cn.edu.ntu.javaee.boot.common.model;
+// package cn.edu.ntu.javaee.boot.common.model;
 //
-//import java.util.Map;
+// import java.util.Map;
 //
-///**
+/// **
 // * @author zack <br>
 // * @create 2020-04-27 11:59 <br>
 // */
-//public class ErrorMessage {
+// public class ErrorMessage {
 //  private Long code;
 //  private String message;
 //  private Map<String, Object> parameters;
@@ -34,4 +34,4 @@
 //  public void setParameters(Map<String, Object> parameters) {
 //    this.parameters = parameters;
 //  }
-//}
+// }

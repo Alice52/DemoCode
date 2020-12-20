@@ -1,16 +1,16 @@
-//package cn.edu.ntu.javaee.boot.common.encrypt;
+// package cn.edu.ntu.javaee.boot.common.encrypt;
 //
-//import org.jasypt.encryption.StringEncryptor;
-//import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
-//import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+// import org.jasypt.encryption.StringEncryptor;
+// import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+// import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 //
-///**
+/// **
 // * // TODO: make this here and use every, how to use other beans ioc bean
 // *
 // * @author zack <br>
 // * @create 2020-05-03 22:04 <br>
 // */
-//public class CustomEncryptorConfig {
+// public class CustomEncryptorConfig {
 //
 //  public StringEncryptor stringEncryptor() {
 //
@@ -29,4 +29,4 @@
 //
 //    return encryptor;
 //  }
-//}
+// }

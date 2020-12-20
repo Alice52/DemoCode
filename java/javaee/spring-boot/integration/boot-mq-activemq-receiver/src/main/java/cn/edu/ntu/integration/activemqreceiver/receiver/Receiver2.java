@@ -13,9 +13,8 @@ import java.util.Optional;
 /**
  * @author zack
  * @create 2019-10-05 19:01
- * @function
- *  false + destination = queue; will declare queue
- *  true + destination = queue; will declare topic
+ * @function false + destination = queue; will declare queue true + destination = queue; will
+ *     declare topic
  */
 @Component
 public class Receiver2 {

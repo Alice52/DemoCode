@@ -16,21 +16,20 @@ import java.util.UUID;
  */
 @Component
 public class Sender2Topic {
-    private static final Logger LOG = LoggerFactory.getLogger(Sender2Topic.class);
+  private static final Logger LOG = LoggerFactory.getLogger(Sender2Topic.class);
 
-    @Autowired
-    private JmsMessagingTemplate jmsMessagingTemplate;
+  @Autowired private JmsMessagingTemplate jmsMessagingTemplate;
 
-    @Autowired private Topic topic;
+  @Autowired private Topic topic;
 
-    public void sendMessage2Topic() {
-        String message = UUID.randomUUID().toString();
-        jmsMessagingTemplate.convertAndSend(topic, message);
-        LOG.info("Send message: {} success.", message);
-    }
+  public void sendMessage2Topic() {
+    String message = UUID.randomUUID().toString();
+    jmsMessagingTemplate.convertAndSend(topic, message);
+    LOG.info("Send message: {} success.", message);
+  }
 
-//    @Scheduled(fixedDelay = 3000)
-    public void sendMessage2TopicSchedule() {
-        sendMessage2Topic();
-    }
+  //    @Scheduled(fixedDelay = 3000)
+  public void sendMessage2TopicSchedule() {
+    sendMessage2Topic();
+  }
 }

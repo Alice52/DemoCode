@@ -19,7 +19,9 @@ import javax.validation.Valid;
     value = "swagger-controller",
     tags = {"swagger2"},
     hidden = false)
-@ApiResponses({@ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)})
+@ApiResponses({
+  @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
+})
 public class SwaggerController {
 
   @GetMapping(value = "/person/{id}")

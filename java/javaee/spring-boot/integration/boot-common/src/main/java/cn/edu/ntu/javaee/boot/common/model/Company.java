@@ -5,18 +5,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
 
-  /**
-   * @author zack
-   * @create 2019-12-22 18:51
-   * @function
-   */
-  public class Company {
+/**
+ * @author zack
+ * @create 2019-12-22 18:51
+ * @function
+ */
+public class Company {
 
-    @NotNull private Address address;
-    @NotBlank private String name;
-    @Past private Date Established;
-    @NotBlank private String LegalPerson;
-
+  @NotNull private Address address;
+  @NotBlank private String name;
+  @Past private Date Established;
+  @NotBlank private String LegalPerson;
 
   public Company() {}
 

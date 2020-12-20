@@ -65,10 +65,10 @@ public class DirectSender {
     directSender();
   }
 
-    @PostConstruct
-    public void init() {
-      amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
-    }
+  @PostConstruct
+  public void init() {
+    amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
+  }
 
   // the follow config is not sub/pub
   //  @PostConstruct
