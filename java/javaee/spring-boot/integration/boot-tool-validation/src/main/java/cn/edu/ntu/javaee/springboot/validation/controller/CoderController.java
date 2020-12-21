@@ -32,6 +32,22 @@ import java.util.List;
 public class CoderController {
 
   /**
+   * This validation will cannot show error message combined with other provider.
+   *
+   * <p>Please use {@link Coder.Common } and {@link Default} together. <br>
+   * and if no Coder.Common.class, it will not show title level validate message. <br>
+   *
+   * @param coder
+   * @return
+   */
+  @PutMapping
+  public Object update(
+      @RequestBody @Validated({Update.class, Coder.Common.class, Default.class}) Coder coder) {
+
+    return "ok";
+  }
+
+  /**
    * This will not validate the parameter of title about level.
    *
    * <p>Unless add Default.class due to <code>
@@ -49,36 +65,11 @@ public class CoderController {
   }
 
   /**
-   * <code>@Valid</code> cannot specify group info, and it will validate Default.class. <br>
-   * and it will cannot show all error message.
-   *
-   * @param coderList
-   * @return
-   */
-  @PostMapping("/list-directly")
-  public Object addListDirectly(@RequestBody List<@Valid Coder> coderList) {
-
-    return "ok";
-  }
-
-  /**
-   * This validation will cannot show error message combined with other provider.
-   *
-   * <p>so, if we want show all error message, please donot use Default.class in model, and should
-   * add Default.class to group. <br>
-   * and if no Coder.Common.class, it will not show title level validate message together. <br>
-   * <code>@NotNull(groups = {Common.class})</code>
+   * This just validate Default.class group.
    *
    * @param coder
    * @return
    */
-  @PutMapping
-  public Object update(
-      @RequestBody @Validated({Update.class, Coder.Common.class, Default.class}) Coder coder) {
-
-    return "ok";
-  }
-
   @PostMapping
   public Object add(@RequestBody @Valid Coder coder) {
 

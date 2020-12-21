@@ -51,7 +51,6 @@ public class Coder {
   @NotNull(groups = {Common.class, Default.class})
   private String company;
 
-  @NotNull(groups = {Common.class})
   /** 初级 */
   @Pattern(
       regexp = "^\u521d\u7ea7.*",
@@ -62,7 +61,7 @@ public class Coder {
       groups = {MiddleCoder.class})
   private String title;
 
-  /** this is customized default group. */
+  /** this is customized default group, if has Default.class, should add Common.class */
   public interface Common {}
 
   public interface PrimaryCoder {}
