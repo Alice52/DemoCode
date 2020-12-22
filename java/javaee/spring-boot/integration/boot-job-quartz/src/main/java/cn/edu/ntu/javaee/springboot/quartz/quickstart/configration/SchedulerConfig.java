@@ -1,6 +1,6 @@
-package cn.edu.ntu.javaee.springboot.quartz.configration;
+package cn.edu.ntu.javaee.springboot.quartz.quickstart.configration;
 
-import cn.edu.ntu.javaee.springboot.quartz.scheduler.SimpleJob;
+import cn.edu.ntu.javaee.springboot.quartz.quickstart.scheduler.SimpleJob;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ public class SchedulerConfig {
   public JobDetail batchAddUsersJobDetail() {
 
     return JobBuilder.newJob(SimpleJob.class)
-        .withIdentity("batchAddUsersJob") // 标识
+        .withIdentity("batchAddUsersJob")
         .storeDurably()
         .build();
   }

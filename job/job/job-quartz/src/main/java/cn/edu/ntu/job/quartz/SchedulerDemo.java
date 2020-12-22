@@ -1,5 +1,6 @@
 package cn.edu.ntu.job.quartz;
 
+import cn.edu.ntu.job.quartz.job.SimpleJob;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 

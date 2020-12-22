@@ -1,4 +1,4 @@
-package cn.edu.ntu.javaee.springboot.quartz.scheduler;
+package cn.edu.ntu.javaee.springboot.quartz.quickstart.scheduler;
 
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -12,7 +12,7 @@ public class SimpleJob extends QuartzJobBean {
 
   private String name;
 
-  // Invoked if a Job data map entry with that name
+  /** Invoked if a Job data map entry with that name */
   public void setName(String name) {
     this.name = name;
   }

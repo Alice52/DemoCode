@@ -73,7 +73,7 @@ public class EmployeeController {
   /**
    * Only {@link org.springframework.validation.annotation.Validated} integrate with ${@link
    * javax.validation.Valid } can validate list per value.<br>
-   * And use {@link org.springframework.validation.annotation.Validated} to specified group info.
+   * And use {@link org.springframework.validation.annotation.Validated} to specify group info.
    *
    * <pre>
    *     Validated in this case must with {@link Validated}, else it will validate List with no constraint.
