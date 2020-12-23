@@ -64,6 +64,7 @@ public class CronExpression {
              * // .withSchedule(CronScheduleBuilder.cronSchedule("5,10,11 * * * * ? * -"))
              * </pre>
              */
+            .withSchedule(CronScheduleBuilder.cronSchedule("* * * ? * ? *"))
             .build();
 
     // 4. bind

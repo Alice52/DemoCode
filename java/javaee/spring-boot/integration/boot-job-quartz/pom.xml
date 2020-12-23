@@ -17,6 +17,12 @@
             <version>${version}</version>
         </dependency>
 
+        <!-- quartz job -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
         <!-- spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -32,16 +38,11 @@
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
 
-        <!-- quartz job -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>
-
         <!-- database connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.15</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

@@ -13,12 +13,9 @@ import java.util.concurrent.TimeUnit;
  * <p>2. Many Triggers can point to the same Job detail, but a single Trigger can only point to one
  * Job detail.
  *
- * <p>3. Cannot point more triggers to job-detail according to <code>
- * scheduler.scheduleJob(jobDetail, trigger);</code>, and should use <code>
- * scheduler.scheduleJob(trigger2);</code>
- *
- * <p>4. Only triggered job-detail can use this way for another trigger: <code>
- * scheduler.scheduleJob(trigger2); </code>
+ * <p>If the JobDetail is triggered by <code> scheduler.scheduleJob(jobDetail, trigger);</code>, so
+ * another trigger cannot trigger in this way. <br>
+ * And must use <code> scheduler.scheduleJob(trigger);</code> method. *
  *
  * @author zack <br>
  * @create 2020/12/22 <br>
@@ -56,7 +53,6 @@ public class MultiTrigger {
 
     // 4. build trigger and job-detail by schedule
     scheduler.scheduleJob(jobDetail, trigger);
-    // if the jobDetail is triggered, then can use this method, otherwise will throw exception.
     scheduler.scheduleJob(trigger2);
     /**
      * This will throw exception: {@link org.quartz.ObjectAlreadyExistsException } <br>
