@@ -1,56 +1,12 @@
 server:
   port: 8080
 
-spring:
-  application:
-    name: boot-job-quartz
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-  servlet:
-    multipart:
-      max-file-size: 100MB
-      max-request-size: 45MB
-      enabled: true
-  mvc:
-    throw-exception-if-no-handler-found: true
-  resources:
-    add-mappings: false
+quartz:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      driverClassName: com.mysql.cj.jdbc.Driver
-      url: ENC(VDSQG47u4b/T7IL418UVJ9rQ3/wHWNWC7b/rhDnQvhBRl/to0qvlpv8MXfMZcjgMBC5Ampom4vEDcUsN5Nkk6TYUTGYuaBUCYR0fB0STqf7HBeA5NeTqF5O8j9ARfS49RN+O/uRgPd3SNhgxR6KSHgoXK9h+BHRODWVLiCZx49+ZdcF3kcYxNqolyXGhzpGk)
-      username: ENC(uVs7DP260FXOKYBacQjLo7Fonyyiq2qwnSjOGt9Q2weCl3ceVf6c6VAAQ6WkTsUt)
-      password: ENC(IkxnRsO4O+J/8pOvHoL7/9sSyvhq3Zv9AYObJx9ldt636qyRiBTGrwndtSISEY4F)
-      initial-size: 10
-      minIdle: 50
-      maxActive: 500
-      maxWait: 60000
-      fail-fast: true
-      Keep-alive: true
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: SELECT 1 FROM DUAL
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: false
-      filters: stat,wall,slf4j
-      maxPoolPreparedStatementPerConnectionSize: 100
-      useGlobalDataSourceStat: true
-      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-      web-stat-filter:
-        enabled: true
-        url-pattern: /*
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-      stat-view-servlet:
-        enabled: true
-        #访问路径为/druid时，跳转到StatViewServlet  http://127.0.0.1:8080/druid
-        url-pattern: "/druid/*"
-        reset-enable: falseEcException
-        login-username: ENC(1j3TT4M6aHscVzKpeHWX5KNKRU7ui1jesPGY52W2FEl9WunVIBiVizoeQv4ocWxd)
-        login-password: ENC(Jm9wTCpswKDpVkuiT0JmwMiz7H4bqiOLnEK1Hs49QPrB+RJ4Y8pUh2ON4FPOSjNV)
-
+    url: ENC(0jw3ueuyZd+gAv+scPJC9MRjJiWxo1O2etxt+yuvptORdCNjGWJ7dgJ7AcgT+CPu0iDjFJVnz7krPfgKdMQh+h+fqoDRnYje/EOCs7ULvgcvwW7wGJfFnq5rK3ouNW3UdYW+zp+7nl1sf23VusD3U49BRDdybFT++jdIxrWuCv1CLAHl/8dhkKVb+Re+uLq6DNWa3cg0rVwbSL3MEwoHOA==)
+    username: ENC(uVs7DP260FXOKYBacQjLo7Fonyyiq2qwnSjOGt9Q2weCl3ceVf6c6VAAQ6WkTsUt)
+    password: ENC(IkxnRsO4O+J/8pOvHoL7/9sSyvhq3Zv9AYObJx9ldt636qyRiBTGrwndtSISEY4F)
+    driverClassName: com.mysql.cj.jdbc.Driver
 
 jasypt:
   encryptor:
@@ -70,3 +26,55 @@ mybatis-plus:
 logging:
   level:
     ec.*: debug
+
+spring:
+  application:
+    name: boot-job-quartz
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    ##---------------- this is using main database. -------------##
+  #  datasource:
+  #    type: com.alibaba.druid.pool.DruidDataSource
+  #    druid:
+  #      driverClassName: com.mysql.cj.jdbc.Driver
+  #      url: jdbc:mysql://49.235.91.10:3306/tutorials?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+  #      username: ENC(uVs7DP260FXOKYBacQjLo7Fonyyiq2qwnSjOGt9Q2weCl3ceVf6c6VAAQ6WkTsUt)
+  #      password: ENC(IkxnRsO4O+J/8pOvHoL7/9sSyvhq3Zv9AYObJx9ldt636qyRiBTGrwndtSISEY4F)
+  #      initial-size: 10
+  #      minIdle: 50
+  #      maxActive: 500
+  #      maxWait: 60000
+  #      fail-fast: true
+  #      Keep-alive: true
+  #      timeBetweenEvictionRunsMillis: 60000
+  #      minEvictableIdleTimeMillis: 300000
+  #      validationQuery: SELECT 1 FROM DUAL
+  #      testWhileIdle: true
+  #      testOnBorrow: false
+  #      testOnReturn: false
+  #      poolPreparedStatements: false
+  #      filters: stat,wall,slf4j
+  #      maxPoolPreparedStatementPerConnectionSize: 100
+  #      useGlobalDataSourceStat: true
+  #      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  #      web-stat-filter:
+  #        enabled: true
+  #        url-pattern: /*
+  #        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+  #      stat-view-servlet:
+  #        enabled: true
+  #        #访问路径为/druid时，跳转到StatViewServlet  http://127.0.0.1:8080/druid
+  #        url-pattern: "/druid/*"
+  #        reset-enable: falseEcException
+  #        login-username: ENC(1j3TT4M6aHscVzKpeHWX5KNKRU7ui1jesPGY52W2FEl9WunVIBiVizoeQv4ocWxd)
+  #        login-password: ENC(Jm9wTCpswKDpVkuiT0JmwMiz7H4bqiOLnEK1Hs49QPrB+RJ4Y8pUh2ON4FPOSjNV)
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      comment-prefix: '#'
+    properties:
+      org:
+        quartz:
+          threadPool:
+            threadCount: 500
