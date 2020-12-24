@@ -64,9 +64,7 @@ public class Coder {
   /** this is customized default group, if has Default.class, should add Common.class */
   public interface Common {}
 
-  public interface PrimaryCoder {}
-  ;
+  public interface PrimaryCoder {};
 
-  public interface MiddleCoder {}
-  ;
+  public interface MiddleCoder {};
 }

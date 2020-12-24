@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @create 2020-12-23 21:21 <br>
  * @project springboot <br>
  */
-@Component
+// @Component
 public class JobInit {
 
   @Resource Scheduler scheduler;

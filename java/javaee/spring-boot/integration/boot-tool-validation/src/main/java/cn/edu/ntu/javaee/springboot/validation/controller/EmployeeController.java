@@ -142,6 +142,7 @@ public class EmployeeController {
     employeeService.getByEmail(null);
     return "ok";
   }
+
   @GetMapping("/validateInService/{email}")
   public Object validateInService(@PathVariable("email") String email) {
     employeeService.validateInService(email);

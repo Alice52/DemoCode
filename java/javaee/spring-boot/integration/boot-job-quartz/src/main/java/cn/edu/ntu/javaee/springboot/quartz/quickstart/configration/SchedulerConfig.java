@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @create 2019-09-22 0:58
  * @function
  */
-@Configuration
+// @Configuration
 public class SchedulerConfig {
 
   private static final String DEFAULT_CRON = "* * * * * ? *";
