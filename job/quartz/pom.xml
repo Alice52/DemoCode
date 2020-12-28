@@ -13,6 +13,7 @@
         <module>quartz-basic</module>
         <module>quartz-spring</module>
         <module>quartz-boot</module>
+        <module>quartz-tutorials</module>
     </modules>
 
     <properties>

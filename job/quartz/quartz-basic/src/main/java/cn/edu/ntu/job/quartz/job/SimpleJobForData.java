@@ -1,6 +1,5 @@
 package cn.edu.ntu.job.quartz.job;
 
-import jdk.nashorn.internal.objects.annotations.Setter;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -19,6 +18,11 @@ public class SimpleJobForData implements Job {
   private int age;
   private String company;
 
+  /**
+   * This value will be injected by quartz.
+   *
+   * @param age
+   */
   public void setAge(int age) {
     this.age = age;
   }
