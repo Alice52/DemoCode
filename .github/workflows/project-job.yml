@@ -30,6 +30,6 @@ jobs:
 
       - name: Build Job Tutorial
         run: |
-          PROJECT_NAME=job
+          PROJECT_NAME=quartz
           cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME
           mvn clean package -DskipTests=true
