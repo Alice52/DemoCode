@@ -1,0 +1,11 @@
+server:
+  port: 9010
+  
+logging:
+  level:
+    ec.*: debug
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
