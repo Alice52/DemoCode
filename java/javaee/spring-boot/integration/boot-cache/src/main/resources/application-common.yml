@@ -1,6 +1,10 @@
 server:
   port: 9010
-  
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
 logging:
   level:
     ec.*: debug
@@ -8,4 +12,5 @@ logging:
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-
+  application:
+    name: boot-cache
