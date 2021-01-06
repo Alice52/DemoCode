@@ -257,9 +257,11 @@ tags
 
 # Created by .ignore support plugin (hsz.mobi)
 
+## gradlew jar
 .gradle
 .gradle/*
 local.properties
+!**/gradle-wrapper.jar
 
 # General build files
 **/build/*

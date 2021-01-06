@@ -18,6 +18,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 /**
+ * TODO: this {@link io.netty.util.internal.OutOfDirectMemoryError } cannot re-produce due to low
+ * through out.
+ *
  * @author zack <br>
  * @create 2021-01-04 22:09 <br>
  * @project springboot <br>
@@ -34,7 +37,9 @@ public class OutOfMemoryController {
     Object usersFromRedis = redisTemplate.opsForValue().get("omm-key");
     if (ObjectUtil.isNull(usersFromRedis)) {
       usersFromRedis = generateMap();
-      redisTemplate.opsForValue().set("omm-key", JSONUtil.toJsonStr(usersFromRedis), 2, TimeUnit.HOURS);
+      redisTemplate
+          .opsForValue()
+          .set("omm-key", JSONUtil.toJsonStr(usersFromRedis), 2, TimeUnit.HOURS);
     }
 
     return usersFromRedis;

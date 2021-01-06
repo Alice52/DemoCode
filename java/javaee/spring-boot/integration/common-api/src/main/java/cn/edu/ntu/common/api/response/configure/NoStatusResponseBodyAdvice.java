@@ -101,6 +101,7 @@ public class NoStatusResponseBodyAdvice implements ResponseBodyAdvice {
       return body;
     }
 
+    HashMap<String, Object> res = new HashMap<>(4);
     if (body != null && body instanceof IBaseErrorResponse) {
       if (!statuses.contains(failedHttpCode)) {
         failedHttpCode = 400;
@@ -108,29 +109,24 @@ public class NoStatusResponseBodyAdvice implements ResponseBodyAdvice {
 
       response.setStatusCode(HttpStatus.valueOf(failedHttpCode));
       IBaseErrorResponse errorResponse = (IBaseErrorResponse) body;
-      return new HashMap<String, Object>(4) {
-        {
-          if (responseProperties.getRequestId().getEnabled()) {
-            put(requestIdKey, MDC.get(requestIdKey));
-          }
 
-          put(codeName, errorResponse.getErrorCode());
-          put(messageName, errorResponse.getErrorMsg());
-          put(dataName, errorResponse.getParameters());
-        }
-      };
+      if (responseProperties.getRequestId().getEnabled()) {
+        res.put(requestIdKey, MDC.get(requestIdKey));
+      }
+      res.put(codeName, errorResponse.getErrorCode());
+      res.put(messageName, errorResponse.getErrorMsg());
+      res.put(dataName, errorResponse.getParameters());
+
+      return res;
     }
 
-    return new HashMap<String, Object>(4) {
-      {
-        if (responseProperties.getRequestId().getEnabled()) {
-          put(requestIdKey, MDC.get(requestIdKey));
-        }
+    if (responseProperties.getRequestId().getEnabled()) {
+      res.put(requestIdKey, MDC.get(requestIdKey));
+    }
+    res.put(codeName, CommonResponseEnum.SUCCESS.getErrorCode());
+    res.put(messageName, CommonResponseEnum.SUCCESS.getErrorMsg());
+    res.put(dataName, body);
 
-        put(codeName, CommonResponseEnum.SUCCESS.getErrorCode());
-        put(messageName, CommonResponseEnum.SUCCESS.getErrorMsg());
-        put(dataName, body);
-      }
-    };
+    return res;
   }
 }
