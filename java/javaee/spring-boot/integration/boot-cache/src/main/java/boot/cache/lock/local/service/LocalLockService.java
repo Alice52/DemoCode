@@ -1,4 +1,4 @@
-package boot.cache.service;
+package boot.cache.lock.local.service;
 
 import boot.cache.utils.RedisUtil;
 import cn.hutool.core.lang.UUID;
@@ -25,7 +25,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Slf4j
 @Service
-public class LockService implements ILockService {
+public class LocalLockService implements ILocalLockService {
   private Lock lock = new ReentrantLock();
   private static final String BRANDS_KEY = "BRANDS";
   private static final String REDIS_LOCK_KEY = "LOCK";
@@ -226,8 +226,8 @@ public class LockService implements ILockService {
       // 3. 删除分布式锁: 只能删除自己的锁, 且原子
       String script =
           "if redis.call('get',KEYS[1]) == ARGV[1] then return redis.call('del',KEYS[1]) else return 0 end";
-      DefaultRedisScript<Long> defaultRedisScript = new DefaultRedisScript<>(script, Long.class);
-      Long delete = redisTemplate.execute(defaultRedisScript, Arrays.asList(REDIS_LOCK_KEY), uuid);
+      DefaultRedisScript<Object> defaultRedisScript = new DefaultRedisScript<>(script, Object.class);
+      Object delete = redisTemplate.execute(defaultRedisScript, Arrays.asList(REDIS_LOCK_KEY), uuid);
 
       return brands;
     }

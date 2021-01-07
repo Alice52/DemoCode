@@ -42,4 +42,8 @@ public class RedisUtil {
     Optional.ofNullable(obj)
         .ifPresent(x -> redisTemplate.opsForValue().set(realKey, obj, timeout, unit));
   }
+
+  public void set(Object obj, String realKey) {
+    set(obj, realKey, 2, TimeUnit.MINUTES);
+  }
 }

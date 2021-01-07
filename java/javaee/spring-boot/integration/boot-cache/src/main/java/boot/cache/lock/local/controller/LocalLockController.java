@@ -1,6 +1,6 @@
-package boot.cache.controller;
+package boot.cache.lock.local.controller;
 
-import boot.cache.service.ILockService;
+import boot.cache.lock.local.service.ILocalLockService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,10 +14,11 @@ import java.util.Map;
  * @project springboot <br>
  */
 @RestController
-@RequestMapping("/lock")
-public class LockController {
+@RequestMapping("/local-lock")
+public class LocalLockController {
 
-  @Resource ILockService lockService;
+  @Resource
+  ILocalLockService lockService;
 
   @GetMapping("/brands")
   public Map getBrands() {

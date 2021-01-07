@@ -1,4 +1,4 @@
-package boot.cache.service;
+package boot.cache.lock.local.service;
 
 import java.util.Map;
 
@@ -7,7 +7,7 @@ import java.util.Map;
  * @create 2021-01-05 21:06 <br>
  * @project springboot <br>
  */
-public interface ILockService {
+public interface ILocalLockService {
 
   /**
    * Get all brands, mask api.
