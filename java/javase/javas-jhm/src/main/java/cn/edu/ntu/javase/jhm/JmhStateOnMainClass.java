@@ -16,14 +16,14 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @State(Scope.Thread)
 public class JmhStateOnMainClass {
 
+  double x = Math.PI;
+
   public static void main(String[] args) throws RunnerException {
     Options opt =
         new OptionsBuilder().include(JmhStateOnMainClass.class.getSimpleName()).forks(1).build();
 
     new Runner(opt).run();
   }
-
-  double x = Math.PI;
 
   @Benchmark
   public void measure() {

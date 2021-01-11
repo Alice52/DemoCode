@@ -10,6 +10,22 @@ public class Employee {
   private double salary;
   private Address address;
 
+  public Employee(String name, int age, double salary, Address address) {
+    this.name = name;
+    this.age = age;
+    this.salary = salary;
+    this.address = address;
+  }
+
+  public Employee() {}
+
+  public Employee(String name, int age, double salary) {
+
+    this.name = name;
+    this.age = age;
+    this.salary = salary;
+  }
+
   @Override
   public String toString() {
     return "Employee{"
@@ -80,21 +96,5 @@ public class Employee {
 
   public void setAddress(Address address) {
     this.address = address;
-  }
-
-  public Employee(String name, int age, double salary, Address address) {
-    this.name = name;
-    this.age = age;
-    this.salary = salary;
-    this.address = address;
-  }
-
-  public Employee() {}
-
-  public Employee(String name, int age, double salary) {
-
-    this.name = name;
-    this.age = age;
-    this.salary = salary;
   }
 }

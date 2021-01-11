@@ -23,17 +23,9 @@ public class TraceSession {
     session.set(this);
   }
 
-  public int getNextCurrentEventId() {
-    return ++currentEventId;
-  }
-
   public static TraceSession getCurrentSession() {
 
     return session.get();
-  }
-
-  public void close() {
-    session.remove();
   }
 
   public static ThreadLocal<TraceSession> getSession() {
@@ -42,6 +34,14 @@ public class TraceSession {
 
   public static void setSession(ThreadLocal<TraceSession> session) {
     TraceSession.session = session;
+  }
+
+  public int getNextCurrentEventId() {
+    return ++currentEventId;
+  }
+
+  public void close() {
+    session.remove();
   }
 
   public String getTraceId() {

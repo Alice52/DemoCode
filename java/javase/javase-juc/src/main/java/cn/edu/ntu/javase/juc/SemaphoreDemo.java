@@ -11,9 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author zack
  * @create 2019-12-08 20:21
  * @function get access to park; Eat hot pot in order
- *
- *  1. first in first get
- *  2. leaved then others in
+ *     <p>1. first in first get 2. leaved then others in
  */
 public class SemaphoreDemo {
 

@@ -11,14 +11,14 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import static java.lang.Math.*;
+import static java.lang.Math.random;
 
 /**
  * * 测试 java 内置的四大核心函数式接口 <br>
- * 1. Consumer<T>:        void accept(T t) <br>
- * 2. Supplier<T>:        T get() <br>
- * 3. Function<T, R>:     R apply(T t) <br>
- * 4. Predicate<T>:       bool test(T t) <br>
+ * 1. Consumer<T>: void accept(T t) <br>
+ * 2. Supplier<T>: T get() <br>
+ * 3. Function<T, R>: R apply(T t) <br>
+ * 4. Predicate<T>: bool test(T t) <br>
  *
  * @author zack <br>
  * @create 2020-04-04 19:02 <br>

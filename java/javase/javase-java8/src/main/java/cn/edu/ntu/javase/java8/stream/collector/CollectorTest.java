@@ -31,7 +31,11 @@ public class CollectorTest {
 
   @Test
   public void testProcessingOperation() {
-    List<String> collect = APPLES.stream().filter(apple -> apple.getWeight() > 50).map(Apple::getColor).collect(toList());
+    List<String> collect =
+        APPLES.stream()
+            .filter(apple -> apple.getWeight() > 50)
+            .map(Apple::getColor)
+            .collect(toList());
 
     collect.forEach(System.out::println);
   }

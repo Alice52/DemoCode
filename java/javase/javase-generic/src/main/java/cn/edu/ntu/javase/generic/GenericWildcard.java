@@ -25,17 +25,6 @@ public class GenericWildcard<E> {
   }
 
   /**
-   * This is real generic.
-   *
-   * @param dest
-   * @param src
-   * @param <T>
-   */
-  public <T extends E> void mergeSameType2(List<T> dest, List<T> src) {
-    src.forEach(x -> dest.add(x));
-  }
-
-  /**
    * Can merge student to person.
    *
    * @param dest
@@ -43,6 +32,17 @@ public class GenericWildcard<E> {
    * @param <T>
    */
   public static <T> void merge(List<? super T> dest, List<T> src) {
+    src.forEach(x -> dest.add(x));
+  }
+
+  /**
+   * This is real generic.
+   *
+   * @param dest
+   * @param src
+   * @param <T>
+   */
+  public <T extends E> void mergeSameType2(List<T> dest, List<T> src) {
     src.forEach(x -> dest.add(x));
   }
 }

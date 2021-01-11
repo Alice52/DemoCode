@@ -32,11 +32,6 @@ public enum UserStatusV3Impl implements CodeBasedEnum {
     this.code = code;
   }
 
-  @Override
-  public int code() {
-    return this.code;
-  }
-
   public static void main(String... arg) {
     LOG.info(ENABLE.name());
     LOG.info(String.valueOf(DISABLE.ordinal()));
@@ -44,5 +39,10 @@ public enum UserStatusV3Impl implements CodeBasedEnum {
     LOG.info(String.valueOf(ENABLE.code()));
     // 10
     LOG.info(String.valueOf(DISABLE.code()));
+  }
+
+  @Override
+  public int code() {
+    return this.code;
   }
 }

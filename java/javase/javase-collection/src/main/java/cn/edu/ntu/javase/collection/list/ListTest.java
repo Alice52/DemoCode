@@ -15,6 +15,14 @@ import java.util.*;
  */
 public class ListTest {
 
+  public static void printPersonInfo(List<Person> persons) {
+    persons.forEach(person -> System.out.println(person));
+  }
+
+  public static void printStudentInfo(List<? extends Person> students) {
+    students.forEach(student -> System.out.println(student));
+  }
+
   public void testArguments_length(String... args) {
     System.out.println(args.length);
   }
@@ -63,13 +71,5 @@ public class ListTest {
     students.add(new Student(40, "1465", "hi"));
     // printPersonInfo(students);  // compile error
     printStudentInfo(students);
-  }
-
-  public static void printPersonInfo(List<Person> persons) {
-    persons.forEach(person -> System.out.println(person));
-  }
-
-  public static void printStudentInfo(List<? extends Person> students) {
-    students.forEach(student -> System.out.println(student));
   }
 }

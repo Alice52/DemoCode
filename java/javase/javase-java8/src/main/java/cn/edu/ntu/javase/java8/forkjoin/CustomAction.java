@@ -1,12 +1,8 @@
 package cn.edu.ntu.javase.java8.forkjoin;
 
 import cn.edu.ntu.javase.java8.utils.AccumulatorHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author zack <br>
@@ -14,9 +10,9 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class CustomAction extends RecursiveAction {
 
+  private static final long THRESHOLD = 10000000L;
   private long start;
   private long end;
-  private static final long THRESHOLD = 10000000L;
 
   public CustomAction() {}
 

@@ -31,63 +31,11 @@ public class InnerClassTest {
     CommonInner commonInner2 = new CommonInner();
   }
 
-  /**
-   * type1: common inner class. <br>
-   * 1. exist depending on outer class objects. <br>
-   * 2. common inner class have access to all member of outer class. <br>
-   * 3. outer class have access to all member of common inner class. <br>
-   * 4. common inner class do not have static member. <br>
-   */
-  public class CommonInner {
-    private int field1 = 20;
-
-    // compile error: common inner class do not have static member
-    // static int field5 = 5;
-
-    public CommonInner() {
-      LOG.info("create " + this.getClass().getSimpleName() + " Object.");
-    }
-  }
-
-  /**
-   * type2: static inner class <br>
-   * 1. exist not depend on outer class. <br>
-   * 2. static inner class have no access to outer class, in addition to static member. <br>
-   * 3. outer class have access to all member of static inner class. <br>
-   * 4. static inner class can also used to new instance. <br>
-   * 5. static inner class can define un-static and static member. <br>
-   */
-  static class StaticInner {
-    // can define static member in static inner class
-    public int field1 = 1;
-    static int field5 = 5;
-
-    public StaticInner() {
-      LOG.info("create " + StaticInner.class.getSimpleName() + " Object.");
-      // LOG.info("InnerClassTest[outer] field1: " + field1); // compile error
-    }
-  }
-
   @Test
   public void testStaticInner() {
     // There are no difference between the two class.
     StaticInner staticInner = new InnerClassTest.StaticInner();
     StaticInner staticInner2 = new StaticInner();
-  }
-
-  /**
-   * type3: anonymous inner class <br>
-   * 1. anonymous in known as implements interface as parameter. <br>
-   * 2. anonymous inner class have all access to outer class. <br>
-   * 3. outer class have a no access to anonymous inner class: <br>
-   * - anonymous inner class can define property，and can only used in local, <br>
-   * - and cannot used in outer class due to no class name.<br>
-   * 4. even cannot create or get anonymous instance.<br>
-   * 5. anonymous just define implements and it will not execute besides call interface method.<br>
-   * 6. create anonymous for each interface method call.<br>
-   */
-  interface AnonymousInterface {
-    void accept(String tag, Consumer consumer);
   }
 
   @Test
@@ -108,5 +56,57 @@ public class InnerClassTest {
     // create anonymous for each interface method call.
     anonymousInterface.accept("obj1", (Object a) -> LOG.info(a.toString()));
     anonymousInterface.accept("obj3", a -> LOG.info(a.toString()));
+  }
+
+  /**
+   * type3: anonymous inner class <br>
+   * 1. anonymous in known as implements interface as parameter. <br>
+   * 2. anonymous inner class have all access to outer class. <br>
+   * 3. outer class have a no access to anonymous inner class: <br>
+   * - anonymous inner class can define property，and can only used in local, <br>
+   * - and cannot used in outer class due to no class name.<br>
+   * 4. even cannot create or get anonymous instance.<br>
+   * 5. anonymous just define implements and it will not execute besides call interface method.<br>
+   * 6. create anonymous for each interface method call.<br>
+   */
+  interface AnonymousInterface {
+    void accept(String tag, Consumer consumer);
+  }
+
+  /**
+   * type2: static inner class <br>
+   * 1. exist not depend on outer class. <br>
+   * 2. static inner class have no access to outer class, in addition to static member. <br>
+   * 3. outer class have access to all member of static inner class. <br>
+   * 4. static inner class can also used to new instance. <br>
+   * 5. static inner class can define un-static and static member. <br>
+   */
+  static class StaticInner {
+    static int field5 = 5;
+    // can define static member in static inner class
+    public int field1 = 1;
+
+    public StaticInner() {
+      LOG.info("create " + StaticInner.class.getSimpleName() + " Object.");
+      // LOG.info("InnerClassTest[outer] field1: " + field1); // compile error
+    }
+  }
+
+  /**
+   * type1: common inner class. <br>
+   * 1. exist depending on outer class objects. <br>
+   * 2. common inner class have access to all member of outer class. <br>
+   * 3. outer class have access to all member of common inner class. <br>
+   * 4. common inner class do not have static member. <br>
+   */
+  public class CommonInner {
+    private int field1 = 20;
+
+    // compile error: common inner class do not have static member
+    // static int field5 = 5;
+
+    public CommonInner() {
+      LOG.info("create " + this.getClass().getSimpleName() + " Object.");
+    }
   }
 }

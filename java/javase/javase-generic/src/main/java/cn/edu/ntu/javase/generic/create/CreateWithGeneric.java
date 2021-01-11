@@ -2,7 +2,8 @@ package cn.edu.ntu.javase.generic.create;
 
 import lombok.SneakyThrows;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 /**
@@ -54,6 +55,4 @@ public class CreateWithGeneric {
 
     return (T) constructor.newInstance(init);
   }
-
-
 }

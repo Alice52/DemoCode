@@ -20,6 +20,12 @@ public enum UserStatusV2 {
     this.desc = desc;
   }
 
+  public static void main(String... args) {
+    LOG.info(ENABLE.name());
+    LOG.info(String.valueOf(DISABLE.ordinal()));
+    LOG.info(ENABLE.getDesc());
+  }
+
   public String getDesc() {
     return this.desc;
   }
@@ -27,11 +33,5 @@ public enum UserStatusV2 {
   @Override
   public String toString() {
     return "UserStatusV2{" + "desc='" + desc + '\'' + '}';
-  }
-
-  public static void main(String... args) {
-    LOG.info(ENABLE.name());
-    LOG.info(String.valueOf(DISABLE.ordinal()));
-    LOG.info(ENABLE.getDesc());
   }
 }

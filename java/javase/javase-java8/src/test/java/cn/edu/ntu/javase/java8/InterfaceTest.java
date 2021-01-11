@@ -15,6 +15,12 @@ public class InterfaceTest {
     System.out.println(a.isEmpty());
   }
 
+  @Test
+  public void testImplement() {
+    EE d = new EE();
+    Assert.isTrue("CC".equals(d.say()));
+  }
+
   private interface A {
     int a = 5;
 
@@ -23,12 +29,6 @@ public class InterfaceTest {
     default boolean isEmpty() {
       return size() == 0;
     }
-  }
-
-  @Test
-  public void testImplement() {
-    EE d = new EE();
-    Assert.isTrue("CC".equals(d.say()));
   }
 
   interface AA {

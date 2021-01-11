@@ -28,6 +28,14 @@ public class StreamTest {
           new Employee("王凡", 38, 6000),
           new Employee("张程", 58, 8000));
 
+  private static Stream<Character> filterCharacter(String string) {
+    List<Character> list = new ArrayList<>();
+    for (char c : string.toCharArray()) {
+      list.add(c);
+    }
+    return list.stream();
+  }
+
   @Test
   /** 创建 Stream */
   public void testCreate() {
@@ -181,14 +189,6 @@ public class StreamTest {
                           }
                         })));
     log.info(collect4.toString());
-  }
-
-  private static Stream<Character> filterCharacter(String string) {
-    List<Character> list = new ArrayList<>();
-    for (char c : string.toCharArray()) {
-      list.add(c);
-    }
-    return list.stream();
   }
 
   //  private List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);

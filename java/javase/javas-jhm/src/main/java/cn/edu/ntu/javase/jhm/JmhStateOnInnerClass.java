@@ -26,19 +26,13 @@ public class JmhStateOnInnerClass {
 
   public static void main(String[] args) throws RunnerException {
     Options opt =
-        new OptionsBuilder().include(JmhStateOnInnerClass.class.getSimpleName()).threads(4).forks(1).build();
+        new OptionsBuilder()
+            .include(JmhStateOnInnerClass.class.getSimpleName())
+            .threads(4)
+            .forks(1)
+            .build();
 
     new Runner(opt).run();
-  }
-
-  @State(Scope.Benchmark)
-  public static class BenchmarkState {
-    volatile double x = Math.PI;
-  }
-
-  @State(Scope.Thread)
-  public static class ThreadState {
-    volatile double x = Math.PI;
   }
 
   @Benchmark
@@ -49,5 +43,15 @@ public class JmhStateOnInnerClass {
   @Benchmark
   public void measureShared(BenchmarkState state) {
     state.x++;
+  }
+
+  @State(Scope.Benchmark)
+  public static class BenchmarkState {
+    volatile double x = Math.PI;
+  }
+
+  @State(Scope.Thread)
+  public static class ThreadState {
+    volatile double x = Math.PI;
   }
 }

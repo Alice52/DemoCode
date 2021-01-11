@@ -5,8 +5,6 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +25,13 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 public class JmhHelloWorld {
   static List<Demo> demoList;
+
+  static {
+    demoList = new ArrayList();
+    for (int i = 0; i < 10000; i++) {
+      demoList.add(new Demo(i, "test"));
+    }
+  }
 
   public static void main(String[] args) throws RunnerException {
     Options opt =
@@ -62,13 +67,6 @@ public class JmhHelloWorld {
     public Demo(int id, String name) {
       this.id = id;
       this.name = name;
-    }
-  }
-
-  static {
-    demoList = new ArrayList();
-    for (int i = 0; i < 10000; i++) {
-      demoList.add(new Demo(i, "test"));
     }
   }
 }

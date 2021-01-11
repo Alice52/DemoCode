@@ -25,7 +25,4 @@ public class GenericClassTest {
     Person person = baseGeneric.createInstance2();
     LOG.info("person: {}", person);
   }
-
-
-
 }

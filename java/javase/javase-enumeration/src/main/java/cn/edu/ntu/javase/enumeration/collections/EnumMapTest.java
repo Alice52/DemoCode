@@ -15,12 +15,12 @@ import java.util.Map;
  * @create 2020-01-31 18:40 <br>
  */
 public class EnumMapTest {
-    private static final Logger LOG = LoggerFactory.getLogger(EnumMapTest.class);
+  private static final Logger LOG = LoggerFactory.getLogger(EnumMapTest.class);
 
-    @Test
-    public void test() {
-        Map<UserStatus, String> welcomeMap = new EnumMap<>(UserStatus.class);
-        welcomeMap.put(UserStatus.A1, "hello");
-        LOG.info(welcomeMap.toString());
-    }
+  @Test
+  public void test() {
+    Map<UserStatus, String> welcomeMap = new EnumMap<>(UserStatus.class);
+    welcomeMap.put(UserStatus.A1, "hello");
+    LOG.info(welcomeMap.toString());
+  }
 }

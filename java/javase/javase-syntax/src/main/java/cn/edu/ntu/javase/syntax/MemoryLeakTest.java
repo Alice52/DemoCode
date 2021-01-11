@@ -21,6 +21,22 @@ import java.util.concurrent.TimeUnit;
 public class MemoryLeakTest {
   private static final Logger LOG = LoggerFactory.getLogger(MemoryLeakTest.class);
 
+  public static void main(String[] args) throws InterruptedException {
+    MyComponent myComponent = new MyComponent();
+    myComponent.create();
+    myComponent.myWindow.clickListener.onClick(new Object());
+    myComponent.destroy();
+    // this operation will do not recycled memory
+    myComponent = null;
+    System.gc();
+
+    TimeUnit.HOURS.sleep(5);
+  }
+
+  public interface OnClickListener {
+    void onClick(Object obj);
+  }
+
   abstract static class Component {
 
     final void create() {
@@ -65,21 +81,5 @@ public class MemoryLeakTest {
     void removeClickListener() {
       this.clickListener = null;
     }
-  }
-
-  public interface OnClickListener {
-    void onClick(Object obj);
-  }
-
-  public static void main(String[] args) throws InterruptedException {
-    MyComponent myComponent = new MyComponent();
-    myComponent.create();
-    myComponent.myWindow.clickListener.onClick(new Object());
-    myComponent.destroy();
-    // this operation will do not recycled memory
-    myComponent = null;
-    System.gc();
-
-    TimeUnit.HOURS.sleep(5);
   }
 }

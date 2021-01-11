@@ -16,35 +16,15 @@ import java.util.stream.LongStream;
 @Slf4j
 public class ForkJoinTest extends RecursiveTask<Long> {
 
+  private static final long THRESHOLD = 10000000L;
   private long start;
   private long end;
-  private static final long THRESHOLD = 10000000L;
 
   public ForkJoinTest() {}
 
   public ForkJoinTest(long start, long end) {
     this.start = start;
     this.end = end;
-  }
-
-  @Override
-  protected Long compute() {
-    long length = end - start;
-    long sum = 0;
-    if (length <= THRESHOLD) {
-      for (long i = start; i <= end; i++) {
-        sum += i;
-      }
-      return sum;
-    } else {
-      // 拆分: 递归
-      long middle = (start + end) / 2;
-      ForkJoinTest forkJoinLeft = new ForkJoinTest(start, middle);
-      forkJoinLeft.fork(); // 进行拆分并压如栈
-      ForkJoinTest forkJoinRight = new ForkJoinTest(middle + 1, end);
-      forkJoinRight.fork(); // 进行拆分并压如栈
-      return forkJoinLeft.join() + forkJoinRight.join();
-    }
   }
 
   public static void main(String[] args) {
@@ -76,5 +56,25 @@ public class ForkJoinTest extends RecursiveTask<Long> {
     Instant end3 = Instant.now();
     //  393
     log.info(Duration.between(start3, end3).toMillis() + "");
+  }
+
+  @Override
+  protected Long compute() {
+    long length = end - start;
+    long sum = 0;
+    if (length <= THRESHOLD) {
+      for (long i = start; i <= end; i++) {
+        sum += i;
+      }
+      return sum;
+    } else {
+      // 拆分: 递归
+      long middle = (start + end) / 2;
+      ForkJoinTest forkJoinLeft = new ForkJoinTest(start, middle);
+      forkJoinLeft.fork(); // 进行拆分并压如栈
+      ForkJoinTest forkJoinRight = new ForkJoinTest(middle + 1, end);
+      forkJoinRight.fork(); // 进行拆分并压如栈
+      return forkJoinLeft.join() + forkJoinRight.join();
+    }
   }
 }

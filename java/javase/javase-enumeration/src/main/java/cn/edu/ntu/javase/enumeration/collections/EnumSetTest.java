@@ -6,33 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.EnumSet;
 
-/**
- * - RegularEnumSet: enum number is less than 64; <br>
- * - JumboEnumSet: enum number is less than 64 <br> <br>
- *
- * - copyOf: create EnumSet use provided Set <br>
- * - noneOf: null Set <br>
- * - allOf: use provided Set to create EnumSet <br>
- * - of: use enum to create EnumSet - range: according to ordinal to define ranged EnumSet<br>
- *
- * @author zack <br>
- * @create 2020-01-31 18:23 <br>
- */
-public class EnumSetTest {
-  private static final Logger LOG = LoggerFactory.getLogger(EnumSetTest.class);
-
-  @Test
-  public void typeTest() {
-    EnumSet<UserStatus> userStatusesSet = EnumSet.allOf(UserStatus.class);
-    LOG.info(String.valueOf(userStatusesSet.size()));
-    userStatusesSet.stream().forEach(System.out::println);
-    LOG.info("userStatusSet:" + userStatusesSet.getClass());
-
-    EnumSet<MoreUserStatus> moreUserStatusesSet = EnumSet.noneOf(MoreUserStatus.class);
-    LOG.info("moreUserStatusesSet:" + moreUserStatusesSet.getClass());
-  }
-}
-
 enum UserStatus {
   A1,
   A2;
@@ -139,4 +112,31 @@ enum MoreUserStatus {
   A98,
   A99,
   A100;
+}
+
+/**
+ * - RegularEnumSet: enum number is less than 64; <br>
+ * - JumboEnumSet: enum number is less than 64 <br>
+ * <br>
+ * - copyOf: create EnumSet use provided Set <br>
+ * - noneOf: null Set <br>
+ * - allOf: use provided Set to create EnumSet <br>
+ * - of: use enum to create EnumSet - range: according to ordinal to define ranged EnumSet<br>
+ *
+ * @author zack <br>
+ * @create 2020-01-31 18:23 <br>
+ */
+public class EnumSetTest {
+  private static final Logger LOG = LoggerFactory.getLogger(EnumSetTest.class);
+
+  @Test
+  public void typeTest() {
+    EnumSet<UserStatus> userStatusesSet = EnumSet.allOf(UserStatus.class);
+    LOG.info(String.valueOf(userStatusesSet.size()));
+    userStatusesSet.stream().forEach(System.out::println);
+    LOG.info("userStatusSet:" + userStatusesSet.getClass());
+
+    EnumSet<MoreUserStatus> moreUserStatusesSet = EnumSet.noneOf(MoreUserStatus.class);
+    LOG.info("moreUserStatusesSet:" + moreUserStatusesSet.getClass());
+  }
 }

@@ -15,6 +15,18 @@ import java.util.Iterator;
  */
 public abstract class BaseGenericMethod<T> {
 
+  public static <A extends Comparable<A>> A max(Collection<A> xs) {
+    Iterator<A> xi = xs.iterator();
+    A w = xi.next();
+    while (xi.hasNext()) {
+      A x = xi.next();
+      if (w.compareTo(x) < 0) {
+        w = x;
+      }
+    }
+    return w;
+  }
+
   /**
    * Generate class
    *
@@ -39,17 +51,6 @@ public abstract class BaseGenericMethod<T> {
     return clazz.newInstance();
   }
 
-  public static <A extends Comparable<A>> A max(Collection<A> xs) {
-    Iterator<A> xi = xs.iterator();
-    A w = xi.next();
-    while (xi.hasNext()) {
-      A x = xi.next();
-      if (w.compareTo(x) < 0) {
-        w = x;
-      }
-    }
-    return w;
-  }
   /**
    * Get Object Hash.
    *

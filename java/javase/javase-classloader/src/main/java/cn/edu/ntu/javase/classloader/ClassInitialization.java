@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 /**
  * 1. using parent static field will not trigger subClass init, but superClass will init. <br>
  * 2. using as DataType to new array will not trigger this class init. <br>
- * 3. cn.edu.ntu.javase.enumeration.constants are stored in the callee constant pool during compilation, so it will not init
- * cn.edu.ntu.javase.enumeration.constants class<br>
+ * 3. cn.edu.ntu.javase.enumeration.constants are stored in the callee constant pool during
+ * compilation, so it will not init cn.edu.ntu.javase.enumeration.constants class<br>
  *
  * @author zack
  * @create 2019-12-13 22:15

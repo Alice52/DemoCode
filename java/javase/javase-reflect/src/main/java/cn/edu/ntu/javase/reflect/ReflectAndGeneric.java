@@ -2,8 +2,6 @@ package cn.edu.ntu.javase.reflect;
 
 import cn.edu.ntu.javase.common.model.Person;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

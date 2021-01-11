@@ -22,19 +22,20 @@ public class CyclicBarrierDemo {
     for (int i = 0; i < NUMBER; i++) {
       final int times = i;
       new Thread(
-          () -> {
-            LOG.info(
-                Thread.currentThread().getName()
-                    + " on condition, and will await for open barrier, and now have "
-                    + times
-                    + " in wait.");
-            try {
-              cb.await();
-            } catch (InterruptedException | BrokenBarrierException e) {
-              e.printStackTrace();
-            }
-          },
-          String.valueOf(i)).start();
+              () -> {
+                LOG.info(
+                    Thread.currentThread().getName()
+                        + " on condition, and will await for open barrier, and now have "
+                        + times
+                        + " in wait.");
+                try {
+                  cb.await();
+                } catch (InterruptedException | BrokenBarrierException e) {
+                  e.printStackTrace();
+                }
+              },
+              String.valueOf(i))
+          .start();
     }
   }
 }

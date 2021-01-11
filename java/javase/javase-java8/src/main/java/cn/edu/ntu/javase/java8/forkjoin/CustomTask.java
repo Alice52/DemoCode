@@ -1,8 +1,5 @@
 package cn.edu.ntu.javase.java8.forkjoin;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.ForkJoinPool;
@@ -16,37 +13,15 @@ import java.util.stream.LongStream;
  */
 public class CustomTask extends RecursiveTask<Long> {
 
+  private static final long THRESHOLD = 10000000L;
   private long start;
   private long end;
-  private static final long THRESHOLD = 10000000L;
 
   public CustomTask() {}
 
   public CustomTask(long start, long end) {
     this.start = start;
     this.end = end;
-  }
-
-  @Override
-  protected Long compute() {
-    long length = end - start;
-    long sum = 0;
-    if (length <= THRESHOLD) {
-      for (long i = start; i <= end; i++) {
-        sum += i;
-      }
-      return sum;
-    } else {
-      // 拆分: 递归
-      long middle = (start + end) / 2;
-      CustomTask forkJoinLeft = new CustomTask(start, middle);
-      // 进行拆分并压如栈
-      forkJoinLeft.fork();
-      CustomTask forkJoinRight = new CustomTask(middle + 1, end);
-      // 进行拆分并压如栈
-      forkJoinRight.fork();
-      return forkJoinLeft.join() + forkJoinRight.join();
-    }
   }
 
   public static void main(String[] args) {
@@ -78,5 +53,27 @@ public class CustomTask extends RecursiveTask<Long> {
     Instant end3 = Instant.now();
     //  393
     System.out.println(Duration.between(start3, end3).toMillis());
+  }
+
+  @Override
+  protected Long compute() {
+    long length = end - start;
+    long sum = 0;
+    if (length <= THRESHOLD) {
+      for (long i = start; i <= end; i++) {
+        sum += i;
+      }
+      return sum;
+    } else {
+      // 拆分: 递归
+      long middle = (start + end) / 2;
+      CustomTask forkJoinLeft = new CustomTask(start, middle);
+      // 进行拆分并压如栈
+      forkJoinLeft.fork();
+      CustomTask forkJoinRight = new CustomTask(middle + 1, end);
+      // 进行拆分并压如栈
+      forkJoinRight.fork();
+      return forkJoinLeft.join() + forkJoinRight.join();
+    }
   }
 }

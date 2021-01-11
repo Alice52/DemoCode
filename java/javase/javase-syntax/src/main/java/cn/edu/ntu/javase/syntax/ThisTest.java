@@ -11,6 +11,12 @@ import cn.hutool.core.lang.Assert;
 public final class ThisTest {
   private int a = 30;
 
+  public static void main(String[] args) {
+    ThisTest test1 = new ThisTest();
+    test1.test(5);
+    Assert.isTrue(560 == test1.a);
+  }
+
   public void test(int b) { // b = 5
     {
       int a = 26;
@@ -30,11 +36,5 @@ public final class ThisTest {
     }
     Assert.isTrue(560 == this.a);
     Assert.isTrue(560 == a);
-  }
-
-  public static void main(String[] args) {
-    ThisTest test1 = new ThisTest();
-    test1.test(5);
-    Assert.isTrue(560 == test1.a);
   }
 }

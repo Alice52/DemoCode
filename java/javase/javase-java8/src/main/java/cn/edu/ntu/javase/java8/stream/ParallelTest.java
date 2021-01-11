@@ -2,8 +2,6 @@ package cn.edu.ntu.javase.java8.stream;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.function.Function;
 import java.util.stream.LongStream;
@@ -15,39 +13,6 @@ import java.util.stream.Stream;
  */
 @Slf4j
 public class ParallelTest {
-
-  @Test
-  public void getProcessor() {
-
-    int processors = Runtime.getRuntime().availableProcessors();
-    log.info(processors + "");
-
-    log.info(System.getProperty("java.util.concurrent.ForkJoinPool.common.parallelism"));
-    log.info(System.getProperty("java.util.concurrent.ForkJoinPool.common.threadFactory"));
-    log.info(System.getProperty("java.util.concurrent.ForkJoinPool.common.exceptionHandler"));
-
-    log.info(
-        "normal add consume time: " + testCompareParallel(ParallelTest::testNormalAdd, 10000000));
-    log.info(
-        "iterate stream add consume time: "
-            + testCompareParallel(ParallelTest::testIterateStream, 10000000));
-    log.info(
-        "parallel stream without box add consume time: "
-            + testCompareParallel(ParallelTest::testParallelStreamWithoutBox, 10000000));
-    log.info(
-        "parallel stream built in add consume time: "
-            + testCompareParallel(ParallelTest::testParallelBuiltin, 10000000));
-    log.info(
-        "parallel stream built in add consume time: "
-            + testCompareParallel(ParallelTest::testParallelBuiltin2, 10000000));
-
-    //      normal add consume time:                            3589700
-    //      iterate stream add consume time:                   90266100
-    //      parallel stream without box add consume time:      80533400
-    //      parallel stream built in add consume time:          1355000
-    //      parallel stream built in add consume time:          8340600
-
-  }
 
   private static long testCompareParallel(Function<Long, Long> way, long limit) {
     long fastest = Long.MAX_VALUE;
@@ -91,5 +56,38 @@ public class ParallelTest {
       result += i;
     }
     return result;
+  }
+
+  @Test
+  public void getProcessor() {
+
+    int processors = Runtime.getRuntime().availableProcessors();
+    log.info(processors + "");
+
+    log.info(System.getProperty("java.util.concurrent.ForkJoinPool.common.parallelism"));
+    log.info(System.getProperty("java.util.concurrent.ForkJoinPool.common.threadFactory"));
+    log.info(System.getProperty("java.util.concurrent.ForkJoinPool.common.exceptionHandler"));
+
+    log.info(
+        "normal add consume time: " + testCompareParallel(ParallelTest::testNormalAdd, 10000000));
+    log.info(
+        "iterate stream add consume time: "
+            + testCompareParallel(ParallelTest::testIterateStream, 10000000));
+    log.info(
+        "parallel stream without box add consume time: "
+            + testCompareParallel(ParallelTest::testParallelStreamWithoutBox, 10000000));
+    log.info(
+        "parallel stream built in add consume time: "
+            + testCompareParallel(ParallelTest::testParallelBuiltin, 10000000));
+    log.info(
+        "parallel stream built in add consume time: "
+            + testCompareParallel(ParallelTest::testParallelBuiltin2, 10000000));
+
+    //      normal add consume time:                            3589700
+    //      iterate stream add consume time:                   90266100
+    //      parallel stream without box add consume time:      80533400
+    //      parallel stream built in add consume time:          1355000
+    //      parallel stream built in add consume time:          8340600
+
   }
 }

@@ -3,13 +3,18 @@ package cn.edu.ntu.javase.juc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 public class CallableDemo {
   private static final Logger LOG = LoggerFactory.getLogger(CallableDemo.class);
 
   public static void main(String[] args) throws ExecutionException, InterruptedException {
-    FutureTask<Integer> future = new FutureTask<>(() -> {
+    FutureTask<Integer> future =
+        new FutureTask<>(
+            () -> {
               TimeUnit.SECONDS.sleep(4);
               return 200;
             });

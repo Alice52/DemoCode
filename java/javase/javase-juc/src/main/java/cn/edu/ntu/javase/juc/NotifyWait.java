@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Stream;
 
 /**
  * @author zack
@@ -40,23 +39,23 @@ public class NotifyWait {
 
   private Thread increaseData(ShareDataVersion2 data, String threadName) {
     return new Thread(
-            () -> {
-              for (int i = 0; i < 500; i++) {
-                data.increase();
-              }
-            },
-            threadName);
+        () -> {
+          for (int i = 0; i < 500; i++) {
+            data.increase();
+          }
+        },
+        threadName);
   }
 
   private Thread decreaseData(ShareDataVersion2 data, String threadName) {
     return new Thread(
-            () -> {
-              // Thread.sleep(200);
-              for (int i = 0; i < 500; i++) {
-                data.decrease();
-              }
-            },
-            threadName);
+        () -> {
+          // Thread.sleep(200);
+          for (int i = 0; i < 500; i++) {
+            data.decrease();
+          }
+        },
+        threadName);
   }
 
   private Thread increaseData(ShareDataVersion1 data, String threadName) {
@@ -82,8 +81,8 @@ public class NotifyWait {
 }
 
 class ShareDataVersion1 {
-  private int number = 0;
   private static final Logger LOG = LoggerFactory.getLogger(ShareDataVersion1.class);
+  private int number = 0;
 
   public synchronized void increase() {
     try {
@@ -123,10 +122,10 @@ class ShareDataVersion1 {
 }
 
 class ShareDataVersion2 {
+  private static final Logger LOG = LoggerFactory.getLogger(ShareDataVersion1.class);
   private int number = 0;
   private Lock lock = new ReentrantLock();
   private Condition condition = lock.newCondition();
-  private static final Logger LOG = LoggerFactory.getLogger(ShareDataVersion1.class);
 
   public void increase() {
     lock.lock();

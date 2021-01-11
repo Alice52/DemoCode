@@ -2,7 +2,6 @@ package cn.edu.ntu.javase.agent;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
-import sun.management.resources.agent;
 
 /**
  * @author zack <br>

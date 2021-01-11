@@ -9,9 +9,8 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author zack
  * @create 2019-12-04 20:50
- * @function 3 seller sale 30 tickets with juc.
- *  1. thread -- operation -- resources
- *  2. high cohesion -- low coupling
+ * @function 3 seller sale 30 tickets with juc. 1. thread -- operation -- resources 2. high cohesion
+ *     -- low coupling
  */
 public class SaleTickets {
 

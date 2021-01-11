@@ -1,16 +1,11 @@
 package cn.edu.ntu.syntax;
 
 import cn.edu.ntu.javase.syntax.ConvertData;
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.nio.charset.Charset;
-import java.util.stream.Stream;
 
 /**
  * @author zack <br>
