@@ -14,6 +14,10 @@ public class Student extends Person {
     this.school = school;
   }
 
+  public Student(String name, int age) {
+    super(name, age);
+  }
+
   public String getSchool() {
     return school;
   }

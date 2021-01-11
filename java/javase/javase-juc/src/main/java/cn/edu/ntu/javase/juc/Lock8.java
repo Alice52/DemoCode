@@ -34,7 +34,7 @@ public class Lock8 {
 
     new Thread(() -> phone.sendSMS(), "A").start();
     TimeUnit.SECONDS.sleep(1); // make sure A can first get access
-    new Thread(() -> phone.sendEmail(), "B").start();
+    new Thread(() -> Phone.sendEmail(), "B").start();
   }
 }
 

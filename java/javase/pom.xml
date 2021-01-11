@@ -13,7 +13,7 @@
         <module>javase-java8</module>
         <module>javase-classloader</module>
         <module>javase-collection</module>
-        <module>javase-generic</module>
+        <module>javase-baseGeneric</module>
         <module>javase-io</module>
         <module>javase-juc</module>
         <module>javase-jvm</module>
@@ -37,10 +37,16 @@
         <logback.classic.version>1.2.3</logback.classic.version>
         <lombok.version>1.18.12</lombok.version>
         <openjdk.jmh.version>1.19</openjdk.jmh.version>
+        <hutool.version>5.2.0</hutool.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
             <!-- junit -->
             <dependency>
                 <groupId>junit</groupId>
@@ -49,16 +55,6 @@
             </dependency>
 
             <!-- logger -->
-            <dependency>
-                <artifactId>slf4j-api</artifactId>
-                <groupId>org.slf4j</groupId>
-                <version>${slf4j.api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>${logback.core.version}</version>
-            </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
