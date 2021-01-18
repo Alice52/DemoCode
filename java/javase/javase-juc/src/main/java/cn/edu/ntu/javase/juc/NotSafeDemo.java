@@ -1,5 +1,7 @@
 package cn.edu.ntu.javase.juc;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @create 2019-12-08 21:08
  * @function
  */
+@Slf4j
 public class NotSafeDemo {
 
   public static void main(String[] args) throws InterruptedException {
@@ -24,14 +27,15 @@ public class NotSafeDemo {
       new Thread(
               () -> {
                 list.add(UUID.randomUUID().toString());
-                System.out.println(
-                    list); // write and read will occur ConcurrentModificationException
+                // write and read will occur ConcurrentModificationException
+                log.info("{}", list);
               })
           .start();
     }
     // can use CountDownLatch to await add finished
     TimeUnit.SECONDS.sleep(5);
-    System.out.println(list); // []
+    // []
+    System.out.println(list);
   }
 
   public static void testSafedList() {
@@ -41,11 +45,12 @@ public class NotSafeDemo {
       new Thread(
               () -> {
                 list.add(UUID.randomUUID().toString());
-                System.out.println(list);
+                log.info("{}", list);
               })
           .start();
     }
 
-    System.out.println(list); // []
+    // []
+    log.info("{}", list);
   }
 }

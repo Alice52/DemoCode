@@ -17,19 +17,25 @@ public class ThreadOrderAccess {
     ShareResource data = new ShareResource();
     new Thread(
             () -> {
-              for (int i = 1; i <= 10; i++) data.executeA(i);
+              for (int i = 1; i <= 10; i++) {
+                data.executeA(i);
+              }
             },
             "A")
         .start();
     new Thread(
             () -> {
-              for (int i = 1; i <= 10; i++) data.executeB(i);
+              for (int i = 1; i <= 10; i++) {
+                data.executeB(i);
+              }
             },
             "B")
         .start();
     new Thread(
             () -> {
-              for (int i = 1; i <= 10; i++) data.executeC(i);
+              for (int i = 1; i <= 10; i++) {
+                data.executeC(i);
+              }
             },
             "C")
         .start();
@@ -51,7 +57,9 @@ class ShareResource {
 
     try {
       // judge
-      while (flag != 1) conditionA.await();
+      while (flag != 1) {
+        conditionA.await();
+      }
 
       // work
       LOG.info(Thread.currentThread().getName() + " execute " + loopTimes + " times");
@@ -72,7 +80,9 @@ class ShareResource {
 
     try {
       // judge
-      while (flag != 2) conditionB.await();
+      while (flag != 2) {
+        conditionB.await();
+      }
 
       // work
       LOG.info(Thread.currentThread().getName() + " execute " + loopTimes + " times");
@@ -93,7 +103,9 @@ class ShareResource {
 
     try {
       // judge
-      while (flag != 3) conditionC.await();
+      while (flag != 3) {
+        conditionC.await();
+      }
 
       // work
       LOG.info(Thread.currentThread().getName() + " execute " + loopTimes + " times");
