@@ -15,7 +15,6 @@ import java.util.concurrent.atomic.AtomicReference;
 @Slf4j
 public class ABATest {
 
-
   static AtomicReference<Integer> atomicReference = new AtomicReference<>(100);
 
   public static void main(String[] args) {

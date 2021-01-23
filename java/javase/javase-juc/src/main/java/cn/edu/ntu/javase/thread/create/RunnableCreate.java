@@ -23,7 +23,7 @@ public class RunnableCreate {
     log.info("main method end ...");
 
     log.info("main method start 2...");
-    Integer i=0 ;
+    Integer i = 0;
     FutureTask<Integer> futureTask = new FutureTask<>(cThread, i);
     new Thread(futureTask).start();
     Integer integer = futureTask.get();

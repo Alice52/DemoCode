@@ -21,15 +21,15 @@ public class ThreadShareVariable {
     // 同类的多个线程共享同一块内存空间和一组系统资源
     private static int i;
 
+    public AppleThread(String name) {
+      super(name);
+    }
+
     @Override
     public void run() {
       for (; i <= 1000; i++) {
         log.info("{}: {}", Thread.currentThread().getName(), i);
       }
-    }
-
-    public AppleThread(String name) {
-      super(name);
     }
   }
 }

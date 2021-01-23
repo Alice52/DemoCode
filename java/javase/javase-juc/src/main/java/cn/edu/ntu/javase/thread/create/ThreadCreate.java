@@ -30,7 +30,7 @@ public class ThreadCreate {
     log.info("main method end ...");
   }
 
-  public static class CThread extends  Thread {
+  public static class CThread extends Thread {
     @Override
     public void run() {
       log.info("thread-id: {}", Thread.currentThread().getId());

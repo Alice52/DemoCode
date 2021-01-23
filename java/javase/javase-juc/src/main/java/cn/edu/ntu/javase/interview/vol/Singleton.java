@@ -56,7 +56,7 @@ public class Singleton {
    *         - 分配内存空间
    *         - 初始化对象
    *         - 设置 instance 指向刚分配的内存地址
-   *     2. 由于指令重排的话可能是1-3-2, 此时返回的只是内存空间还没有初始化
+   *     2. 由于指令重排的话可能是 1-3-2, 此时返回的只是内存空间还没有初始化
    *     3. 在变量前加 volatile 禁止指令重排
    * </pre>
    *
@@ -77,5 +77,8 @@ public class Singleton {
   public static void main(String[] args) {
     IntStream.rangeClosed(0, 1000000)
         .forEach(x -> new Thread(() -> Singleton.getInstance(), "AAA" + x).start());
+
+    IntStream.rangeClosed(0, 1000000)
+        .forEach(x -> new Thread(() -> Singleton.getInstanceV2(), "BBB" + x).start());
   }
 }

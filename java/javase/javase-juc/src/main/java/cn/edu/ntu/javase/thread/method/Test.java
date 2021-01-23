@@ -40,24 +40,6 @@ public class Test {
   }
 
   /**
-   * 在非 Main 函数中调用线程的 start 方法, 则 run 函数不会被执行<br>
-   *
-   * <pre>
-   *     1. 可以调用 thread.run() 去运行线程
-   *     2. 可以使用 sleep 使得 new 的线程有执行的时间
-   * </pre>
-   */
-  @SneakyThrows
-  @org.junit.Test
-  public void testNoMainSleep() {
-    Thread thread = new JoinSleepThread();
-    thread.start();
-
-    TimeUnit.SECONDS.sleep(3);
-    // thread.run();
-  }
-
-  /**
    * 告诉操作系统: 在未来的多少毫秒内不参与 CPU 竞争
    *
    * <pre>
@@ -155,6 +137,24 @@ public class Test {
     thread.start();
     TimeUnit.MICROSECONDS.sleep(1000);
     thread.interrupt();
+  }
+
+  /**
+   * 在非 Main 函数中调用线程的 start 方法, 则 run 函数不会被执行<br>
+   *
+   * <pre>
+   *     1. 可以调用 thread.run() 去运行线程
+   *     2. 可以使用 sleep 使得 new 的线程有执行的时间
+   * </pre>
+   */
+  @SneakyThrows
+  @org.junit.Test
+  public void testNoMainSleep() {
+    Thread thread = new JoinSleepThread();
+    thread.start();
+
+    TimeUnit.SECONDS.sleep(3);
+    // thread.run();
   }
 
   /** 在 sleep 的时间内一定不会执行 */
