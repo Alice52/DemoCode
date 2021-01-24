@@ -45,9 +45,9 @@ public class ReenterLock {
 
   /** Lock 只要成对出现就可以, 次数无关 */
   private static void m0() {
+    lock.lock();
+    lock.lock();
     try {
-      lock.lock();
-      lock.lock();
       log.info("thread: {} reentrant-lock -- m0", Thread.currentThread().getName());
       m1();
     } finally {
@@ -58,8 +58,8 @@ public class ReenterLock {
   }
 
   private static void m1() {
+    lock.lock();
     try {
-      lock.lock();
       log.info("thread: {} reentrant-lock -- m1", Thread.currentThread().getName());
     } finally {
       lock.unlock();

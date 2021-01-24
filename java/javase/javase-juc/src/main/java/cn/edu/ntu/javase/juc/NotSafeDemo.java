@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author zack
  * @create 2019-12-08 21:08
- * @function
  */
 @Slf4j
 public class NotSafeDemo {

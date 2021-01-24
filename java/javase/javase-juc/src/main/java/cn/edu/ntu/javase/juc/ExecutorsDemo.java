@@ -7,9 +7,10 @@ import java.util.Random;
 import java.util.concurrent.*;
 
 /**
+ * the object got by new can use pool to get
+ *
  * @author zack
  * @create 2019-12-08 20:34
- * @function the object got by new can use pool to get
  */
 public class ExecutorsDemo {
 

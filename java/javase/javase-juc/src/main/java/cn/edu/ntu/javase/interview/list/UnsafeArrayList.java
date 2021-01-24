@@ -39,8 +39,8 @@ public class UnsafeArrayList {
      */
     List<String> unsafeList = new ArrayList<>();
     List<String> safeVector = new Vector<>();
-    // unsafeList 也会有值
-    List<String> safeList = Collections.synchronizedList(unsafeList);
+    // 如果参数位置是 unsafeList 也会有值
+    List<String> safeList = Collections.synchronizedList(new ArrayList<>());
 
     Assert.isFalse(unsafeList == safeList);
 
@@ -51,8 +51,11 @@ public class UnsafeArrayList {
                         () -> {
                           String uuid = UUID.fastUUID().toString();
                           // unsafeList.add(uuid);
+                          // log.info("unsafeList: {}", unsafeList);
                           safeVector.add(uuid);
+                          log.info("safeVector: {}", safeVector);
                           safeList.add(uuid);
+                          log.info("safeList: {}", safeList);
                         },
                         "AAA" + i)
                     .start());
@@ -60,10 +63,6 @@ public class UnsafeArrayList {
     while (Thread.activeCount() > 2) {
       Thread.yield();
     }
-
-    log.info("unsafeList: {}", unsafeList);
-    log.info("safeVector: {}", safeVector);
-    log.info("safeList: {}", safeList);
   }
 
   public void arraysTest() {

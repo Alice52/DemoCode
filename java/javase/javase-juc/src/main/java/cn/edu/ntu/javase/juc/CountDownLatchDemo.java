@@ -8,7 +8,6 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @author zack
  * @create 2019-12-08 19:09
- * @function
  */
 public class CountDownLatchDemo {
   private static final Logger LOG = LoggerFactory.getLogger(CountDownLatchDemo.class);

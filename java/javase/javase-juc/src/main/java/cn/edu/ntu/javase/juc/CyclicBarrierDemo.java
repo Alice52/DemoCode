@@ -9,7 +9,6 @@ import java.util.concurrent.CyclicBarrier;
 /**
  * @author zack
  * @create 2019-12-08 19:54
- * @function
  */
 public class CyclicBarrierDemo {
 

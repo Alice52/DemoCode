@@ -8,10 +8,16 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * get access to park; Eat hot pot in order
+ *
+ * <pre>
+ *    1. first in first get
+ *    2. leaved then others in
+ * </pre>
+ *
  * @author zack
  * @create 2019-12-08 20:21
- * @function get access to park; Eat hot pot in order
- *     <p>1. first in first get 2. leaved then others in
+ * @function
  */
 public class SemaphoreDemo {
 

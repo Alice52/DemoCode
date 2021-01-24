@@ -1,73 +1,50 @@
 package cn.edu.ntu.javase.juc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.IntStream;
 
 /**
+ * 3 seller sale 30 tickets with juc. <br>
+ *
+ * <pre>
+ *   1. thread -- operation -- resources
+ *   2. high cohesion -- low coupling
+ *   3. resources = instance var + instance method
+ * </pre>
+ *
  * @author zack
  * @create 2019-12-04 20:50
- * @function 3 seller sale 30 tickets with juc. 1. thread -- operation -- resources 2. high cohesion
- *     -- low coupling
  */
 public class SaleTickets {
+  private static final int NUMBER = 500;
 
   public static void main(String[] args) {
     Ticket tickets = new Ticket();
+    tickets.setNumber(NUMBER);
 
-    new Thread(
-            () -> {
-              for (int i = 1; i < 400; i++) {
-                tickets.sale();
-              }
-            },
-            "seller01")
+    new Thread(() -> IntStream.rangeClosed(1, NUMBER * 2).forEach(i -> tickets.sale()), "seller01")
         .start();
-    new Thread(
-            () -> {
-              for (int i = 1; i < 400; i++) {
-                tickets.sale();
-              }
-            },
-            "seller02")
-        .start();
-    new Thread(
-            () -> {
-              for (int i = 1; i < 400; i++) {
-                tickets.sale();
-              }
-            },
-            "seller03")
+    new Thread(() -> IntStream.rangeClosed(1, NUMBER).forEach(i -> tickets.sale()), "seller02")
         .start();
   }
 }
 
-// resources = instance var + instance method
+@Slf4j
+@Data
 class Ticket {
-
-  private static final Logger LOG = LoggerFactory.getLogger(Ticket.class);
-
-  private int number = 300;
+  private volatile int number = 3000;
   private Lock lock = new ReentrantLock();
 
-  public synchronized void sale() {
+  public void sale() {
     lock.lock();
     try {
-
-      if (number > 0) {
-        LOG.info(
-            Thread.currentThread().getName()
-                + " sale ticket number: "
-                + number--
-                + " ,"
-                + number
-                + " tickets left.");
+      while (number > 0) {
+        log.info("ale number {} ticket and {} left.", number--, number);
       }
-
-    } catch (Exception e) {
-
     } finally {
       lock.unlock();
     }
