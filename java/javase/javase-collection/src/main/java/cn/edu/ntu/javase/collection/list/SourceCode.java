@@ -3,6 +3,7 @@ package cn.edu.ntu.javase.collection.list;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Vector;
 import java.util.stream.IntStream;
@@ -24,5 +25,7 @@ public class SourceCode {
     Optional.of(list.remove(new Integer(5))).ifPresent(System.out::println);
 
     new Vector<>().add(1);
+
+    new LinkedList<Integer>().element();
   }
 }
