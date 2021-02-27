@@ -17,52 +17,59 @@ public class SetTest {
   @Test
   public void TestHashSet() {
 
-    Set<Person> PEOPLE = new HashSet<>();
+    Set<Person> persons = new HashSet<>();
 
-    PEOPLE.add(new Person("AA", 10));
-    PEOPLE.add(new Person("BB", 11));
-    PEOPLE.add(new Person("CC", 12));
-    PEOPLE.add(new Person("DD", 13));
-    PEOPLE.add(new Person("EE", 14));
-    PEOPLE.add(new Person("EE", 15));
+    persons.add(new Person("AA", 10));
+    persons.add(new Person("BB", 11));
+    persons.add(new Person("CC", 12));
+    persons.add(new Person("DD", 13));
+    persons.add(new Person("EE", 14));
+    persons.add(new Person("EE", 14));
 
-    Assert.isTrue(6 == PEOPLE.size());
-    PEOPLE.forEach(System.out::println);
+    Assert.isTrue(5 == persons.size());
+    persons.forEach(System.out::println);
   }
 
   @Test
   public void TestLinkedHashSet() {
 
-    Set<Person> PEOPLE = new LinkedHashSet<>();
+    Set<Person> persons = new LinkedHashSet<>();
 
-    PEOPLE.add(new Person("AA", 10));
-    PEOPLE.add(new Person("BB", 11));
-    PEOPLE.add(new Person("EE", 14));
-    PEOPLE.add(new Person("CC", 12));
-    PEOPLE.add(new Person("DD", 13));
-    PEOPLE.add(new Person("DD", 13));
-    Assert.isTrue(6 == PEOPLE.size());
+    persons.add(new Person("AA", 18));
+    persons.add(new Person("BB", 11));
+    persons.add(new Person("EE", 14));
+    persons.add(new Person("CC", 12));
+    persons.add(new Person("DD", 13));
+    persons.add(new Person("DD", 13));
+    Assert.isTrue(5 == persons.size());
 
-    PEOPLE.forEach(System.out::println);
+    persons.forEach(System.out::println);
   }
 
   /**
-   * 方法一: 这里 Person 类实现 Comparable 接口中的 CompareTo 方法<br>
-   * 方法二: 自定义 Comparator
+   * TreeSet Usage:
+   *
+   * <pre>
+   *     1. 泛型对象实现 Comparable
+   *     2. 创建 TreeSet 时指定 comparator
+   *     3. 不能存放 null
+   *     4. TreeSet 泛型重写该对象对应得 equals()方法时, 应该保证方法与 compareTo(obj) 方法有一致的结果
+   *        - Person::getName 作为 unique 的标准
+   * </pre>
    */
   @Test
-  public void testTreeSet2() {
+  public void testTreeSet() {
 
-    Set<Person> PEOPLE = new TreeSet<>(Comparator.comparing(Person::getName));
+    Set<Person> people = new TreeSet<>(Comparator.comparing(Person::getName));
 
-    PEOPLE.add(new Person("AA", 10));
-    PEOPLE.add(new Person("DD", 13));
-    PEOPLE.add(new Person("EE", 14));
-    PEOPLE.add(new Person("BB", 11));
-    PEOPLE.add(new Person("CC", 12));
-    PEOPLE.add(new Person("CC", 15));
+    people.add(new Person("AA", 10));
+    people.add(new Person("DD", 13));
+    people.add(new Person("EE", 14));
+    people.add(new Person("BB", 11));
+    people.add(new Person("CC", 12));
+    people.add(new Person("CC", 15));
 
-    Assert.isTrue(5 == PEOPLE.size());
-    PEOPLE.forEach(System.out::println);
+    Assert.isTrue(5 == people.size());
+    people.forEach(System.out::println);
   }
 }

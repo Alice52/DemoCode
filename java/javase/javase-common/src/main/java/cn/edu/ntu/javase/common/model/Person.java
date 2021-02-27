@@ -1,11 +1,14 @@
 package cn.edu.ntu.javase.common.model;
 
+import lombok.EqualsAndHashCode;
+
 import java.io.Serializable;
 
 /**
  * @author zack <br>
  * @create 2020-04-04 15:30 <br>
  */
+@EqualsAndHashCode
 public class Person implements Serializable {
   private String name;
   private int age;

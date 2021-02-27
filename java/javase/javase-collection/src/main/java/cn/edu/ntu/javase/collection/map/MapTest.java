@@ -22,6 +22,7 @@ public class MapTest {
 
       Map<String, Integer> map = new HashMap<>(16);
 
+
       String str;
       while ((str = bufferedReader.readLine()) != null) {
         String[] arr = str.replace(StrUtil.COMMA, StrUtil.SPACE).split(StrUtil.SPACE);
