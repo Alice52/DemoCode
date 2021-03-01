@@ -28,7 +28,7 @@ public class RWLock {
 
     for (int i = 0; i < 9; i++) {
       int finalI = i;
-      new Thread(() -> cache.set("a" + finalI, finalI), "AAA" + i).start();
+      new Thread(() -> cache.setSafeV2("a" + finalI, finalI), "AAA" + i).start();
       // new Thread(() -> cache.getSafeV2("a" + finalI), "BBB" + i).start();
     }
 
@@ -63,15 +63,6 @@ class MyCache {
     log.info("thread: {} is write done", Thread.currentThread().getName());
   }
 
-  @SneakyThrows
-  public Object get(String key) {
-    log.info("thread: {} is read key {}", Thread.currentThread().getName(), key);
-    TimeUnit.MICROSECONDS.sleep(300);
-    Object o = cache.get(key);
-    log.info("thread: {} is read done {}", Thread.currentThread().getName(), o);
-    return o;
-  }
-
   /**
    * 写操作是线程安全的, 且只保证写操作的线程安全.<br>
    * 如果调用 set 非线程安全操作, 则会在写操作之间读操作的log<br>
@@ -87,20 +78,6 @@ class MyCache {
       TimeUnit.MICROSECONDS.sleep(300);
       cache.put(key, value);
       log.info("thread: {} is write done", Thread.currentThread().getName());
-    } finally {
-      lock.unlock();
-    }
-  }
-
-  @SneakyThrows
-  public Object getSafe(String key) {
-    lock.lock();
-    try {
-      log.info("thread: {} is read key {}", Thread.currentThread().getName(), key);
-      TimeUnit.MICROSECONDS.sleep(300);
-      Object o = cache.get(key);
-      log.info("thread: {} is read done {}", Thread.currentThread().getName(), o);
-      return o;
     } finally {
       lock.unlock();
     }
@@ -122,6 +99,29 @@ class MyCache {
       log.info("thread: {} is write done", Thread.currentThread().getName());
     } finally {
       rwLock.writeLock().unlock();
+    }
+  }
+
+  @SneakyThrows
+  public Object get(String key) {
+    log.info("thread: {} is read key {}", Thread.currentThread().getName(), key);
+    TimeUnit.MICROSECONDS.sleep(300);
+    Object o = cache.get(key);
+    log.info("thread: {} is read done {}", Thread.currentThread().getName(), o);
+    return o;
+  }
+
+  @SneakyThrows
+  public Object getSafe(String key) {
+    lock.lock();
+    try {
+      log.info("thread: {} is read key {}", Thread.currentThread().getName(), key);
+      TimeUnit.MICROSECONDS.sleep(300);
+      Object o = cache.get(key);
+      log.info("thread: {} is read done {}", Thread.currentThread().getName(), o);
+      return o;
+    } finally {
+      lock.unlock();
     }
   }
 

@@ -28,12 +28,16 @@ public class ABASolutionTest {
 
               int stamp = atomicReference.getStamp();
               log.info("thread name: {}, version: {}", Thread.currentThread().getName(), stamp);
-              atomicReference.compareAndSet(100, 101, stamp, stamp + 1);
+              atomicReference.compareAndSet(100, 101, stamp, ++stamp);
               log.info(
                   "thread name: {}, version: {}",
                   Thread.currentThread().getName(),
                   atomicReference.getStamp());
-              atomicReference.compareAndSet(101, 100, stamp + 1, stamp + 2);
+              atomicReference.compareAndSet(101, 100, stamp, ++stamp);
+                log.info(
+                        "thread name: {}, version: {}",
+                        Thread.currentThread().getName(),
+                        atomicReference.getStamp());
             },
             "AAA")
         .start();
@@ -46,7 +50,14 @@ public class ABASolutionTest {
 
                 // 保证AAA线程完成一次ABA操作
                 TimeUnit.SECONDS.sleep(3);
-                atomicReference.compareAndSet(100, 102, stamp, stamp + 1);
+                boolean success = atomicReference.compareAndSet(100, 102, stamp, ++stamp);
+
+                log.info(
+                    "thread name: {}, change 100 to 102 success: {}, version: {}",
+                    Thread.currentThread().getName(),
+                    success,
+                    atomicReference.getStamp());
+
               } catch (InterruptedException e) {
               }
             },

@@ -64,13 +64,13 @@ public class SpinLock {
   }
 
   private void Lock() {
-    log.info("thread: {} try get lock", Thread.currentThread().getName());
 
     // 成功比较并设置则停止循环
     while (!reference.compareAndSet(null, Thread.currentThread())) {
       // logic
       log.info("thread: {} do-while", Thread.currentThread().getName());
     }
+    log.info("thread: {} got lock", Thread.currentThread().getName());
   }
 
   private void UnLock() {

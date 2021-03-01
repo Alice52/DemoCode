@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.juc;
+package cn.edu.ntu.javase.interview.queue;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -9,44 +9,56 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 
 /**
- * A -- B -- C -- A -- B -- C
- *
- * @author zack
- * @create 2019-12-06 21:48
+ * @author zack <br>
+ * @create 2021-03-01 19:17 <br>
+ * @project javase <br>
  */
-public class Abcabc {
+@Slf4j
+public class ABCABCWithLock {
+
   public static void main(String[] args) {
-    ShareResource data = new ShareResource();
+
+    testResourceWithMoreCondition();
+    // testShareResourceWith1Condition();
+  }
+
+  /** A B C 顺序执行10次 */
+  public static void testShareResourceWith1Condition() {
+    ShareResourceWith1Condition data = new ShareResourceWith1Condition();
     new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> data.executeA(i)), "AAA").start();
     new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> data.executeB(i)), "BBB").start();
     new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> data.executeC(i)), "CCC").start();
   }
+
+  /** A B C 顺序执行10次 */
+  public static void testResourceWithMoreCondition() {
+    ResourceWithMoreCondition resource = new ResourceWithMoreCondition();
+    new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> resource.print5()), "AAA").start();
+    new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> resource.print10()), "BBB").start();
+    new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> resource.print15()), "CCC").start();
+  }
 }
 
 @Slf4j
-class ShareResource {
-  /** flag: A-1; B-2; C-3; */
-  private int flag = 1;
+class ResourceWithMoreCondition {
+
+  /** 1 - A; 2 - B; 3 - C; */
+  volatile int flag = 1;
 
   private Lock lock = new ReentrantLock();
-  /** like key of lock */
   private Condition conditionA = lock.newCondition();
-
   private Condition conditionB = lock.newCondition();
   private Condition conditionC = lock.newCondition();
 
   @SneakyThrows
-  public void executeA(int loopTimes) {
+  public void print5() {
     lock.lock();
     try {
-      // judge
       while (flag != 1) {
-        log.info("  executeA ");
         conditionA.await();
       }
-      // work
-      log.info("executeA " + loopTimes + " times");
-      // notice
+
+      IntStream.rangeClosed(1, 5).forEach(i -> log.info("{}", i));
       flag = 2;
       conditionB.signal();
     } finally {
@@ -55,18 +67,14 @@ class ShareResource {
   }
 
   @SneakyThrows
-  public void executeB(int loopTimes) {
+  public void print10() {
     lock.lock();
     try {
-      // judge
       while (flag != 2) {
-        log.info("  executeB ");
         conditionB.await();
       }
-      // work
-      log.info(" executeB " + loopTimes + " times");
 
-      // notice
+      IntStream.rangeClosed(1, 10).forEach(i -> log.info("{}", i));
       flag = 3;
       conditionC.signal();
     } finally {
@@ -75,17 +83,14 @@ class ShareResource {
   }
 
   @SneakyThrows
-  public void executeC(int loopTimes) {
+  public void print15() {
     lock.lock();
     try {
-      // judge
       while (flag != 3) {
-        log.info("  executeC ");
         conditionC.await();
       }
-      // work
-      log.info("executeC " + loopTimes + " times");
-      // notice
+
+      IntStream.rangeClosed(1, 15).forEach(i -> log.info("{}", i));
       flag = 1;
       conditionA.signal();
     } finally {

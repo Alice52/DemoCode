@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 /**
@@ -22,7 +23,6 @@ public class CallableCreate {
     new Thread(futureTask, "Callable Thread1").start();
     // 无效
     new Thread(futureTask, "Callable Thread2").start();
-
     // block
     Integer integer = futureTask.get();
     log.info("main method end ...");

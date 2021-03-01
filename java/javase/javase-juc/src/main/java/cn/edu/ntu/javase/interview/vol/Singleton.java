@@ -75,8 +75,8 @@ public class Singleton {
   }
 
   public static void main(String[] args) {
-    IntStream.rangeClosed(0, 1000000)
-        .forEach(x -> new Thread(() -> Singleton.getInstance(), "AAA" + x).start());
+//    IntStream.rangeClosed(0, 1000000)
+//        .forEach(x -> new Thread(() -> Singleton.getInstance(), "AAA" + x).start());
 
     IntStream.rangeClosed(0, 1000000)
         .forEach(x -> new Thread(() -> Singleton.getInstanceV2(), "BBB" + x).start());

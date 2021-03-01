@@ -18,8 +18,8 @@ public class ReenterLock {
   private static Lock lock = new ReentrantLock();
 
   public static void main(String[] args) {
-    // testSynchronizedReentrant();
-    testReentrantLockReentrant();
+    testSynchronizedReentrant();
+    //testReentrantLockReentrant();
   }
 
   private static void testReentrantLockReentrant() {
