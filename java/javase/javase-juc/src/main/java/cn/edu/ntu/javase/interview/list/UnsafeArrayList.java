@@ -64,10 +64,4 @@ public class UnsafeArrayList {
       Thread.yield();
     }
   }
-
-  public void arraysTest() {
-    List<String> list = Arrays.asList("a", "b", "c");
-    // list.add("a"); // java.lang.UnsupportedOperationException
-    list.forEach(System.out::println);
-  }
 }
