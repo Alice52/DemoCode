@@ -46,24 +46,26 @@ def rename_cell_folder(folder_name):
     all_file_name = os.listdir(folder_name)
     if len(all_file_name) > 1 and is_target_folder(all_file_name):
         file_name = get_file_name(folder_name)
+        # TODO: need a reg to match file_name start with number + "."
+        prefix = os.path.basename(folder_name).zfill(3) + "."
         for i in range(len(all_file_name)):
             _file = all_file_name[i]
             if '.flv' in _file:
                 old_file_path = os.path.join(folder_name, _file)
                 suffix = _file[_file.rfind('_'):]  # _10.flv
                 if len(suffix) <= 1:
-                    new_file_path = os.path.join(folder_name, str(file_name + '.flv'))
+                    new_file_path = os.path.join(folder_name, str(prefix + file_name + '.flv'))
                 else:
-                    new_file_path = os.path.join(folder_name, str(file_name + suffix))
+                    new_file_path = os.path.join(folder_name, str(prefix + file_name + suffix))
                 print("do rename: use " + new_file_path + " replace old name: " + new_file_path)
-                os.rename(old_file_path, new_file_path)
+                os.rename(old_file_path, new_file_path.zfill(3))
             if '.mp4' in _file:
                 old_file_path = os.path.join(folder_name, _file)
                 suffix = _file[_file.rfind('_'):]  # _10.flv
                 if len(suffix) <= 1:
-                    new_file_path = os.path.join(folder_name, str(file_name + '.flv'))
+                    new_file_path = os.path.join(folder_name, str(prefix + file_name + '.flv'))
                 else:
-                    new_file_path = os.path.join(folder_name, str(file_name + suffix))
+                    new_file_path = os.path.join(folder_name, str(prefix + file_name + suffix))
                 print("do rename: use " + new_file_path + " replace old name: " + new_file_path)
                 os.rename(old_file_path, new_file_path)
             else:
@@ -93,7 +95,7 @@ if __name__ == "__main__":
     try:
         # 自动获取目录
         current_path = os.path.dirname(os.path.abspath(__file__))
-        # current_path = "E:\\bilibili\\58493036"
+        # current_path = "E:\\bilibili\\629300292"
         cell_folders = []
         cell_folders = get_cell_folder(current_path, cell_folders)
 
