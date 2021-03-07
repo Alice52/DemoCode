@@ -26,7 +26,6 @@ public class Sender {
         sendMsg();
     }
 
-
     public static void sendMsg() {
 
         Channel channel = null;

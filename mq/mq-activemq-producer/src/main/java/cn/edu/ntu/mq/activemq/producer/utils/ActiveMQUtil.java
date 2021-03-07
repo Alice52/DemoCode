@@ -1,4 +1,4 @@
-package cn.edu.ntu.mq.activemq.utils;
+package cn.edu.ntu.mq.activemq.producer.utils;
 
 
 import cn.edu.ntu.mq.constants.Constants;
@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
-import javax.jms.MessageConsumer;
 import javax.jms.Session;
 
 /**

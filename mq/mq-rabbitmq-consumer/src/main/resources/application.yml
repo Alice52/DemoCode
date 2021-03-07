@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  rabbitmq:
+    addresses: 101.37.174.197
+    listener:
+      # simple 这一块可以使用代码设置 https://blog.csdn.net/oschina_40730821/article/details/105120414
+      simple:
+        # 这里设置 retry 无效
+        acknowledge-mode: manual
+        # 设置消费者每次拉取的消息数据
+        prefetch: 1
+        max-concurrency: 100
+        default-requeue-rejected: false
+
+
+mq:
+  direct:
+    exchange: direct-exchange
+    queue: direct-queue
+    routing-key: routing-key
+
+

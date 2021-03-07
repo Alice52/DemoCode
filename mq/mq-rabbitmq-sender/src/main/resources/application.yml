@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: 101.37.174.197
+    publisher-returns: true
+    # Mandatory为true时, 消息通过交换器无法匹配到队列会返回给生产者 并触发MessageReturn 为false时,匹配不到会直接被丢弃
+    template:
+      mandatory: true
+    publisher-confirm-type: correlated
+
+mq:
+  direct:
+    exchange: direct-exchange
+    queue: direct-queue
+    routing-key: routing-key
+    ttl:
+      exchange: direct-ttl-exchange
+      queue: direct-ttl-queue
+      routing-key: ttl-routing-key
+
+

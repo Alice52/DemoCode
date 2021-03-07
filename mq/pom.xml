@@ -12,6 +12,8 @@
         <module>mq-activemq-consumer</module>
         <module>mq-activemq-producer</module>
         <module>mq-rabbitmq</module>
+        <module>mq-rabbitmq-consumer</module>
+        <module>mq-rabbitmq-sender</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -21,6 +23,7 @@
         <java.version>8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
 
         <junit.version>4.12</junit.version>
         <slf4j.api.version>1.7.25</slf4j.api.version>
@@ -36,6 +39,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- spring boot dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- rabbitmq -->
             <dependency>
                 <groupId>com.rabbitmq</groupId>

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author zack
@@ -33,7 +34,7 @@ public class Receiver {
             channel.queueDeclare(Constants.SIMPLE_QUEUE_NAME, false, false, false, null);
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), "UTF-8");
+                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
                 LOG.info(" [x] Received '" + message + "'");
             };
 

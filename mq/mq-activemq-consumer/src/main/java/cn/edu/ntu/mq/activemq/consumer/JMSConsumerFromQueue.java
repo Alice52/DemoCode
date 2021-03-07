@@ -1,6 +1,6 @@
 package cn.edu.ntu.mq.activemq.consumer;
 
-import cn.edu.ntu.mq.activemq.utils.ActiveMQUtil;
+import cn.edu.ntu.mq.activemq.consumer.utils.ActiveMQUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

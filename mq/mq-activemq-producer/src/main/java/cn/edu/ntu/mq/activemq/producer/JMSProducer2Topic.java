@@ -1,15 +1,13 @@
 package cn.edu.ntu.mq.activemq.producer;
 
-import cn.edu.ntu.mq.activemq.utils.ActiveMQUtil;
+import cn.edu.ntu.mq.activemq.producer.utils.ActiveMQUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
-
 import java.util.UUID;
 
 import static cn.edu.ntu.mq.constants.Constants.TOPIC_NAME;
-
 
 /**
  * @author zack
