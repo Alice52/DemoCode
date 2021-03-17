@@ -42,7 +42,7 @@ class Ticket {
   public void sale() {
     lock.lock();
     try {
-      while (number > 0) {
+      if (number > 0) {
         log.info("ale number {} ticket and {} left.", number--, number);
       }
     } finally {

@@ -46,7 +46,8 @@ enum MessageHandlers implements MessageHandler {
       LOG.info("json");
       return true;
     }
-  };
+  },
+  UNKNOWN_HANDLER(MessageType.UNKNOWN);
 
   private static final Logger LOG = LoggerFactory.getLogger(MessageHandlers.class);
   private final MessageType acceptType;
@@ -55,7 +56,11 @@ enum MessageHandlers implements MessageHandler {
     this.acceptType = acceptType;
   }
 
-  abstract boolean doHandle(Message message);
+  boolean doHandle(Message message) {
+    LOG.info("Cannot find suitable handler.");
+
+    return false;
+  }
 
   /**
    * if message type is accept type, then call doHandle to handle message.
