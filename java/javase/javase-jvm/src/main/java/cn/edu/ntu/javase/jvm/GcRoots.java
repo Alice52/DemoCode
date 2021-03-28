@@ -2,8 +2,6 @@ package cn.edu.ntu.javase.jvm;
 
 import cn.edu.ntu.javase.common.model.Person;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * GcRoots 的对象
@@ -22,18 +20,15 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class GcRoots {
 
-    // 2.方法区中的类静态属性引用的对象: 静态属性所指向的对象
-    private static Person person = new Person();
-    // 3.方法区中常量引用的对象: 常量池中所指向的对象
-    private static final Person PERSON_FINAL = new Person();
+  // 3.方法区中常量引用的对象: 常量池中所指向的对象
+  private static final Person PERSON_FINAL = new Person();
+  // 2.方法区中的类静态属性引用的对象: 静态属性所指向的对象
+  private static Person person = new Person();
 
-
-    public static void main(String[] args) {
-        // 1. 局部变量表: 比如方法内的局部变量和方法参数
-        GcRoots temp = new GcRoots();
-        // 不能回收 temp 对象
-        System.gc();
-    }
-
-
+  public static void main(String[] args) {
+    // 1. 局部变量表: 比如方法内的局部变量和方法参数
+    GcRoots temp = new GcRoots();
+    // 不能回收 temp 对象
+    System.gc();
+  }
 }

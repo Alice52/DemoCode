@@ -20,7 +20,7 @@ public class CollectionsAndArraysTest {
   /** 对List列表中的数据按年龄生序排序 */
   @Test
   public void ListSort() {
-    Arrays.sort(new int[]{});
+    Arrays.sort(new int[] {});
     Collections.sort(persons, Comparator.comparing(Person::getAge));
     persons.forEach(System.out::println);
   }

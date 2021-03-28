@@ -16,8 +16,6 @@ public class Array2List {
     array2ListByArrays();
     array2ListByArrayList();
     array2ListByCollections();
-
-
   }
 
   /**

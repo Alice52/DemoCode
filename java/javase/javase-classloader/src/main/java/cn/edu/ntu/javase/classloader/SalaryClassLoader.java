@@ -1,9 +1,9 @@
 package cn.edu.ntu.javase.classloader;
 
-import com.sun.xml.internal.ws.util.ByteArrayBuffer;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.security.SecureClassLoader;
@@ -28,14 +28,14 @@ public class SalaryClassLoader extends SecureClassLoader {
 
     String classPath = filePath + name.replace(".", "\\").concat("class");
     FileInputStream inputStream = new FileInputStream(new File(classPath));
-    ByteArrayBuffer buffer = new ByteArrayBuffer();
+    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     byte[] b;
     int code;
     while ((code = inputStream.read()) != -1) {
       buffer.write(code);
     }
 
-    b = buffer.getRawData();
+    b = buffer.toByteArray();
 
     return defineClass(name, b, 0, b.length);
   }

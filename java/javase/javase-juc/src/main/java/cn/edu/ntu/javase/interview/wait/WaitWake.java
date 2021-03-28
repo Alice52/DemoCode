@@ -23,15 +23,15 @@ public class WaitWake {
     waitWakeByLockSupport();
   }
 
-    /**
-     * LockSupport 方法实现等待唤醒
-     *
-     * <pre>
-     *    - LockSupport api 的方法
-     *    - 先 unpark 之后 park 也是可以的
-     *    - 可以不再同步代码块内执行
-     * </pre>
-     */
+  /**
+   * LockSupport 方法实现等待唤醒
+   *
+   * <pre>
+   *    - LockSupport api 的方法
+   *    - 先 unpark 之后 park 也是可以的
+   *    - 可以不再同步代码块内执行
+   * </pre>
+   */
   @SneakyThrows
   public static void waitWakeByLockSupport() {
 

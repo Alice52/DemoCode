@@ -11,6 +11,15 @@ import static cn.edu.ntu.javase.collection.ObjectFactory.students;
 /** @author zack */
 public class ListWithGeneric {
 
+  @Deprecated
+  public static void printPersonInfo(List<Person> persons) {
+    persons.forEach(System.out::println);
+  }
+
+  public static void printStudentInfo(List<? extends Person> students) {
+    students.forEach(System.out::println);
+  }
+
   /**
    * List & Generic
    *
@@ -27,15 +36,6 @@ public class ListWithGeneric {
     printPersonInfo(persons);
     // printPersonInfo(students);  // compile error
     printStudentInfo(students);
-  }
-
-  @Deprecated
-  public static void printPersonInfo(List<Person> persons) {
-    persons.forEach(System.out::println);
-  }
-
-  public static void printStudentInfo(List<? extends Person> students) {
-    students.forEach(System.out::println);
   }
 
   public void testArgumentsLength(String... args) {

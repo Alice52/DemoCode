@@ -1,9 +1,9 @@
 package cn.edu.ntu.javase.classloader;
 
-import com.sun.xml.internal.ws.util.ByteArrayBuffer;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.security.SecureClassLoader;
@@ -22,20 +22,24 @@ public class SalaryJarClassLoader extends SecureClassLoader {
     this.jarPath = jarPath;
   }
 
+  /**
+   * @param name
+   * @return
+   * @throws ClassNotFoundException
+   */
   @SneakyThrows
   @Override
   protected Class<?> findClass(String name) throws ClassNotFoundException {
 
     String classPath = "jar:file:\\" + jarPath + "!/" + name.replace(".", "\\").concat("class");
     InputStream inputStream = new URL(classPath).openStream();
-    ByteArrayBuffer buffer = new ByteArrayBuffer();
-    byte[] b;
+    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     int code;
     while ((code = inputStream.read()) != -1) {
       buffer.write(code);
     }
 
-    b = buffer.getRawData();
+    byte[] b = buffer.toByteArray();
 
     return defineClass(name, b, 0, b.length);
   }

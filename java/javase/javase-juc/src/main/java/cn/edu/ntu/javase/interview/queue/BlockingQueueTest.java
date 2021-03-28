@@ -25,9 +25,7 @@ public class BlockingQueueTest {
     OptionalInt.of(bq.size()).ifPresent(System.out::println);
     OptionalInt.of(bq.remainingCapacity()).ifPresent(System.out::println);
 
-
     new SynchronousQueue<>();
-
   }
 
   @SneakyThrows

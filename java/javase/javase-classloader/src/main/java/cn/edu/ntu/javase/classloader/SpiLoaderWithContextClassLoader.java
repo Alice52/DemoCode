@@ -12,7 +12,7 @@ import java.util.ServiceLoader;
  * @project javase <br>
  */
 @Slf4j
-public class SpiLoader {
+public class SpiLoaderWithContextClassLoader {
   static SpiInterface spi = null;
 
   public static void main(String[] args) {

@@ -12,10 +12,10 @@ import java.util.Arrays;
 @Slf4j
 public class CustomArrayList<T> {
 
-  transient Object[] elementData;
-  private int size;
   private static final int DEFAULT_CAPACITY = 10;
   private static final Object[] EMPTY_ELEMENTDATA = {};
+  transient Object[] elementData;
+  private int size;
 
   public CustomArrayList() {
     this.elementData = EMPTY_ELEMENTDATA;

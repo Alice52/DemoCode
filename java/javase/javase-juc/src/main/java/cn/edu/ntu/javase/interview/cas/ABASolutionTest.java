@@ -34,10 +34,10 @@ public class ABASolutionTest {
                   Thread.currentThread().getName(),
                   atomicReference.getStamp());
               atomicReference.compareAndSet(101, 100, stamp, ++stamp);
-                log.info(
-                        "thread name: {}, version: {}",
-                        Thread.currentThread().getName(),
-                        atomicReference.getStamp());
+              log.info(
+                  "thread name: {}, version: {}",
+                  Thread.currentThread().getName(),
+                  atomicReference.getStamp());
             },
             "AAA")
         .start();

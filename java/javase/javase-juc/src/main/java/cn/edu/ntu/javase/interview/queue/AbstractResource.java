@@ -7,8 +7,8 @@ package cn.edu.ntu.javase.interview.queue;
  */
 public abstract class AbstractResource {
 
-  volatile int number = 0;
   final int MAX_COUNT = 2;
+  volatile int number = 0;
 
   public abstract void produce();
 

@@ -19,7 +19,7 @@ public class ReenterLock {
 
   public static void main(String[] args) {
     testSynchronizedReentrant();
-    //testReentrantLockReentrant();
+    // testReentrantLockReentrant();
   }
 
   private static void testReentrantLockReentrant() {

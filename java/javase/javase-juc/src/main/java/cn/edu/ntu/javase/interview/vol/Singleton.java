@@ -17,13 +17,14 @@ public class Singleton {
     log.info("construct...");
   }
 
-  /***
-   * 单例模式的线程安全:
+  /**
+   * * 单例模式的线程安全:
    *
    * <pre>
    *     1. 没有任何修饰[synchronized]的时候时线程不安全的:
    *     2. 可以使用 synchronized 可以解决: 性能不好, 不能做到多个线程同时获取这个对象
    * </pre>
+   *
    * @return
    */
   public static Singleton getInstance() {
@@ -75,8 +76,8 @@ public class Singleton {
   }
 
   public static void main(String[] args) {
-//    IntStream.rangeClosed(0, 1000000)
-//        .forEach(x -> new Thread(() -> Singleton.getInstance(), "AAA" + x).start());
+    //    IntStream.rangeClosed(0, 1000000)
+    //        .forEach(x -> new Thread(() -> Singleton.getInstance(), "AAA" + x).start());
 
     IntStream.rangeClosed(0, 1000000)
         .forEach(x -> new Thread(() -> Singleton.getInstanceV2(), "BBB" + x).start());

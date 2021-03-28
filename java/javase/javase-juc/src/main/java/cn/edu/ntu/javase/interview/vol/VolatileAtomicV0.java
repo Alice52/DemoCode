@@ -23,7 +23,7 @@ public class VolatileAtomicV0 {
    */
   public static void main(String[] args) {
 
-      for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 50; i++) {
       new Thread(
               () ->
                   IntStream.rangeClosed(1, 1000)
@@ -33,7 +33,7 @@ public class VolatileAtomicV0 {
                             atomicInteger.addAndGet(1);
                           }))
           .start();
-      }
+    }
 
     // 需要等待上面 50 个线程都执行完成后 在 main 线程中去 number
     while (Thread.activeCount() > 2) { // main + gc 两个线程
