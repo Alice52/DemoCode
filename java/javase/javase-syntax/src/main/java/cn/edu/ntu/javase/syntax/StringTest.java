@@ -22,6 +22,7 @@ public class StringTest {
    *     2. 如果没有, 则先在字符串池中创建一个相同值的 String 对象, 然后再将它的引用返回
    *     3. + 操作只有 都是字符串才会放入字符串常量池, 不能含有变量
    *     4. new String() 是在 heap 中开辟空间; = "" 是在常量池中加入元素[也在 heap 中], 他们不是一个对象
+   *     5. 必须是常量相加才会放入常量池: new String() 创建的对象即使加上 final 关键字修饰也还是放在 heap 中
    * </pre>
    */
   @Test
@@ -34,6 +35,25 @@ public class StringTest {
     Assert.isTrue(s1 == s2);
     Assert.isFalse("1a" == (s1 + "a"));
     Assert.isTrue((s1 + "a").intern() == (s1 + "a").intern());
+
+    String s10 = "12";
+    String s20 = s1 + "2";
+    Assert.isFalse(s10 == s20);
+    Assert.isTrue(s10.equals(s20));
+
+    final String s202 = s1 + "2";
+    Assert.isFalse(s10 == s202);
+    Assert.isTrue(s10.equals(s202));
+
+    final String s0 = "1";
+    String s203 = s0 + "2";
+    Assert.isTrue(s10 == s203);
+    Assert.isTrue(s10.equals(s203));
+
+    final String s01 = new String("1");
+    String s204 = s01 + "2";
+    Assert.isFalse(s10 == s204);
+    Assert.isTrue(s10.equals(s204));
 
     String s11 = "1" + "2";
     String s21 = "1" + "2";

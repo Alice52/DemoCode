@@ -26,7 +26,7 @@ import static com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping.NON_FINA
  * @project springboot <br>
  */
 @Component
-public class RedisConfiguration {
+public class RedisLocalConfiguration {
   @Bean("springSessionDefaultRedisSerializer")
   public RedisSerializer setSerializer() {
     return new GenericJackson2JsonRedisSerializer();

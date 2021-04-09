@@ -12,5 +12,13 @@ logging:
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
   application:
     name: boot-cache
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

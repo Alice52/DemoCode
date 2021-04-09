@@ -2,7 +2,52 @@ spring:
   profiles:
     include: common
 
+  datasource:
+    username: ENC(3+5Pg+H9L0s1ATmg/xTWLbNt9OeMFguochuRyTl9a4BGbD4lL2SLM8351rdHYhC2)
+    password: ENC(MkGdNTchUL+OnF+nvm5YSSjWc7XeHLNab+KV9Wr3fqF1fAbEVLB2urZotLn8nAk1)
+    url: ENC(/eIMClN/Pk0zV/9tsO/lVvwakl1gLUvisFxUIqE1nrspX+kVREo86lF3721bhlTYWuq0oRKPQca79vt6kkOiCgLGoMlVDpMj2p4qCdwSydY=)
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    # Configure monitoring statistics interception filters.
+    # If removed, the monitoring interface sql cannot collect statistics.
+    # Wall is used for the firewall
+    filters: stat,wall,slf4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
   redis:
-    host: ENC(lqRvSdjFZxOIzE3oztQYZOxFFKduKg3KquPm0Ip2Kk1bwK9sIvBmKEI6kz64LavE)
+    host: ENC(7KovIsPRdqwCfirn4hqyvyImWNCj0p/ag5rLhqKqMjiZ9HcC54uBFalQrr9h00lq)
     password: ENC(JIczcGuavcI1nX9NbM0YcDyHiQ834QTPhqmczAw+Qr8Nm6wPeq5p5M076HzPSbFF)
     port: ENC(AcXQfYO9iFqD0RYGjek03cmHP3k9y7fl9HEy41cg/mr0xoT4ApjXUbtlpKNK8OCp)
+    database: 15
+
+# mybaits-plus配置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: 0
+      field-strategy: 1
+      table-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    boot.cache: DEBUG

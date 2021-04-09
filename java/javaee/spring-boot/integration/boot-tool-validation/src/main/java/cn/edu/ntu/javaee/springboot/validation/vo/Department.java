@@ -30,7 +30,7 @@ public class Department {
   @Null(message = "主键不可以有值")
   private Integer id;
 
-  @ApiModelProperty(required = true)
+  @ApiModelProperty(required = true, hidden = true)
   @NotNull
   private Integer parentId;
 
