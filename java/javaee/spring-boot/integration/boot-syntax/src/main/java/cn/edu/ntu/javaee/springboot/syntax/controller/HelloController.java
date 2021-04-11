@@ -8,7 +8,6 @@ import cn.edu.ntu.javaee.springboot.syntax.service.HelloService;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +21,8 @@ import javax.validation.constraints.Email;
 @RestController
 public class HelloController {
   private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
-
-  @Resource HelloService service;
   @Resource public Person person;
-
+  @Resource HelloService service;
   @Email // do not work with @Value
   @Value("${name:mars}")
   private String name;

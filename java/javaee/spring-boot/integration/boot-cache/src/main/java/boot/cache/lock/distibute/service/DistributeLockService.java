@@ -62,23 +62,22 @@ public class DistributeLockService implements IDistributeLockService {
   }
 
   /**
-   * 停车场停车. <br/>
+   * 停车场停车. <br>
    *
    * <pre>
    *    1. park 过期时间为 -1
    *    2. 当没有车位时, 停车动作会被阻塞, 直到有车离开[空出车位]
    *    3. 车离开没有限制
    * </pre>
-   *
    */
   @SneakyThrows
   @Override
   public void go() {
-    RSemaphore park  = redissonClient.getSemaphore("park");
+    RSemaphore park = redissonClient.getSemaphore("park");
     park.trySetPermits(5); // 5 个车位
     park.release(); // 走车
     park.acquire(); // 停车, 阻塞等待
-    boolean acquire = park.tryAcquire();// 停车, 能停就停, 不能停就算了
+    boolean acquire = park.tryAcquire(); // 停车, 能停就停, 不能停就算了
   }
 
   @Override

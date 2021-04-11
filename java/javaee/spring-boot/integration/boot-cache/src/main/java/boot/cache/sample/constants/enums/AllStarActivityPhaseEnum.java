@@ -7,21 +7,24 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * @author zack <br/>
- * @create 2021-04-09 10:28 <br/>
- * @project integration <br/>
+ * @author zack <br>
+ * @create 2021-04-09 10:28 <br>
+ * @project integration <br>
  */
 @Getter
 @AllArgsConstructor
 public enum AllStarActivityPhaseEnum {
-    WARM_UP,
-    START_UP,
-    RESTAURANT_COMPETITION,
-    ONLINE_PK,
-    SUMMARY;
+  WARM_UP,
+  START_UP,
+  RESTAURANT_COMPETITION,
+  ONLINE_PK,
+  SUMMARY;
 
-    public static Boolean contains(String phase) {
+  public static Boolean contains(String phase) {
 
-        return Arrays.stream(AllStarActivityPhaseEnum.values()).map(Enum::name).collect(Collectors.toList()).contains(phase);
-    }
+    return Arrays.stream(AllStarActivityPhaseEnum.values())
+        .map(Enum::name)
+        .collect(Collectors.toList())
+        .contains(phase);
+  }
 }

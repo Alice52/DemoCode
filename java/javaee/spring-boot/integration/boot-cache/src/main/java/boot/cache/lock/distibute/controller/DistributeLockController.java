@@ -22,9 +22,8 @@ public class DistributeLockController {
   @GetMapping("/park")
   public void park() {
 
-     lockService.go();
+    lockService.go();
   }
-
 
   @GetMapping("/brands")
   public Map getBrands() {
@@ -53,6 +52,6 @@ public class DistributeLockController {
   @GetMapping("/school-door-close")
   public void schoolDoorClose() {
 
-     lockService.lockSchoolDoor();
+    lockService.lockSchoolDoor();
   }
 }

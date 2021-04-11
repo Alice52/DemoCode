@@ -1,7 +1,6 @@
 package cn.edu.ntu.boot.starter.controller;
 
 import cn.edu.ntu.javaee.springboot.starter.service.HelloService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

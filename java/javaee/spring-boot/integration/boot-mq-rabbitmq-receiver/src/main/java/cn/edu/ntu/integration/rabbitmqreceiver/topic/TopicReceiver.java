@@ -17,15 +17,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class TopicReceiver {
 
+  private final Logger LOG = LoggerFactory.getLogger(this.getClass());
   @Autowired AmqpAdmin amqpAdmin;
-
   @Value("${exchange.topic}")
   private String TOPIC_EXCHANGE;
-
   @Value("${queue.topic}")
   private String TOPIC_QUEUE;
-
-  private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
   @RabbitListener(queues = "${queue.topic}")
   @RabbitListener(

@@ -13,14 +13,6 @@ public enum HttpErrorCode {
   private int errorCode;
   private String message;
 
-  public int getErrorCode() {
-    return errorCode;
-  }
-
-  public String getMessage() {
-    return message;
-  }
-
   HttpErrorCode(int errorCode, String message) {
     this.errorCode = errorCode;
     this.message = message;
@@ -33,6 +25,14 @@ public enum HttpErrorCode {
       }
     }
     return null;
+  }
+
+  public int getErrorCode() {
+    return errorCode;
+  }
+
+  public String getMessage() {
+    return message;
   }
 
   @Override

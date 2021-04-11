@@ -2,7 +2,9 @@ package cn.edu.ntu.integration.rabbitmqsender.direct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,21 +25,15 @@ public class DirectSender {
   private static final Logger LOG = LoggerFactory.getLogger(DirectSender.class);
 
   // @Autowired private Queue directQueue;
-
+  private static final String DIRECT_MESSAGE = "hello direct";
+  @Autowired RabbitTemplate rabbitTemplate;
+  @Autowired AmqpAdmin amqpAdmin;
   @Value("${exchange.direct}")
   private String DIRECT_EXCHANGE;
-
   @Value("${queue.direct}")
   private String DIRECT_QUEUE;
-
   @Value("${direct.routing.key}")
   private String DIRECT_ROUTING_KEY;
-
-  private static final String DIRECT_MESSAGE = "hello direct";
-
-  @Autowired RabbitTemplate rabbitTemplate;
-
-  @Autowired AmqpAdmin amqpAdmin;
 
   public void directSender() {
 

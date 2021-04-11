@@ -2,6 +2,7 @@ package cn.edu.ntu.javaee.springboot.syntax.component;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;

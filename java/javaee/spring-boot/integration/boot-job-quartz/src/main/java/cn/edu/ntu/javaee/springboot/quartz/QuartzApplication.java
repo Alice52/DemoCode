@@ -25,15 +25,15 @@ public class QuartzApplication {
   @Value("${spring.quartz.properties.org.quartz.scheduler.instanceId}")
   private String instanceId;
 
+  public static void main(String[] args) {
+    SpringApplication.run(QuartzApplication.class, args);
+  }
+
   @PostConstruct
   public void initInfo() throws SchedulerException {
     LOG.warn("startup server's instanceId is: {}", instanceId);
     LOG.warn(
         "instanceId got from scheduler is: {}", scheduler.getMetaData().getSchedulerInstanceId());
     LOG.warn("name got from scheduler is: {}", scheduler.getMetaData().getSchedulerName());
-  }
-
-  public static void main(String[] args) {
-    SpringApplication.run(QuartzApplication.class, args);
   }
 }

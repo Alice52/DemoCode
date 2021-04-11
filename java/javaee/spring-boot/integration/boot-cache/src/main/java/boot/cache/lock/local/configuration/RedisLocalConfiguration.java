@@ -34,6 +34,7 @@ public class RedisLocalConfiguration {
 
   /**
    * This serializer will contains Class info.
+   *
    * @param redisConnectionFactory
    * @return
    */

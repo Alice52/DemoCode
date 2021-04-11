@@ -3,7 +3,9 @@ package cn.edu.ntu.integration.rabbitmqsender.topic;
 import cn.edu.ntu.integration.rabbitmqsender.direct.DirectSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.ExchangeTypes;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,18 +25,13 @@ public class TopicSender {
 
   private static final String[] topicsRoutingKeys =
       new String[] {"topicsKey.aa", "topicsKey.bb", "topicsKey.cc.ee"};
-
+  private static final String TOPIC_MESSAGE = "hello topic";
+  @Autowired public RabbitTemplate rabbitTemplate;
+  @Autowired AmqpAdmin amqpAdmin;
   @Value("${exchange.topic}")
   private String TOPIC_EXCHANGE;
-
   @Value("${queue.topic}")
   private String TOPIC_QUEUE;
-
-  private static final String TOPIC_MESSAGE = "hello topic";
-
-  @Autowired public RabbitTemplate rabbitTemplate;
-
-  @Autowired AmqpAdmin amqpAdmin;
 
   public void topicSender() {
     for (String routingKey : topicsRoutingKeys) {

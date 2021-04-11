@@ -16,9 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements IEmployeeService, SmartInitializingSingleton {
 
-  private IEmployeeService employeeServiceProxy = null;
-
   private static final Logger LOG = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+  private IEmployeeService employeeServiceProxy = null;
 
   @Override
   public void addEmploy(Employee employee) {

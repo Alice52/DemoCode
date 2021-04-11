@@ -1,7 +1,5 @@
 package cn.edu.ntu.springboot.mvc.controller;
 
-import cn.edu.ntu.javaee.boot.common.enumeration.HttpErrorCode;
-import cn.edu.ntu.javaee.boot.common.model.JsonObject;
 import cn.edu.ntu.springboot.mvc.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

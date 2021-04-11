@@ -16,13 +16,13 @@ public class ErrorResponse {
   private String errorMsg;
   private Map<String, Object> parameters;
 
-  public static ErrorResponse error(ErrorMessageEnum errorMessageEnum) {
-    return new ErrorResponse(errorMessageEnum);
-  }
-
   private ErrorResponse(ErrorMessageEnum errorMessageEnum) {
     this.errorMsg = errorMessageEnum.getErrorMsg();
     this.errorCode = errorMessageEnum.getErrorCode();
+  }
+
+  public static ErrorResponse error(ErrorMessageEnum errorMessageEnum) {
+    return new ErrorResponse(errorMessageEnum);
   }
 
   public Integer getErrorCode() {

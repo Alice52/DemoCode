@@ -34,29 +34,6 @@ public class ElasticSearchConfig {
 
   private List<HttpHost> httpHosts = new ArrayList<>();
 
-  @Bean
-  @ConditionalOnMissingBean
-  public RestHighLevelClient restHighLevelClient() {
-
-    List<String> clusterNodes = elasticsearchProperties.getClusterNodes();
-    clusterNodes.forEach(
-        node -> {
-          try {
-            String[] parts = StringUtils.split(node, ":");
-            Assert.notNull(parts, "Must defined");
-            Assert.state(parts.length == 2, "Must be defined as 'host:port'");
-            httpHosts.add(
-                new HttpHost(
-                    parts[0], Integer.parseInt(parts[1]), elasticsearchProperties.getSchema()));
-          } catch (Exception e) {
-            throw new IllegalStateException("Invalid ES nodes " + "property '" + node + "'", e);
-          }
-        });
-    RestClientBuilder builder = RestClient.builder(httpHosts.toArray(new HttpHost[0]));
-
-    return getRestHighLevelClient(builder, elasticsearchProperties);
-  }
-
   /**
    * get restHistLevelClient
    *
@@ -98,5 +75,28 @@ public class ElasticSearchConfig {
           new UsernamePasswordCredentials(account.getUsername(), account.getPassword()));
     }
     return new RestHighLevelClient(builder);
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public RestHighLevelClient restHighLevelClient() {
+
+    List<String> clusterNodes = elasticsearchProperties.getClusterNodes();
+    clusterNodes.forEach(
+        node -> {
+          try {
+            String[] parts = StringUtils.split(node, ":");
+            Assert.notNull(parts, "Must defined");
+            Assert.state(parts.length == 2, "Must be defined as 'host:port'");
+            httpHosts.add(
+                new HttpHost(
+                    parts[0], Integer.parseInt(parts[1]), elasticsearchProperties.getSchema()));
+          } catch (Exception e) {
+            throw new IllegalStateException("Invalid ES nodes " + "property '" + node + "'", e);
+          }
+        });
+    RestClientBuilder builder = RestClient.builder(httpHosts.toArray(new HttpHost[0]));
+
+    return getRestHighLevelClient(builder, elasticsearchProperties);
   }
 }

@@ -31,10 +31,6 @@ import java.io.IOException;
 @Slf4j
 public abstract class BaseElasticsearchService {
 
-  @Resource protected RestHighLevelClient client;
-
-  @Resource private ElasticsearchProperties elasticsearchProperties;
-
   protected static final RequestOptions COMMON_OPTIONS;
 
   static {
@@ -44,6 +40,32 @@ public abstract class BaseElasticsearchService {
     builder.setHttpAsyncResponseConsumerFactory(
         new HttpAsyncResponseConsumerFactory.HeapBufferedResponseConsumerFactory(30 * 1024 * 1024));
     COMMON_OPTIONS = builder.build();
+  }
+
+  @Resource protected RestHighLevelClient client;
+  @Resource private ElasticsearchProperties elasticsearchProperties;
+
+  /**
+   * build DeleteIndexRequest
+   *
+   * @param index elasticsearch index name
+   * @author fxbin
+   */
+  private static DeleteIndexRequest buildDeleteIndexRequest(String index) {
+    return new DeleteIndexRequest(index);
+  }
+
+  /**
+   * build IndexRequest
+   *
+   * @param index elasticsearch index name
+   * @param id request object id
+   * @param object request object
+   * @return {@link org.elasticsearch.action.index.IndexRequest}
+   * @author fxbin
+   */
+  protected static IndexRequest buildIndexRequest(String index, String id, Object object) {
+    return new IndexRequest(index).id(id).source(BeanUtil.beanToMap(object), XContentType.JSON);
   }
 
   /**
@@ -89,29 +111,6 @@ public abstract class BaseElasticsearchService {
     } catch (IOException e) {
       throw new ElasticsearchException("删除索引 {" + index + "} 失败");
     }
-  }
-
-  /**
-   * build DeleteIndexRequest
-   *
-   * @param index elasticsearch index name
-   * @author fxbin
-   */
-  private static DeleteIndexRequest buildDeleteIndexRequest(String index) {
-    return new DeleteIndexRequest(index);
-  }
-
-  /**
-   * build IndexRequest
-   *
-   * @param index elasticsearch index name
-   * @param id request object id
-   * @param object request object
-   * @return {@link org.elasticsearch.action.index.IndexRequest}
-   * @author fxbin
-   */
-  protected static IndexRequest buildIndexRequest(String index, String id, Object object) {
-    return new IndexRequest(index).id(id).source(BeanUtil.beanToMap(object), XContentType.JSON);
   }
 
   /**

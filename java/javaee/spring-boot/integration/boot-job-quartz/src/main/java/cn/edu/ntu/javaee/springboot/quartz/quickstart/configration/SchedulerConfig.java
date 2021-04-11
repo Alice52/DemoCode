@@ -3,7 +3,6 @@ package cn.edu.ntu.javaee.springboot.quartz.quickstart.configration;
 import cn.edu.ntu.javaee.springboot.quartz.quickstart.job.SimpleJob;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Un-Recommend.

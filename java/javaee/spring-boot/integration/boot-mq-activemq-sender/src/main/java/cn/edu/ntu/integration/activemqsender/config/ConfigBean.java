@@ -21,14 +21,13 @@ public class ConfigBean {
 
   @Value("${queue-name}")
   private String queueName;
+  @Value("${topic-name}")
+  private String topicName;
 
   @Bean
   public Queue queue() {
     return new ActiveMQQueue(queueName);
   }
-
-  @Value("${topic-name}")
-  private String topicName;
 
   @Bean
   public Topic topic() {

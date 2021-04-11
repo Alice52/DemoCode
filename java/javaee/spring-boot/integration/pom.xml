@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -32,6 +32,9 @@
         <module>boot-tool-mapstruct</module>
         <module>boot-cache</module>
         <module>common-api</module>
+        <module>boot-web-flux</module>
+        <module>boot-web-flux/webflux-client</module>
+        <module>boot-web-flux/webflux-server</module>
     </modules>
 
     <properties>
@@ -69,10 +72,17 @@
         <jquery.version>3.3.1</jquery.version>
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
         <swagger2.knife4j>2.0.4</swagger2.knife4j>
+        <swagger.starter>3.0.0</swagger.starter>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger.starter}</version>
+            </dependency>
+
             <!-- swagger3 -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -175,7 +185,8 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
-            </dependency>  <dependency>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>

@@ -25,19 +25,6 @@ public enum ErrorMessageEnum {
     this.errorMsg = errorMsg;
   }
 
-  public Integer getErrorCode() {
-    return errorCode;
-  }
-
-  public String getErrorMsg() {
-    return errorMsg;
-  }
-
-  @Override
-  public String toString() {
-    return "ErrorMessages{" + "code=" + errorCode + ", errorMsg='" + errorMsg + '\'' + '}';
-  }
-
   /**
    * get ErrorMessage by error code.
    *
@@ -94,5 +81,18 @@ public enum ErrorMessageEnum {
       return Optional.empty();
     }
     return Optional.ofNullable(enumValue);
+  }
+
+  public Integer getErrorCode() {
+    return errorCode;
+  }
+
+  public String getErrorMsg() {
+    return errorMsg;
+  }
+
+  @Override
+  public String toString() {
+    return "ErrorMessages{" + "code=" + errorCode + ", errorMsg='" + errorMsg + '\'' + '}';
   }
 }

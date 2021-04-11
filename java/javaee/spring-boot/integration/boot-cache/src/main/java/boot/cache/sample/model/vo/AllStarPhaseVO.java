@@ -13,49 +13,48 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @author zack <br/>
- * @create 2021-04-09 10:15 <br/>
- * @project integration <br/>
+ * @author zack <br>
+ * @create 2021-04-09 10:15 <br>
+ * @project integration <br>
  */
-
 @Data
 @NoArgsConstructor
 public class AllStarPhaseVO implements Serializable {
-    private Long id;
+  private Long id;
 
-    @ApiModelProperty("阶段 Code")
-    private String phaseCode;
+  @ApiModelProperty("阶段 Code")
+  private String phaseCode;
 
-    @ApiModelProperty("阶段名称")
-    private String phaseName;
+  @ApiModelProperty("阶段名称")
+  private String phaseName;
 
-    private LocalDateTime startTime;
+  private LocalDateTime startTime;
 
-    private LocalDateTime endTime;
+  private LocalDateTime endTime;
 
-    private String type;
+  private String type;
 
-    private AllStarPhaseStatusEnum status;
+  private AllStarPhaseStatusEnum status;
 
-    private Boolean isDeleted;
+  private Boolean isDeleted;
 
-    private LocalDateTime insertedTime;
+  private LocalDateTime insertedTime;
 
-    private LocalDateTime updatedTime;
+  private LocalDateTime updatedTime;
 
-    private Long insertedBy;
+  private Long insertedBy;
 
-    private Long updatedBy;
+  private Long updatedBy;
 
-    @JsonProperty("allStarActivities")
-    private List<AllStarActivityVO> allStarActivityVO;
+  @JsonProperty("allStarActivities")
+  private List<AllStarActivityVO> allStarActivityVO;
 
-    public AllStarPhaseVO(String phaseCode, String phaseName) {
-        this.phaseCode = phaseCode;
-        this.phaseName = phaseName;
-    }
+  public AllStarPhaseVO(String phaseCode, String phaseName) {
+    this.phaseCode = phaseCode;
+    this.phaseName = phaseName;
+  }
 
-    public AllStarPhaseVO(AllStarPhase po) {
-        BeanUtil.copyProperties(po, this, "status");
-    }
+  public AllStarPhaseVO(AllStarPhase po) {
+    BeanUtil.copyProperties(po, this, "status");
+  }
 }

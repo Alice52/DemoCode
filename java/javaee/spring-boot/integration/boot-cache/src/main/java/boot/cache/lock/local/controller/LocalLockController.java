@@ -17,8 +17,7 @@ import java.util.Map;
 @RequestMapping("/local-lock")
 public class LocalLockController {
 
-  @Resource
-  ILocalLockService lockService;
+  @Resource ILocalLockService lockService;
 
   @GetMapping("/brands")
   public Map getBrands() {

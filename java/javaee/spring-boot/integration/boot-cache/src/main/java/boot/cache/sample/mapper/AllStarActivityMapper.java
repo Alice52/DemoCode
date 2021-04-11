@@ -8,5 +8,4 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @create 2021-04-09 10:25 <br>
  * @project integration <br>
  */
-public interface AllStarActivityMapper extends BaseMapper<AllStarActivity> {
-}
+public interface AllStarActivityMapper extends BaseMapper<AllStarActivity> {}

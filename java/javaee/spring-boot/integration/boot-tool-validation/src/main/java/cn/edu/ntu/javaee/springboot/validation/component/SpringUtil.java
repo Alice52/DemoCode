@@ -16,11 +16,6 @@ public class SpringUtil implements ApplicationContextAware {
 
   private static ApplicationContext applicationContext = null;
 
-  @Override
-  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-    SpringUtil.applicationContext = applicationContext;
-  }
-
   public static <T> T getBean(Class<T> cla) {
     return applicationContext.getBean(cla);
   }
@@ -35,5 +30,10 @@ public class SpringUtil implements ApplicationContextAware {
 
   public static String getProperty(String key) {
     return applicationContext.getBean(Environment.class).getProperty(key);
+  }
+
+  @Override
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    SpringUtil.applicationContext = applicationContext;
   }
 }

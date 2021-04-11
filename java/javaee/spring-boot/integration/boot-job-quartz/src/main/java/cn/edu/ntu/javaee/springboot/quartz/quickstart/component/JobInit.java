@@ -2,7 +2,6 @@ package cn.edu.ntu.javaee.springboot.quartz.quickstart.component;
 
 import cn.edu.ntu.javaee.springboot.quartz.quickstart.job.SimpleJob;
 import org.quartz.*;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

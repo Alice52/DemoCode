@@ -32,6 +32,11 @@ import java.util.stream.Collectors;
 @ResponseBody
 public class BeanValidationExceptionHandler {
 
+  protected static ResponseEntity buildResponseEntity(
+      ErrorResponse errorResponse, HttpStatus status) {
+    return new ResponseEntity<>(errorResponse, status);
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity handleException(Exception ex) {
 
@@ -142,10 +147,5 @@ public class BeanValidationExceptionHandler {
     errorResponse.setParameters(collect);
 
     return buildResponseEntity(errorResponse, HttpStatus.BAD_REQUEST);
-  }
-
-  protected static ResponseEntity buildResponseEntity(
-      ErrorResponse errorResponse, HttpStatus status) {
-    return new ResponseEntity<>(errorResponse, status);
   }
 }

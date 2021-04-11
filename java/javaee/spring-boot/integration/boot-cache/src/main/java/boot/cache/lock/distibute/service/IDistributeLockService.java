@@ -31,6 +31,8 @@ public interface IDistributeLockService {
   String writeValue();
 
   void lockSchoolDoor();
+
   void lockDoor();
+
   void go();
 }
