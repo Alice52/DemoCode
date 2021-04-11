@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: boot-webflux-server
+  jackson:
+    date-format: java.text.SimpleDateFormat
+    default-property-inclusion: non_null
+  data:
+    mongodb:
+      uri: mongodb://49.235.91.10:27017/tutorials

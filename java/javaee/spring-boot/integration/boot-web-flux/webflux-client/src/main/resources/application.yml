@@ -1,0 +1,9 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: boot-webflux-client
+  jackson:
+    date-format: java.text.SimpleDateFormat
+    default-property-inclusion: non_null
