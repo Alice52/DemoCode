@@ -3,7 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>integration</artifactId>
+        <artifactId>boot-web-flux</artifactId>
         <groupId>cn.edu.ntu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -12,12 +12,6 @@
     <artifactId>webflux-server</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>cn.edu.ntu</groupId>
-            <artifactId>boot-web-flux</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
