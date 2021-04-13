@@ -1,4 +1,4 @@
-package boot.cache.utils;
+package boot.cache.lock.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;

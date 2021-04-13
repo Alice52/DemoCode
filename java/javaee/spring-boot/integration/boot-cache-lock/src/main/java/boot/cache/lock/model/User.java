@@ -1,4 +1,4 @@
-package boot.cache.model;
+package boot.cache.lock.model;
 
 import lombok.*;
 

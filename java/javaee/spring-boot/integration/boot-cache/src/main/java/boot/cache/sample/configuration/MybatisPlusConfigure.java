@@ -3,6 +3,7 @@ package boot.cache.sample.configuration;
 import boot.cache.sample.component.datascope.DataScopeInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @project integration <br>
  */
 @Configuration
+@EnableCaching
 @MapperScan("boot.cache.sample.mapper")
 public class MybatisPlusConfigure {
   /**

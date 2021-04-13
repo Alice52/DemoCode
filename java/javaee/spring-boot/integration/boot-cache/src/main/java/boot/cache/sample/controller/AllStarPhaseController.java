@@ -46,7 +46,7 @@ public class AllStarPhaseController {
   @Cacheable(
       value = GlobalCacheConstants.MODULE_MCDONALDS_ALLSTART_PHASE_KEY,
       key = "'list'",
-      unless = "#result.data.size() == 0")
+      unless = "#result.size() == 0")
   public List<AllStarPhaseVO> list(
       @RequestParam(value = "type", required = false) @ApiParam(value = "活动标识") String type) {
 
@@ -57,7 +57,7 @@ public class AllStarPhaseController {
   @Cacheable(
       value = GlobalCacheConstants.MODULE_MCDONALDS_ALLSTART_PHASE_KEY,
       key = "#id",
-      unless = "#result.data.id == null")
+      unless = "#result.id == null")
   public AllStarPhaseVO get(
       @PathVariable("id") Long id,
       @RequestParam(value = "type", required = false) @ApiParam(value = "活动标识") String type) {

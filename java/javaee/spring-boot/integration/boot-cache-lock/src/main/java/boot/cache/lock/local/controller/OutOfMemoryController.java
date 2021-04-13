@@ -1,6 +1,6 @@
 package boot.cache.lock.local.controller;
 
-import boot.cache.model.User;
+import boot.cache.lock.model.User;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import org.springframework.data.redis.core.RedisTemplate;

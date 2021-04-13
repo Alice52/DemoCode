@@ -1,6 +1,6 @@
 package boot.cache.lock.distibute.service;
 
-import boot.cache.utils.RedisUtil;
+import boot.cache.lock.utils.RedisUtil;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.ObjectUtil;
 import lombok.SneakyThrows;

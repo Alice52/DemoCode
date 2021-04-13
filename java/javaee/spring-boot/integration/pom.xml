@@ -33,7 +33,9 @@
         <module>boot-cache</module>
         <module>common-api</module>
         <module>boot-web-flux</module>
-     </modules>
+        <module>boot-cache-lock</module>
+        <module>boot-web-limit</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
