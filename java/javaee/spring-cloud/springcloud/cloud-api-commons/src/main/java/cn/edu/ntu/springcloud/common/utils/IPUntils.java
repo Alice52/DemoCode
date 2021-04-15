@@ -42,7 +42,7 @@ public final class IPUntils {
         ip = address.nextElement();
         if (!ip.isSiteLocalAddress()
             && !ip.isLoopbackAddress()
-            && ip.getHostAddress().indexOf(":") == -1) {
+            && !ip.getHostAddress().contains(":")) {
           // 外网IP
           netip = ip.getHostAddress();
           finded = true;
@@ -50,7 +50,7 @@ public final class IPUntils {
 
         } else if (ip.isSiteLocalAddress()
             && !ip.isLoopbackAddress()
-            && ip.getHostAddress().indexOf(":") == -1) {
+            && !ip.getHostAddress().contains(":")) {
           // 内网IP
           localip = ip.getHostAddress();
         }
