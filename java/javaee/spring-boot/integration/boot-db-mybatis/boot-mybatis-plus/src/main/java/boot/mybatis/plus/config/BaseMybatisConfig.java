@@ -1,5 +1,6 @@
 package boot.mybatis.plus.config;
 
+import boot.mybatis.plus.config.handler.MybatisMetaHandler;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import org.springframework.context.annotation.Bean;
 

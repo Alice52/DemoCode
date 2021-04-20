@@ -1,13 +1,14 @@
 server:
+  # https://blog.csdn.net/zhangjunli/article/details/89207038
   undertow:
-    io-threads: 2
-    worker-threads: 30
+    io-threads: 4
+    worker-threads: 32
     accesslog:
       dir: logs/access/
       enabled: true
       pattern: '%h %l %u %t "%r" %s %b %D "%{i,Referer}" "%{i,User-Agent}"'
       prefix: ${spring.application.name}_access
-      suffix: log
+      suffix: .log
       rotate: true
 
 # 加解密根密码
@@ -15,46 +16,26 @@ jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
 
-# Spring 相关
-spring:
-  jackson:
-    default-property-inclusion: non_null
-
 management:
   endpoints:
     web:
       exposure:
         include: "*"
 
-http:
-  maxTotal: 2000
-  defaultMaxPerRoute: 2000
-
-
+# Spring 相关
+spring:
+  application:
+    name: boot-mybatis-plus
+  jackson:
+    default-property-inclusion: non_null
   datasource:
     username: ENC(3+5Pg+H9L0s1ATmg/xTWLbNt9OeMFguochuRyTl9a4BGbD4lL2SLM8351rdHYhC2)
     password: ENC(MkGdNTchUL+OnF+nvm5YSSjWc7XeHLNab+KV9Wr3fqF1fAbEVLB2urZotLn8nAk1)
-    url: ENC(/eIMClN/Pk0zV/9tsO/lVvwakl1gLUvisFxUIqE1nrspX+kVREo86lF3721bhlTYWuq0oRKPQca79vt6kkOiCgLGoMlVDpMj2p4qCdwSydY=)
+    url: ENC(qYpoVw2Izmv2SmeWaOIaz4YNUrnm+ZZnVRhmMRo/W9+APjiNrPn7gK4VbQEJNdPepfPiJGVJPgt5KOeW3e+Q1CZa10lKC5O/zxd/JXsJVhNTPO0u/CSUNe18N7AYFBfX)
     driver-class-name: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: false
-    # Configure monitoring statistics interception filters.
-    # If removed, the monitoring interface sql cannot collect statistics.
-    # Wall is used for the firewall
-    filters: stat,wall,slf4j
-    maxPoolPreparedStatementPerConnectionSize: 20
-    useGlobalDataSourceStat: true
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 1000
 
 # mybatis-plus
 mybatis-plus:
@@ -63,8 +44,8 @@ mybatis-plus:
   global-config:
     banner: false
     db-config:
-      id-type: 0
-      field-strategy: 1
+      id-type: AUTO
+      field-strategy: NOT_NULL
       table-underline: true
       logic-delete-value: 1
       logic-not-delete-value: 0
@@ -73,6 +54,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 logging:
-  root:
-    level:
-      boot.mybatis: DEBUG
+  level:
+    root: info
+    boot.mybatis.plus: debug

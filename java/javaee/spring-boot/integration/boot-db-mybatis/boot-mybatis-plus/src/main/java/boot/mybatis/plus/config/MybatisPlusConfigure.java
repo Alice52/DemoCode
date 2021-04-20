@@ -1,10 +1,10 @@
 package boot.mybatis.plus.config;
 
+import boot.mybatis.plus.config.handler.DataScopeInterceptor;
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,8 +15,7 @@ import org.springframework.context.annotation.Profile;
  * @project integration <br>
  */
 @Configuration
-@MapperScan("boot.mybatis.plus.mapper")
-public class MybatisPlusConfigure extends BaseMybatisConfig{
+public class MybatisPlusConfigure extends BaseMybatisConfig {
   /**
    * 分页插件
    *
@@ -47,9 +46,14 @@ public class MybatisPlusConfigure extends BaseMybatisConfig{
     return new LogicSqlInjector();
   }
 
-  /** SQL执行效率插件 */
+  /**
+   * SQL执行效率插件 <br>
+   * 且只有在 HikariDataSource 下才会生效参数<br>
+   *
+   * @return
+   */
   @Bean
-  @Profile({"dev", "cloud"}) // 设置 dev demo staging 环境开启
+  @Profile({"dev", "cloud"}) // 设置 dev 环境开启
   public PerformanceInterceptor performanceInterceptor() {
     return new PerformanceInterceptor();
   }

@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
  * // TODO: this module need modify
  *
  * <pre>
- *     2. redis cache serial
+ *     1. redis cache serial
  * </pre>
  *
  * @author zack <br>

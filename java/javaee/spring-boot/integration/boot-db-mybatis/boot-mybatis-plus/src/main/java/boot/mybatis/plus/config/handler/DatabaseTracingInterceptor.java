@@ -1,4 +1,4 @@
-package boot.mybatis.plus.config.trace;
+package boot.mybatis.plus.config.handler;
 
 import brave.Span;
 import brave.Tracer;
@@ -47,8 +47,7 @@ public class DatabaseTracingInterceptor implements Interceptor {
     Span span = tracer.nextSpan().name(SPAN_NAME);
     span.tag(TAG_INSTANCE, serviceName);
     try (Tracer.SpanInScope ws = tracer.withSpanInScope(span.start())) {
-      StatementHandler statementHandler =
-          (StatementHandler) PluginUtils.realTarget(invocation.getTarget());
+      StatementHandler statementHandler = PluginUtils.realTarget(invocation.getTarget());
       MetaObject metaObject = SystemMetaObject.forObject(statementHandler);
       MappedStatement mappedStatement =
           (MappedStatement) metaObject.getValue("delegate.mappedStatement");

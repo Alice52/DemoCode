@@ -35,6 +35,7 @@
         <module>boot-web-flux</module>
         <module>boot-cache-lock</module>
         <module>boot-web-limit</module>
+        <module>boot-web-actuator</module>
     </modules>
 
     <properties>

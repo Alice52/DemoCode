@@ -38,7 +38,7 @@ public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements
 
   private static LambdaQueryWrapper<Phase> buildQueryWrapper(String type) {
     LambdaQueryWrapper<Phase> queryWrapper =
-        Wrappers.<Phase>query().lambda().eq(Phase::getIsDeleted, 0);
+        Wrappers.<Phase>query().lambda();
     Optional.ofNullable(type).ifPresent(t -> queryWrapper.eq(Phase::getType, type));
 
     return queryWrapper;

@@ -1,5 +1,6 @@
-package boot.mybatis.plus.config;
+package boot.mybatis.plus.config.handler;
 
+import boot.mybatis.common.utils.DataScope;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
@@ -19,7 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-/** mybatis 数据权限拦截器 */
+/** mybatis 数据权限拦截器
+ * @author zack*/
 @Slf4j
 @Intercepts({
   @Signature(
@@ -32,8 +34,7 @@ public class DataScopeInterceptor extends AbstractSqlParserHandler implements In
   @Override
   @SneakyThrows
   public Object intercept(Invocation invocation) {
-    StatementHandler statementHandler =
-        (StatementHandler) PluginUtils.realTarget(invocation.getTarget());
+    StatementHandler statementHandler = PluginUtils.realTarget(invocation.getTarget());
     MetaObject metaObject = SystemMetaObject.forObject(statementHandler);
     this.sqlParser(metaObject);
     // 先判断是不是SELECT操作

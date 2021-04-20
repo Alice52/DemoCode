@@ -1,4 +1,4 @@
-package boot.mybatis.plus.controller; // package boot.cache.sample.controller;
+package boot.mybatis.plus.controller;
 
 import boot.mybatis.common.model.vo.ActivityVO;
 import boot.mybatis.plus.service.ActivityService;
@@ -25,7 +25,7 @@ public class ActivityController {
   @Resource private ActivityService activityService;
 
   @GetMapping("/activitys")
-  public List<ActivityVO> list(@RequestParam(value = "type") List<Long> ids) {
+  public List<ActivityVO> list(@RequestParam(value = "id") List<Long> ids) {
 
     return activityService.queryByPhaseIds(ids);
   }
