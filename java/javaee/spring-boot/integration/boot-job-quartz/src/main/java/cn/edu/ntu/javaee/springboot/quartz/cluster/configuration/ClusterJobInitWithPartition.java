@@ -35,6 +35,7 @@ public class ClusterJobInitWithPartition {
 
   private static final Logger LOG = LoggerFactory.getLogger(ClusterJobInitWithPartition.class);
   @Resource Scheduler scheduler;
+
   @Value("${spring.quartz.properties.org.quartz.scheduler.instanceName}")
   private String instanceName;
 

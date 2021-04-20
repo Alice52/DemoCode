@@ -28,10 +28,13 @@ public class DirectSender {
   private static final String DIRECT_MESSAGE = "hello direct";
   @Autowired RabbitTemplate rabbitTemplate;
   @Autowired AmqpAdmin amqpAdmin;
+
   @Value("${exchange.direct}")
   private String DIRECT_EXCHANGE;
+
   @Value("${queue.direct}")
   private String DIRECT_QUEUE;
+
   @Value("${direct.routing.key}")
   private String DIRECT_ROUTING_KEY;
 

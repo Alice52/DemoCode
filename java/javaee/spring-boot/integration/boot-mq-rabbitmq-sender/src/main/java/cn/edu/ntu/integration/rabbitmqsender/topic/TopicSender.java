@@ -28,8 +28,10 @@ public class TopicSender {
   private static final String TOPIC_MESSAGE = "hello topic";
   @Autowired public RabbitTemplate rabbitTemplate;
   @Autowired AmqpAdmin amqpAdmin;
+
   @Value("${exchange.topic}")
   private String TOPIC_EXCHANGE;
+
   @Value("${queue.topic}")
   private String TOPIC_QUEUE;
 

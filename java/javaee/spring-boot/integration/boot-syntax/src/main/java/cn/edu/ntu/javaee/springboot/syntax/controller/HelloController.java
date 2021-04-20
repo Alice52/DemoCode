@@ -23,6 +23,7 @@ public class HelloController {
   private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
   @Resource public Person person;
   @Resource HelloService service;
+
   @Email // do not work with @Value
   @Value("${name:mars}")
   private String name;

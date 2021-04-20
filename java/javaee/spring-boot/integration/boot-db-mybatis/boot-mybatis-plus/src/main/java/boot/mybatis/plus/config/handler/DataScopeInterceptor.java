@@ -20,8 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-/** mybatis 数据权限拦截器
- * @author zack*/
+/**
+ * mybatis 数据权限拦截器
+ *
+ * @author zack
+ */
 @Slf4j
 @Intercepts({
   @Signature(

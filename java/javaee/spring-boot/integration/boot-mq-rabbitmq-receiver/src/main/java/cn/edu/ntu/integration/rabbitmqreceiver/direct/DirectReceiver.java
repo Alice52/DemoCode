@@ -22,16 +22,22 @@ public class DirectReceiver {
 
   private final Logger LOG = LoggerFactory.getLogger(this.getClass());
   @Autowired AmqpAdmin amqpAdmin;
+
   @Value("${exchange.direct}")
   private String DIRECT_EXCHANGE;
+
   @Value("${queue.direct}")
   private String DIRECT_QUEUE;
+
   @Value("${direct.routing.key}")
   private String DIRECT_ROUTING_KEY;
+
   @Value("${exchange.topic}")
   private String TOPIC_EXCHANGE;
+
   @Value("${queue.topic}")
   private String TOPIC_QUEUE;
+
   @Value("${queue.direct}")
   private String queueName;
 

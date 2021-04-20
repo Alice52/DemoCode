@@ -59,6 +59,7 @@
 
         <validation.api.version>2.0.1.Final</validation.api.version>
         <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
+        <actuator.admin.version>2.2.4</actuator.admin.version>
 
         <!-- database -->
         <mysql.version>5.1.47</mysql.version>
@@ -160,10 +161,14 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring.boot.version}</version>
-                <scope>test</scope>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${actuator.admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${actuator.admin.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -238,11 +243,6 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>${swagger2.knife4j}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>jquery</artifactId>
             </dependency>
         </dependencies>
     </dependencyManagement>
