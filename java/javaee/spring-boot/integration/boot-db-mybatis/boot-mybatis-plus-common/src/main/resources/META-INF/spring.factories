@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  boot.mybatis.common.config.JacksonConfig,\
+  boot.mybatis.common.config.SpringContextHolder

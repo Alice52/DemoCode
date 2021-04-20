@@ -28,7 +28,7 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
-        <!-- this is for swagger Api model -->
+        <!-- this is for swagger Api boot.mybatis.common.model -->
         <dependency>
             <artifactId>swagger-annotations</artifactId>
             <groupId>io.swagger</groupId>

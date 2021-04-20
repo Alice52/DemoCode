@@ -81,4 +81,39 @@ public class CompletableFutureExceptionTest {
               throw x;
             });
   }
+
+  @SneakyThrows
+  @Test
+  public void checkAsyncAllof() {
+
+    CompletableFuture<Void> runAsync =
+        CompletableFuture.runAsync(
+            () -> {
+              log.info("thread 2 supply async start ... ");
+              throw new RuntimeException("thread-2");
+            });
+
+    try {
+      CompletableFuture.allOf(runAsync).join();
+    } catch (CompletionException e) {
+      if (e.getCause() instanceof RuntimeException) {
+        throw (RuntimeException) e.getCause();
+      }
+      throw new RuntimeException(e.getCause().getMessage());
+    }
+  }
+
+
+    @SneakyThrows
+    @Test
+    public void checkAsync2() {
+
+        CompletableFuture<Void> runAsync =
+                CompletableFuture.runAsync(
+                        () -> {
+                            log.info("thread 2 supply async start ... ");
+                            throw new RuntimeException("thread-2");
+                        });
+        runAsync.get();
+    }
 }

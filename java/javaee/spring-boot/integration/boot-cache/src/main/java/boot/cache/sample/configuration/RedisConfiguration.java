@@ -1,6 +1,5 @@
 package boot.cache.sample.configuration;
 
-import boot.cache.sample.constants.GlobalCacheConstants;
 import boot.cache.sample.util.McJavaTimeModule;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -39,7 +38,7 @@ public class RedisConfiguration {
     return builder -> {
       Map<String, RedisCacheConfiguration> configurationMap = new HashMap<>();
       configurationMap.put(
-          GlobalCacheConstants.MODULE_MCDONALDS_ALLSTART_PHASE_KEY,
+          "GlobalCacheConstants.MODULE_MCDONALDS_ALLSTART_PHASE_KEY",
           RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(10)));
       builder.withInitialCacheConfigurations(configurationMap);
     };

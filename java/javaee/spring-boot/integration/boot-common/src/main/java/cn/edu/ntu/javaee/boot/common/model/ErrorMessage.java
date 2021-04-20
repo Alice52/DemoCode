@@ -1,4 +1,4 @@
-// package cn.edu.ntu.javaee.boot.common.model;
+// package cn.edu.ntu.javaee.boot.common.boot.mybatis.common.model;
 //
 // import java.util.Map;
 //

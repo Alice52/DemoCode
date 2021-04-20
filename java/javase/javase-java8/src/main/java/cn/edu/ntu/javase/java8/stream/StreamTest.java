@@ -221,4 +221,21 @@ public class StreamTest {
     Optional<Employee> employee = EMPLOYEES.stream().filter(i -> i.getAge() == 2).findAny();
     EMPLOYEES.stream().filter(i -> i.getAge() == 18).findFirst().ifPresent(System.out::println);
   }
+
+  @Test
+  public void testMapV2() {
+
+    List<Employee> employees =
+        Arrays.asList(
+            new Employee(null, 18, 6500),
+            new Employee(null, 8, 3000),
+            new Employee(null, 38, 6000),
+            new Employee(null, 58, 8000));
+
+    Map<Integer, String> collect =
+        employees.stream()
+            .collect(HashMap::new, (m, v) -> m.put(v.getAge(), v.getName()), HashMap::putAll);
+
+    log.info("map: {}", collect);
+  }
 }

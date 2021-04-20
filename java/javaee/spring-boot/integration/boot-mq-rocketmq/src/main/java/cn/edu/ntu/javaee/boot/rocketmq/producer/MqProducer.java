@@ -1,6 +1,6 @@
 // package cn.edu.ntu.javaee.boot.rocketmq.producer;
 //
-// import cn.edu.ntu.seckill.model.bo.StockLogBO;
+// import cn.edu.ntu.seckill.boot.mybatis.common.model.bo.StockLogBO;
 // import cn.edu.ntu.seckill.service.IOrderService;
 // import cn.edu.ntu.seckill.service.IStockLogService;
 // import cn.hutool.json.JSONUtil;

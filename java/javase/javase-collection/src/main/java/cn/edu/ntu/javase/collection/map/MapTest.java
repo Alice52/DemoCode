@@ -37,8 +37,6 @@ public class MapTest {
 
     // 案值排序: 相对计较麻烦, 将map中的键值对放入list列表中
     // method1: Collections.sort(List<T> list, Comparator<? super T> c)
-    Collections.sort(
-        new ArrayList<Map.Entry<String, Integer>>(map.entrySet()),
-        Comparator.comparing(x -> x.getValue()));
+    new ArrayList<>(map.entrySet()).sort(Map.Entry.comparingByValue());
   }
 }
