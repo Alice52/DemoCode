@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: actuator-client
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8090/"
+        instance:
+          metadata:
+            user.name: ${spring.security.user.name}
+            user.password: ${spring.security.user.password}
+  security:
+    user:
+      name: zack
+      password: ${JASYPT_ENCRYPTOR_PASSWORD}
+management:
+  endpoint:
+    health:
+      # 端点健康情况，默认值"never"
+      # 设置为"always"可以显示硬盘使用情况和线程情况
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
