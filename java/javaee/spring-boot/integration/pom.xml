@@ -244,6 +244,12 @@
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>${swagger2.knife4j}</version>
             </dependency>
+            <!-- swagger3 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger.starter}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

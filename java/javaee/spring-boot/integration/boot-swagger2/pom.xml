@@ -18,6 +18,7 @@
             <artifactId>boot-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <!-- spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

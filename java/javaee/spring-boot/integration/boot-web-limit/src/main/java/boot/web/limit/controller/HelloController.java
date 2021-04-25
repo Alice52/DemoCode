@@ -2,6 +2,7 @@ package boot.web.limit.controller;
 
 import boot.web.limit.annotation.IdempotentRequest;
 import boot.web.limit.annotation.LimitRequest;
+import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

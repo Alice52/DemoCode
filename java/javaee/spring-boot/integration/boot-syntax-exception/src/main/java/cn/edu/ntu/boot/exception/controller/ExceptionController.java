@@ -3,6 +3,7 @@ package cn.edu.ntu.boot.exception.controller;
 import cn.edu.ntu.boot.exception.exception.UserNotExistException;
 import cn.edu.ntu.javaee.boot.common.model.JsonObject;
 import cn.edu.ntu.javaee.boot.common.response.ErrorResponse;
+import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,5 +40,16 @@ public class ExceptionController {
   @GetMapping(value = "/invalid-properties-format-exception")
   public Object invalidPropertiesFormatException() throws Exception {
     throw new InvalidPropertiesFormatException("");
+  }
+
+  @GetMapping("/lombok-sneaky-throws")
+  public String sneaky() {
+    sneakyLogic();
+    return "PONG";
+  }
+
+  @SneakyThrows
+  private void sneakyLogic() {
+    throw new Exception("sad");
   }
 }

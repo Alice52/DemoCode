@@ -108,12 +108,18 @@ public class CompletableFutureExceptionTest {
     @Test
     public void checkAsync2() {
 
+      if(null instanceof Object) {
+          log.info("sas");
+        }
+
+
         CompletableFuture<Void> runAsync =
                 CompletableFuture.runAsync(
                         () -> {
                             log.info("thread 2 supply async start ... ");
                             throw new RuntimeException("thread-2");
                         });
-        runAsync.get();
+
+             runAsync.get();
     }
 }
