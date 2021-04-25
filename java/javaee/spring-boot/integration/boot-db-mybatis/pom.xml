@@ -17,6 +17,9 @@
         <module>boot-mybatis-plus-common</module>
         <module>boot-mybatis-plus</module>
         <module>boot-mybatis-plus-async</module>
+        <module>boot-mybatis-flyway</module>
+        <module>boot-mybatis-multi-datasource</module>
+        <module>boot-mybatis-mapper</module>
     </modules>
 
     <properties>

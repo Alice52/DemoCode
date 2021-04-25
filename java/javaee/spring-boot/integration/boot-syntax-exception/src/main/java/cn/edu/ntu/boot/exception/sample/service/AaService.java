@@ -20,5 +20,5 @@ public interface AaService {
    *
    * @param name
    */
-  void hello4B(@NotNull(message = "名称不能为空")String name);
+  void hello4B(@NotNull(message = "名称不能为空") String name);
 }

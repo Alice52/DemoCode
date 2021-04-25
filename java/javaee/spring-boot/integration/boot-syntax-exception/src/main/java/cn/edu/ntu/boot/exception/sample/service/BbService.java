@@ -13,7 +13,7 @@ public interface BbService {
    *
    * @param name
    */
-  void helloB(@NotNull(message = "名称不能为空")String name);
+  void helloB(@NotNull(message = "名称不能为空") String name);
 
   /**
    * A service will call this api to handle logic.

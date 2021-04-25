@@ -1,6 +1,5 @@
 package cn.edu.ntu.boot.exception.sample.contoller;
 
-import cn.edu.ntu.boot.exception.sample.service.BbService;
 import cn.edu.ntu.boot.exception.sample.service.CcService;
 import cn.edu.ntu.javaee.boot.common.model.JsonObject;
 import org.springframework.web.bind.annotation.GetMapping;

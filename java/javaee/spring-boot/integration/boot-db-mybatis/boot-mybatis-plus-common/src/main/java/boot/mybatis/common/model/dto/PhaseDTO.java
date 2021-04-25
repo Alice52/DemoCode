@@ -59,4 +59,8 @@ public class PhaseDTO implements Serializable {
     this.id = id;
     this.type = type;
   }
+
+  public PhaseDTO(Long id) {
+    this.id = id;
+  }
 }
