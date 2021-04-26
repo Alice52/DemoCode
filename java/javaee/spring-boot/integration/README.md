@@ -10,3 +10,9 @@
 2. spring mvc exception handler sample
 3. spring common exception
     - BeanCurrentlyInCreationException: 循环依赖
+
+### considering modules
+
+1. tio
+2. grpc
+3. https

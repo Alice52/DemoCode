@@ -10,32 +10,20 @@
     <packaging>pom</packaging>
     <modules>
         <module>boot-common</module>
-        <module>boot-mq-activemq-sender</module>
-        <module>boot-mq-activemq-receiver</module>
-        <module>boot-mq-rabbitmq-sender</module>
-        <module>boot-mq-rabbitmq-receiver</module>
-        <module>boot-job-quartz</module>
         <module>boot-db-jdbc</module>
         <module>boot-db-mybatis</module>
-        <module>boot-syntax</module>
-        <module>boot-swagger2</module>
-        <module>boot-syntax-exception</module>
-        <module>boot-syntax-mvc</module>
-        <module>boot-tool-encrypt</module>
-        <module>boot-starter</module>
         <module>boot-workflow</module>
-        <module>boot-starter-autoconfigure</module>
-        <module>boot-starter-test</module>
-        <module>boot-mq-rocketmq</module>
-        <module>boot-tool-validation</module>
         <module>boot-db-elasticsearch</module>
-        <module>boot-tool-mapstruct</module>
-        <module>boot-cache</module>
         <module>common-api</module>
-        <module>boot-web-flux</module>
-        <module>boot-cache-lock</module>
-        <module>boot-web-limit</module>
-        <module>boot-web-actuator</module>
+        <module>boot-web</module>
+        <module>boot-db-redis</module>
+        <module>boot-mq</module>
+        <module>boot-starter</module>
+        <module>boot-swagger</module>
+        <module>boot-syntax</module>
+        <module>boot-job</module>
+        <module>boot-tool</module>
+        <module>boot-security</module>
     </modules>
 
     <properties>
