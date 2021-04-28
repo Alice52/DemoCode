@@ -22,7 +22,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driverClassName: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://49.235.91.10:3306/tutorials?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+      url: ENC(sVzpLgY8KAy5WUZbqsb+O7Ybvu9eddnJtLaEuo8QVWMyIL6DpOcnYQAYMEQ9SXCFQrbKUNmBn2ZeHIcTe+iuXVghVQjW7ASiygEQnMMXVG5zHpHzl3iz/w4028RUXcoc5ng8dvUPzBPfN0BXkVVQzdn5b5DluPawm0oIzAkWxxWRmHp5zZvD8tRhr+8pO+CegcZOI0nj6Io9iAgcICE67g==)
       username: ENC(uVs7DP260FXOKYBacQjLo7Fonyyiq2qwnSjOGt9Q2weCl3ceVf6c6VAAQ6WkTsUt)
       password: ENC(IkxnRsO4O+J/8pOvHoL7/9sSyvhq3Zv9AYObJx9ldt636qyRiBTGrwndtSISEY4F)
       initial-size: 10
