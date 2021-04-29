@@ -20,8 +20,7 @@
 <body>
 <div id="job">
     <div id="top">
-        <el-button size="small" type="primary" plain @click="search" :loading="loading" icon="el-icon-search">查询
-        </el-button>
+        <el-button size="small" type="primary" plain @click="search" :loading="loading" icon="el-icon-search">查询</el-button>
         <el-button size="small" type="primary" plain @click="handleadd" icon="el-icon-plus">添加</el-button>
     </div>
     <br/>
@@ -69,7 +68,15 @@
     <el-dialog title="添加任务" :visible.sync="dialogFormVisible">
         <el-form :model="form">
             <el-form-item label="任务名称" label-width="100px" style="width:90%">
-                <el-input v-model="form.jobName" auto-complete="off"></el-input>
+<!--                <el-input v-model="form.jobName" auto-complete="off"></el-input>-->
+                <el-select v-model="form.jobName" placeholder="请选择" :style="{display: 'block'}">
+                    <el-option
+                            v-for="item in jobNameOptions"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item label="任务分组" label-width="100px" style="width:90%">
                 <el-input v-model="form.jobGroup" auto-complete="off"></el-input>
@@ -132,9 +139,25 @@
                 jobGroup: '',
                 cronExpression: ''
             },
-            loading: false
+            loading: false,
+            jobNameOptions: [],
         },
         methods: {
+            loadOptions: function () {
+                this.$http.get('job/available').then(function (res) {
+                    console.log(res);
+                    let jobNameOptions = [];
+                    for (const key in res.body.data) {
+                        jobNameOptions.push({
+                            label: key,
+                            value: res.body.data[key]
+                        });
+                    }
+                    this.jobNameOptions = jobNameOptions;
+                }, function () {
+                    console.log('failed');
+                });
+            },
             // 格式化状态
             formatState: function (row, column, cellValue, index) {
                 if (row.triggerState === 'WAITING' || row.triggerState === 'ACQUIRED') {
@@ -252,6 +275,7 @@
 
     //载入数据
     vue.loadData(vue.currentPage, vue.pagesize);
+    vue.loadOptions();
 
 
 

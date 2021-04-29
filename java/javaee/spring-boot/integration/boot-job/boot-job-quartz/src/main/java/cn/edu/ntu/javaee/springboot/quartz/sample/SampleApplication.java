@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * - 多实例会自动出现LB的效果
+ *
  * @author zack <br>
  * @create 2021-04-28<br>
  * @project integration <br>

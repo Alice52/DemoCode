@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -149,5 +150,17 @@ public class ReflectTest {
     // 3. Uses the constructor represented by this {@code Constructor} object to create
     Object obj = constructor.newInstance("张壮壮", 12);
     System.out.println(obj);
+  }
+
+  @Test
+  public void testClassFields() {
+    Field[] fields = Person.class.getDeclaredFields();
+    Arrays.stream(fields).map(Field::getName) .forEach(System.out::println);
+
+
+    Arrays.stream(fields).forEach(x -> {
+      throw new RuntimeException("sa");
+    });
+
   }
 }

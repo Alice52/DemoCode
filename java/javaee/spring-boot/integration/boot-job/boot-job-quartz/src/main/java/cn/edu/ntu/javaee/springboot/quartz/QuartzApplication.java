@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -15,7 +14,7 @@ import javax.annotation.Resource;
  * @author zack
  * @project boot-job-quartz
  */
-@SpringBootApplication
+// @SpringBootApplication
 public class QuartzApplication {
 
   private static final Logger LOG = LoggerFactory.getLogger(QuartzApplication.class);
