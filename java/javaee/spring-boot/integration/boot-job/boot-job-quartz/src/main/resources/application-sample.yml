@@ -7,7 +7,7 @@ spring:
   application:
     name: boot-job-quartz-sample
   datasource:
-    url: ENC(sVzpLgY8KAy5WUZbqsb+O7Ybvu9eddnJtLaEuo8QVWMyIL6DpOcnYQAYMEQ9SXCFQrbKUNmBn2ZeHIcTe+iuXVghVQjW7ASiygEQnMMXVG5zHpHzl3iz/w4028RUXcoc5ng8dvUPzBPfN0BXkVVQzdn5b5DluPawm0oIzAkWxxWRmHp5zZvD8tRhr+8pO+CegcZOI0nj6Io9iAgcICE67g==)
+    url: ENC(AoaqntVABm1UyE6T94YJL5KiA+mmteL2WCCVXEu17LtazQns2LU9I7aea92Wv3uvGvK9jJIVkHjw902val+gPydSz3U/7GPlqV5IgUFDGBXJLZ5I6iL2QG0ge1YLjV3PjbyuSoeY5mgxqTJSxvhj121OfOJ43xCPsKqlyD2Hy6ZCktf9+GYjDtqB7YVfbEJuy6tYV5xYZirZog+04j/Aew==)
     username: ENC(uVs7DP260FXOKYBacQjLo7Fonyyiq2qwnSjOGt9Q2weCl3ceVf6c6VAAQ6WkTsUt)
     password: ENC(IkxnRsO4O+J/8pOvHoL7/9sSyvhq3Zv9AYObJx9ldt636qyRiBTGrwndtSISEY4F)
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -11,11 +11,19 @@
 
     <artifactId>javase-jvm</artifactId>
 
+    <properties>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>cn.edu.ntu.java</groupId>
             <artifactId>javase-common</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
         </dependency>
     </dependencies>
 </project>

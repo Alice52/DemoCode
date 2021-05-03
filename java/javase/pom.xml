@@ -31,6 +31,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
+        <jol-core.version>0.9</jol-core.version>
         <junit.version>4.12</junit.version>
         <slf4j.api.version>1.7.25</slf4j.api.version>
         <logback.core.version>1.2.3</logback.core.version>
@@ -78,6 +79,13 @@
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-generator-annprocess</artifactId>
                 <version>${openjdk.jmh.version}</version>
+            </dependency>
+
+            <!-- jvm struct -->
+            <dependency>
+                <groupId>org.openjdk.jol</groupId>
+                <artifactId>jol-core</artifactId>
+                <version>${jol-core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
