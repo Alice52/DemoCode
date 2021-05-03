@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
  * @project boot-mybatis-common <br>
  */
 public abstract class BaseMybatisConfig {
-  @Bean
-  public GlobalConfig globalConfig() {
-    GlobalConfig globalConfig = new GlobalConfig();
-    globalConfig.setMetaObjectHandler(new MybatisMetaHandler());
-    return globalConfig;
-  }
+    @Bean
+    public GlobalConfig globalConfig() {
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setMetaObjectHandler(new MybatisMetaHandler());
+        return globalConfig;
+    }
 }

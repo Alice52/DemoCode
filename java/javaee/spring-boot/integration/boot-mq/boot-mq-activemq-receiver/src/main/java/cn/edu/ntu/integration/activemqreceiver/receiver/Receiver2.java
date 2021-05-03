@@ -18,29 +18,29 @@ import java.util.Optional;
  */
 @Component
 public class Receiver2 {
-  private static final Logger LOG = LoggerFactory.getLogger(Receiver2.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Receiver2.class);
 
-  @Value("${topic-name}")
-  private String topicName;
+    @Value("${topic-name}")
+    private String topicName;
 
-  // destination is super class of queue and topic
-  @JmsListener(destination = "${topic-name}")
-  public void receiveFromTopic(TextMessage textMessage) {
-    Optional.ofNullable(textMessage)
-        .ifPresent(
-            mg -> {
-              try {
-                LOG.info(
-                    "Receive message: {} from topic: {} success.",
-                    textMessage.getText(),
-                    topicName);
-              } catch (JMSException e) {
-                LOG.warn(
-                    "Failed to receive message: {} from topic: {}, cause by {}.",
-                    textMessage,
-                    topicName,
-                    e);
-              }
-            });
-  }
+    // destination is super class of queue and topic
+    @JmsListener(destination = "${topic-name}")
+    public void receiveFromTopic(TextMessage textMessage) {
+        Optional.ofNullable(textMessage)
+                .ifPresent(
+                        mg -> {
+                            try {
+                                LOG.info(
+                                        "Receive message: {} from topic: {} success.",
+                                        textMessage.getText(),
+                                        topicName);
+                            } catch (JMSException e) {
+                                LOG.warn(
+                                        "Failed to receive message: {} from topic: {}, cause by {}.",
+                                        textMessage,
+                                        topicName,
+                                        e);
+                            }
+                        });
+    }
 }

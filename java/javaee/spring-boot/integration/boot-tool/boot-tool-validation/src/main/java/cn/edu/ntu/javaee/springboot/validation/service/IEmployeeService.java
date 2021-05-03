@@ -15,54 +15,54 @@ import javax.validation.constraints.NotNull;
 @Validated
 public interface IEmployeeService {
 
-  /**
-   * This validation will not be worked.
-   *
-   * @param employee
-   */
-  void addEmploy(Employee employee);
+    /**
+     * This validation will not be worked.
+     *
+     * @param employee
+     */
+    void addEmploy(Employee employee);
 
-  /**
-   * This validation will be worked.
-   *
-   * @param employee
-   */
-  void addEmploy2(@Valid Employee employee);
+    /**
+     * This validation will be worked.
+     *
+     * @param employee
+     */
+    void addEmploy2(@Valid Employee employee);
 
-  /**
-   * This validation will be worked.
-   *
-   * @param email
-   * @return
-   */
-  Employee getByEmail(@NotNull String email);
+    /**
+     * This validation will be worked.
+     *
+     * @param email
+     * @return
+     */
+    Employee getByEmail(@NotNull String email);
 
-  /**
-   * Please not use validation to validate result.
-   *
-   * <p>Please use Assertion to check result.
-   *
-   * @param id
-   * @return
-   */
-  @NotNull
-  Employee getById(@NotNull Integer id);
+    /**
+     * Please not use validation to validate result.
+     *
+     * <p>Please use Assertion to check result.
+     *
+     * @param id
+     * @return
+     */
+    @NotNull
+    Employee getById(@NotNull Integer id);
 
-  /**
-   * This validation will be used by validateInService.
-   *
-   * @param email
-   */
-  void validate(@NotNull String email);
+    /**
+     * This validation will be used by validateInService.
+     *
+     * @param email
+     */
+    void validate(@NotNull String email);
 
-  /**
-   * This is to validate between service.
-   *
-   * <p>if want the internal method[validate] worked, please get proxy of service,
-   *
-   * <p>>then to call validate() method.
-   *
-   * @param email
-   */
-  void validateInService(@Email String email);
+    /**
+     * This is to validate between service.
+     *
+     * <p>if want the internal method[validate] worked, please get proxy of service,
+     *
+     * <p>>then to call validate() method.
+     *
+     * @param email
+     */
+    void validateInService(@Email String email);
 }

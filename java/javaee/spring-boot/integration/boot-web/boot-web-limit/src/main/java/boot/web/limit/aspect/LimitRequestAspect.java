@@ -28,55 +28,57 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 public class LimitRequestAspect {
 
-  /** 根据请求地址保存不同的令牌桶 */
-  private static final Map<String, RateLimiter> rateLimiterMap = new ConcurrentHashMap<>(16);
+    /** 根据请求地址保存不同的令牌桶 */
+    private static final Map<String, RateLimiter> rateLimiterMap = new ConcurrentHashMap<>(16);
 
-  private static String getRemoteIP(HttpServletRequest request) {
-    if (request.getHeader("x-forwarded-for") == null) {
-      return request.getRemoteAddr();
-    }
-    return request.getHeader("x-forwarded-for");
-  }
-
-  /**
-   * 切入去点拦截
-   *
-   * @see LimitRequest
-   */
-  @Pointcut("@annotation(limitRequest)")
-  public void pointCut(LimitRequest limitRequest) {}
-
-  @Around("pointCut(limitRequest)")
-  public Object doPoint(ProceedingJoinPoint joinPoint, LimitRequest limitRequest) throws Throwable {
-
-    if (limitRequest.count() == 0 || limitRequest.time() == 0) {
-      joinPoint.proceed();
+    private static String getRemoteIP(HttpServletRequest request) {
+        if (request.getHeader("x-forwarded-for") == null) {
+            return request.getRemoteAddr();
+        }
+        return request.getHeader("x-forwarded-for");
     }
 
-    // 获取 request
-    ServletRequestAttributes servletRequestAttributes =
-        (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-    HttpServletRequest request = servletRequestAttributes.getRequest();
-    // 获取请求 uri
-    String uri = request.getRequestURI();
-    if (!rateLimiterMap.containsKey(uri)) {
-      // 为当前请求创建令牌桶
-      rateLimiterMap.put(
-          uri, RateLimiter.create(NumberUtil.div(limitRequest.count(), limitRequest.time())));
-    }
-    // 根据请求 uri 获取令牌桶
-    RateLimiter rateLimiter = rateLimiterMap.get(uri);
-    // 获取令牌
+    /**
+     * 切入去点拦截
+     *
+     * @see LimitRequest
+     */
+    @Pointcut("@annotation(limitRequest)")
+    public void pointCut(LimitRequest limitRequest) {}
 
-    boolean acquire =
-        rateLimiter.tryAcquire(
-            limitRequest.acquireTokenTimeout(), limitRequest.acquireTokenTimeUnit());
-    if (acquire) {
-      // 调用目标方法
-      return joinPoint.proceed();
+    @Around("pointCut(limitRequest)")
+    public Object doPoint(ProceedingJoinPoint joinPoint, LimitRequest limitRequest)
+            throws Throwable {
+
+        if (limitRequest.count() == 0 || limitRequest.time() == 0) {
+            joinPoint.proceed();
+        }
+
+        // 获取 request
+        ServletRequestAttributes servletRequestAttributes =
+                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+        // 获取请求 uri
+        String uri = request.getRequestURI();
+        if (!rateLimiterMap.containsKey(uri)) {
+            // 为当前请求创建令牌桶
+            rateLimiterMap.put(
+                    uri,
+                    RateLimiter.create(NumberUtil.div(limitRequest.count(), limitRequest.time())));
+        }
+        // 根据请求 uri 获取令牌桶
+        RateLimiter rateLimiter = rateLimiterMap.get(uri);
+        // 获取令牌
+
+        boolean acquire =
+                rateLimiter.tryAcquire(
+                        limitRequest.acquireTokenTimeout(), limitRequest.acquireTokenTimeUnit());
+        if (acquire) {
+            // 调用目标方法
+            return joinPoint.proceed();
+        }
+        // 获取不到令牌抛出异常
+        log.info("接口: {}, IP: {} - {}", uri, getRemoteIP(request), limitRequest.message());
+        throw new RuntimeException(limitRequest.message());
     }
-    // 获取不到令牌抛出异常
-    log.info("接口: {}, IP: {} - {}", uri, getRemoteIP(request), limitRequest.message());
-    throw new RuntimeException(limitRequest.message());
-  }
 }

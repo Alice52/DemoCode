@@ -15,33 +15,33 @@ import java.time.LocalDateTime;
 @Slf4j
 @Component
 public class MybatisMetaHandler implements MetaObjectHandler {
-  /**
-   * 新增数据执行
-   *
-   * @param metaObject
-   */
-  @Override
-  public void insertFill(MetaObject metaObject) {
-    this.setFieldValByName("insertedTime", LocalDateTime.now(), metaObject);
-    Long memberId = 0L;
+    /**
+     * 新增数据执行
+     *
+     * @param metaObject
+     */
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        this.setFieldValByName("insertedTime", LocalDateTime.now(), metaObject);
+        Long memberId = 0L;
 
-    if (memberId != null) {
-      this.setFieldValByName("insertedBy", memberId, metaObject);
+        if (memberId != null) {
+            this.setFieldValByName("insertedBy", memberId, metaObject);
+        }
     }
-  }
 
-  /**
-   * 更新数据执行
-   *
-   * @param metaObject
-   */
-  @Override
-  public void updateFill(MetaObject metaObject) {
-    this.setFieldValByName("updatedTime", LocalDateTime.now(), metaObject);
-    Long memberId = 0L;
+    /**
+     * 更新数据执行
+     *
+     * @param metaObject
+     */
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        this.setFieldValByName("updatedTime", LocalDateTime.now(), metaObject);
+        Long memberId = 0L;
 
-    if (memberId != null) {
-      this.setFieldValByName("updatedBy", memberId, metaObject);
+        if (memberId != null) {
+            this.setFieldValByName("updatedBy", memberId, metaObject);
+        }
     }
-  }
 }

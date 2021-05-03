@@ -16,13 +16,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateTimeJsonDeserializer extends JsonDeserializer<DateTime> {
 
-  @Override
-  public DateTime deserialize(
-      com.fasterxml.jackson.core.JsonParser jsonParser, DeserializationContext ctxt)
-      throws IOException, JsonProcessingException {
-    String dateString = jsonParser.readValueAs(String.class);
-    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    @Override
+    public DateTime deserialize(
+            com.fasterxml.jackson.core.JsonParser jsonParser, DeserializationContext ctxt)
+            throws IOException, JsonProcessingException {
+        String dateString = jsonParser.readValueAs(String.class);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    return DateUtil.parse(dateString, timeFormatter);
-  }
+        return DateUtil.parse(dateString, timeFormatter);
+    }
 }

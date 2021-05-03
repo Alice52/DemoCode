@@ -37,36 +37,36 @@ import javax.validation.groups.Default;
 @GroupSequenceProvider(CoderGroupSequenceProvider.class)
 public class Coder {
 
-  @NotNull(groups = {Common.class, Default.class})
-  private Integer age;
+    @NotNull(groups = {Common.class, Default.class})
+    private Integer age;
 
-  @Null(
-      groups = {Update.class},
-      message = "cannot update name")
-  @NotBlank(
-      groups = {Add.class},
-      message = "name must be not blank")
-  private String name;
+    @Null(
+            groups = {Update.class},
+            message = "cannot update name")
+    @NotBlank(
+            groups = {Add.class},
+            message = "name must be not blank")
+    private String name;
 
-  @NotNull(groups = {Common.class, Default.class})
-  private String company;
+    @NotNull(groups = {Common.class, Default.class})
+    private String company;
 
-  /** 初级 */
-  @Pattern(
-      regexp = "^\u521d\u7ea7.*",
-      groups = {PrimaryCoder.class})
-  /** 中级 */
-  @Pattern(
-      regexp = "^\u4e2d\u7ea7.*",
-      groups = {MiddleCoder.class})
-  private String title;
+    /** 初级 */
+    @Pattern(
+            regexp = "^\u521d\u7ea7.*",
+            groups = {PrimaryCoder.class})
+    /** 中级 */
+    @Pattern(
+            regexp = "^\u4e2d\u7ea7.*",
+            groups = {MiddleCoder.class})
+    private String title;
 
-  /** this is customized default group, if has Default.class, should add Common.class */
-  public interface Common {}
+    /** this is customized default group, if has Default.class, should add Common.class */
+    public interface Common {}
 
-  public interface PrimaryCoder {}
-  ;
+    public interface PrimaryCoder {}
+    ;
 
-  public interface MiddleCoder {}
-  ;
+    public interface MiddleCoder {}
+    ;
 }

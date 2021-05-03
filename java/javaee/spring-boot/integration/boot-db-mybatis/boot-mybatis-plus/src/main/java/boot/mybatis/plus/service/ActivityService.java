@@ -16,11 +16,11 @@ import java.util.List;
 @Validated
 public interface ActivityService extends IService<Activity> {
 
-  /**
-   * 获取某些阶段对应的活动
-   *
-   * @param phaseIds
-   * @return
-   */
-  List<ActivityVO> queryByPhaseIds(@NotNull(message = "阶段Id不能为空") List<Long> phaseIds);
+    /**
+     * 获取某些阶段对应的活动
+     *
+     * @param phaseIds
+     * @return
+     */
+    List<ActivityVO> queryByPhaseIds(@NotNull(message = "阶段Id不能为空") List<Long> phaseIds);
 }

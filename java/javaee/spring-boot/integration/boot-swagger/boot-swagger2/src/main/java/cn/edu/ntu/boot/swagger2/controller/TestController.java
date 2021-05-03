@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-  @PostMapping(value = "/test")
-  public Person hello(Person person) {
-    return person;
-  }
+    @PostMapping(value = "/test")
+    public Person hello(Person person) {
+        return person;
+    }
 }

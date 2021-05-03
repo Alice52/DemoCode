@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 @EnableReactiveMongoRepositories
 public class WebFluxApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(WebFluxApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(WebFluxApplication.class, args);
+    }
 }

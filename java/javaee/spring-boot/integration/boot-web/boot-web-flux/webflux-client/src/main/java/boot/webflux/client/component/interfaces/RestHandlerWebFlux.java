@@ -16,38 +16,38 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Component
 public class RestHandlerWebFlux implements IRestHandler {
 
-  private WebClient client;
+    private WebClient client;
 
-  @Override
-  public Object invokeRest(MethodInfo methodInfo) {
+    @Override
+    public Object invokeRest(MethodInfo methodInfo) {
 
-    Object result;
+        Object result;
 
-    log.info("method info: {}", methodInfo);
+        log.info("method info: {}", methodInfo);
 
-    WebClient.RequestBodySpec r =
-        this.client
-            .method(methodInfo.getMethod())
-            .uri(methodInfo.getUri(), methodInfo.getParams())
-            .accept(MediaType.APPLICATION_JSON);
+        WebClient.RequestBodySpec r =
+                this.client
+                        .method(methodInfo.getMethod())
+                        .uri(methodInfo.getUri(), methodInfo.getParams())
+                        .accept(MediaType.APPLICATION_JSON);
 
-    if (methodInfo.getBody() != null) {
-      r.body(methodInfo.getBody(), methodInfo.getBodyType());
+        if (methodInfo.getBody() != null) {
+            r.body(methodInfo.getBody(), methodInfo.getBodyType());
+        }
+
+        WebClient.ResponseSpec request = r.retrieve();
+        if (methodInfo.getIsFlux()) {
+            result = request.bodyToFlux(methodInfo.getReturnType());
+        } else {
+            result = request.bodyToMono(methodInfo.getReturnType());
+        }
+
+        return result;
     }
 
-    WebClient.ResponseSpec request = r.retrieve();
-    if (methodInfo.getIsFlux()) {
-      result = request.bodyToFlux(methodInfo.getReturnType());
-    } else {
-      result = request.bodyToMono(methodInfo.getReturnType());
+    @Override
+    public void initServerInfo(ServerInfo info) {
+
+        client = WebClient.create(info.uri());
     }
-
-    return result;
-  }
-
-  @Override
-  public void initServerInfo(ServerInfo info) {
-
-    client = WebClient.create(info.uri());
-  }
 }

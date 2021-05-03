@@ -27,38 +27,44 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 public class IdempotentRequestAspect {
 
-  /** <uri, <token, count>> */
-  private static final Map<String, ExpiringMap<String, Integer>> map = new ConcurrentHashMap<>(16);
+    /** <uri, <token, count>> */
+    private static final Map<String, ExpiringMap<String, Integer>> map =
+            new ConcurrentHashMap<>(16);
 
-  /**
-   * 切入去点拦截
-   *
-   * @see IdempotentRequest
-   */
-  @Pointcut("@annotation(idempotentRequest)")
-  public void pointCut(IdempotentRequest idempotentRequest) {}
+    /**
+     * 切入去点拦截
+     *
+     * @see IdempotentRequest
+     */
+    @Pointcut("@annotation(idempotentRequest)")
+    public void pointCut(IdempotentRequest idempotentRequest) {}
 
-  @Around("pointCut(idempotentRequest)")
-  public Object doPoint(ProceedingJoinPoint point, IdempotentRequest idempotentRequest)
-      throws Throwable {
+    @Around("pointCut(idempotentRequest)")
+    public Object doPoint(ProceedingJoinPoint point, IdempotentRequest idempotentRequest)
+            throws Throwable {
 
-    HttpServletRequest request = RequestHolder.getCurrentRequest();
-    String token = RequestHolder.getCurrentToken();
+        HttpServletRequest request = RequestHolder.getCurrentRequest();
+        String token = RequestHolder.getCurrentToken();
 
-    ExpiringMap<String, Integer> em =
-        map.getOrDefault(
-            request.getRequestURI(), ExpiringMap.builder().variableExpiration().build());
-    Integer count = em.getOrDefault(token, 0);
+        ExpiringMap<String, Integer> em =
+                map.getOrDefault(
+                        request.getRequestURI(),
+                        ExpiringMap.builder().variableExpiration().build());
+        Integer count = em.getOrDefault(token, 0);
 
-    if (count >= 1) {
-      // 超过次数，不执行目标方法
-      return null;
+        if (count >= 1) {
+            // 超过次数，不执行目标方法
+            return null;
+        }
+
+        em.put(
+                token,
+                1,
+                ExpirationPolicy.CREATED,
+                idempotentRequest.time(),
+                idempotentRequest.timeUnit());
+        map.put(request.getRequestURI(), em);
+
+        return point.proceed();
     }
-
-    em.put(
-        token, 1, ExpirationPolicy.CREATED, idempotentRequest.time(), idempotentRequest.timeUnit());
-    map.put(request.getRequestURI(), em);
-
-    return point.proceed();
-  }
 }

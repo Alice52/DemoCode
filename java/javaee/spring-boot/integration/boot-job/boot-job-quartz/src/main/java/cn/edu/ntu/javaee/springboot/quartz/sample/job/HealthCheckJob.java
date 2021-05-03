@@ -19,36 +19,39 @@ import javax.annotation.Resource;
 @Component
 public class HealthCheckJob {
 
-  @Resource Scheduler scheduler;
+    @Resource Scheduler scheduler;
 
-  @PostConstruct
-  public void initJob() throws SchedulerException {
-    TriggerKey triggerKey = TriggerKey.triggerKey("health-check-job", "default-group");
-    JobKey jobKey = JobKey.jobKey("health-check-job", "default-group");
+    @PostConstruct
+    public void initJob() throws SchedulerException {
+        TriggerKey triggerKey = TriggerKey.triggerKey("health-check-job", "default-group");
+        JobKey jobKey = JobKey.jobKey("health-check-job", "default-group");
 
-    JobDetail jobDetail = JobBuilder.newJob(HealthCheckJobBean.class).withIdentity(jobKey).build();
+        JobDetail jobDetail =
+                JobBuilder.newJob(HealthCheckJobBean.class).withIdentity(jobKey).build();
 
-    Trigger trigger = scheduler.getTrigger(triggerKey);
-    if (ObjectUtil.isNull(trigger)) {
-      trigger =
-          TriggerBuilder.newTrigger()
-              .withIdentity(triggerKey)
-              .withSchedule(
-                  SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(10).repeatForever())
-              .build();
+        Trigger trigger = scheduler.getTrigger(triggerKey);
+        if (ObjectUtil.isNull(trigger)) {
+            trigger =
+                    TriggerBuilder.newTrigger()
+                            .withIdentity(triggerKey)
+                            .withSchedule(
+                                    SimpleScheduleBuilder.simpleSchedule()
+                                            .withIntervalInSeconds(10)
+                                            .repeatForever())
+                            .build();
 
-      scheduler.scheduleJob(jobDetail, trigger);
-    } else {
-      // already existence, so just re-start
-      scheduler.rescheduleJob(triggerKey, trigger);
+            scheduler.scheduleJob(jobDetail, trigger);
+        } else {
+            // already existence, so just re-start
+            scheduler.rescheduleJob(triggerKey, trigger);
+        }
     }
-  }
 
-  class HealthCheckJobBean extends QuartzJobBean {
-    @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext)
-        throws JobExecutionException {
-      log.info("CHECK HEALTH IS OK IN {}", DateUtil.now());
+    class HealthCheckJobBean extends QuartzJobBean {
+        @Override
+        protected void executeInternal(JobExecutionContext jobExecutionContext)
+                throws JobExecutionException {
+            log.info("CHECK HEALTH IS OK IN {}", DateUtil.now());
+        }
     }
-  }
 }

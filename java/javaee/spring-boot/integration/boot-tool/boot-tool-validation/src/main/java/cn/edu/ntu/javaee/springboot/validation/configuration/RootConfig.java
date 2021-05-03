@@ -12,15 +12,15 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 @Configuration
 public class RootConfig {
 
-  /**
-   * // TODO: confused.
-   *
-   * <p>I cannot understand what's function of this bean.
-   *
-   * @return methodValidationPostProcessor bean
-   */
-  @Bean
-  public MethodValidationPostProcessor methodValidationPostProcessor() {
-    return new MethodValidationPostProcessor();
-  }
+    /**
+     * // TODO: confused.
+     *
+     * <p>I cannot understand what's function of this bean.
+     *
+     * @return methodValidationPostProcessor bean
+     */
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
+    }
 }

@@ -16,9 +16,9 @@ import java.util.List;
  */
 @Service
 public class DeptDAOImpl extends BaseDAO<Department> implements IDeptDAO {
-  @Override
-  public List<Department> getALlDepartments() {
+    @Override
+    public List<Department> getALlDepartments() {
 
-    return this.getForList(null, null);
-  }
+        return this.getForList(null, null);
+    }
 }

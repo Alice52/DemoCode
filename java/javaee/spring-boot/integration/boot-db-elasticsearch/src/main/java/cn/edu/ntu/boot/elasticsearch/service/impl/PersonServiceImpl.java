@@ -24,71 +24,72 @@ import java.util.Map;
 @Service
 public class PersonServiceImpl extends BaseElasticsearchService implements PersonService {
 
-  @Override
-  public void createIndex(String index) {
-    createIndexRequest(index);
-  }
+    @Override
+    public void createIndex(String index) {
+        createIndexRequest(index);
+    }
 
-  @Override
-  public void deleteIndex(String index) {
-    deleteIndexRequest(index);
-  }
+    @Override
+    public void deleteIndex(String index) {
+        deleteIndexRequest(index);
+    }
 
-  @Override
-  public void insert(String index, List<Person> list) {
+    @Override
+    public void insert(String index, List<Person> list) {
 
-    try {
-      list.forEach(
-          person -> {
-            IndexRequest request = buildIndexRequest(index, String.valueOf(person.getId()), person);
+        try {
+            list.forEach(
+                    person -> {
+                        IndexRequest request =
+                                buildIndexRequest(index, String.valueOf(person.getId()), person);
+                        try {
+                            client.index(request, COMMON_OPTIONS);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+        } finally {
             try {
-              client.index(request, COMMON_OPTIONS);
+                client.close();
             } catch (IOException e) {
-              e.printStackTrace();
+                e.printStackTrace();
             }
-          });
-    } finally {
-      try {
-        client.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+        }
     }
-  }
 
-  @Override
-  public void update(String index, List<Person> list) {
-    list.forEach(
-        person -> {
-          updateRequest(index, String.valueOf(person.getId()), person);
-        });
-  }
-
-  @Override
-  public void delete(String index, Person person) {
-    if (ObjectUtils.isEmpty(person)) {
-      // 如果person 对象为空，则删除全量
-      searchList(index)
-          .forEach(
-              p -> {
-                deleteRequest(index, String.valueOf(p.getId()));
-              });
+    @Override
+    public void update(String index, List<Person> list) {
+        list.forEach(
+                person -> {
+                    updateRequest(index, String.valueOf(person.getId()), person);
+                });
     }
-    deleteRequest(index, String.valueOf(person.getId()));
-  }
 
-  @Override
-  public List<Person> searchList(String index) {
-    SearchResponse searchResponse = search(index);
-    SearchHit[] hits = searchResponse.getHits().getHits();
-    List<Person> personList = new ArrayList<>();
-    Arrays.stream(hits)
-        .forEach(
-            hit -> {
-              Map<String, Object> sourceAsMap = hit.getSourceAsMap();
-              Person person = BeanUtil.mapToBean(sourceAsMap, Person.class, true);
-              personList.add(person);
-            });
-    return personList;
-  }
+    @Override
+    public void delete(String index, Person person) {
+        if (ObjectUtils.isEmpty(person)) {
+            // 如果person 对象为空，则删除全量
+            searchList(index)
+                    .forEach(
+                            p -> {
+                                deleteRequest(index, String.valueOf(p.getId()));
+                            });
+        }
+        deleteRequest(index, String.valueOf(person.getId()));
+    }
+
+    @Override
+    public List<Person> searchList(String index) {
+        SearchResponse searchResponse = search(index);
+        SearchHit[] hits = searchResponse.getHits().getHits();
+        List<Person> personList = new ArrayList<>();
+        Arrays.stream(hits)
+                .forEach(
+                        hit -> {
+                            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+                            Person person = BeanUtil.mapToBean(sourceAsMap, Person.class, true);
+                            personList.add(person);
+                        });
+        return personList;
+    }
 }

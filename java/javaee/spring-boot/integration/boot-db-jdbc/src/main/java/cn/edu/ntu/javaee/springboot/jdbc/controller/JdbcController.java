@@ -14,11 +14,11 @@ import java.util.Map;
  */
 @RestController
 public class JdbcController {
-  @Resource JdbcTemplate jdbcTemplate;
+    @Resource JdbcTemplate jdbcTemplate;
 
-  @GetMapping("/query")
-  public Map<String, Object> map() {
-    List<Map<String, Object>> list = jdbcTemplate.queryForList("select * FROM db_dept");
-    return list.get(0);
-  }
+    @GetMapping("/query")
+    public Map<String, Object> map() {
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select * FROM db_dept");
+        return list.get(0);
+    }
 }

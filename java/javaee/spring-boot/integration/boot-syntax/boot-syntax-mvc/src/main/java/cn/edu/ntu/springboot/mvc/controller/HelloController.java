@@ -14,29 +14,29 @@ import javax.validation.constraints.Email;
 @PropertySource(value = {"classpath:person.properties"})
 @RestController
 public class HelloController {
-  private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
 
-  @Resource public Person person;
+    @Resource public Person person;
 
-  /** do not work with @Value */
-  @Email
-  @Value("${name:mars}")
-  private String name;
+    /** do not work with @Value */
+    @Email
+    @Value("${name:mars}")
+    private String name;
 
-  @Value("${age:18}")
-  private int age;
+    @Value("${age:18}")
+    private int age;
 
-  @Value("${idCard:654321}")
-  private long IdCard;
+    @Value("${idCard:654321}")
+    private long IdCard;
 
-  @GetMapping(value = "/person")
-  public Person hello() {
-    LOG.info("Autowired person: {}", person);
-    Person person = new Person();
-    person.setName(name);
-    person.setAge(age);
-    person.setIdCard(IdCard);
-    person.setCountry("China");
-    return person;
-  }
+    @GetMapping(value = "/person")
+    public Person hello() {
+        LOG.info("Autowired person: {}", person);
+        Person person = new Person();
+        person.setName(name);
+        person.setAge(age);
+        person.setIdCard(IdCard);
+        person.setCountry("China");
+        return person;
+    }
 }

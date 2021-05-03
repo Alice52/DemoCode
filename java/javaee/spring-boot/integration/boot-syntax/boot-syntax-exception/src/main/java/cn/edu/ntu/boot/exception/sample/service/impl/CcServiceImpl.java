@@ -15,16 +15,16 @@ import javax.validation.constraints.NotNull;
 @Service
 @Slf4j
 public class CcServiceImpl implements CcService {
-  @Resource private CcService ccService;
+    @Resource private CcService ccService;
 
-  @Override
-  public void transactionWithValidate(@NotNull(message = "名称不能为空") String name) {
-    log.info("validate transaction ...");
-    ccService.transactionReal(name);
-  }
+    @Override
+    public void transactionWithValidate(@NotNull(message = "名称不能为空") String name) {
+        log.info("validate transaction ...");
+        ccService.transactionReal(name);
+    }
 
-  @Override
-  public void transactionReal(String name) {
-    log.info("real commit transaction ...");
-  }
+    @Override
+    public void transactionReal(String name) {
+        log.info("real commit transaction ...");
+    }
 }

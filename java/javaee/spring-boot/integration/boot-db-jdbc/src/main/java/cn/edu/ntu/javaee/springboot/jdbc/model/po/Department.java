@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
  */
 @Data
 public class Department {
-  private Integer id;
-  private String dept_name;
-  private String location;
-  private LocalDateTime created_date;
+    private Integer id;
+    private String dept_name;
+    private String location;
+    private LocalDateTime created_date;
 
-  private LocalDateTime updated_date;
-  private boolean is_deleted;
+    private LocalDateTime updated_date;
+    private boolean is_deleted;
 }

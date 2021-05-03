@@ -20,44 +20,47 @@ import javax.annotation.PostConstruct;
 @RabbitListener(queues = "${queue.direct}")
 public class DirectReceiver {
 
-  private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-  @Autowired AmqpAdmin amqpAdmin;
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    @Autowired AmqpAdmin amqpAdmin;
 
-  @Value("${exchange.direct}")
-  private String DIRECT_EXCHANGE;
+    @Value("${exchange.direct}")
+    private String DIRECT_EXCHANGE;
 
-  @Value("${queue.direct}")
-  private String DIRECT_QUEUE;
+    @Value("${queue.direct}")
+    private String DIRECT_QUEUE;
 
-  @Value("${direct.routing.key}")
-  private String DIRECT_ROUTING_KEY;
+    @Value("${direct.routing.key}")
+    private String DIRECT_ROUTING_KEY;
 
-  @Value("${exchange.topic}")
-  private String TOPIC_EXCHANGE;
+    @Value("${exchange.topic}")
+    private String TOPIC_EXCHANGE;
 
-  @Value("${queue.topic}")
-  private String TOPIC_QUEUE;
+    @Value("${queue.topic}")
+    private String TOPIC_QUEUE;
 
-  @Value("${queue.direct}")
-  private String queueName;
+    @Value("${queue.direct}")
+    private String queueName;
 
-  @RabbitHandler
-  public void process(Object content) {
-    LOG.info(
-        "[{}] Get message from {}, message detail: {} ", ExchangeTypes.DIRECT, queueName, content);
-  }
+    @RabbitHandler
+    public void process(Object content) {
+        LOG.info(
+                "[{}] Get message from {}, message detail: {} ",
+                ExchangeTypes.DIRECT,
+                queueName,
+                content);
+    }
 
-  @PostConstruct
-  public void init() {
-    amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
-    amqpAdmin.declareQueue(new Queue(DIRECT_QUEUE, true));
+    @PostConstruct
+    public void init() {
+        amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
+        amqpAdmin.declareQueue(new Queue(DIRECT_QUEUE, true));
 
-    amqpAdmin.declareBinding(
-        new Binding(
-            DIRECT_QUEUE,
-            Binding.DestinationType.QUEUE,
-            DIRECT_EXCHANGE,
-            DIRECT_ROUTING_KEY,
-            null));
-  }
+        amqpAdmin.declareBinding(
+                new Binding(
+                        DIRECT_QUEUE,
+                        Binding.DestinationType.QUEUE,
+                        DIRECT_EXCHANGE,
+                        DIRECT_ROUTING_KEY,
+                        null));
+    }
 }

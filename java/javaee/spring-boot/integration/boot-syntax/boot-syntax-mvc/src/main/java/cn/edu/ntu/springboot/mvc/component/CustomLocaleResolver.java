@@ -16,17 +16,18 @@ import java.util.Locale;
 @Component
 public class CustomLocaleResolver implements LocaleResolver {
 
-  @Override
-  public Locale resolveLocale(HttpServletRequest request) {
-    String lg = request.getParameter("lg");
-    Locale locale = Locale.getDefault();
-    if (!StringUtils.isEmpty(lg)) {
-      String[] split = lg.split("_");
-      locale = new Locale(split[0], split[1]);
+    @Override
+    public Locale resolveLocale(HttpServletRequest request) {
+        String lg = request.getParameter("lg");
+        Locale locale = Locale.getDefault();
+        if (!StringUtils.isEmpty(lg)) {
+            String[] split = lg.split("_");
+            locale = new Locale(split[0], split[1]);
+        }
+        return locale;
     }
-    return locale;
-  }
 
-  @Override
-  public void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) {}
+    @Override
+    public void setLocale(
+            HttpServletRequest request, HttpServletResponse response, Locale locale) {}
 }

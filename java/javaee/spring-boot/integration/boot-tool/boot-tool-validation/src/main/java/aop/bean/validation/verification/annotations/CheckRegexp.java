@@ -8,9 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CheckRegexp {
 
-  String expression() default ".*";
+    String expression() default ".*";
 
-  String messageRef() default "";
+    String messageRef() default "";
 
-  ValidationPolicy[] policy() default {ValidationPolicy.ADD};
+    ValidationPolicy[] policy() default {ValidationPolicy.ADD};
 }

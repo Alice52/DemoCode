@@ -20,33 +20,33 @@ import javax.annotation.Resource;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RedisTests {
-  private static final Logger LOG = LoggerFactory.getLogger(RedisTests.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RedisTests.class);
 
-  @Resource RedisTemplate redisTemplate;
+    @Resource RedisTemplate redisTemplate;
 
-  @Resource StringRedisTemplate stringRedisTemplate;
+    @Resource StringRedisTemplate stringRedisTemplate;
 
-  @Test
-  public void testAutoConfigBeans() {
+    @Test
+    public void testAutoConfigBeans() {
 
-    LOG.info("redisTemplate: {}", redisTemplate);
-    LOG.info("stringRedisTemplate: {}", stringRedisTemplate);
-  }
+        LOG.info("redisTemplate: {}", redisTemplate);
+        LOG.info("stringRedisTemplate: {}", stringRedisTemplate);
+    }
 
-  @Test
-  public void testSimpleUsage() {
+    @Test
+    public void testSimpleUsage() {
 
-    Object o = redisTemplate.opsForValue().get(this.getClass().getName());
-    LOG.info("get from redisTemplate but not exist: {}", o);
-    Assert.isNull(o);
+        Object o = redisTemplate.opsForValue().get(this.getClass().getName());
+        LOG.info("get from redisTemplate but not exist: {}", o);
+        Assert.isNull(o);
 
-    redisTemplate.opsForValue().set(this.getClass().getName(), this.getClass().getName());
-    o = redisTemplate.opsForValue().get(this.getClass().getName());
-    LOG.info("get from redisTemplate: {}", o);
-    Assert.notNull(o);
+        redisTemplate.opsForValue().set(this.getClass().getName(), this.getClass().getName());
+        o = redisTemplate.opsForValue().get(this.getClass().getName());
+        LOG.info("get from redisTemplate: {}", o);
+        Assert.notNull(o);
 
-    final Boolean delete = redisTemplate.delete(this.getClass().getName());
-    LOG.info("delete from redisTemplate: {}", delete);
-    Assert.isTrue(delete);
-  }
+        final Boolean delete = redisTemplate.delete(this.getClass().getName());
+        LOG.info("delete from redisTemplate: {}", delete);
+        Assert.isTrue(delete);
+    }
 }

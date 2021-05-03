@@ -10,41 +10,44 @@ import java.util.Map;
 
 public class ObjectValidator implements IVerifier {
 
-  @Override
-  public void validate(Object param, Annotation annotation, Annotation methodAnnotation)
-      throws CustomException {
-    Class<?> beanClass = param.getClass();
-    Field[] fields = beanClass.getDeclaredFields();
-    Map<Class<?>, Class<? extends IVerifier>> verifiersMap = ArgumentsValidator.getVerifiersMap();
+    @Override
+    public void validate(Object param, Annotation annotation, Annotation methodAnnotation)
+            throws CustomException {
+        Class<?> beanClass = param.getClass();
+        Field[] fields = beanClass.getDeclaredFields();
+        Map<Class<?>, Class<? extends IVerifier>> verifiersMap =
+                ArgumentsValidator.getVerifiersMap();
 
-    for (Field field : fields) {
-      Annotation[] fieldAnnotations = field.getAnnotations();
-      for (Annotation fieldAnnotation : fieldAnnotations) {
-        if (verifiersMap.containsKey(fieldAnnotation.annotationType())) {
-          Class<? extends IVerifier> verifierClass =
-              verifiersMap.get(fieldAnnotation.annotationType());
-          IVerifier verifier = null;
+        for (Field field : fields) {
+            Annotation[] fieldAnnotations = field.getAnnotations();
+            for (Annotation fieldAnnotation : fieldAnnotations) {
+                if (verifiersMap.containsKey(fieldAnnotation.annotationType())) {
+                    Class<? extends IVerifier> verifierClass =
+                            verifiersMap.get(fieldAnnotation.annotationType());
+                    IVerifier verifier = null;
 
-          try {
-            verifier = verifierClass.newInstance();
-          } catch (Exception exception) {
-            exception.printStackTrace();
-            throw new CustomException("", "can't create varifier instance");
-          }
+                    try {
+                        verifier = verifierClass.newInstance();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                        throw new CustomException("", "can't create varifier instance");
+                    }
 
-          Object value = null;
+                    Object value = null;
 
-          try {
-            value =
-                new PropertyDescriptor(field.getName(), beanClass).getReadMethod().invoke(param);
-          } catch (Exception exception) {
-            exception.printStackTrace();
-            throw new CustomException("", "can't create property descriptor");
-          }
+                    try {
+                        value =
+                                new PropertyDescriptor(field.getName(), beanClass)
+                                        .getReadMethod()
+                                        .invoke(param);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                        throw new CustomException("", "can't create property descriptor");
+                    }
 
-          verifier.validate(value, fieldAnnotation, methodAnnotation);
+                    verifier.validate(value, fieldAnnotation, methodAnnotation);
+                }
+            }
         }
-      }
     }
-  }
 }

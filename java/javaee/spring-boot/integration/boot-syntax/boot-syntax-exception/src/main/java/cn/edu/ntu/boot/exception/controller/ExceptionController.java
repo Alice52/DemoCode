@@ -17,39 +17,39 @@ import java.util.InvalidPropertiesFormatException;
 @RestController
 public class ExceptionController {
 
-  @GetMapping(value = "/userNotExistException")
-  public JsonObject userNotExistException() {
-    throw new UserNotExistException();
-  }
+    @GetMapping(value = "/userNotExistException")
+    public JsonObject userNotExistException() {
+        throw new UserNotExistException();
+    }
 
-  @GetMapping(value = "/runtimeException")
-  public ErrorResponse runtimeException() {
-    throw new RuntimeException();
-  }
+    @GetMapping(value = "/runtimeException")
+    public ErrorResponse runtimeException() {
+        throw new RuntimeException();
+    }
 
-  @GetMapping(value = "/exception")
-  public ErrorResponse exception() throws Exception {
-    throw new Exception();
-  }
+    @GetMapping(value = "/exception")
+    public ErrorResponse exception() throws Exception {
+        throw new Exception();
+    }
 
-  @GetMapping(value = "/bad-string-operation-exception")
-  public Object badStringOperationException() throws Exception {
-    throw new BadStringOperationException("");
-  }
+    @GetMapping(value = "/bad-string-operation-exception")
+    public Object badStringOperationException() throws Exception {
+        throw new BadStringOperationException("");
+    }
 
-  @GetMapping(value = "/invalid-properties-format-exception")
-  public Object invalidPropertiesFormatException() throws Exception {
-    throw new InvalidPropertiesFormatException("");
-  }
+    @GetMapping(value = "/invalid-properties-format-exception")
+    public Object invalidPropertiesFormatException() throws Exception {
+        throw new InvalidPropertiesFormatException("");
+    }
 
-  @GetMapping("/lombok-sneaky-throws")
-  public String sneaky() {
-    sneakyLogic();
-    return "PONG";
-  }
+    @GetMapping("/lombok-sneaky-throws")
+    public String sneaky() {
+        sneakyLogic();
+        return "PONG";
+    }
 
-  @SneakyThrows
-  private void sneakyLogic() {
-    throw new Exception("sad");
-  }
+    @SneakyThrows
+    private void sneakyLogic() {
+        throw new Exception("sad");
+    }
 }

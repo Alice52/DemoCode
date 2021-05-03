@@ -22,11 +22,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/mcdonalds")
 public class ActivityController {
-  @Resource private ActivityService activityService;
+    @Resource private ActivityService activityService;
 
-  @GetMapping("/activitys")
-  public List<ActivityVO> list(@RequestParam(value = "id") List<Long> ids) {
+    @GetMapping("/activitys")
+    public List<ActivityVO> list(@RequestParam(value = "id") List<Long> ids) {
 
-    return activityService.queryByPhaseIds(ids);
-  }
+        return activityService.queryByPhaseIds(ids);
+    }
 }

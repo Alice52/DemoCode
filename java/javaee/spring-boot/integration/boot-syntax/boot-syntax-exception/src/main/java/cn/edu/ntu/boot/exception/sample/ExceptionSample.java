@@ -23,7 +23,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class ExceptionSample {
-  public static void main(String[] args) {
-    SpringApplication.run(ExceptionSample.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(ExceptionSample.class, args);
+    }
 }

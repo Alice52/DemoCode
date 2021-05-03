@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.LOWEST_PRECEDENCE)
 @Component
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
-  @Override
-  public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-      throws BeansException {
-    BeanDefinition testServiceImpl = beanFactory.getBeanDefinition("testServiceImpl");
-    MutablePropertyValues propertyValues = testServiceImpl.getPropertyValues();
-    // TODO: exception thrown
-    // propertyValues.addPropertyValue("exposeProxy", true);
-  }
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+            throws BeansException {
+        BeanDefinition testServiceImpl = beanFactory.getBeanDefinition("testServiceImpl");
+        MutablePropertyValues propertyValues = testServiceImpl.getPropertyValues();
+        // TODO: exception thrown
+        // propertyValues.addPropertyValue("exposeProxy", true);
+    }
 }

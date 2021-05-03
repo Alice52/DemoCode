@@ -18,14 +18,14 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity>
-    implements ActivityService {
+        implements ActivityService {
 
-  @Override
-  public List<ActivityVO> queryByPhaseIds(List<Long> phaseIds) {
+    @Override
+    public List<ActivityVO> queryByPhaseIds(List<Long> phaseIds) {
 
-    return this.list(Wrappers.<Activity>query().lambda().in(Activity::getPhaseId, phaseIds))
-        .stream()
-        .map(ActivityVO::new)
-        .collect(Collectors.toList());
-  }
+        return this.list(Wrappers.<Activity>query().lambda().in(Activity::getPhaseId, phaseIds))
+                .stream()
+                .map(ActivityVO::new)
+                .collect(Collectors.toList());
+    }
 }

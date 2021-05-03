@@ -12,14 +12,14 @@ import javax.validation.Validator;
  */
 @Component
 public final class ValidatorUtils {
-  private static Validator validator;
+    private static Validator validator;
 
-  public static Validator getValidator() {
-    return validator;
-  }
+    public static Validator getValidator() {
+        return validator;
+    }
 
-  @Resource
-  public void setValidator(Validator validator) {
-    ValidatorUtils.validator = validator;
-  }
+    @Resource
+    public void setValidator(Validator validator) {
+        ValidatorUtils.validator = validator;
+    }
 }

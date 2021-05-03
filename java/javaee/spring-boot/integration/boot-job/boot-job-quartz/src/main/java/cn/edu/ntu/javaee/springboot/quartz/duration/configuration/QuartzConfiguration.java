@@ -19,17 +19,17 @@ import javax.sql.DataSource;
 @EnableConfigurationProperties(QDataSourceProperties.class)
 public class QuartzConfiguration {
 
-  @Resource QDataSourceProperties dataSourceProperties;
+    @Resource QDataSourceProperties dataSourceProperties;
 
-  @Bean
-  @QuartzDataSource
-  public DataSource qDataSource() {
-    DruidDataSource source = new DruidDataSource();
+    @Bean
+    @QuartzDataSource
+    public DataSource qDataSource() {
+        DruidDataSource source = new DruidDataSource();
 
-    source.setUrl(dataSourceProperties.getUrl());
-    source.setUsername(dataSourceProperties.getUsername());
-    source.setPassword(dataSourceProperties.getPassword());
-    source.setDriverClassName(dataSourceProperties.getDriverClassName());
-    return source;
-  }
+        source.setUrl(dataSourceProperties.getUrl());
+        source.setUsername(dataSourceProperties.getUsername());
+        source.setPassword(dataSourceProperties.getPassword());
+        source.setDriverClassName(dataSourceProperties.getDriverClassName());
+        return source;
+    }
 }

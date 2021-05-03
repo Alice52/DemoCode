@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class SwaggerApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(SwaggerApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(SwaggerApplication.class, args);
+    }
 }

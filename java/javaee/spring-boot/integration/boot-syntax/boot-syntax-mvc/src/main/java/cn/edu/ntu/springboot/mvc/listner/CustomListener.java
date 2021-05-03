@@ -10,15 +10,15 @@ import javax.servlet.ServletContextListener;
 /** @author zack */
 @Component
 public class CustomListener implements ServletContextListener {
-  private static final Logger LOG = LoggerFactory.getLogger(CustomListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomListener.class);
 
-  @Override
-  public void contextInitialized(ServletContextEvent sce) {
-    LOG.info("contextInitialized...");
-  }
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        LOG.info("contextInitialized...");
+    }
 
-  @Override
-  public void contextDestroyed(ServletContextEvent sce) {
-    LOG.info("contextDestroyed...");
-  }
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        LOG.info("contextDestroyed...");
+    }
 }

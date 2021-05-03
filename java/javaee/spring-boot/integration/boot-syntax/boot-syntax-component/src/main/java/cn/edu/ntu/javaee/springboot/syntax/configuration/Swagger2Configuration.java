@@ -21,25 +21,28 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger2Configuration {
-  @Bean
-  public Docket createRestApi() {
-    return new Docket(DocumentationType.SWAGGER_2)
-        .apiInfo(apiInfo())
-        .pathMapping("/")
-        .select()
-        .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-        .paths(PathSelectors.any())
-        .build();
-  }
+    @Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .pathMapping("/")
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                .paths(PathSelectors.any())
+                .build();
+    }
 
-  private ApiInfo apiInfo() {
-    return new ApiInfoBuilder()
-        .title("API Document")
-        .description("API Document Description")
-        .contact(
-            new Contact("Alice52", "https://github.com/Alice52/demo-code/", "zzhang_xz@163.com"))
-        .termsOfServiceUrl("https://github.com/Alice52/java-ocean/")
-        .version("1.0")
-        .build();
-  }
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("API Document")
+                .description("API Document Description")
+                .contact(
+                        new Contact(
+                                "Alice52",
+                                "https://github.com/Alice52/demo-code/",
+                                "zzhang_xz@163.com"))
+                .termsOfServiceUrl("https://github.com/Alice52/java-ocean/")
+                .version("1.0")
+                .build();
+    }
 }

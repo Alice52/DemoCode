@@ -9,10 +9,10 @@ import java.util.Map;
  */
 public interface ILocalLockService {
 
-  /**
-   * Get all brands, mask api.
-   *
-   * @return
-   */
-  Map getAllBrands();
+    /**
+     * Get all brands, mask api.
+     *
+     * @return
+     */
+    Map getAllBrands();
 }

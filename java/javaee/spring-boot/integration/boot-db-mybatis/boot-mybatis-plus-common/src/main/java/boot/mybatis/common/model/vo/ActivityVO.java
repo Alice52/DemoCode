@@ -17,21 +17,21 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class ActivityVO implements Serializable {
-  private Long id;
+    private Long id;
 
-  private Long phaseId;
+    private Long phaseId;
 
-  private String activityCode;
+    private String activityCode;
 
-  private String activityName;
+    private String activityName;
 
-  private LocalDateTime startTime;
+    private LocalDateTime startTime;
 
-  private LocalDateTime endTime;
+    private LocalDateTime endTime;
 
-  private ActivityStatusEnum status;
+    private ActivityStatusEnum status;
 
-  public ActivityVO(Activity allStarActivity) {
-    BeanUtil.copyProperties(allStarActivity, this, "status");
-  }
+    public ActivityVO(Activity allStarActivity) {
+        BeanUtil.copyProperties(allStarActivity, this, "status");
+    }
 }

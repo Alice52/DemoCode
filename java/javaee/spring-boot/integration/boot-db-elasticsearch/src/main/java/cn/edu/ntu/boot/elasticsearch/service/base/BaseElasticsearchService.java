@@ -31,140 +31,144 @@ import java.io.IOException;
 @Slf4j
 public abstract class BaseElasticsearchService {
 
-  protected static final RequestOptions COMMON_OPTIONS;
+    protected static final RequestOptions COMMON_OPTIONS;
 
-  static {
-    RequestOptions.Builder builder = RequestOptions.DEFAULT.toBuilder();
+    static {
+        RequestOptions.Builder builder = RequestOptions.DEFAULT.toBuilder();
 
-    // 默认缓冲限制为100MB，此处修改为30MB。
-    builder.setHttpAsyncResponseConsumerFactory(
-        new HttpAsyncResponseConsumerFactory.HeapBufferedResponseConsumerFactory(30 * 1024 * 1024));
-    COMMON_OPTIONS = builder.build();
-  }
-
-  @Resource protected RestHighLevelClient client;
-  @Resource private ElasticsearchProperties elasticsearchProperties;
-
-  /**
-   * build DeleteIndexRequest
-   *
-   * @param index elasticsearch index name
-   * @author fxbin
-   */
-  private static DeleteIndexRequest buildDeleteIndexRequest(String index) {
-    return new DeleteIndexRequest(index);
-  }
-
-  /**
-   * build IndexRequest
-   *
-   * @param index elasticsearch index name
-   * @param id request object id
-   * @param object request object
-   * @return {@link org.elasticsearch.action.index.IndexRequest}
-   * @author fxbin
-   */
-  protected static IndexRequest buildIndexRequest(String index, String id, Object object) {
-    return new IndexRequest(index).id(id).source(BeanUtil.beanToMap(object), XContentType.JSON);
-  }
-
-  /**
-   * create elasticsearch index (asyc)
-   *
-   * @param index elasticsearch index
-   * @author fxbin
-   */
-  protected void createIndexRequest(String index) {
-    try {
-      CreateIndexRequest request = new CreateIndexRequest(index);
-      // Settings for this index
-      request.settings(
-          Settings.builder()
-              .put("index.number_of_shards", elasticsearchProperties.getIndex().getNumberOfShards())
-              .put(
-                  "index.number_of_replicas",
-                  elasticsearchProperties.getIndex().getNumberOfReplicas()));
-
-      CreateIndexResponse createIndexResponse = client.indices().create(request, COMMON_OPTIONS);
-
-      log.info(
-          " whether all of the nodes have acknowledged the request : {}",
-          createIndexResponse.isAcknowledged());
-      log.info(
-          " Indicates whether the requisite number of shard copies were started for each shard in the index before timing out :{}",
-          createIndexResponse.isShardsAcknowledged());
-    } catch (IOException e) {
-      throw new ElasticsearchException("创建索引 {" + index + "} 失败");
+        // 默认缓冲限制为100MB，此处修改为30MB。
+        builder.setHttpAsyncResponseConsumerFactory(
+                new HttpAsyncResponseConsumerFactory.HeapBufferedResponseConsumerFactory(
+                        30 * 1024 * 1024));
+        COMMON_OPTIONS = builder.build();
     }
-  }
 
-  /**
-   * delete elasticsearch index
-   *
-   * @param index elasticsearch index name
-   * @author fxbin
-   */
-  protected void deleteIndexRequest(String index) {
-    DeleteIndexRequest deleteIndexRequest = buildDeleteIndexRequest(index);
-    try {
-      client.indices().delete(deleteIndexRequest, COMMON_OPTIONS);
-    } catch (IOException e) {
-      throw new ElasticsearchException("删除索引 {" + index + "} 失败");
-    }
-  }
+    @Resource protected RestHighLevelClient client;
+    @Resource private ElasticsearchProperties elasticsearchProperties;
 
-  /**
-   * exec updateRequest
-   *
-   * @param index elasticsearch index name
-   * @param id Document id
-   * @param object request object
-   * @author fxbin
-   */
-  protected void updateRequest(String index, String id, Object object) {
-    try {
-      UpdateRequest updateRequest =
-          new UpdateRequest(index, id).doc(BeanUtil.beanToMap(object), XContentType.JSON);
-      client.update(updateRequest, COMMON_OPTIONS);
-    } catch (IOException e) {
-      throw new ElasticsearchException("更新索引 {" + index + "} 数据 {" + object + "} 失败");
+    /**
+     * build DeleteIndexRequest
+     *
+     * @param index elasticsearch index name
+     * @author fxbin
+     */
+    private static DeleteIndexRequest buildDeleteIndexRequest(String index) {
+        return new DeleteIndexRequest(index);
     }
-  }
 
-  /**
-   * exec deleteRequest
-   *
-   * @param index elasticsearch index name
-   * @param id Document id
-   * @author fxbin
-   */
-  protected void deleteRequest(String index, String id) {
-    try {
-      DeleteRequest deleteRequest = new DeleteRequest(index, id);
-      client.delete(deleteRequest, COMMON_OPTIONS);
-    } catch (IOException e) {
-      throw new ElasticsearchException("删除索引 {" + index + "} 数据id {" + id + "} 失败");
+    /**
+     * build IndexRequest
+     *
+     * @param index elasticsearch index name
+     * @param id request object id
+     * @param object request object
+     * @return {@link org.elasticsearch.action.index.IndexRequest}
+     * @author fxbin
+     */
+    protected static IndexRequest buildIndexRequest(String index, String id, Object object) {
+        return new IndexRequest(index).id(id).source(BeanUtil.beanToMap(object), XContentType.JSON);
     }
-  }
 
-  /**
-   * search all
-   *
-   * @param index elasticsearch index name
-   * @return {@link SearchResponse}
-   * @author fxbin
-   */
-  protected SearchResponse search(String index) {
-    SearchRequest searchRequest = new SearchRequest(index);
-    SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-    searchSourceBuilder.query(QueryBuilders.matchAllQuery());
-    searchRequest.source(searchSourceBuilder);
-    SearchResponse searchResponse = null;
-    try {
-      searchResponse = client.search(searchRequest, COMMON_OPTIONS);
-    } catch (IOException e) {
-      e.printStackTrace();
+    /**
+     * create elasticsearch index (asyc)
+     *
+     * @param index elasticsearch index
+     * @author fxbin
+     */
+    protected void createIndexRequest(String index) {
+        try {
+            CreateIndexRequest request = new CreateIndexRequest(index);
+            // Settings for this index
+            request.settings(
+                    Settings.builder()
+                            .put(
+                                    "index.number_of_shards",
+                                    elasticsearchProperties.getIndex().getNumberOfShards())
+                            .put(
+                                    "index.number_of_replicas",
+                                    elasticsearchProperties.getIndex().getNumberOfReplicas()));
+
+            CreateIndexResponse createIndexResponse =
+                    client.indices().create(request, COMMON_OPTIONS);
+
+            log.info(
+                    " whether all of the nodes have acknowledged the request : {}",
+                    createIndexResponse.isAcknowledged());
+            log.info(
+                    " Indicates whether the requisite number of shard copies were started for each shard in the index before timing out :{}",
+                    createIndexResponse.isShardsAcknowledged());
+        } catch (IOException e) {
+            throw new ElasticsearchException("创建索引 {" + index + "} 失败");
+        }
     }
-    return searchResponse;
-  }
+
+    /**
+     * delete elasticsearch index
+     *
+     * @param index elasticsearch index name
+     * @author fxbin
+     */
+    protected void deleteIndexRequest(String index) {
+        DeleteIndexRequest deleteIndexRequest = buildDeleteIndexRequest(index);
+        try {
+            client.indices().delete(deleteIndexRequest, COMMON_OPTIONS);
+        } catch (IOException e) {
+            throw new ElasticsearchException("删除索引 {" + index + "} 失败");
+        }
+    }
+
+    /**
+     * exec updateRequest
+     *
+     * @param index elasticsearch index name
+     * @param id Document id
+     * @param object request object
+     * @author fxbin
+     */
+    protected void updateRequest(String index, String id, Object object) {
+        try {
+            UpdateRequest updateRequest =
+                    new UpdateRequest(index, id).doc(BeanUtil.beanToMap(object), XContentType.JSON);
+            client.update(updateRequest, COMMON_OPTIONS);
+        } catch (IOException e) {
+            throw new ElasticsearchException("更新索引 {" + index + "} 数据 {" + object + "} 失败");
+        }
+    }
+
+    /**
+     * exec deleteRequest
+     *
+     * @param index elasticsearch index name
+     * @param id Document id
+     * @author fxbin
+     */
+    protected void deleteRequest(String index, String id) {
+        try {
+            DeleteRequest deleteRequest = new DeleteRequest(index, id);
+            client.delete(deleteRequest, COMMON_OPTIONS);
+        } catch (IOException e) {
+            throw new ElasticsearchException("删除索引 {" + index + "} 数据id {" + id + "} 失败");
+        }
+    }
+
+    /**
+     * search all
+     *
+     * @param index elasticsearch index name
+     * @return {@link SearchResponse}
+     * @author fxbin
+     */
+    protected SearchResponse search(String index) {
+        SearchRequest searchRequest = new SearchRequest(index);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = null;
+        try {
+            searchResponse = client.search(searchRequest, COMMON_OPTIONS);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return searchResponse;
+    }
 }

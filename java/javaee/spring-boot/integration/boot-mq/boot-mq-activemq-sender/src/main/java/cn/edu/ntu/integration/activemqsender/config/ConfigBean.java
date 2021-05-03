@@ -19,19 +19,19 @@ import javax.jms.Topic;
 @EnableJms
 public class ConfigBean {
 
-  @Value("${queue-name}")
-  private String queueName;
+    @Value("${queue-name}")
+    private String queueName;
 
-  @Value("${topic-name}")
-  private String topicName;
+    @Value("${topic-name}")
+    private String topicName;
 
-  @Bean
-  public Queue queue() {
-    return new ActiveMQQueue(queueName);
-  }
+    @Bean
+    public Queue queue() {
+        return new ActiveMQQueue(queueName);
+    }
 
-  @Bean
-  public Topic topic() {
-    return new ActiveMQTopic(topicName);
-  }
+    @Bean
+    public Topic topic() {
+        return new ActiveMQTopic(topicName);
+    }
 }

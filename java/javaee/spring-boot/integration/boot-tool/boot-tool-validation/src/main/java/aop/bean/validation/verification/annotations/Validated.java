@@ -8,5 +8,5 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Validated {
 
-  ValidationPolicy policy() default ValidationPolicy.ADD;
+    ValidationPolicy policy() default ValidationPolicy.ADD;
 }

@@ -41,28 +41,30 @@ import javax.annotation.Resource;
 // @Component
 public class DurableJobInit {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DurableJobInit.class);
-  @Resource Scheduler scheduler;
+    private static final Logger LOG = LoggerFactory.getLogger(DurableJobInit.class);
+    @Resource Scheduler scheduler;
 
-  @PostConstruct
-  public void initJob() throws SchedulerException {
-    final int poolSize = scheduler.getMetaData().getThreadPoolSize();
-    LOG.info("quartz thread count in cluster job config: {}", poolSize);
+    @PostConstruct
+    public void initJob() throws SchedulerException {
+        final int poolSize = scheduler.getMetaData().getThreadPoolSize();
+        LOG.info("quartz thread count in cluster job config: {}", poolSize);
 
-    startJob("durable-job-1", "durable-trigger-1");
-  }
+        startJob("durable-job-1", "durable-trigger-1");
+    }
 
-  private void startJob(String jobName, String triggerName) throws SchedulerException {
-    JobDetail jobDetail =
-        JobBuilder.newJob(SimpleJob.class).withIdentity(jobName).storeDurably(true).build();
-    Trigger trigger =
-        TriggerBuilder.newTrigger()
-            .withIdentity(triggerName)
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
-            .startNow()
-            .build();
-    /** scheduler.scheduleJob(jobDetail, trigger); */
-    scheduler.scheduleJob(jobDetail, Sets.newHashSet(trigger), true);
-  }
+    private void startJob(String jobName, String triggerName) throws SchedulerException {
+        JobDetail jobDetail =
+                JobBuilder.newJob(SimpleJob.class).withIdentity(jobName).storeDurably(true).build();
+        Trigger trigger =
+                TriggerBuilder.newTrigger()
+                        .withIdentity(triggerName)
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(5)
+                                        .repeatForever())
+                        .startNow()
+                        .build();
+        /** scheduler.scheduleJob(jobDetail, trigger); */
+        scheduler.scheduleJob(jobDetail, Sets.newHashSet(trigger), true);
+    }
 }

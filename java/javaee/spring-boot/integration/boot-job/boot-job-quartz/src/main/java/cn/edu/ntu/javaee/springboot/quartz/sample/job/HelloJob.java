@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloJob implements BaseJob {
 
-  @Override
-  public void execute(JobExecutionContext context) {
-    log.warn("Hello Job 执行时间: {}", DateUtil.now());
-  }
+    @Override
+    public void execute(JobExecutionContext context) {
+        log.warn("Hello Job 执行时间: {}", DateUtil.now());
+    }
 }

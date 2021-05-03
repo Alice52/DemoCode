@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class BusinessExceptionHandler {
-  @ExceptionHandler(BusinessException.class)
-  public ErrorResponse exception(BusinessException e) {
+    @ExceptionHandler(BusinessException.class)
+    public ErrorResponse exception(BusinessException e) {
 
-    log.info("BusinessException: {}", e);
-    return ErrorResponse.error(ErrorMessageEnum.UNKNOWN_EXCEPTION);
-  }
+        log.info("BusinessException: {}", e);
+        return ErrorResponse.error(ErrorMessageEnum.UNKNOWN_EXCEPTION);
+    }
 }

@@ -6,17 +6,17 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MybatisConfiguration {
-  private static final Logger LOG = LoggerFactory.getLogger(MybatisConfiguration.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MybatisConfiguration.class);
 
-  //  public ConfigurationCustomizer configurationCustomizer() {
-  //    return new ConfigurationCustomizer() {
-  //
-  //      @Override
-  //      public void customize(org.apache.ibatis.session.Configuration configuration) {
-  //
-  //        configuration.setMapUnderscoreToCamelCase(true);
-  //      }
-  //
-  //    };
-  //  }
+    //  public ConfigurationCustomizer configurationCustomizer() {
+    //    return new ConfigurationCustomizer() {
+    //
+    //      @Override
+    //      public void customize(org.apache.ibatis.session.Configuration configuration) {
+    //
+    //        configuration.setMapUnderscoreToCamelCase(true);
+    //      }
+    //
+    //    };
+    //  }
 }

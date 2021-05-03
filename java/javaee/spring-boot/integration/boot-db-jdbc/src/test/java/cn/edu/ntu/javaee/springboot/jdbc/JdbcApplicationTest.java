@@ -19,21 +19,21 @@ import java.sql.SQLException;
 @WebAppConfiguration
 public class JdbcApplicationTest {
 
-  private static final Logger LOG = LoggerFactory.getLogger(JdbcApplicationTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcApplicationTest.class);
 
-  @Autowired DataSource dataSource;
-  @Autowired JdbcTemplate jdbcTemplate;
+    @Autowired DataSource dataSource;
+    @Autowired JdbcTemplate jdbcTemplate;
 
-  @Test
-  public void testDataSource() throws SQLException {
+    @Test
+    public void testDataSource() throws SQLException {
 
-    Connection connection = dataSource.getConnection();
-    LOG.info("DataSource: {}, and Connection: {}", dataSource, connection);
-  }
+        Connection connection = dataSource.getConnection();
+        LOG.info("DataSource: {}, and Connection: {}", dataSource, connection);
+    }
 
-  @Test
-  public void testJdbcTemplate() {
+    @Test
+    public void testJdbcTemplate() {
 
-    LOG.info("JdbcTemplate: {}", jdbcTemplate);
-  }
+        LOG.info("JdbcTemplate: {}", jdbcTemplate);
+    }
 }

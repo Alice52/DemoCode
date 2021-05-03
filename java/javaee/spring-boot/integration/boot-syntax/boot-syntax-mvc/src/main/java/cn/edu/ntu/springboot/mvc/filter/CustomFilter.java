@@ -10,18 +10,18 @@ import java.io.IOException;
 /** @author zack */
 @Component
 public class CustomFilter implements Filter {
-  private static final Logger LOG = LoggerFactory.getLogger(CustomFilter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomFilter.class);
 
-  @Override
-  public void init(FilterConfig filterConfig) throws ServletException {}
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {}
 
-  @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-      throws IOException, ServletException {
-    LOG.info("CustomFilter Process.");
-    chain.doFilter(request, response);
-  }
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        LOG.info("CustomFilter Process.");
+        chain.doFilter(request, response);
+    }
 
-  @Override
-  public void destroy() {}
+    @Override
+    public void destroy() {}
 }

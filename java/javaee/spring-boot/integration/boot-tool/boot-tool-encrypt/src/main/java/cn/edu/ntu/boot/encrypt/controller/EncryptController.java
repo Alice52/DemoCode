@@ -19,33 +19,33 @@ import javax.annotation.Resource;
 @Api
 @RestController
 @ApiResponses({
-  @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
+    @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
 })
 public class EncryptController {
 
-  @Resource private ApplicationContext appCtx;
+    @Resource private ApplicationContext appCtx;
 
-  @Resource private StringEncryptor encryptBean;
+    @Resource private StringEncryptor encryptBean;
 
-  @GetMapping("/encrypt")
-  public String doEncrypt(@RequestParam("encryptWord") String encryptWord) {
+    @GetMapping("/encrypt")
+    public String doEncrypt(@RequestParam("encryptWord") String encryptWord) {
 
-    return encrypt(encryptWord);
-  }
+        return encrypt(encryptWord);
+    }
 
-  @GetMapping("/decrypt")
-  public String doDecrypt(@RequestParam("decryWord") String decryWord) {
+    @GetMapping("/decrypt")
+    public String doDecrypt(@RequestParam("decryWord") String decryWord) {
 
-    return decrypt(decryWord);
-  }
+        return decrypt(decryWord);
+    }
 
-  private String encrypt(String originPassword) {
-    String encryptStr = encryptBean.encrypt(originPassword);
-    return encryptStr;
-  }
+    private String encrypt(String originPassword) {
+        String encryptStr = encryptBean.encrypt(originPassword);
+        return encryptStr;
+    }
 
-  private String decrypt(String encryptedPassword) {
-    String decryptStr = encryptBean.decrypt(encryptedPassword);
-    return decryptStr;
-  }
+    private String decrypt(String encryptedPassword) {
+        String decryptStr = encryptBean.decrypt(encryptedPassword);
+        return decryptStr;
+    }
 }

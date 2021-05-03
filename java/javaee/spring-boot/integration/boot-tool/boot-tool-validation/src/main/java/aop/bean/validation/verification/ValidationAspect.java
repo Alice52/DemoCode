@@ -11,19 +11,19 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class ValidationAspect {
 
-  @Pointcut("execution (public * aop.bean.validation.verification.*.*(..))")
-  public void allPublicMethods() {}
+    @Pointcut("execution (public * aop.bean.validation.verification.*.*(..))")
+    public void allPublicMethods() {}
 
-  @Before("allPublicMethods()")
-  public void validateBefore(JoinPoint joinPoint) throws Exception {
-    Signature signature = joinPoint.getSignature();
-    MethodSignature mSignature = (MethodSignature) signature;
-    Object[] args = joinPoint.getArgs();
+    @Before("allPublicMethods()")
+    public void validateBefore(JoinPoint joinPoint) throws Exception {
+        Signature signature = joinPoint.getSignature();
+        MethodSignature mSignature = (MethodSignature) signature;
+        Object[] args = joinPoint.getArgs();
 
-    try {
-      ArgumentsValidator.validate(mSignature.getMethod(), args);
-    } catch (CustomException exception) {
-      throw exception;
+        try {
+            ArgumentsValidator.validate(mSignature.getMethod(), args);
+        } catch (CustomException exception) {
+            throw exception;
+        }
     }
-  }
 }

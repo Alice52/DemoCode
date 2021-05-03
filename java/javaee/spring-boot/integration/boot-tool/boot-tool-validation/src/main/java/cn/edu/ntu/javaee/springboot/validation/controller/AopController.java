@@ -17,17 +17,17 @@ import javax.annotation.Resource;
 @RequestMapping("/aop")
 public class AopController {
 
-  @Resource private AopService aopService;
+    @Resource private AopService aopService;
 
-  @PostMapping
-  public void add(@RequestBody Department department) {
+    @PostMapping
+    public void add(@RequestBody Department department) {
 
-    aopService.addDepartment(department);
-  }
+        aopService.addDepartment(department);
+    }
 
-  @GetMapping
-  public void query() {
+    @GetMapping
+    public void query() {
 
-    aopService.validate(null);
-  }
+        aopService.validate(null);
+    }
 }

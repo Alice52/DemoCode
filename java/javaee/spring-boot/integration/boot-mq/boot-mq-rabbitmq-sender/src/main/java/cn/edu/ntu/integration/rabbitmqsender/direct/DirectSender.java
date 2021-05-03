@@ -22,65 +22,65 @@ import java.util.Map;
  */
 @Component
 public class DirectSender {
-  private static final Logger LOG = LoggerFactory.getLogger(DirectSender.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DirectSender.class);
 
-  // @Autowired private Queue directQueue;
-  private static final String DIRECT_MESSAGE = "hello direct";
-  @Autowired RabbitTemplate rabbitTemplate;
-  @Autowired AmqpAdmin amqpAdmin;
+    // @Autowired private Queue directQueue;
+    private static final String DIRECT_MESSAGE = "hello direct";
+    @Autowired RabbitTemplate rabbitTemplate;
+    @Autowired AmqpAdmin amqpAdmin;
 
-  @Value("${exchange.direct}")
-  private String DIRECT_EXCHANGE;
+    @Value("${exchange.direct}")
+    private String DIRECT_EXCHANGE;
 
-  @Value("${queue.direct}")
-  private String DIRECT_QUEUE;
+    @Value("${queue.direct}")
+    private String DIRECT_QUEUE;
 
-  @Value("${direct.routing.key}")
-  private String DIRECT_ROUTING_KEY;
+    @Value("${direct.routing.key}")
+    private String DIRECT_ROUTING_KEY;
 
-  public void directSender() {
+    public void directSender() {
 
-    rabbitTemplate.convertAndSend(DIRECT_EXCHANGE, DIRECT_ROUTING_KEY, DIRECT_MESSAGE);
-    LOG.info(
-        "{} Send message to {} success, message detail: {}",
-        ExchangeTypes.DIRECT,
-        DIRECT_QUEUE,
-        DIRECT_MESSAGE);
+        rabbitTemplate.convertAndSend(DIRECT_EXCHANGE, DIRECT_ROUTING_KEY, DIRECT_MESSAGE);
+        LOG.info(
+                "{} Send message to {} success, message detail: {}",
+                ExchangeTypes.DIRECT,
+                DIRECT_QUEUE,
+                DIRECT_MESSAGE);
 
-    Map<String, Number> map = new HashMap<>();
-    map.put("hello", 1);
-    // this message will be convert to byte[]
-    rabbitTemplate.convertAndSend(DIRECT_EXCHANGE, DIRECT_ROUTING_KEY, map);
+        Map<String, Number> map = new HashMap<>();
+        map.put("hello", 1);
+        // this message will be convert to byte[]
+        rabbitTemplate.convertAndSend(DIRECT_EXCHANGE, DIRECT_ROUTING_KEY, map);
 
-    LOG.info(
-        "{} Send message to {} success, message detail: {}",
-        ExchangeTypes.DIRECT,
-        DIRECT_QUEUE,
-        map);
-  }
+        LOG.info(
+                "{} Send message to {} success, message detail: {}",
+                ExchangeTypes.DIRECT,
+                DIRECT_QUEUE,
+                map);
+    }
 
-  @Scheduled(fixedDelay = 3000)
-  public void directSenderScheduled() {
-    directSender();
-  }
+    @Scheduled(fixedDelay = 3000)
+    public void directSenderScheduled() {
+        directSender();
+    }
 
-  @PostConstruct
-  public void init() {
-    amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
-  }
+    @PostConstruct
+    public void init() {
+        amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
+    }
 
-  // the follow config is not sub/pub
-  //  @PostConstruct
-  //  public void init() {
-  //    amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
-  //    amqpAdmin.declareQueue(new Queue(DIRECT_QUEUE, true));
-  //
-  //    amqpAdmin.declareBinding(
-  //        new Binding(
-  //            DIRECT_QUEUE,
-  //            Binding.DestinationType.QUEUE,
-  //            DIRECT_EXCHANGE,
-  //            DIRECT_ROUTING_KEY,
-  //            null));
-  //  }
+    // the follow config is not sub/pub
+    //  @PostConstruct
+    //  public void init() {
+    //    amqpAdmin.declareExchange(new DirectExchange(DIRECT_EXCHANGE));
+    //    amqpAdmin.declareQueue(new Queue(DIRECT_QUEUE, true));
+    //
+    //    amqpAdmin.declareBinding(
+    //        new Binding(
+    //            DIRECT_QUEUE,
+    //            Binding.DestinationType.QUEUE,
+    //            DIRECT_EXCHANGE,
+    //            DIRECT_ROUTING_KEY,
+    //            null));
+    //  }
 }

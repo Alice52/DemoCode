@@ -13,10 +13,10 @@ import java.io.IOException;
  * @project springboot <br>
  */
 public class DateTimeJsonSerializer extends JsonSerializer<DateTime> {
-  @Override
-  public void serialize(
-      DateTime dateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
-      throws IOException {
-    jsonGenerator.writeString(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
-  }
+    @Override
+    public void serialize(
+            DateTime dateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+            throws IOException {
+        jsonGenerator.writeString(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
+    }
 }

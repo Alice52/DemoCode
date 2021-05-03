@@ -18,29 +18,29 @@ import java.util.List;
  */
 @RestController
 public class MoreImplAutowireTestController {
-  private static final Logger LOG = LoggerFactory.getLogger(MoreImplAutowireTestController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MoreImplAutowireTestController.class);
 
-  /* ok */
-  @Resource List<IUserService> userServices;
+    /* ok */
+    @Resource List<IUserService> userServices;
 
-  /* error due to  expected single matching bean but found 2*/
-  //  @Resource IUserService userService;
+    /* error due to  expected single matching bean but found 2*/
+    //  @Resource IUserService userService;
 
-  @Qualifier("oneUserServiceImpl")
-  @Resource
-  IUserService uService;
+    @Qualifier("oneUserServiceImpl")
+    @Resource
+    IUserService uService;
 
-  @Resource IUserService oneUserServiceImpl;
+    @Resource IUserService oneUserServiceImpl;
 
-  @Resource OneUserServiceImpl userService;
+    @Resource OneUserServiceImpl userService;
 
-  @GetMapping("/test-more-impl")
-  public void moreImplTest() {
-    oneUserServiceImpl.helloWorld();
-    uService.helloWorld();
-    userService.helloWorld();
-    LOG.info("aaa");
+    @GetMapping("/test-more-impl")
+    public void moreImplTest() {
+        oneUserServiceImpl.helloWorld();
+        uService.helloWorld();
+        userService.helloWorld();
+        LOG.info("aaa");
 
-    userServices.forEach(x -> x.helloWorld());
-  }
+        userServices.forEach(x -> x.helloWorld());
+    }
 }

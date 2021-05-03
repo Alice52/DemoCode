@@ -9,30 +9,30 @@ import java.util.Map;
  */
 public interface IDistributeLockService {
 
-  /**
-   * Get all brands, mask api.
-   *
-   * @return
-   */
-  Map getAllBrands();
+    /**
+     * Get all brands, mask api.
+     *
+     * @return
+     */
+    Map getAllBrands();
 
-  /**
-   * Read Lock.
-   *
-   * @return
-   */
-  String readValue();
+    /**
+     * Read Lock.
+     *
+     * @return
+     */
+    String readValue();
 
-  /**
-   * Write Lock.
-   *
-   * @return
-   */
-  String writeValue();
+    /**
+     * Write Lock.
+     *
+     * @return
+     */
+    String writeValue();
 
-  void lockSchoolDoor();
+    void lockSchoolDoor();
 
-  void lockDoor();
+    void lockDoor();
 
-  void go();
+    void go();
 }

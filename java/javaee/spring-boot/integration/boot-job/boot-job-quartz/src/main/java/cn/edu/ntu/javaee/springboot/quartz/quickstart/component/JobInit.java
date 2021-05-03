@@ -19,18 +19,20 @@ import javax.annotation.Resource;
 // @Component
 public class JobInit {
 
-  @Resource Scheduler scheduler;
+    @Resource Scheduler scheduler;
 
-  @PostConstruct
-  public void initJob() throws SchedulerException {
-    JobDetail jobDetail = JobBuilder.newJob(SimpleJob.class).withIdentity("simple-job").build();
-    Trigger trigger =
-        TriggerBuilder.newTrigger()
-            .withIdentity("simple-trigger")
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
-            .build();
+    @PostConstruct
+    public void initJob() throws SchedulerException {
+        JobDetail jobDetail = JobBuilder.newJob(SimpleJob.class).withIdentity("simple-job").build();
+        Trigger trigger =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("simple-trigger")
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(5)
+                                        .repeatForever())
+                        .build();
 
-    scheduler.scheduleJob(jobDetail, trigger);
-  }
+        scheduler.scheduleJob(jobDetail, trigger);
+    }
 }

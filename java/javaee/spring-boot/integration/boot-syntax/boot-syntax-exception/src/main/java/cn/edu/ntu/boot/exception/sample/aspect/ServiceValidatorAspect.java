@@ -31,35 +31,35 @@ import java.util.Set;
 @Deprecated
 public class ServiceValidatorAspect {
 
-  @Resource private Validator validator;
+    @Resource private Validator validator;
 
-  /** 只能工作于实现类 */
-  @Pointcut("@annotation(org.springframework.validation.annotation.Validated))")
-  public void validateMethod() {}
+    /** 只能工作于实现类 */
+    @Pointcut("@annotation(org.springframework.validation.annotation.Validated))")
+    public void validateMethod() {}
 
-  @Before("validateMethod()")
-  public void before(JoinPoint joinPoint) throws ConstraintViolationException {
+    @Before("validateMethod()")
+    public void before(JoinPoint joinPoint) throws ConstraintViolationException {
 
-    Object[] args = joinPoint.getArgs();
-    MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Object[] args = joinPoint.getArgs();
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
-    ExecutableValidator execVal = this.validator.forExecutables();
-    Set<ConstraintViolation<Object>> result;
-    Method methodToValidate = signature.getMethod();
+        ExecutableValidator execVal = this.validator.forExecutables();
+        Set<ConstraintViolation<Object>> result;
+        Method methodToValidate = signature.getMethod();
 
-    try {
-      // TODO: make it can work by group
-      result = execVal.validateParameters(joinPoint.getThis(), methodToValidate, args);
-    } catch (IllegalArgumentException ex) {
-      methodToValidate =
-          BridgeMethodResolver.findBridgedMethod(
-              ClassUtils.getMostSpecificMethod(
-                  signature.getMethod(), joinPoint.getThis().getClass()));
-      result = execVal.validateParameters(joinPoint.getThis(), methodToValidate, args);
+        try {
+            // TODO: make it can work by group
+            result = execVal.validateParameters(joinPoint.getThis(), methodToValidate, args);
+        } catch (IllegalArgumentException ex) {
+            methodToValidate =
+                    BridgeMethodResolver.findBridgedMethod(
+                            ClassUtils.getMostSpecificMethod(
+                                    signature.getMethod(), joinPoint.getThis().getClass()));
+            result = execVal.validateParameters(joinPoint.getThis(), methodToValidate, args);
+        }
+
+        if (!result.isEmpty()) {
+            throw new ConstraintViolationException(result);
+        }
     }
-
-    if (!result.isEmpty()) {
-      throw new ConstraintViolationException(result);
-    }
-  }
 }

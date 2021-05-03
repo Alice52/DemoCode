@@ -20,9 +20,9 @@ import javax.validation.Valid;
 @Service
 public class DepartmentService {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DepartmentService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DepartmentService.class);
 
-  public void addDepartment(@Valid Department department) {
-    LOG.info("add department success");
-  }
+    public void addDepartment(@Valid Department department) {
+        LOG.info("add department success");
+    }
 }

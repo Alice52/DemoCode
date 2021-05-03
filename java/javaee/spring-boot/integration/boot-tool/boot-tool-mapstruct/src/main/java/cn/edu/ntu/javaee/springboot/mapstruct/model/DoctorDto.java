@@ -17,9 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class DoctorDto {
-  private int id;
-  private String name;
-  private String specialization;
-  private String degree;
-  private List<PatientDto> patientDtoList;
+    private int id;
+    private String name;
+    private String specialization;
+    private String degree;
+    private List<PatientDto> patientDtoList;
 }

@@ -23,15 +23,15 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 public class UserVO {
 
-  @Max(100)
-  @Min(0)
-  private Integer age;
+    @Max(100)
+    @Min(0)
+    private Integer age;
 
-  @JsonIgnore @DateTimeFormat private LocalDateTime registerDate;
+    @JsonIgnore @DateTimeFormat private LocalDateTime registerDate;
 
-  @NotBlank private String name;
-  @NotBlank @JsonIgnore private String password;
+    @NotBlank private String name;
+    @NotBlank @JsonIgnore private String password;
 
-  /** @Email cannot validate null, if email is null, which can go though validation rule. */
-  @NotNull @Email private String email;
+    /** @Email cannot validate null, if email is null, which can go though validation rule. */
+    @NotNull @Email private String email;
 }

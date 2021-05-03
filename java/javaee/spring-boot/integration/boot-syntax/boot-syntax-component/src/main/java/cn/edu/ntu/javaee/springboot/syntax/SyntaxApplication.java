@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource(locations = {"classpath:beans.xml"})
 public class SyntaxApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(SyntaxApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(SyntaxApplication.class, args);
+    }
 }

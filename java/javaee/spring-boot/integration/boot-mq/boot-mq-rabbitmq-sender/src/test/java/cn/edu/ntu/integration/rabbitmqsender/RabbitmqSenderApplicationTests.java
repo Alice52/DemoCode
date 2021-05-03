@@ -14,16 +14,16 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class RabbitmqSenderApplicationTests {
 
-  @Autowired DirectSender directSender;
-  @Autowired TopicSender topicSender;
+    @Autowired DirectSender directSender;
+    @Autowired TopicSender topicSender;
 
-  @Test
-  public void testDirectSender() {
-    directSender.directSender();
-  }
+    @Test
+    public void testDirectSender() {
+        directSender.directSender();
+    }
 
-  @Test
-  public void testTopic() {
-    topicSender.topicSender();
-  }
+    @Test
+    public void testTopic() {
+        topicSender.topicSender();
+    }
 }

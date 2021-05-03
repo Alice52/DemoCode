@@ -15,20 +15,22 @@ import java.util.Map;
 @Component
 public class CustomErrorAttributes extends DefaultErrorAttributes {
 
-  @Override
-  public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
-    Map<String, Object> map = super.getErrorAttributes(webRequest, includeStackTrace);
-    map.put("name", "zack");
+    @Override
+    public Map<String, Object> getErrorAttributes(
+            WebRequest webRequest, boolean includeStackTrace) {
+        Map<String, Object> map = super.getErrorAttributes(webRequest, includeStackTrace);
+        map.put("name", "zack");
 
-    Map<String, Object> ext = (Map<String, Object>) webRequest.getAttribute(HttpConstants.EXT, 0);
-    map.put(HttpConstants.EXT, ext);
+        Map<String, Object> ext =
+                (Map<String, Object>) webRequest.getAttribute(HttpConstants.EXT, 0);
+        map.put(HttpConstants.EXT, ext);
 
-    Integer status = (Integer) webRequest.getAttribute(HttpConstants.SERVER_CODE, 0);
-    // http code
-    webRequest.setAttribute(HttpConstants.JAVAX_SERVLET_ERROR_STATUS_CODE, status, 0);
+        Integer status = (Integer) webRequest.getAttribute(HttpConstants.SERVER_CODE, 0);
+        // http code
+        webRequest.setAttribute(HttpConstants.JAVAX_SERVLET_ERROR_STATUS_CODE, status, 0);
 
-    // response status
-    map.put(HttpConstants.STATUS, status);
-    return map;
-  }
+        // response status
+        map.put(HttpConstants.STATUS, status);
+        return map;
+    }
 }

@@ -22,16 +22,16 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 @ComponentScan(basePackages = {"boot.job.scheduler.scheduler"})
 public class TaskConfig implements SchedulingConfigurer {
 
-  @Override
-  @Deprecated
-  public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-    taskRegistrar.setScheduler(taskExecutor());
-  }
+    @Override
+    @Deprecated
+    public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+        taskRegistrar.setScheduler(taskExecutor());
+    }
 
-  /** 这里等同于配置文件配置 */
-  @Bean
-  @Deprecated
-  public Executor taskExecutor() {
-    return new ScheduledThreadPoolExecutor(30, Executors.defaultThreadFactory());
-  }
+    /** 这里等同于配置文件配置 */
+    @Bean
+    @Deprecated
+    public Executor taskExecutor() {
+        return new ScheduledThreadPoolExecutor(30, Executors.defaultThreadFactory());
+    }
 }

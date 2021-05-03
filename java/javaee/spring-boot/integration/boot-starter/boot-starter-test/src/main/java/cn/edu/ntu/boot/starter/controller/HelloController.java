@@ -14,10 +14,10 @@ import javax.annotation.Resource;
 @RestController
 public class HelloController {
 
-  @Resource HelloService helloService;
+    @Resource HelloService helloService;
 
-  @GetMapping("/hello")
-  public String hello() {
-    return helloService.sayHellAtguigu("man");
-  }
+    @GetMapping("/hello")
+    public String hello() {
+        return helloService.sayHellAtguigu("man");
+    }
 }

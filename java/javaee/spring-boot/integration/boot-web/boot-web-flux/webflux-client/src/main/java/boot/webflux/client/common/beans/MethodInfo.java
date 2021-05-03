@@ -20,14 +20,14 @@ import java.util.Map;
 @EqualsAndHashCode
 public class MethodInfo {
 
-  private String uri;
-  private HttpMethod method;
+    private String uri;
+    private HttpMethod method;
 
-  private Map<String, Object> params;
+    private Map<String, Object> params;
 
-  private Mono<?> body;
-  private Class<?> bodyType;
+    private Mono<?> body;
+    private Class<?> bodyType;
 
-  private Boolean isFlux;
-  private Class<?> returnType;
+    private Boolean isFlux;
+    private Class<?> returnType;
 }

@@ -15,24 +15,24 @@ import java.util.regex.Pattern;
  */
 public class MobileDescriptor implements ConstraintValidator<Mobile, String> {
 
-  private static final Pattern MOBILE_PATTERN = Pattern.compile("^[1]\\d{10}$");
-  private boolean required = false;
+    private static final Pattern MOBILE_PATTERN = Pattern.compile("^[1]\\d{10}$");
+    private boolean required = false;
 
-  @Override
-  public void initialize(Mobile constraintAnnotation) {
-    required = constraintAnnotation.required();
-  }
-
-  @Override
-  public boolean isValid(String value, ConstraintValidatorContext context) {
-    if (!required && StrUtil.isBlank(value)) {
-      return true;
+    @Override
+    public void initialize(Mobile constraintAnnotation) {
+        required = constraintAnnotation.required();
     }
 
-    if (StrUtil.isBlank(value)) {
-      return false;
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (!required && StrUtil.isBlank(value)) {
+            return true;
+        }
+
+        if (StrUtil.isBlank(value)) {
+            return false;
+        }
+        Matcher m = MOBILE_PATTERN.matcher(value);
+        return m.matches();
     }
-    Matcher m = MOBILE_PATTERN.matcher(value);
-    return m.matches();
-  }
 }

@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CheckObject {
-  String friendlyGroup() default "";
+    String friendlyGroup() default "";
 
-  ValidationPolicy policy() default ValidationPolicy.ADD;
+    ValidationPolicy policy() default ValidationPolicy.ADD;
 }

@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
  * @function custom exception
  */
 public class UserNotExistException extends RuntimeException {
-  private static final Logger LOG = LoggerFactory.getLogger(UserNotExistException.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserNotExistException.class);
 
-  public UserNotExistException() {
-    super("use not exist!");
-    LOG.info("use not exist!");
-  }
+    public UserNotExistException() {
+        super("use not exist!");
+        LOG.info("use not exist!");
+    }
 }

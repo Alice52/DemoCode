@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class ActivemqSenderApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(ActivemqSenderApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(ActivemqSenderApplication.class, args);
+    }
 }

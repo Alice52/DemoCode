@@ -13,26 +13,26 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ActivityStatusEnum {
-  DEFAULT(1, ""),
-  NOT_STARTED(2, "未开始"),
-  STARTED(3, "已开始"),
-  ENDED(4, "已结束");
+    DEFAULT(1, ""),
+    NOT_STARTED(2, "未开始"),
+    STARTED(3, "已开始"),
+    ENDED(4, "已结束");
 
-  @EnumValue @JsonValue private final int code;
-  private String name;
+    @EnumValue @JsonValue private final int code;
+    private String name;
 
-  /**
-   * Notice this method may return null.
-   *
-   * @param code
-   * @return
-   */
-  public static ActivityStatusEnum getEnumByStatusCode(int code) {
-    for (ActivityStatusEnum item : ActivityStatusEnum.values()) {
-      if (item.code == code) {
-        return item;
-      }
+    /**
+     * Notice this method may return null.
+     *
+     * @param code
+     * @return
+     */
+    public static ActivityStatusEnum getEnumByStatusCode(int code) {
+        for (ActivityStatusEnum item : ActivityStatusEnum.values()) {
+            if (item.code == code) {
+                return item;
+            }
+        }
+        return null;
     }
-    return null;
-  }
 }

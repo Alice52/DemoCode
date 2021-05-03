@@ -16,5 +16,5 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode
 public class ServerInfo {
 
-  private String uri;
+    private String uri;
 }

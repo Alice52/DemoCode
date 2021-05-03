@@ -7,11 +7,11 @@ package boot.webflux.client.component.interfaces;
  */
 public interface IProxyCreator<E> {
 
-  /**
-   * 创建代理对象
-   *
-   * @param clazz
-   * @return
-   */
-  E createProxy(Class<?> clazz);
+    /**
+     * 创建代理对象
+     *
+     * @param clazz
+     * @return
+     */
+    E createProxy(Class<?> clazz);
 }

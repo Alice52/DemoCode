@@ -16,47 +16,47 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements IEmployeeService, SmartInitializingSingleton {
 
-  private static final Logger LOG = LoggerFactory.getLogger(EmployeeServiceImpl.class);
-  private IEmployeeService employeeServiceProxy = null;
+    private static final Logger LOG = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+    private IEmployeeService employeeServiceProxy = null;
 
-  @Override
-  public void addEmploy(Employee employee) {
-    LOG.info("add employee success");
-  }
+    @Override
+    public void addEmploy(Employee employee) {
+        LOG.info("add employee success");
+    }
 
-  @Override
-  public void addEmploy2(Employee employee) {
-    LOG.info("add employee success");
-  }
+    @Override
+    public void addEmploy2(Employee employee) {
+        LOG.info("add employee success");
+    }
 
-  @Override
-  public Employee getByEmail(String email) {
-    LOG.info("query employee success");
+    @Override
+    public Employee getByEmail(String email) {
+        LOG.info("query employee success");
 
-    return null;
-  }
+        return null;
+    }
 
-  @Override
-  public Employee getById(Integer id) {
-    return null;
-  }
+    @Override
+    public Employee getById(Integer id) {
+        return null;
+    }
 
-  @Override
-  public void validate(String email) {
-    LOG.info("This is second service.");
-  }
+    @Override
+    public void validate(String email) {
+        LOG.info("This is second service.");
+    }
 
-  @Override
-  public void validateInService(String email) {
-    LOG.info("This is first service.");
+    @Override
+    public void validateInService(String email) {
+        LOG.info("This is first service.");
 
-    // this is not worked because this is not proxy object.
-    this.validate(null);
-    employeeServiceProxy.validate(null);
-  }
+        // this is not worked because this is not proxy object.
+        this.validate(null);
+        employeeServiceProxy.validate(null);
+    }
 
-  @Override
-  public void afterSingletonsInstantiated() {
-    employeeServiceProxy = SpringUtil.getBean(IEmployeeService.class);
-  }
+    @Override
+    public void afterSingletonsInstantiated() {
+        employeeServiceProxy = SpringUtil.getBean(IEmployeeService.class);
+    }
 }

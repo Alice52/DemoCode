@@ -17,24 +17,24 @@ import java.io.UnsupportedEncodingException;
  */
 @RestController
 public class TestController {
-  @Autowired private Producer producer;
+    @Autowired private Producer producer;
 
-  @RequestMapping("/push")
-  public String pushMsg() {
-    try {
+    @RequestMapping("/push")
+    public String pushMsg() {
+        try {
 
-      return producer.send("PushTopic", "push", "hello rocketmq");
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    } catch (RemotingException e) {
-      e.printStackTrace();
-    } catch (MQClientException e) {
-      e.printStackTrace();
-    } catch (MQBrokerException e) {
-      e.printStackTrace();
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
+            return producer.send("PushTopic", "push", "hello rocketmq");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (RemotingException e) {
+            e.printStackTrace();
+        } catch (MQClientException e) {
+            e.printStackTrace();
+        } catch (MQBrokerException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
     }
-    return "ERROR";
-  }
 }

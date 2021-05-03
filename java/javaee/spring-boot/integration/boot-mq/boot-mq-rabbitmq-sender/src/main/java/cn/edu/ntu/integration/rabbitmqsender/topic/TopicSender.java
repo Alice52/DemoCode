@@ -21,39 +21,39 @@ import javax.annotation.PostConstruct;
  */
 @Component
 public class TopicSender {
-  private static final Logger LOG = LoggerFactory.getLogger(DirectSender.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DirectSender.class);
 
-  private static final String[] topicsRoutingKeys =
-      new String[] {"topicsKey.aa", "topicsKey.bb", "topicsKey.cc.ee"};
-  private static final String TOPIC_MESSAGE = "hello topic";
-  @Autowired public RabbitTemplate rabbitTemplate;
-  @Autowired AmqpAdmin amqpAdmin;
+    private static final String[] topicsRoutingKeys =
+            new String[] {"topicsKey.aa", "topicsKey.bb", "topicsKey.cc.ee"};
+    private static final String TOPIC_MESSAGE = "hello topic";
+    @Autowired public RabbitTemplate rabbitTemplate;
+    @Autowired AmqpAdmin amqpAdmin;
 
-  @Value("${exchange.topic}")
-  private String TOPIC_EXCHANGE;
+    @Value("${exchange.topic}")
+    private String TOPIC_EXCHANGE;
 
-  @Value("${queue.topic}")
-  private String TOPIC_QUEUE;
+    @Value("${queue.topic}")
+    private String TOPIC_QUEUE;
 
-  public void topicSender() {
-    for (String routingKey : topicsRoutingKeys) {
-      rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, routingKey, TOPIC_MESSAGE);
-      LOG.info(
-          "[{}] Send message to {} success with routing key {}, message detail: {}.",
-          ExchangeTypes.TOPIC,
-          TOPIC_QUEUE,
-          routingKey,
-          TOPIC_MESSAGE);
+    public void topicSender() {
+        for (String routingKey : topicsRoutingKeys) {
+            rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, routingKey, TOPIC_MESSAGE);
+            LOG.info(
+                    "[{}] Send message to {} success with routing key {}, message detail: {}.",
+                    ExchangeTypes.TOPIC,
+                    TOPIC_QUEUE,
+                    routingKey,
+                    TOPIC_MESSAGE);
+        }
     }
-  }
 
-  @Scheduled(fixedDelay = 3000)
-  public void topicSenderScheduled() {
-    topicSender();
-  }
+    @Scheduled(fixedDelay = 3000)
+    public void topicSenderScheduled() {
+        topicSender();
+    }
 
-  @PostConstruct
-  public void init() {
-    amqpAdmin.declareExchange(new TopicExchange(TOPIC_EXCHANGE));
-  }
+    @PostConstruct
+    public void init() {
+        amqpAdmin.declareExchange(new TopicExchange(TOPIC_EXCHANGE));
+    }
 }

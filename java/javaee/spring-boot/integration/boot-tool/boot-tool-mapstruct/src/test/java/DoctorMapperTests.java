@@ -12,9 +12,9 @@ import org.junit.Test;
 @Slf4j
 public class DoctorMapperTests {
 
-  @Test
-  public void testConvert() {
-    DoctorDto doctorDto = DoctorMapper.INSTANCE.toDto(new Doctor());
-    log.info("{}", doctorDto);
-  }
+    @Test
+    public void testConvert() {
+        DoctorDto doctorDto = DoctorMapper.INSTANCE.toDto(new Doctor());
+        log.info("{}", doctorDto);
+    }
 }

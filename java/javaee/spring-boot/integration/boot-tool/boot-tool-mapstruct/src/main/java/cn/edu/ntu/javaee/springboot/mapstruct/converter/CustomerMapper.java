@@ -14,16 +14,16 @@ import org.mapstruct.factory.Mappers;
  * @project springboot <br>
  */
 @Mapper(
-    componentModel = "spring",
-    uses = {BooleanStrFormat.class})
+        componentModel = "spring",
+        uses = {BooleanStrFormat.class})
 public interface CustomerMapper {
 
-  CustomerMapper INSTANCES = Mappers.getMapper(CustomerMapper.class);
+    CustomerMapper INSTANCES = Mappers.getMapper(CustomerMapper.class);
 
-  @Mappings({
-    @Mapping(source = "name", target = "customerName"),
-    @Mapping(source = "isDisable", target = "disable")
-    // customerDto.setDisable( booleanStrFormat.toStr( customer.getIsDisable() ) );
-  })
-  CustomerDto toCustomerDto(Customer customer);
+    @Mappings({
+        @Mapping(source = "name", target = "customerName"),
+        @Mapping(source = "isDisable", target = "disable")
+        // customerDto.setDisable( booleanStrFormat.toStr( customer.getIsDisable() ) );
+    })
+    CustomerDto toCustomerDto(Customer customer);
 }

@@ -18,32 +18,32 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtil {
 
-  @Resource RedisTemplate redisTemplate;
+    @Resource RedisTemplate redisTemplate;
 
-  public <E> E get(String realKey) {
+    public <E> E get(String realKey) {
 
-    Object object = redisTemplate.opsForValue().get(realKey);
+        Object object = redisTemplate.opsForValue().get(realKey);
 
-    if (ObjectUtil.isNotNull(object)) {
-      E e = null;
-      try {
-        e = (E) object;
-      } catch (Exception ex) {
-        log.warn("cast object: {} to type: {} error: {}", object, e.getClass(), ex);
-      }
+        if (ObjectUtil.isNotNull(object)) {
+            E e = null;
+            try {
+                e = (E) object;
+            } catch (Exception ex) {
+                log.warn("cast object: {} to type: {} error: {}", object, e.getClass(), ex);
+            }
 
-      return e;
+            return e;
+        }
+
+        return null;
     }
 
-    return null;
-  }
+    public void set(Object obj, String realKey, final long timeout, final TimeUnit unit) {
+        Optional.ofNullable(obj)
+                .ifPresent(x -> redisTemplate.opsForValue().set(realKey, obj, timeout, unit));
+    }
 
-  public void set(Object obj, String realKey, final long timeout, final TimeUnit unit) {
-    Optional.ofNullable(obj)
-        .ifPresent(x -> redisTemplate.opsForValue().set(realKey, obj, timeout, unit));
-  }
-
-  public void set(Object obj, String realKey) {
-    set(obj, realKey, 2, TimeUnit.MINUTES);
-  }
+    public void set(Object obj, String realKey) {
+        set(obj, realKey, 2, TimeUnit.MINUTES);
+    }
 }

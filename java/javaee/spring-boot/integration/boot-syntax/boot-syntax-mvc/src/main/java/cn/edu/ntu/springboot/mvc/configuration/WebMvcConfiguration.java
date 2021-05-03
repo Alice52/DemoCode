@@ -17,28 +17,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
-  @Override
-  public void addResourceHandlers(ResourceHandlerRegistry registry) {}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {}
 
-  @Override
-  public void addViewControllers(ViewControllerRegistry registry) {}
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {}
 
-  @Bean
-  public LoginInterceptor loginInterceptor() {
-    return new LoginInterceptor();
-  }
+    @Bean
+    public LoginInterceptor loginInterceptor() {
+        return new LoginInterceptor();
+    }
 
-  @Override
-  public void addInterceptors(InterceptorRegistry registry) {
-    registry
-        .addInterceptor(loginInterceptor())
-        .addPathPatterns("/**")
-        .excludePathPatterns("/", "/index.html", "/user/login", "/static/**", "/webjars/**");
-  }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/", "/index.html", "/user/login", "/static/**", "/webjars/**");
+    }
 
-  @Bean
-  public LocaleResolver localeResolver() {
+    @Bean
+    public LocaleResolver localeResolver() {
 
-    return new CustomLocaleResolver();
-  }
+        return new CustomLocaleResolver();
+    }
 }

@@ -33,47 +33,49 @@ import javax.annotation.Resource;
 @Component
 public class ClusterJobInitWithPartition {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ClusterJobInitWithPartition.class);
-  @Resource Scheduler scheduler;
+    private static final Logger LOG = LoggerFactory.getLogger(ClusterJobInitWithPartition.class);
+    @Resource Scheduler scheduler;
 
-  @Value("${spring.quartz.properties.org.quartz.scheduler.instanceName}")
-  private String instanceName;
+    @Value("${spring.quartz.properties.org.quartz.scheduler.instanceName}")
+    private String instanceName;
 
-  @PostConstruct
-  public void initJob() throws SchedulerException {
-    final int poolSize = scheduler.getMetaData().getThreadPoolSize();
-    LOG.info("quartz thread count in cluster job config: {}", poolSize);
+    @PostConstruct
+    public void initJob() throws SchedulerException {
+        final int poolSize = scheduler.getMetaData().getThreadPoolSize();
+        LOG.info("quartz thread count in cluster job config: {}", poolSize);
 
-    startJob("cluster-job-1", "cluster-trigger-1", "order-service-job");
-    startJob("cluster-job-2", "cluster-trigger-2", "cart-service-job");
-    startJob("cluster-job-3", "cluster-trigger-3", "order-service-job");
-  }
-
-  /**
-   * Recommend to use api to trigger relation between job-detail and triggers.
-   *
-   * @param jobName
-   * @param triggerName
-   * @throws SchedulerException
-   */
-  @Deprecated
-  private void startJob(String jobName, String triggerName, String partition)
-      throws SchedulerException {
-
-    if (!partition.equals(instanceName)) {
-      return;
+        startJob("cluster-job-1", "cluster-trigger-1", "order-service-job");
+        startJob("cluster-job-2", "cluster-trigger-2", "cart-service-job");
+        startJob("cluster-job-3", "cluster-trigger-3", "order-service-job");
     }
 
-    JobDetail jobDetail =
-        JobBuilder.newJob(SimpleJob.class).withIdentity(jobName).storeDurably(true).build();
+    /**
+     * Recommend to use api to trigger relation between job-detail and triggers.
+     *
+     * @param jobName
+     * @param triggerName
+     * @throws SchedulerException
+     */
+    @Deprecated
+    private void startJob(String jobName, String triggerName, String partition)
+            throws SchedulerException {
 
-    Trigger trigger =
-        TriggerBuilder.newTrigger()
-            .withIdentity(triggerName)
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
-            .startNow()
-            .build();
-    scheduler.scheduleJob(jobDetail, Sets.newHashSet(trigger), true);
-  }
+        if (!partition.equals(instanceName)) {
+            return;
+        }
+
+        JobDetail jobDetail =
+                JobBuilder.newJob(SimpleJob.class).withIdentity(jobName).storeDurably(true).build();
+
+        Trigger trigger =
+                TriggerBuilder.newTrigger()
+                        .withIdentity(triggerName)
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(5)
+                                        .repeatForever())
+                        .startNow()
+                        .build();
+        scheduler.scheduleJob(jobDetail, Sets.newHashSet(trigger), true);
+    }
 }

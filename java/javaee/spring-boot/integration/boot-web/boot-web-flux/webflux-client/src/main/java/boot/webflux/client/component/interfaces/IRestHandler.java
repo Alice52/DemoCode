@@ -10,7 +10,7 @@ import boot.webflux.client.common.beans.ServerInfo;
  */
 public interface IRestHandler {
 
-  Object invokeRest(MethodInfo methodInfo);
+    Object invokeRest(MethodInfo methodInfo);
 
-  void initServerInfo(ServerInfo info);
+    void initServerInfo(ServerInfo info);
 }

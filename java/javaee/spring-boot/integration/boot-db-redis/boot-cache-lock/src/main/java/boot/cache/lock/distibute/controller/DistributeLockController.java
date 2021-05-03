@@ -17,41 +17,41 @@ import java.util.Map;
 @RequestMapping("/distribute-lock")
 public class DistributeLockController {
 
-  @Resource IDistributeLockService lockService;
+    @Resource IDistributeLockService lockService;
 
-  @GetMapping("/park")
-  public void park() {
+    @GetMapping("/park")
+    public void park() {
 
-    lockService.go();
-  }
+        lockService.go();
+    }
 
-  @GetMapping("/brands")
-  public Map getBrands() {
+    @GetMapping("/brands")
+    public Map getBrands() {
 
-    return lockService.getAllBrands();
-  }
+        return lockService.getAllBrands();
+    }
 
-  @GetMapping("/write")
-  public String write() {
+    @GetMapping("/write")
+    public String write() {
 
-    return lockService.writeValue();
-  }
+        return lockService.writeValue();
+    }
 
-  @GetMapping("/read")
-  public String read() {
+    @GetMapping("/read")
+    public String read() {
 
-    return lockService.readValue();
-  }
+        return lockService.readValue();
+    }
 
-  @GetMapping("/class-door-close")
-  public void classDoorClose() {
+    @GetMapping("/class-door-close")
+    public void classDoorClose() {
 
-    lockService.lockDoor();
-  }
+        lockService.lockDoor();
+    }
 
-  @GetMapping("/school-door-close")
-  public void schoolDoorClose() {
+    @GetMapping("/school-door-close")
+    public void schoolDoorClose() {
 
-    lockService.lockSchoolDoor();
-  }
+        lockService.lockSchoolDoor();
+    }
 }

@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // @EnableAspectJAutoProxy(proxyTargetClass = true)
 @SpringBootApplication
 public class ValidationApplication {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    SpringApplication.run(ValidationApplication.class, args);
-  }
+        SpringApplication.run(ValidationApplication.class, args);
+    }
 }

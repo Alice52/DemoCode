@@ -20,45 +20,45 @@ import java.util.stream.IntStream;
 @RestController
 public class SampleController {
 
-  @GetMapping("/greeting")
-  public Mono<String> greeting() {
-    return Mono.just("hello webflux");
-  }
+    @GetMapping("/greeting")
+    public Mono<String> greeting() {
+        return Mono.just("hello webflux");
+    }
 
-  @GetMapping("/mono")
-  public Mono<String> timeConsumer() {
+    @GetMapping("/mono")
+    public Mono<String> timeConsumer() {
 
-    log.info("start");
+        log.info("start");
 
-    Mono<String> mono = Mono.fromCallable(() -> timeConsumerService());
+        Mono<String> mono = Mono.fromCallable(() -> timeConsumerService());
 
-    log.info("end");
-    return mono;
-  }
+        log.info("end");
+        return mono;
+    }
 
-  @GetMapping(value = "/flux", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-  public Flux<String> flux() {
-    Flux<String> flux =
-        Flux.fromStream(
-            IntStream.range(1, 10)
-                .mapToObj(
-                    i -> {
-                      try {
-                        TimeUnit.SECONDS.sleep(1);
-                      } catch (InterruptedException e) {
-                      }
-                      return "flux " + i;
-                    }));
+    @GetMapping(value = "/flux", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> flux() {
+        Flux<String> flux =
+                Flux.fromStream(
+                        IntStream.range(1, 10)
+                                .mapToObj(
+                                        i -> {
+                                            try {
+                                                TimeUnit.SECONDS.sleep(1);
+                                            } catch (InterruptedException e) {
+                                            }
+                                            return "flux " + i;
+                                        }));
 
-    return flux;
-  }
+        return flux;
+    }
 
-  @SneakyThrows
-  private String timeConsumerService() {
+    @SneakyThrows
+    private String timeConsumerService() {
 
-    log.info("start processor");
-    TimeUnit.SECONDS.sleep(5);
-    log.info("end processor");
-    return "hello webflux";
-  }
+        log.info("start processor");
+        TimeUnit.SECONDS.sleep(5);
+        log.info("end processor");
+        return "hello webflux";
+    }
 }

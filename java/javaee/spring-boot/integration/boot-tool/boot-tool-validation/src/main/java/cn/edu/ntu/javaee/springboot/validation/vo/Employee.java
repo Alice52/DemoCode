@@ -32,23 +32,23 @@ import javax.validation.constraints.Null;
 @EqualsAndHashCode
 public class Employee {
 
-  @NotNull(groups = {Update.class})
-  @Null(groups = {Add.class})
-  private Integer id;
+    @NotNull(groups = {Update.class})
+    @Null(groups = {Add.class})
+    private Integer id;
 
-  @ApiModelProperty(required = true)
-  @NotEmpty
-  private String name;
+    @ApiModelProperty(required = true)
+    @NotEmpty
+    private String name;
 
-  /**
-   * This just validate {@link Department} when it is not null, <br>
-   * If {@link Department} is null, it can go though validation such as @Email.
-   */
-  @Valid private Department department;
+    /**
+     * This just validate {@link Department} when it is not null, <br>
+     * If {@link Department} is null, it can go though validation such as @Email.
+     */
+    @Valid private Department department;
 
-  @Mobile private String phone;
+    @Mobile private String phone;
 
-  /** This is EL expression, but value is hard code 18. */
-  @Min(value = 18, message = "{value} is invalid")
-  private Integer age;
+    /** This is EL expression, but value is hard code 18. */
+    @Min(value = 18, message = "{value} is invalid")
+    private Integer age;
 }

@@ -23,7 +23,7 @@ import java.util.List;
  * @project validation <br>
  */
 @ApiResponses({
-  @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
+    @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
 })
 @Api
 @Validated
@@ -31,48 +31,50 @@ import java.util.List;
 @RequestMapping("/coder")
 public class CoderController {
 
-  /**
-   * This validation will cannot show error message combined with other provider.
-   *
-   * <p>Please use {@link Coder.Common } and {@link Default} together. <br>
-   * and if no Coder.Common.class, it will not show title level validate message. <br>
-   *
-   * @param coder
-   * @return
-   */
-  @PutMapping
-  public Object update(
-      @RequestBody @Validated({Update.class, Coder.Common.class, Default.class}) Coder coder) {
+    /**
+     * This validation will cannot show error message combined with other provider.
+     *
+     * <p>Please use {@link Coder.Common } and {@link Default} together. <br>
+     * and if no Coder.Common.class, it will not show title level validate message. <br>
+     *
+     * @param coder
+     * @return
+     */
+    @PutMapping
+    public Object update(
+            @RequestBody @Validated({Update.class, Coder.Common.class, Default.class})
+                    Coder coder) {
 
-    return "ok";
-  }
+        return "ok";
+    }
 
-  /**
-   * This will not validate the parameter of title about level.
-   *
-   * <p>Unless add Default.class due to <code>
-   * CoderGroupSequenceProvider implements DefaultGroupSequenceProvider<Coder></code> <br>
-   * it add group to default groups.
-   *
-   * @param coderList
-   * @return
-   */
-  @PostMapping("/list")
-  public Object addList(
-      @RequestBody @ValidList(values = {Add.class, Coder.Common.class}) List<Coder> coderList) {
+    /**
+     * This will not validate the parameter of title about level.
+     *
+     * <p>Unless add Default.class due to <code>
+     * CoderGroupSequenceProvider implements DefaultGroupSequenceProvider<Coder></code> <br>
+     * it add group to default groups.
+     *
+     * @param coderList
+     * @return
+     */
+    @PostMapping("/list")
+    public Object addList(
+            @RequestBody @ValidList(values = {Add.class, Coder.Common.class})
+                    List<Coder> coderList) {
 
-    return "ok";
-  }
+        return "ok";
+    }
 
-  /**
-   * This just validate Default.class group.
-   *
-   * @param coder
-   * @return
-   */
-  @PostMapping
-  public Object add(@RequestBody @Valid Coder coder) {
+    /**
+     * This just validate Default.class group.
+     *
+     * @param coder
+     * @return
+     */
+    @PostMapping
+    public Object add(@RequestBody @Valid Coder coder) {
 
-    return "ok";
-  }
+        return "ok";
+    }
 }

@@ -18,32 +18,32 @@ import javax.jms.TextMessage;
  */
 @Component
 public class Receiver1 {
-  private static final Logger LOG = LoggerFactory.getLogger(Receiver1.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Receiver1.class);
 
-  @Value("${queue-name}")
-  private String queueName;
+    @Value("${queue-name}")
+    private String queueName;
 
-  @Value("${queue-reply}")
-  private String queueReply;
+    @Value("${queue-reply}")
+    private String queueReply;
 
-  @JmsListener(destination = "${queue-name}")
-  // @SendTo("${queue-reply}")
-  @SendTo("${topic-name}") // false + destination = queue; will declare queue
-  public String receiveFromQueue(TextMessage textMessage) {
-    if (textMessage != null) {
-      String message;
-      try {
-        message = textMessage.getText();
-        LOG.info("Receive message: {} from queue: {} success.", message, queueName);
-        return "reply message: " + textMessage.getText();
-      } catch (JMSException e) {
-        LOG.warn(
-            "Failed to receive message: {} from queue: {}, cause by {}.",
-            textMessage,
-            queueName,
-            e);
-      }
+    @JmsListener(destination = "${queue-name}")
+    // @SendTo("${queue-reply}")
+    @SendTo("${topic-name}") // false + destination = queue; will declare queue
+    public String receiveFromQueue(TextMessage textMessage) {
+        if (textMessage != null) {
+            String message;
+            try {
+                message = textMessage.getText();
+                LOG.info("Receive message: {} from queue: {} success.", message, queueName);
+                return "reply message: " + textMessage.getText();
+            } catch (JMSException e) {
+                LOG.warn(
+                        "Failed to receive message: {} from queue: {}, cause by {}.",
+                        textMessage,
+                        queueName,
+                        e);
+            }
+        }
+        return null;
     }
-    return null;
-  }
 }

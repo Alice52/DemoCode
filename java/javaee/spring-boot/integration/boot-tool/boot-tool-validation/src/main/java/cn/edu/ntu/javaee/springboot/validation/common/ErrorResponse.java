@@ -8,32 +8,32 @@ import java.util.Map;
  * @project validation <br>
  */
 public class ErrorResponse {
-  private Integer errorCode;
-  private String errorMsg;
-  private Map<String, Object> parameters;
+    private Integer errorCode;
+    private String errorMsg;
+    private Map<String, Object> parameters;
 
-  private ErrorResponse(ErrorMessageEnum errorMessageEnum) {
-    this.errorMsg = errorMessageEnum.getErrorMsg();
-    this.errorCode = errorMessageEnum.getErrorCode();
-  }
+    private ErrorResponse(ErrorMessageEnum errorMessageEnum) {
+        this.errorMsg = errorMessageEnum.getErrorMsg();
+        this.errorCode = errorMessageEnum.getErrorCode();
+    }
 
-  public static ErrorResponse error(ErrorMessageEnum errorMessageEnum) {
-    return new ErrorResponse(errorMessageEnum);
-  }
+    public static ErrorResponse error(ErrorMessageEnum errorMessageEnum) {
+        return new ErrorResponse(errorMessageEnum);
+    }
 
-  public Integer getErrorCode() {
-    return errorCode;
-  }
+    public Integer getErrorCode() {
+        return errorCode;
+    }
 
-  public String getErrorMsg() {
-    return errorMsg;
-  }
+    public String getErrorMsg() {
+        return errorMsg;
+    }
 
-  public Map<String, Object> getParameters() {
-    return parameters;
-  }
+    public Map<String, Object> getParameters() {
+        return parameters;
+    }
 
-  public void setParameters(Map<String, Object> parameters) {
-    this.parameters = parameters;
-  }
+    public void setParameters(Map<String, Object> parameters) {
+        this.parameters = parameters;
+    }
 }

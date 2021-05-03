@@ -14,13 +14,13 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper(uses = PatientMapper.class)
 public interface DoctorMapper {
-  DoctorMapper INSTANCE = Mappers.getMapper(DoctorMapper.class);
+    DoctorMapper INSTANCE = Mappers.getMapper(DoctorMapper.class);
 
-  @Mapping(source = "doctor.specialty", target = "specialization")
-  @Mapping(source = "doctor.patientList", target = "patientDtoList")
-  DoctorDto toDto(Doctor doctor);
+    @Mapping(source = "doctor.specialty", target = "specialization")
+    @Mapping(source = "doctor.patientList", target = "patientDtoList")
+    DoctorDto toDto(Doctor doctor);
 
-  @Mapping(source = "doctor.specialty", target = "specialization")
-  @Mapping(source = "education.degreeName", target = "degree")
-  DoctorDto toDto(Doctor doctor, Education education);
+    @Mapping(source = "doctor.specialty", target = "specialization")
+    @Mapping(source = "education.degreeName", target = "degree")
+    DoctorDto toDto(Doctor doctor, Education education);
 }

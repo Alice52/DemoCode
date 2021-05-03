@@ -30,73 +30,80 @@ import java.util.List;
 @EnableConfigurationProperties(ElasticsearchProperties.class)
 public class ElasticSearchConfig {
 
-  private final ElasticsearchProperties elasticsearchProperties;
+    private final ElasticsearchProperties elasticsearchProperties;
 
-  private List<HttpHost> httpHosts = new ArrayList<>();
+    private List<HttpHost> httpHosts = new ArrayList<>();
 
-  /**
-   * get restHistLevelClient
-   *
-   * @param builder RestClientBuilder
-   * @param elasticsearchProperties elasticsearch default properties
-   * @return {@link org.elasticsearch.client.RestHighLevelClient}
-   * @author fxbin
-   */
-  private static RestHighLevelClient getRestHighLevelClient(
-      RestClientBuilder builder, ElasticsearchProperties elasticsearchProperties) {
+    /**
+     * get restHistLevelClient
+     *
+     * @param builder RestClientBuilder
+     * @param elasticsearchProperties elasticsearch default properties
+     * @return {@link org.elasticsearch.client.RestHighLevelClient}
+     * @author fxbin
+     */
+    private static RestHighLevelClient getRestHighLevelClient(
+            RestClientBuilder builder, ElasticsearchProperties elasticsearchProperties) {
 
-    // Callback used the default {@link RequestConfig} being set to the {@link CloseableHttpClient}
-    builder.setRequestConfigCallback(
-        requestConfigBuilder -> {
-          requestConfigBuilder.setConnectTimeout(elasticsearchProperties.getConnectTimeout());
-          requestConfigBuilder.setSocketTimeout(elasticsearchProperties.getSocketTimeout());
-          requestConfigBuilder.setConnectionRequestTimeout(
-              elasticsearchProperties.getConnectionRequestTimeout());
-          return requestConfigBuilder;
-        });
+        // Callback used the default {@link RequestConfig} being set to the {@link
+        // CloseableHttpClient}
+        builder.setRequestConfigCallback(
+                requestConfigBuilder -> {
+                    requestConfigBuilder.setConnectTimeout(
+                            elasticsearchProperties.getConnectTimeout());
+                    requestConfigBuilder.setSocketTimeout(
+                            elasticsearchProperties.getSocketTimeout());
+                    requestConfigBuilder.setConnectionRequestTimeout(
+                            elasticsearchProperties.getConnectionRequestTimeout());
+                    return requestConfigBuilder;
+                });
 
-    // Callback used to customize the {@link CloseableHttpClient} instance used by a {@link
-    // RestClient} instance.
-    builder.setHttpClientConfigCallback(
-        httpClientBuilder -> {
-          httpClientBuilder.setMaxConnTotal(elasticsearchProperties.getMaxConnectTotal());
-          httpClientBuilder.setMaxConnPerRoute(elasticsearchProperties.getMaxConnectPerRoute());
-          return httpClientBuilder;
-        });
+        // Callback used to customize the {@link CloseableHttpClient} instance used by a {@link
+        // RestClient} instance.
+        builder.setHttpClientConfigCallback(
+                httpClientBuilder -> {
+                    httpClientBuilder.setMaxConnTotal(elasticsearchProperties.getMaxConnectTotal());
+                    httpClientBuilder.setMaxConnPerRoute(
+                            elasticsearchProperties.getMaxConnectPerRoute());
+                    return httpClientBuilder;
+                });
 
-    // Callback used the basic credential auth
-    ElasticsearchProperties.Account account = elasticsearchProperties.getAccount();
-    if (!StringUtils.isEmpty(account.getUsername())
-        && !StringUtils.isEmpty(account.getUsername())) {
-      final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        // Callback used the basic credential auth
+        ElasticsearchProperties.Account account = elasticsearchProperties.getAccount();
+        if (!StringUtils.isEmpty(account.getUsername())
+                && !StringUtils.isEmpty(account.getUsername())) {
+            final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 
-      credentialsProvider.setCredentials(
-          AuthScope.ANY,
-          new UsernamePasswordCredentials(account.getUsername(), account.getPassword()));
+            credentialsProvider.setCredentials(
+                    AuthScope.ANY,
+                    new UsernamePasswordCredentials(account.getUsername(), account.getPassword()));
+        }
+        return new RestHighLevelClient(builder);
     }
-    return new RestHighLevelClient(builder);
-  }
 
-  @Bean
-  @ConditionalOnMissingBean
-  public RestHighLevelClient restHighLevelClient() {
+    @Bean
+    @ConditionalOnMissingBean
+    public RestHighLevelClient restHighLevelClient() {
 
-    List<String> clusterNodes = elasticsearchProperties.getClusterNodes();
-    clusterNodes.forEach(
-        node -> {
-          try {
-            String[] parts = StringUtils.split(node, ":");
-            Assert.notNull(parts, "Must defined");
-            Assert.state(parts.length == 2, "Must be defined as 'host:port'");
-            httpHosts.add(
-                new HttpHost(
-                    parts[0], Integer.parseInt(parts[1]), elasticsearchProperties.getSchema()));
-          } catch (Exception e) {
-            throw new IllegalStateException("Invalid ES nodes " + "property '" + node + "'", e);
-          }
-        });
-    RestClientBuilder builder = RestClient.builder(httpHosts.toArray(new HttpHost[0]));
+        List<String> clusterNodes = elasticsearchProperties.getClusterNodes();
+        clusterNodes.forEach(
+                node -> {
+                    try {
+                        String[] parts = StringUtils.split(node, ":");
+                        Assert.notNull(parts, "Must defined");
+                        Assert.state(parts.length == 2, "Must be defined as 'host:port'");
+                        httpHosts.add(
+                                new HttpHost(
+                                        parts[0],
+                                        Integer.parseInt(parts[1]),
+                                        elasticsearchProperties.getSchema()));
+                    } catch (Exception e) {
+                        throw new IllegalStateException(
+                                "Invalid ES nodes " + "property '" + node + "'", e);
+                    }
+                });
+        RestClientBuilder builder = RestClient.builder(httpHosts.toArray(new HttpHost[0]));
 
-    return getRestHighLevelClient(builder, elasticsearchProperties);
-  }
+        return getRestHighLevelClient(builder, elasticsearchProperties);
+    }
 }

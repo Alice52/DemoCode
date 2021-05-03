@@ -8,17 +8,17 @@ import javax.validation.constraints.NotNull;
  * @project integration <br>
  */
 public interface AaService {
-  /**
-   * say hello to name.
-   *
-   * @param name
-   */
-  void helloA(@NotNull(message = "名称不能为空") String name);
+    /**
+     * say hello to name.
+     *
+     * @param name
+     */
+    void helloA(@NotNull(message = "名称不能为空") String name);
 
-  /**
-   * B service will call this api to handle logic.
-   *
-   * @param name
-   */
-  void hello4B(@NotNull(message = "名称不能为空") String name);
+    /**
+     * B service will call this api to handle logic.
+     *
+     * @param name
+     */
+    void hello4B(@NotNull(message = "名称不能为空") String name);
 }

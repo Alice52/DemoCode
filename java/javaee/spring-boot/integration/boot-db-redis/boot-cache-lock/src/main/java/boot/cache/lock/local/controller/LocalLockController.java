@@ -17,11 +17,11 @@ import java.util.Map;
 @RequestMapping("/local-lock")
 public class LocalLockController {
 
-  @Resource ILocalLockService lockService;
+    @Resource ILocalLockService lockService;
 
-  @GetMapping("/brands")
-  public Map getBrands() {
+    @GetMapping("/brands")
+    public Map getBrands() {
 
-    return lockService.getAllBrands();
-  }
+        return lockService.getAllBrands();
+    }
 }

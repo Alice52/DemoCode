@@ -9,5 +9,5 @@ import org.slf4j.LoggerFactory;
  * @function inspect with xml
  */
 public class HelloService {
-  private static final Logger LOG = LoggerFactory.getLogger(HelloService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HelloService.class);
 }

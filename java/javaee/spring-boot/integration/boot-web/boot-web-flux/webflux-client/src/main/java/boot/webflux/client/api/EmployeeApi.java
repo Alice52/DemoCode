@@ -14,15 +14,15 @@ import reactor.core.publisher.Mono;
 @ApiServer("localhost:8080")
 public interface EmployeeApi {
 
-  @GetMapping("/employees")
-  Flux<Employee> list();
+    @GetMapping("/employees")
+    Flux<Employee> list();
 
-  @GetMapping("/employee/{id}")
-  Mono<Employee> get(@PathVariable("id") String id);
+    @GetMapping("/employee/{id}")
+    Mono<Employee> get(@PathVariable("id") String id);
 
-  @DeleteMapping("/employee/{id}")
-  Mono<Void> delete(@PathVariable("id") String id);
+    @DeleteMapping("/employee/{id}")
+    Mono<Void> delete(@PathVariable("id") String id);
 
-  @PostMapping("/employee")
-  Mono<Employee> create(@RequestBody Mono<Employee> employee);
+    @PostMapping("/employee")
+    Mono<Employee> create(@RequestBody Mono<Employee> employee);
 }

@@ -34,51 +34,66 @@ import javax.annotation.Resource;
 // @Component
 public class ClusterJobInit {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ClusterJobInit.class);
-  @Resource Scheduler scheduler;
+    private static final Logger LOG = LoggerFactory.getLogger(ClusterJobInit.class);
+    @Resource Scheduler scheduler;
 
-  /**
-   * Recommend to use api to trigger relation between job-detail and triggers.
-   *
-   * @throws SchedulerException
-   */
-  @PostConstruct
-  public void initJob() throws SchedulerException {
-    final int poolSize = scheduler.getMetaData().getThreadPoolSize();
-    LOG.info("quartz thread count in cluster job config: {}", poolSize);
+    /**
+     * Recommend to use api to trigger relation between job-detail and triggers.
+     *
+     * @throws SchedulerException
+     */
+    @PostConstruct
+    public void initJob() throws SchedulerException {
+        final int poolSize = scheduler.getMetaData().getThreadPoolSize();
+        LOG.info("quartz thread count in cluster job config: {}", poolSize);
 
-    JobDetail jobDetail1 =
-        JobBuilder.newJob(SimpleJob.class).withIdentity("cluster-job-1").storeDurably(true).build();
-    Trigger trigger1 =
-        TriggerBuilder.newTrigger()
-            .withIdentity("cluster-trigger-1")
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
-            .startNow()
-            .build();
+        JobDetail jobDetail1 =
+                JobBuilder.newJob(SimpleJob.class)
+                        .withIdentity("cluster-job-1")
+                        .storeDurably(true)
+                        .build();
+        Trigger trigger1 =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("cluster-trigger-1")
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(5)
+                                        .repeatForever())
+                        .startNow()
+                        .build();
 
-    JobDetail jobDetail2 =
-        JobBuilder.newJob(SimpleJob.class).withIdentity("cluster-job-2").storeDurably(true).build();
-    Trigger trigger2 =
-        TriggerBuilder.newTrigger()
-            .withIdentity("cluster-trigger-2")
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
-            .startNow()
-            .build();
+        JobDetail jobDetail2 =
+                JobBuilder.newJob(SimpleJob.class)
+                        .withIdentity("cluster-job-2")
+                        .storeDurably(true)
+                        .build();
+        Trigger trigger2 =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("cluster-trigger-2")
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(5)
+                                        .repeatForever())
+                        .startNow()
+                        .build();
 
-    JobDetail jobDetail3 =
-        JobBuilder.newJob(SimpleJob.class).withIdentity("cluster-job-3").storeDurably(true).build();
-    Trigger trigger3 =
-        TriggerBuilder.newTrigger()
-            .withIdentity("cluster-trigger-3")
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5).repeatForever())
-            .startNow()
-            .build();
+        JobDetail jobDetail3 =
+                JobBuilder.newJob(SimpleJob.class)
+                        .withIdentity("cluster-job-3")
+                        .storeDurably(true)
+                        .build();
+        Trigger trigger3 =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("cluster-trigger-3")
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(5)
+                                        .repeatForever())
+                        .startNow()
+                        .build();
 
-    scheduler.scheduleJob(jobDetail1, Sets.newHashSet(trigger1), true);
-    scheduler.scheduleJob(jobDetail2, Sets.newHashSet(trigger2), true);
-    scheduler.scheduleJob(jobDetail3, Sets.newHashSet(trigger3), true);
-  }
+        scheduler.scheduleJob(jobDetail1, Sets.newHashSet(trigger1), true);
+        scheduler.scheduleJob(jobDetail2, Sets.newHashSet(trigger2), true);
+        scheduler.scheduleJob(jobDetail3, Sets.newHashSet(trigger3), true);
+    }
 }

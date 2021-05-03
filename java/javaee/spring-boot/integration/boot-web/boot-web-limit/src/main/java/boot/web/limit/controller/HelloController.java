@@ -15,20 +15,20 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class HelloController {
 
-  @GetMapping("/api")
-  public String api() {
-    return "PONG";
-  }
+    @GetMapping("/api")
+    public String api() {
+        return "PONG";
+    }
 
-  @LimitRequest(count = 5, time = 10)
-  @GetMapping("/limit-api")
-  public String limit() {
-    return "PONG";
-  }
+    @LimitRequest(count = 5, time = 10)
+    @GetMapping("/limit-api")
+    public String limit() {
+        return "PONG";
+    }
 
-  @IdempotentRequest(time = 2, timeUnit = TimeUnit.SECONDS)
-  @GetMapping("/idempotent")
-  public String idempotent() {
-    return "PONG";
-  }
+    @IdempotentRequest(time = 2, timeUnit = TimeUnit.SECONDS)
+    @GetMapping("/idempotent")
+    public String idempotent() {
+        return "PONG";
+    }
 }

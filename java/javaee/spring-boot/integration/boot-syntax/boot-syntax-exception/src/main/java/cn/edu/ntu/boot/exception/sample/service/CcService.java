@@ -10,17 +10,17 @@ package cn.edu.ntu.boot.exception.sample.service;
  */
 public interface CcService {
 
-  /**
-   * 整个大的操作: 校验 + 具体的数据库影响
-   *
-   * @param name
-   */
-  void transactionWithValidate(String name);
+    /**
+     * 整个大的操作: 校验 + 具体的数据库影响
+     *
+     * @param name
+     */
+    void transactionWithValidate(String name);
 
-  /**
-   * 真的的事务踢
-   *
-   * @param name
-   */
-  void transactionReal(String name);
+    /**
+     * 真的的事务踢
+     *
+     * @param name
+     */
+    void transactionReal(String name);
 }

@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CustomServlet extends HttpServlet {
-  private static final Logger LOG = LoggerFactory.getLogger(CustomServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomServlet.class);
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    LOG.info("CustomServlet doGet");
-    doPost(req, resp);
-  }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        LOG.info("CustomServlet doGet");
+        doPost(req, resp);
+    }
 
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    LOG.info("CustomServlet doPost");
-    resp.getWriter().write("Hello CustomServlet");
-  }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        LOG.info("CustomServlet doPost");
+        resp.getWriter().write("Hello CustomServlet");
+    }
 }

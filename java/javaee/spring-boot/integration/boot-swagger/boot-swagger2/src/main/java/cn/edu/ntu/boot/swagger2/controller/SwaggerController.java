@@ -16,24 +16,24 @@ import javax.validation.Valid;
  */
 @RestController
 @Api(
-    value = "swagger-controller",
-    tags = {"swagger2"},
-    hidden = false)
+        value = "swagger-controller",
+        tags = {"swagger2"},
+        hidden = false)
 @ApiResponses({
-  @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
+    @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
 })
 public class SwaggerController {
 
-  @GetMapping(value = "/person/{id}")
-  @ApiOperation(value = "Get Person Api")
-  @ApiImplicitParam(name = "age", value = "age", required = true, dataType = "Long")
-  public Person get(@Valid Person person, @PathVariable(value = "id", required = true) Long id) {
-    return person;
-  }
+    @GetMapping(value = "/person/{id}")
+    @ApiOperation(value = "Get Person Api")
+    @ApiImplicitParam(name = "age", value = "age", required = true, dataType = "Long")
+    public Person get(@Valid Person person, @PathVariable(value = "id", required = true) Long id) {
+        return person;
+    }
 
-  @GetMapping(value = "/ignore")
-  @ApiIgnore
-  public Person ignore(Person person) {
-    return person;
-  }
+    @GetMapping(value = "/ignore")
+    @ApiIgnore
+    public Person ignore(Person person) {
+        return person;
+    }
 }

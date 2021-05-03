@@ -7,6 +7,6 @@ package cn.edu.ntu.boot.elasticsearch.constants;
  */
 public interface ElasticsearchConstant {
 
-  /** 索引名称 */
-  String INDEX_NAME = "person";
+    /** 索引名称 */
+    String INDEX_NAME = "person";
 }

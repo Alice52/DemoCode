@@ -21,18 +21,18 @@ import javax.annotation.Resource;
  * @project validation <br>
  */
 @ApiResponses({
-  @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
+    @ApiResponse(code = 400, message = "Internal Error", response = ErrorResponse.class)
 })
 @Api
 @RestController
 @RequestMapping("/department")
 public class DepartmentController {
 
-  @Resource private DepartmentService departmentService;
+    @Resource private DepartmentService departmentService;
 
-  @PostMapping
-  public void add(@RequestBody Department department) {
+    @PostMapping
+    public void add(@RequestBody Department department) {
 
-    departmentService.addDepartment(department);
-  }
+        departmentService.addDepartment(department);
+    }
 }

@@ -19,24 +19,24 @@ import java.util.concurrent.ExecutionException;
 @RestControllerAdvice
 public class LombokExceptionHandler {
 
-  @Resource private ConcurrentExceptionHandler concurrentExceptionHandler;
+    @Resource private ConcurrentExceptionHandler concurrentExceptionHandler;
 
-  @ExceptionHandler(UndeclaredThrowableException.class)
-  public ErrorResponse undeclaredThrowableException(UndeclaredThrowableException e) {
-    return tryConvert2ConcurrentException(e);
-  }
-
-  private ErrorResponse tryConvert2ConcurrentException(UndeclaredThrowableException e) {
-    if (e.getUndeclaredThrowable() instanceof ExecutionException) {
-      return concurrentExceptionHandler.executionException(
-          (ExecutionException) e.getUndeclaredThrowable());
+    @ExceptionHandler(UndeclaredThrowableException.class)
+    public ErrorResponse undeclaredThrowableException(UndeclaredThrowableException e) {
+        return tryConvert2ConcurrentException(e);
     }
 
-    if (e.getUndeclaredThrowable() instanceof CompletionException) {
-      return concurrentExceptionHandler.completionException(
-          (CompletionException) e.getUndeclaredThrowable());
-    }
+    private ErrorResponse tryConvert2ConcurrentException(UndeclaredThrowableException e) {
+        if (e.getUndeclaredThrowable() instanceof ExecutionException) {
+            return concurrentExceptionHandler.executionException(
+                    (ExecutionException) e.getUndeclaredThrowable());
+        }
 
-    return concurrentExceptionHandler.globalExceptionHandler.exception(e);
-  }
+        if (e.getUndeclaredThrowable() instanceof CompletionException) {
+            return concurrentExceptionHandler.completionException(
+                    (CompletionException) e.getUndeclaredThrowable());
+        }
+
+        return concurrentExceptionHandler.globalExceptionHandler.exception(e);
+    }
 }

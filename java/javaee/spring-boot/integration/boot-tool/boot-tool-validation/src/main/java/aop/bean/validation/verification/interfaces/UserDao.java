@@ -8,6 +8,6 @@ import aop.bean.validation.verification.annotations.Validated;
 
 public interface UserDao {
 
-  @Validated(policy = ValidationPolicy.ADD)
-  void createUser(@CheckObject User user) throws CustomException;
+    @Validated(policy = ValidationPolicy.ADD)
+    void createUser(@CheckObject User user) throws CustomException;
 }

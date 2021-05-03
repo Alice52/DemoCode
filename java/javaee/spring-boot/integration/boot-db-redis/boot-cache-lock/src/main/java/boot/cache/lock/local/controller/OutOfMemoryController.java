@@ -28,31 +28,31 @@ import java.util.stream.Stream;
 @RequestMapping("/cache")
 public class OutOfMemoryController {
 
-  @Resource RedisTemplate redisTemplate;
+    @Resource RedisTemplate redisTemplate;
 
-  @GetMapping("/brands")
-  public Object getListOfBrand() {
+    @GetMapping("/brands")
+    public Object getListOfBrand() {
 
-    Object usersFromRedis = redisTemplate.opsForValue().get("omm-key");
-    if (ObjectUtil.isNull(usersFromRedis)) {
-      usersFromRedis = generateMap();
-      redisTemplate
-          .opsForValue()
-          .set("omm-key", JSONUtil.toJsonStr(usersFromRedis), 2, TimeUnit.HOURS);
+        Object usersFromRedis = redisTemplate.opsForValue().get("omm-key");
+        if (ObjectUtil.isNull(usersFromRedis)) {
+            usersFromRedis = generateMap();
+            redisTemplate
+                    .opsForValue()
+                    .set("omm-key", JSONUtil.toJsonStr(usersFromRedis), 2, TimeUnit.HOURS);
+        }
+
+        return usersFromRedis;
     }
 
-    return usersFromRedis;
-  }
+    private Map generateMap() {
+        Stream<Integer> range = Stream.generate(() -> (int) (Math.random() * 100)).limit(1000);
+        List<User> users = new ArrayList<>();
+        range.forEach(x -> users.add(new User("zack" + x, x)));
 
-  private Map generateMap() {
-    Stream<Integer> range = Stream.generate(() -> (int) (Math.random() * 100)).limit(1000);
-    List<User> users = new ArrayList<>();
-    range.forEach(x -> users.add(new User("zack" + x, x)));
-
-    return new HashMap<String, Object>() {
-      {
-        put("oom-key", users);
-      }
-    };
-  }
+        return new HashMap<String, Object>() {
+            {
+                put("oom-key", users);
+            }
+        };
+    }
 }

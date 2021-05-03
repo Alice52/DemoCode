@@ -12,7 +12,7 @@ import org.mapstruct.factory.Mappers;
  */
 @Mapper
 public interface PatientMapper {
-  PatientMapper INSTANCE = Mappers.getMapper(PatientMapper.class);
+    PatientMapper INSTANCE = Mappers.getMapper(PatientMapper.class);
 
-  PatientDto toDto(Patient patient);
+    PatientDto toDto(Patient patient);
 }

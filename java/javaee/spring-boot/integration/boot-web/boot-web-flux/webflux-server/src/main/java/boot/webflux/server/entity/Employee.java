@@ -17,9 +17,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class Employee {
 
-  @Id private String id;
+    @Id private String id;
 
-  private String name;
+    private String name;
 
-  private Integer age;
+    private Integer age;
 }

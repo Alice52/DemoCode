@@ -13,24 +13,24 @@ import javax.servlet.http.HttpServletRequest;
  * @project integration <br>
  */
 public final class RequestHolder {
-  private static final String BEARER_ = "Bearer ";
+    private static final String BEARER_ = "Bearer ";
 
-  public static HttpServletRequest getCurrentRequest() {
-    // 获得request对象
-    RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-    ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-    return sra.getRequest();
-  }
-
-  public static String getCurrentToken() {
-    HttpServletRequest request = getCurrentRequest();
-
-    String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-
-    if (header == null || !header.startsWith(BEARER_)) {
-      throw new RuntimeException("请求头中Authorization信息为空");
+    public static HttpServletRequest getCurrentRequest() {
+        // 获得request对象
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+        return sra.getRequest();
     }
 
-    return header.replace(BEARER_, "");
-  }
+    public static String getCurrentToken() {
+        HttpServletRequest request = getCurrentRequest();
+
+        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+
+        if (header == null || !header.startsWith(BEARER_)) {
+            throw new RuntimeException("请求头中Authorization信息为空");
+        }
+
+        return header.replace(BEARER_, "");
+    }
 }

@@ -15,19 +15,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedissonConfiguration {
 
-  @Value(("${spring.redis.host}"))
-  private String ip;
+    @Value(("${spring.redis.host}"))
+    private String ip;
 
-  @Value(("${spring.redis.port}"))
-  private int port;
+    @Value(("${spring.redis.port}"))
+    private int port;
 
-  @Value(("${spring.redis.password}"))
-  private String password;
+    @Value(("${spring.redis.password}"))
+    private String password;
 
-  @Bean
-  public RedissonClient redissonClient() {
-    Config config = new Config();
-    config.useSingleServer().setAddress("redis://" + ip + ":" + port).setPassword(password);
-    return Redisson.create(config);
-  }
+    @Bean
+    public RedissonClient redissonClient() {
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://" + ip + ":" + port).setPassword(password);
+        return Redisson.create(config);
+    }
 }

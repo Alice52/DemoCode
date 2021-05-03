@@ -10,10 +10,10 @@ import java.util.List;
  * @project integration <br>
  */
 public interface IDeptDAO {
-  /**
-   * Get all departments.
-   *
-   * @return
-   */
-  List<Department> getALlDepartments();
+    /**
+     * Get all departments.
+     *
+     * @return
+     */
+    List<Department> getALlDepartments();
 }

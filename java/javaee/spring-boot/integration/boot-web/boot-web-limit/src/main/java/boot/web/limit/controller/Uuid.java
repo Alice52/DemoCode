@@ -11,10 +11,10 @@ import java.util.OptionalLong;
  * @project integration <br>
  */
 public class Uuid {
-  // 1383945030787534848
-  // 1383945091923709952
-  public static void main(String[] args) {
-    Snowflake snowflake = IdUtil.getSnowflake(1, 1);
-    OptionalLong.of(snowflake.nextId()).ifPresent(System.out::println);
-  }
+    // 1383945030787534848
+    // 1383945091923709952
+    public static void main(String[] args) {
+        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
+        OptionalLong.of(snowflake.nextId()).ifPresent(System.out::println);
+    }
 }

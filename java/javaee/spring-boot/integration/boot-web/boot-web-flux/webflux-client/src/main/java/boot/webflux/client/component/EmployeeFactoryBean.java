@@ -15,20 +15,20 @@ import javax.annotation.Resource;
 @Component
 public class EmployeeFactoryBean implements FactoryBean<EmployeeApi> {
 
-  @Resource IProxyCreator<EmployeeApi> proxyCreator;
+    @Resource IProxyCreator<EmployeeApi> proxyCreator;
 
-  @Override
-  public EmployeeApi getObject() throws Exception {
-    return proxyCreator.createProxy(getObjectType());
-  }
+    @Override
+    public EmployeeApi getObject() throws Exception {
+        return proxyCreator.createProxy(getObjectType());
+    }
 
-  @Override
-  public Class<?> getObjectType() {
-    return EmployeeApi.class;
-  }
+    @Override
+    public Class<?> getObjectType() {
+        return EmployeeApi.class;
+    }
 
-  @Override
-  public boolean isSingleton() {
-    return false;
-  }
+    @Override
+    public boolean isSingleton() {
+        return false;
+    }
 }

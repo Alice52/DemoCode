@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
-  private Long id;
-  private String name;
-  private Boolean isDisable;
+    private Long id;
+    private String name;
+    private Boolean isDisable;
 }

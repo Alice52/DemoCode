@@ -15,12 +15,12 @@ import javax.annotation.Resource;
  */
 @RestController
 public class CcController {
-  @Resource private CcService ccService;
+    @Resource private CcService ccService;
 
-  @GetMapping("/hello-c/transaction")
-  public JsonObject helloA(@RequestParam(value = "name") String name) {
-    ccService.transactionWithValidate(name);
+    @GetMapping("/hello-c/transaction")
+    public JsonObject helloA(@RequestParam(value = "name") String name) {
+        ccService.transactionWithValidate(name);
 
-    return new JsonObject();
-  }
+        return new JsonObject();
+    }
 }

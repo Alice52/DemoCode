@@ -17,45 +17,47 @@ import org.springframework.context.annotation.Bean;
 // @Configuration
 public class SchedulerConfig {
 
-  private static final String DEFAULT_CRON = "* * * * * ? *";
-  private String CORN_ADD_USER = DEFAULT_CRON;
+    private static final String DEFAULT_CRON = "* * * * * ? *";
+    private String CORN_ADD_USER = DEFAULT_CRON;
 
-  @Bean
-  public JobDetail sampleJobDetail() {
-    return JobBuilder.newJob(SimpleJob.class)
-        .withIdentity("sampleJob")
-        .usingJobData("name", "World")
-        .storeDurably()
-        .build();
-  }
+    @Bean
+    public JobDetail sampleJobDetail() {
+        return JobBuilder.newJob(SimpleJob.class)
+                .withIdentity("sampleJob")
+                .usingJobData("name", "World")
+                .storeDurably()
+                .build();
+    }
 
-  @Bean
-  public Trigger sampleJobTrigger() {
+    @Bean
+    public Trigger sampleJobTrigger() {
 
-    return TriggerBuilder.newTrigger()
-        .forJob(sampleJobDetail())
-        .withIdentity("sampleTrigger")
-        .withSchedule(
-            SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
-        .build();
-  }
+        return TriggerBuilder.newTrigger()
+                .forJob(sampleJobDetail())
+                .withIdentity("sampleTrigger")
+                .withSchedule(
+                        SimpleScheduleBuilder.simpleSchedule()
+                                .withIntervalInSeconds(2)
+                                .repeatForever())
+                .build();
+    }
 
-  @Bean
-  public JobDetail batchAddUsersJobDetail() {
+    @Bean
+    public JobDetail batchAddUsersJobDetail() {
 
-    return JobBuilder.newJob(SimpleJob.class)
-        .withIdentity("batchAddUsersJob")
-        .storeDurably()
-        .build();
-  }
+        return JobBuilder.newJob(SimpleJob.class)
+                .withIdentity("batchAddUsersJob")
+                .storeDurably()
+                .build();
+    }
 
-  @Bean
-  public Trigger batchAddUsersTrigger() {
+    @Bean
+    public Trigger batchAddUsersTrigger() {
 
-    return TriggerBuilder.newTrigger()
-        .forJob("batchAddUsersJob")
-        .withIdentity("batchAddUsersJobTrigger")
-        .withSchedule(CronScheduleBuilder.cronSchedule(CORN_ADD_USER))
-        .build();
-  }
+        return TriggerBuilder.newTrigger()
+                .forJob("batchAddUsersJob")
+                .withIdentity("batchAddUsersJobTrigger")
+                .withSchedule(CronScheduleBuilder.cronSchedule(CORN_ADD_USER))
+                .build();
+    }
 }

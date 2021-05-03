@@ -15,12 +15,12 @@ import javax.annotation.Resource;
  */
 @RestController
 public class BbController {
-  @Resource private AaService aaService;
+    @Resource private AaService aaService;
 
-  @GetMapping("/hello-b/{name}")
-  public JsonObject helloA(@PathVariable(value = "name", required = true) String name) {
-    aaService.helloA(name);
+    @GetMapping("/hello-b/{name}")
+    public JsonObject helloA(@PathVariable(value = "name", required = true) String name) {
+        aaService.helloA(name);
 
-    return new JsonObject();
-  }
+        return new JsonObject();
+    }
 }

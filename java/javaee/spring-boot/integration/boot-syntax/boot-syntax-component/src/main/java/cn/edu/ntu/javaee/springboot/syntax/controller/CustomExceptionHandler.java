@@ -18,30 +18,30 @@ import java.util.Map;
  */
 @ControllerAdvice
 public class CustomExceptionHandler {
-  private static final Logger LOG = LoggerFactory.getLogger(CustomExceptionHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
-  @ExceptionHandler(UserNotExistException.class)
-  public HttpServletRequest handleUserNotExistException(
-      UserNotExistException e, HttpServletRequest request) {
-    Map<String, Object> map = new HashMap<>();
+    @ExceptionHandler(UserNotExistException.class)
+    public HttpServletRequest handleUserNotExistException(
+            UserNotExistException e, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
 
-    map.put("code", "runtime error");
-    map.put("message", e);
+        map.put("code", "runtime error");
+        map.put("message", e);
 
-    request.setAttribute(HttpConstants.EXT, map);
-    request.setAttribute(HttpConstants.SERVER_CODE, 405);
+        request.setAttribute(HttpConstants.EXT, map);
+        request.setAttribute(HttpConstants.SERVER_CODE, 405);
 
-    return request;
-  }
+        return request;
+    }
 
-  @ExceptionHandler(Exception.class)
-  public String handleException(Exception e, HttpServletRequest request) {
-    Map<String, Object> map = new HashMap<>();
-    request.setAttribute(HttpConstants.JAVAX_SERVLET_ERROR_STATUS_CODE, 500);
-    map.put("code", "9999");
-    map.put("message", "system exception");
+    @ExceptionHandler(Exception.class)
+    public String handleException(Exception e, HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        request.setAttribute(HttpConstants.JAVAX_SERVLET_ERROR_STATUS_CODE, 500);
+        map.put("code", "9999");
+        map.put("message", "system exception");
 
-    request.setAttribute("ext", map);
-    return "forward:/error";
-  }
+        request.setAttribute("ext", map);
+        return "forward:/error";
+    }
 }

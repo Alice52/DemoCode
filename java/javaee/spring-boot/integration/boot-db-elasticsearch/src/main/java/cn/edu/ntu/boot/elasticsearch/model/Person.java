@@ -19,23 +19,23 @@ import java.util.Date;
 @AllArgsConstructor
 public class Person implements Serializable {
 
-  private static final long serialVersionUID = 8510634155374943623L;
+    private static final long serialVersionUID = 8510634155374943623L;
 
-  /** 主键 */
-  private Long id;
+    /** 主键 */
+    private Long id;
 
-  /** 名字 */
-  private String name;
+    /** 名字 */
+    private String name;
 
-  /** 国家 */
-  private String country;
+    /** 国家 */
+    private String country;
 
-  /** 年龄 */
-  private Integer age;
+    /** 年龄 */
+    private Integer age;
 
-  /** 生日 */
-  private Date birthday;
+    /** 生日 */
+    private Date birthday;
 
-  /** 介绍 */
-  private String remark;
+    /** 介绍 */
+    private String remark;
 }

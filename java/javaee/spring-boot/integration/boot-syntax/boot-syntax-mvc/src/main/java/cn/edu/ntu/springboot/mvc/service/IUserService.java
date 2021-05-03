@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
  * @project spring <br>
  */
 public interface IUserService {
-  Logger LOG = LoggerFactory.getLogger(IUserService.class);
+    Logger LOG = LoggerFactory.getLogger(IUserService.class);
 
-  default void helloWorld() {
-    LOG.info("IUserService default impl");
-  }
+    default void helloWorld() {
+        LOG.info("IUserService default impl");
+    }
 }

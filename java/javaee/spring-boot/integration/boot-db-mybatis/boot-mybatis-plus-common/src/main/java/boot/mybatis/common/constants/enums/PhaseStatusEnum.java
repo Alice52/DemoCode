@@ -11,26 +11,26 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PhaseStatusEnum {
-  DEFAULT("", ""),
-  NOT_STARTED("NOT_STARTED", "未开始"),
-  STARTED("STARTED", "已开始"),
-  ENDED("ENDED", "已结束");
+    DEFAULT("", ""),
+    NOT_STARTED("NOT_STARTED", "未开始"),
+    STARTED("STARTED", "已开始"),
+    ENDED("ENDED", "已结束");
 
-  private String statusCode;
-  private String statusName;
+    private String statusCode;
+    private String statusName;
 
-  /**
-   * Notice this method may return null.
-   *
-   * @param statusCode
-   * @return
-   */
-  public static PhaseStatusEnum getEnumByStatusCode(String statusCode) {
-    for (PhaseStatusEnum item : PhaseStatusEnum.values()) {
-      if (item.statusCode.equals(statusCode)) {
-        return item;
-      }
+    /**
+     * Notice this method may return null.
+     *
+     * @param statusCode
+     * @return
+     */
+    public static PhaseStatusEnum getEnumByStatusCode(String statusCode) {
+        for (PhaseStatusEnum item : PhaseStatusEnum.values()) {
+            if (item.statusCode.equals(statusCode)) {
+                return item;
+            }
+        }
+        return null;
     }
-    return null;
-  }
 }

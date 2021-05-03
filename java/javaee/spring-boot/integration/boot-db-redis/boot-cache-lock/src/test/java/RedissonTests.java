@@ -17,12 +17,12 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class RedissonTests {
 
-  private static final Logger LOG = LoggerFactory.getLogger(RedissonTests.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RedissonTests.class);
 
-  @Resource RedissonClient redissonClient;
+    @Resource RedissonClient redissonClient;
 
-  @Test
-  public void testRedisson() {
-    LOG.info("redissonClient: {}", redissonClient);
-  }
+    @Test
+    public void testRedisson() {
+        LOG.info("redissonClient: {}", redissonClient);
+    }
 }

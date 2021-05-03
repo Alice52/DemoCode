@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 // @SpringBootApplication
 public class ExceptionApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(ExceptionApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(ExceptionApplication.class, args);
+    }
 }

@@ -15,21 +15,22 @@ import org.springframework.stereotype.Component;
 @Component
 @ComponentScan("boot.mybatis.common.config")
 public class CommonConfigImport
-    implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+        implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
-  /**
-   * Fix UT026010 warning.
-   *
-   * @param factory
-   */
-  @Override
-  public void customize(UndertowServletWebServerFactory factory) {
-    factory.addDeploymentInfoCustomizers(
-        deploymentInfo -> {
-          WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
-          webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 1024));
-          deploymentInfo.addServletContextAttribute(
-              "io.undertow.websockets.jsr.WebSocketDeploymentInfo", webSocketDeploymentInfo);
-        });
-  }
+    /**
+     * Fix UT026010 warning.
+     *
+     * @param factory
+     */
+    @Override
+    public void customize(UndertowServletWebServerFactory factory) {
+        factory.addDeploymentInfoCustomizers(
+                deploymentInfo -> {
+                    WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
+                    webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 1024));
+                    deploymentInfo.addServletContextAttribute(
+                            "io.undertow.websockets.jsr.WebSocketDeploymentInfo",
+                            webSocketDeploymentInfo);
+                });
+    }
 }

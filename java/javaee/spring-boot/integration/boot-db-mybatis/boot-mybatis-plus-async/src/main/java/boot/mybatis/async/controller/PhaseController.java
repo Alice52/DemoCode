@@ -23,27 +23,27 @@ import javax.validation.groups.Default;
 @RestController
 @RequestMapping("/boot-mybatis-async")
 public class PhaseController {
-  @Resource private PhaseService phaseService;
+    @Resource private PhaseService phaseService;
 
-  @PostMapping("/phase")
-  public void create(
-      @RequestBody @Validated({ValidationUtil.Add.class, Default.class}) PhaseDTO phase) {
-    phaseService.createPhase(phase);
-  }
+    @PostMapping("/phase")
+    public void create(
+            @RequestBody @Validated({ValidationUtil.Add.class, Default.class}) PhaseDTO phase) {
+        phaseService.createPhase(phase);
+    }
 
-  @SneakyThrows
-  @GetMapping("/phase/{id}")
-  public PhaseVO get(@PathVariable("id") Long id) {
+    @SneakyThrows
+    @GetMapping("/phase/{id}")
+    public PhaseVO get(@PathVariable("id") Long id) {
 
-    return phaseService.getPhase(id).get();
-  }
+        return phaseService.getPhase(id).get();
+    }
 
-  @SneakyThrows
-  @PostMapping("/phase/transaction")
-  public void transaction(
-      @RequestBody @Validated({ValidationUtil.Add.class, Default.class}) PhaseDTO phase,
-      @RequestParam("hasException") Boolean hasException) {
+    @SneakyThrows
+    @PostMapping("/phase/transaction")
+    public void transaction(
+            @RequestBody @Validated({ValidationUtil.Add.class, Default.class}) PhaseDTO phase,
+            @RequestParam("hasException") Boolean hasException) {
 
-    phaseService.asyncTask4Transaction(phase, hasException);
-  }
+        phaseService.asyncTask4Transaction(phase, hasException);
+    }
 }

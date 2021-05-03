@@ -16,11 +16,11 @@ import javax.validation.constraints.NotNull;
 @Validated
 public interface ITestService {
 
-  String validate(@Email String email);
+    String validate(@Email String email);
 
-  UserVO register(@Valid UserVO userVO);
+    UserVO register(@Valid UserVO userVO);
 
-  String validateBetweenService(@Email String email) throws Exception;
+    String validateBetweenService(@Email String email) throws Exception;
 
-  Object hello(@NotNull @Min(10) Integer id, @NotNull String name);
+    Object hello(@NotNull @Min(10) Integer id, @NotNull String name);
 }

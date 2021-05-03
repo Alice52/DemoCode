@@ -21,35 +21,35 @@ import java.util.Arrays;
 @Configuration
 public class ServerConfiguration {
 
-  @Bean(value = "servletRegistrationBean")
-  public ServletRegistrationBean customServlet(CustomServlet customServlet) {
-    ServletRegistrationBean registrationBean =
-        new ServletRegistrationBean(customServlet, "/customServlet");
-    registrationBean.setLoadOnStartup(1);
-    return registrationBean;
-  }
+    @Bean(value = "servletRegistrationBean")
+    public ServletRegistrationBean customServlet(CustomServlet customServlet) {
+        ServletRegistrationBean registrationBean =
+                new ServletRegistrationBean(customServlet, "/customServlet");
+        registrationBean.setLoadOnStartup(1);
+        return registrationBean;
+    }
 
-  @Bean(value = "filterRegistrationBean")
-  public FilterRegistrationBean customFilter(CustomFilter customFilter) {
-    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-    registrationBean.setFilter(customFilter);
-    registrationBean.setUrlPatterns(Arrays.asList("/person"));
-    return registrationBean;
-  }
+    @Bean(value = "filterRegistrationBean")
+    public FilterRegistrationBean customFilter(CustomFilter customFilter) {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        registrationBean.setFilter(customFilter);
+        registrationBean.setUrlPatterns(Arrays.asList("/person"));
+        return registrationBean;
+    }
 
-  @Bean(value = "servletListenerRegistrationBean")
-  public ServletListenerRegistrationBean myListener(CustomListener customListener) {
-    ServletListenerRegistrationBean<CustomListener> registrationBean =
-        new ServletListenerRegistrationBean<>(customListener);
-    return registrationBean;
-  }
+    @Bean(value = "servletListenerRegistrationBean")
+    public ServletListenerRegistrationBean myListener(CustomListener customListener) {
+        ServletListenerRegistrationBean<CustomListener> registrationBean =
+                new ServletListenerRegistrationBean<>(customListener);
+        return registrationBean;
+    }
 
-  @Bean
-  public WebServerFactoryCustomizer embeddedServletContainerCustomizer() {
-    return (factory) -> {
-      ConfigurableWebServerFactory configurableWebServerFactory =
-          (ConfigurableWebServerFactory) factory;
-      configurableWebServerFactory.setPort(8080);
-    };
-  }
+    @Bean
+    public WebServerFactoryCustomizer embeddedServletContainerCustomizer() {
+        return (factory) -> {
+            ConfigurableWebServerFactory configurableWebServerFactory =
+                    (ConfigurableWebServerFactory) factory;
+            configurableWebServerFactory.setPort(8080);
+        };
+    }
 }

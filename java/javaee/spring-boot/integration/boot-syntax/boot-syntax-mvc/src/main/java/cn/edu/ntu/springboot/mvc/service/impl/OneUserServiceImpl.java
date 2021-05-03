@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class OneUserServiceImpl implements IUserService {
 
-  private static final Logger LOG = LoggerFactory.getLogger(OneUserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OneUserServiceImpl.class);
 
-  @Override
-  public void helloWorld() {
-    LOG.info("OneUserServiceImpl");
-  }
+    @Override
+    public void helloWorld() {
+        LOG.info("OneUserServiceImpl");
+    }
 }

@@ -15,32 +15,32 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @AllArgsConstructor
 public class R<T> implements Serializable {
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  @Getter @Setter private int code = 1;
+    @Getter @Setter private int code = 1;
 
-  @Getter @Setter private String msg = "success";
+    @Getter @Setter private String msg = "success";
 
-  @Getter @Setter private T data;
+    @Getter @Setter private T data;
 
-  public R() {
-    super();
-  }
+    public R() {
+        super();
+    }
 
-  public R(T data) {
-    super();
-    this.data = data;
-  }
+    public R(T data) {
+        super();
+        this.data = data;
+    }
 
-  public R(T data, String msg) {
-    super();
-    this.data = data;
-    this.msg = msg;
-  }
+    public R(T data, String msg) {
+        super();
+        this.data = data;
+        this.msg = msg;
+    }
 
-  public R(Throwable e) {
-    super();
-    this.msg = e.getMessage();
-    this.code = 1;
-  }
+    public R(Throwable e) {
+        super();
+        this.msg = e.getMessage();
+        this.code = 1;
+    }
 }

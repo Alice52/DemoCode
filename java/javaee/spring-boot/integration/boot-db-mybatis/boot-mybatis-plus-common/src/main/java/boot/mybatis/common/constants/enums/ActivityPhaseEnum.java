@@ -14,17 +14,17 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
 public enum ActivityPhaseEnum {
-  WARM_UP,
-  START_UP,
-  RESTAURANT_COMPETITION,
-  ONLINE_PK,
-  SUMMARY;
+    WARM_UP,
+    START_UP,
+    RESTAURANT_COMPETITION,
+    ONLINE_PK,
+    SUMMARY;
 
-  public static Boolean contains(String phase) {
+    public static Boolean contains(String phase) {
 
-    return Arrays.stream(ActivityPhaseEnum.values())
-        .map(Enum::name)
-        .collect(Collectors.toList())
-        .contains(phase);
-  }
+        return Arrays.stream(ActivityPhaseEnum.values())
+                .map(Enum::name)
+                .collect(Collectors.toList())
+                .contains(phase);
+    }
 }

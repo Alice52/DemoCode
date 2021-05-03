@@ -18,25 +18,25 @@ import javax.annotation.Resource;
  */
 @Configuration
 @ConditionalOnProperty(
-    prefix = "starter",
-    value = {"enable"},
-    havingValue = "true")
+        prefix = "starter",
+        value = {"enable"},
+        havingValue = "true")
 @EnableConfigurationProperties(HelloProperties.class)
 @ComponentScan(basePackages = {"cn.edu.ntu.javaee.springboot.starter"})
 public class HelloServiceAutoConfiguration {
 
-  @Resource HelloProperties helloProperties;
+    @Resource HelloProperties helloProperties;
 
-  /**
-   * also can new HelloService, then put it in ioc container
-   *
-   * @return
-   */
-  @Bean
-  @ConditionalOnMissingBean(HelloService.class)
-  public HelloService helloService() {
-    HelloService service = new HelloService();
-    service.setHelloProperties(helloProperties);
-    return service;
-  }
+    /**
+     * also can new HelloService, then put it in ioc container
+     *
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean(HelloService.class)
+    public HelloService helloService() {
+        HelloService service = new HelloService();
+        service.setHelloProperties(helloProperties);
+        return service;
+    }
 }

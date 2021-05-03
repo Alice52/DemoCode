@@ -6,5 +6,5 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 /** @author zack */
 public class LoginInterceptor implements HandlerInterceptor {
-  private static final Logger LOG = LoggerFactory.getLogger(LoginInterceptor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoginInterceptor.class);
 }

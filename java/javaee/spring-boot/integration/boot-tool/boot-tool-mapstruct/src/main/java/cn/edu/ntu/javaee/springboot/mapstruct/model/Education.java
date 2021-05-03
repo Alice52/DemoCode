@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Education {
-  private String degreeName;
-  private String institute;
-  private Integer yearOfPassing;
+    private String degreeName;
+    private String institute;
+    private Integer yearOfPassing;
 }

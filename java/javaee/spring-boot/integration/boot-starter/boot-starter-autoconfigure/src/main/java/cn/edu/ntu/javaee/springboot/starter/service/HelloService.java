@@ -13,17 +13,17 @@ import javax.annotation.Resource;
 @Service
 public class HelloService {
 
-  @Resource HelloProperties helloProperties;
+    @Resource HelloProperties helloProperties;
 
-  public HelloProperties getHelloProperties() {
-    return helloProperties;
-  }
+    public HelloProperties getHelloProperties() {
+        return helloProperties;
+    }
 
-  public void setHelloProperties(HelloProperties helloProperties) {
-    this.helloProperties = helloProperties;
-  }
+    public void setHelloProperties(HelloProperties helloProperties) {
+        this.helloProperties = helloProperties;
+    }
 
-  public String sayHellAtguigu(String name) {
-    return helloProperties.getPrefix() + "-" + name + "-" + helloProperties.getSuffix();
-  }
+    public String sayHellAtguigu(String name) {
+        return helloProperties.getPrefix() + "-" + name + "-" + helloProperties.getSuffix();
+    }
 }

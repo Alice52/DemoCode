@@ -18,27 +18,27 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class BaseEntity<T extends Model> extends Model implements Serializable {
-  protected static final long serialVersionUID = 1L;
+    protected static final long serialVersionUID = 1L;
 
-  @TableLogic private Boolean isDeleted;
+    @TableLogic private Boolean isDeleted;
 
-  /**
-   * FieldFill.INSERT will work in create:
-   *
-   * <pre>
-   *     Preparing:   INSERT INTO boot_cache_all_star_phase ( phase_code, phase_name, start_time, end_time, inserted_time, inserted_by ) VALUES ( ?, ?, ?, ?, ?, ? )
-   *     Parameters:  WARM_UP(String), 活动(String), 2021-04-25 14:30:30.0(Timestamp), 2021-04-25 14:35:30.0(Timestamp), 2021-04-25 23:15:07.267(Timestamp), null
-   * </pre>
-   */
-  @TableField(value = "inserted_time", fill = FieldFill.INSERT)
-  private LocalDateTime insertedTime;
+    /**
+     * FieldFill.INSERT will work in create:
+     *
+     * <pre>
+     *     Preparing:   INSERT INTO boot_cache_all_star_phase ( phase_code, phase_name, start_time, end_time, inserted_time, inserted_by ) VALUES ( ?, ?, ?, ?, ?, ? )
+     *     Parameters:  WARM_UP(String), 活动(String), 2021-04-25 14:30:30.0(Timestamp), 2021-04-25 14:35:30.0(Timestamp), 2021-04-25 23:15:07.267(Timestamp), null
+     * </pre>
+     */
+    @TableField(value = "inserted_time", fill = FieldFill.INSERT)
+    private LocalDateTime insertedTime;
 
-  @TableField(value = "updated_time", fill = FieldFill.UPDATE)
-  private LocalDateTime updatedTime;
+    @TableField(value = "updated_time", fill = FieldFill.UPDATE)
+    private LocalDateTime updatedTime;
 
-  @TableField(value = "inserted_by", fill = FieldFill.INSERT)
-  private Long insertedBy;
+    @TableField(value = "inserted_by", fill = FieldFill.INSERT)
+    private Long insertedBy;
 
-  @TableField(value = "updated_by", fill = FieldFill.UPDATE)
-  private Long updatedBy;
+    @TableField(value = "updated_by", fill = FieldFill.UPDATE)
+    private Long updatedBy;
 }

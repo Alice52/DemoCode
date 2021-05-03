@@ -16,65 +16,65 @@ import javax.validation.constraints.NotNull;
 @Service
 public class TestServiceImpl implements ITestService, SmartInitializingSingleton {
 
-  /**
-   * thread unsafe:
-   *
-   * <p>but can use <code>@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)</code> to make it safe
-   * thread.
-   */
-  private ITestService testService = null;
+    /**
+     * thread unsafe:
+     *
+     * <p>but can use <code>@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)</code> to make it safe
+     * thread.
+     */
+    private ITestService testService = null;
 
-  // SpringUtil.getBean(ITestService.class);
+    // SpringUtil.getBean(ITestService.class);
 
-  @Override
-  public String validate(String email) {
-    return email;
-  }
+    @Override
+    public String validate(String email) {
+        return email;
+    }
 
-  @Override
-  public UserVO register(UserVO userVO) {
+    @Override
+    public UserVO register(UserVO userVO) {
 
-    userVO.setEmail("aaaa");
-    validate(userVO.getEmail());
-    return userVO;
-  }
+        userVO.setEmail("aaaa");
+        validate(userVO.getEmail());
+        return userVO;
+    }
 
-  /**
-   * this validation is work by using proxy object method calling,
-   *
-   * <p>due to @Validated in interface will make it[interface] to aop proxy object,
-   *
-   * <p>then spring will be able to validate method parameter annotation by Pointcut.
-   *
-   * @param email
-   * @return string
-   */
-  @Override
-  public String validateBetweenService(String email) throws Exception {
+    /**
+     * this validation is work by using proxy object method calling,
+     *
+     * <p>due to @Validated in interface will make it[interface] to aop proxy object,
+     *
+     * <p>then spring will be able to validate method parameter annotation by Pointcut.
+     *
+     * @param email
+     * @return string
+     */
+    @Override
+    public String validateBetweenService(String email) throws Exception {
 
-    // TODO: this validation is not work
-    validateInService(null);
+        // TODO: this validation is not work
+        validateInService(null);
 
-    // TODO: https://github.com/Alice52/java-ocean/issues/134
-    // ITestService proxy = (ITestService) AopContext.currentProxy();
+        // TODO: https://github.com/Alice52/java-ocean/issues/134
+        // ITestService proxy = (ITestService) AopContext.currentProxy();
 
-    String validate = testService.validate("hhhh");
-    return validate;
-  }
+        String validate = testService.validate("hhhh");
+        return validate;
+    }
 
-  private String validateInService(@NotNull String email) {
+    private String validateInService(@NotNull String email) {
 
-    // TODO: this validation is not work
-    return validate(null);
-  }
+        // TODO: this validation is not work
+        return validate(null);
+    }
 
-  @Override
-  public Object hello(Integer id, String name) {
-    return id;
-  }
+    @Override
+    public Object hello(Integer id, String name) {
+        return id;
+    }
 
-  @Override
-  public void afterSingletonsInstantiated() {
-    testService = SpringUtil.getBean(ITestService.class);
-  }
+    @Override
+    public void afterSingletonsInstantiated() {
+        testService = SpringUtil.getBean(ITestService.class);
+    }
 }

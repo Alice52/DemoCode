@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class GlobalExceptionHandler {
 
-  @ExceptionHandler(Exception.class)
-  public ErrorResponse exception(Exception e) {
+    @ExceptionHandler(Exception.class)
+    public ErrorResponse exception(Exception e) {
 
-    log.info("Exception: {}", e);
-    return ErrorResponse.error(ErrorMessageEnum.UNKNOWN_EXCEPTION);
-  }
+        log.info("Exception: {}", e);
+        return ErrorResponse.error(ErrorMessageEnum.UNKNOWN_EXCEPTION);
+    }
 }

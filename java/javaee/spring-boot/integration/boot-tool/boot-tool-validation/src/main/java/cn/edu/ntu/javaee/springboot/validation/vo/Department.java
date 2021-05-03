@@ -27,16 +27,16 @@ import java.util.List;
 @EqualsAndHashCode
 public class Department {
 
-  @Null(message = "主键不可以有值")
-  private Integer id;
+    @Null(message = "主键不可以有值")
+    private Integer id;
 
-  @ApiModelProperty(required = true, hidden = true)
-  @NotNull
-  private Integer parentId;
+    @ApiModelProperty(required = true, hidden = true)
+    @NotNull
+    private Integer parentId;
 
-  @NotBlank private String name;
+    @NotBlank private String name;
 
-  @NotNull @PastOrPresent private LocalDateTime createTime;
+    @NotNull @PastOrPresent private LocalDateTime createTime;
 
-  private List<@Valid Employee> employeeList;
+    private List<@Valid Employee> employeeList;
 }

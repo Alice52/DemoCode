@@ -19,25 +19,25 @@ import java.util.concurrent.ExecutionException;
 @RestControllerAdvice
 public class ConcurrentExceptionHandler {
 
-  @Resource GlobalExceptionHandler globalExceptionHandler;
-  @Resource BusinessExceptionHandler businessExceptionHandler;
+    @Resource GlobalExceptionHandler globalExceptionHandler;
+    @Resource BusinessExceptionHandler businessExceptionHandler;
 
-  @ExceptionHandler(ExecutionException.class)
-  public ErrorResponse executionException(ExecutionException e) {
-    return tryConvert2BusinessException(e);
-  }
-
-  @ExceptionHandler(CompletionException.class)
-  public ErrorResponse completionException(CompletionException e) {
-    return tryConvert2BusinessException(e);
-  }
-
-  private ErrorResponse tryConvert2BusinessException(Exception e) {
-    if (e.getCause() instanceof BusinessException) {
-      // this will try to convert to UserNotExistException first
-      return businessExceptionHandler.exception((BusinessException) e.getCause());
+    @ExceptionHandler(ExecutionException.class)
+    public ErrorResponse executionException(ExecutionException e) {
+        return tryConvert2BusinessException(e);
     }
 
-    return globalExceptionHandler.exception(e);
-  }
+    @ExceptionHandler(CompletionException.class)
+    public ErrorResponse completionException(CompletionException e) {
+        return tryConvert2BusinessException(e);
+    }
+
+    private ErrorResponse tryConvert2BusinessException(Exception e) {
+        if (e.getCause() instanceof BusinessException) {
+            // this will try to convert to UserNotExistException first
+            return businessExceptionHandler.exception((BusinessException) e.getCause());
+        }
+
+        return globalExceptionHandler.exception(e);
+    }
 }

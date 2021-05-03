@@ -7,9 +7,9 @@ package boot.mybatis.common.utils;
  */
 public interface ValidationUtil {
 
-  /** marked as update operation */
-  interface Update {}
+    /** marked as update operation */
+    interface Update {}
 
-  /** marked as add operation */
-  interface Add {}
+    /** marked as add operation */
+    interface Add {}
 }

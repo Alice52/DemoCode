@@ -17,15 +17,15 @@ import javax.validation.constraints.NotNull;
 @Service
 public class BbServiceImpl implements BbService {
 
-  @Resource private AaService aService;
+    @Resource private AaService aService;
 
-  @Override
-  public void helloB(@NotNull(message = "名称不能为空") String name) {
-    aService.hello4B(name);
-  }
+    @Override
+    public void helloB(@NotNull(message = "名称不能为空") String name) {
+        aService.hello4B(name);
+    }
 
-  @Override
-  public void hello4A(@NotNull(message = "名称不能为空") String name) {
-    log.info("a service call hello4A method.");
-  }
+    @Override
+    public void hello4A(@NotNull(message = "名称不能为空") String name) {
+        log.info("a service call hello4A method.");
+    }
 }

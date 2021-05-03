@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class OtherUserServiceImpl implements IUserService {
-  private static final Logger LOG = LoggerFactory.getLogger(OtherUserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OtherUserServiceImpl.class);
 
-  @Override
-  public void helloWorld() {
-    LOG.info("OtherUserServiceImpl");
-  }
+    @Override
+    public void helloWorld() {
+        LOG.info("OtherUserServiceImpl");
+    }
 }

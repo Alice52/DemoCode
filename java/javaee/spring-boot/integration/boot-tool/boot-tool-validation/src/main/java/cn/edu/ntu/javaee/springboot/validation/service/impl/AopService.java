@@ -17,14 +17,14 @@ import javax.validation.constraints.NotNull;
 @Service
 @Validated
 public class AopService {
-  private static final Logger LOG = LoggerFactory.getLogger(AopService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AopService.class);
 
-  public void addDepartment(@Valid Department department) {
-    LOG.info("add first method");
-    validate(null);
-  }
+    public void addDepartment(@Valid Department department) {
+        LOG.info("add first method");
+        validate(null);
+    }
 
-  public void validate(@NotNull String name) {
-    LOG.info("add first method");
-  }
+    public void validate(@NotNull String name) {
+        LOG.info("add first method");
+    }
 }

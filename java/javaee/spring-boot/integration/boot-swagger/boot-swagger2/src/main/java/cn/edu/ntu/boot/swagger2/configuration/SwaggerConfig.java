@@ -31,65 +31,69 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 @ConditionalOnProperty(
-    prefix = "swagger2",
-    value = {"enable"},
-    havingValue = "true")
+        prefix = "swagger2",
+        value = {"enable"},
+        havingValue = "true")
 public class SwaggerConfig {
 
-  @Bean
-  public Docket createRestApi() {
+    @Bean
+    public Docket createRestApi() {
 
-    List<ResponseMessage> responseMessageList = new ArrayList<>();
-    responseMessageList.add(new ResponseMessageBuilder().code(404).message("Not Found").build());
-    responseMessageList.add(
-        new ResponseMessageBuilder()
-            .code(400)
-            .message("Internal Error")
-            .responseModel(new ModelRef("ErrorMessage"))
-            .build());
-    responseMessageList.add(new ResponseMessageBuilder().code(401).message("Unauthorized").build());
+        List<ResponseMessage> responseMessageList = new ArrayList<>();
+        responseMessageList.add(
+                new ResponseMessageBuilder().code(404).message("Not Found").build());
+        responseMessageList.add(
+                new ResponseMessageBuilder()
+                        .code(400)
+                        .message("Internal Error")
+                        .responseModel(new ModelRef("ErrorMessage"))
+                        .build());
+        responseMessageList.add(
+                new ResponseMessageBuilder().code(401).message("Unauthorized").build());
 
-    return new Docket(DocumentationType.SWAGGER_2)
-        .apiInfo(apiInfo())
-        // .useDefaultResponseMessages(false)
-        .globalResponseMessage(RequestMethod.GET, responseMessageList)
-        .globalResponseMessage(RequestMethod.POST, responseMessageList)
-        .globalResponseMessage(RequestMethod.PUT, responseMessageList)
-        .globalResponseMessage(RequestMethod.DELETE, responseMessageList)
-        // Extensibility mechanism to add a servlet path mapping,
-        // if there is one, to the apis base path.
-        // .pathMapping("/")
-        .select()
-        .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-        // .apis(RequestHandlerSelectors.basePackage("cn.edu.ntu.boot.swagger2.controller"))
-        .paths(PathSelectors.any())
-        .build()
-        .globalOperationParameters(parameter());
-  }
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                // .useDefaultResponseMessages(false)
+                .globalResponseMessage(RequestMethod.GET, responseMessageList)
+                .globalResponseMessage(RequestMethod.POST, responseMessageList)
+                .globalResponseMessage(RequestMethod.PUT, responseMessageList)
+                .globalResponseMessage(RequestMethod.DELETE, responseMessageList)
+                // Extensibility mechanism to add a servlet path mapping,
+                // if there is one, to the apis base path.
+                // .pathMapping("/")
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                // .apis(RequestHandlerSelectors.basePackage("cn.edu.ntu.boot.swagger2.controller"))
+                .paths(PathSelectors.any())
+                .build()
+                .globalOperationParameters(parameter());
+    }
 
-  private ApiInfo apiInfo() {
-    return new ApiInfoBuilder()
-        .title("Api Document")
-        .description("Api Document Description")
-        .contact(
-            new Contact(
-                "Alice52", "https://github.com/Alice52/tutorials-sample/", "zzhang_xz@163.com"))
-        .termsOfServiceUrl("https://github.com/Alice52/java-ocean/")
-        .version("1.0")
-        .build();
-  }
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("Api Document")
+                .description("Api Document Description")
+                .contact(
+                        new Contact(
+                                "Alice52",
+                                "https://github.com/Alice52/tutorials-sample/",
+                                "zzhang_xz@163.com"))
+                .termsOfServiceUrl("https://github.com/Alice52/java-ocean/")
+                .version("1.0")
+                .build();
+    }
 
-  private List<Parameter> parameter() {
-    List<Parameter> parameters = new ArrayList<>();
-    parameters.add(
-        new ParameterBuilder()
-            .name("token")
-            .description("Api Token")
-            .modelRef(new ModelRef("String"))
-            .parameterType("header")
-            .required(false)
-            .build());
+    private List<Parameter> parameter() {
+        List<Parameter> parameters = new ArrayList<>();
+        parameters.add(
+                new ParameterBuilder()
+                        .name("token")
+                        .description("Api Token")
+                        .modelRef(new ModelRef("String"))
+                        .parameterType("header")
+                        .required(false)
+                        .build());
 
-    return parameters;
-  }
+        return parameters;
+    }
 }

@@ -17,20 +17,20 @@ import java.util.UUID;
  */
 @Component
 public class Sender2Queue {
-  private static final Logger LOG = LoggerFactory.getLogger(Sender2Queue.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Sender2Queue.class);
 
-  @Autowired private JmsMessagingTemplate jmsMessagingTemplate;
+    @Autowired private JmsMessagingTemplate jmsMessagingTemplate;
 
-  @Autowired private Queue queue;
+    @Autowired private Queue queue;
 
-  public void sendMessage2Queue() {
-    String message = UUID.randomUUID().toString();
-    jmsMessagingTemplate.convertAndSend(queue, message);
-    LOG.info("Send message: {} success.", message);
-  }
+    public void sendMessage2Queue() {
+        String message = UUID.randomUUID().toString();
+        jmsMessagingTemplate.convertAndSend(queue, message);
+        LOG.info("Send message: {} success.", message);
+    }
 
-  @Scheduled(fixedDelay = 3000)
-  public void sendMessage2QueueSchedule() {
-    sendMessage2Queue();
-  }
+    @Scheduled(fixedDelay = 3000)
+    public void sendMessage2QueueSchedule() {
+        sendMessage2Queue();
+    }
 }

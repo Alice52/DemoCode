@@ -17,19 +17,19 @@ import javax.annotation.Resource;
 @RestController
 public class AaController {
 
-  @Resource private AaService aService;
+    @Resource private AaService aService;
 
-  @GetMapping("/hello-a/{name}")
-  public JsonObject helloA(@PathVariable(value = "name", required = true) String name) {
-    aService.helloA(name);
+    @GetMapping("/hello-a/{name}")
+    public JsonObject helloA(@PathVariable(value = "name", required = true) String name) {
+        aService.helloA(name);
 
-    return new JsonObject();
-  }
+        return new JsonObject();
+    }
 
-  @GetMapping("/hello-a")
-  public JsonObject hello(@RequestParam(value = "name") String name) {
-    aService.helloA(null);
+    @GetMapping("/hello-a")
+    public JsonObject hello(@RequestParam(value = "name") String name) {
+        aService.helloA(null);
 
-    return new JsonObject();
-  }
+        return new JsonObject();
+    }
 }

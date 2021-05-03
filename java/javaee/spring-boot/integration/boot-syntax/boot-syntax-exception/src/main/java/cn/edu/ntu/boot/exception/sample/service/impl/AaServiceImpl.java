@@ -18,16 +18,16 @@ import javax.validation.constraints.NotNull;
 @Slf4j
 public class AaServiceImpl implements AaService {
 
-  @Resource private BbService bService;
+    @Resource private BbService bService;
 
-  @Override
-  @Validated
-  public void helloA(@NotNull(message = "名称不能为空") String name) {
-    bService.helloB(name);
-  }
+    @Override
+    @Validated
+    public void helloA(@NotNull(message = "名称不能为空") String name) {
+        bService.helloB(name);
+    }
 
-  @Override
-  public void hello4B(@NotNull(message = "名称不能为空") String name) {
-    log.info("b service call hello4B method.");
-  }
+    @Override
+    public void hello4B(@NotNull(message = "名称不能为空") String name) {
+        log.info("b service call hello4B method.");
+    }
 }

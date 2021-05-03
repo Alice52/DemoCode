@@ -17,22 +17,23 @@ import javax.annotation.Resource;
 // @SpringBootApplication
 public class QuartzApplication {
 
-  private static final Logger LOG = LoggerFactory.getLogger(QuartzApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(QuartzApplication.class);
 
-  @Resource Scheduler scheduler;
+    @Resource Scheduler scheduler;
 
-  @Value("${spring.quartz.properties.org.quartz.scheduler.instanceId}")
-  private String instanceId;
+    @Value("${spring.quartz.properties.org.quartz.scheduler.instanceId}")
+    private String instanceId;
 
-  public static void main(String[] args) {
-    SpringApplication.run(QuartzApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(QuartzApplication.class, args);
+    }
 
-  @PostConstruct
-  public void initInfo() throws SchedulerException {
-    LOG.warn("startup server's instanceId is: {}", instanceId);
-    LOG.warn(
-        "instanceId got from scheduler is: {}", scheduler.getMetaData().getSchedulerInstanceId());
-    LOG.warn("name got from scheduler is: {}", scheduler.getMetaData().getSchedulerName());
-  }
+    @PostConstruct
+    public void initInfo() throws SchedulerException {
+        LOG.warn("startup server's instanceId is: {}", instanceId);
+        LOG.warn(
+                "instanceId got from scheduler is: {}",
+                scheduler.getMetaData().getSchedulerInstanceId());
+        LOG.warn("name got from scheduler is: {}", scheduler.getMetaData().getSchedulerName());
+    }
 }

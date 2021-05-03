@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 public class MybatisPlusAsyncApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(MybatisPlusAsyncApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(MybatisPlusAsyncApplication.class, args);
+    }
 }

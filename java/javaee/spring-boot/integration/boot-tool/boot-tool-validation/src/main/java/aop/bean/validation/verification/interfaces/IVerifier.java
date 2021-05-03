@@ -6,6 +6,6 @@ import java.lang.annotation.Annotation;
 
 public interface IVerifier {
 
-  public void validate(Object param, Annotation annotation, Annotation methodAnnotation)
-      throws CustomException;
+    public void validate(Object param, Annotation annotation, Annotation methodAnnotation)
+            throws CustomException;
 }

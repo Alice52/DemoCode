@@ -12,10 +12,10 @@ import java.util.List;
  */
 @Mapper
 public interface JobMapper {
-  /**
-   * 查询定时作业和触发器列表
-   *
-   * @return 定时作业和触发器列表
-   */
-  List<JobAndTrigger> list();
+    /**
+     * 查询定时作业和触发器列表
+     *
+     * @return 定时作业和触发器列表
+     */
+    List<JobAndTrigger> list();
 }
