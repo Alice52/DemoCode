@@ -14,32 +14,33 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
  */
 public class JmhBlackhole {
 
-  static int x1 = 10, x2 = 20;
+    static int x1 = 10, x2 = 20;
 
-  public static void main(String[] args) throws RunnerException {
-    Options opt = new OptionsBuilder().include(JmhBlackhole.class.getSimpleName()).forks(1).build();
+    public static void main(String[] args) throws RunnerException {
+        Options opt =
+                new OptionsBuilder().include(JmhBlackhole.class.getSimpleName()).forks(1).build();
 
-    new Runner(opt).run();
-  }
+        new Runner(opt).run();
+    }
 
-  /**
-   * 返回测试结果, 防止编译器优化
-   *
-   * @return
-   */
-  @Benchmark
-  public double measureRight1() {
-    return Math.log(x1) + Math.log(x2);
-  }
+    /**
+     * 返回测试结果, 防止编译器优化
+     *
+     * @return
+     */
+    @Benchmark
+    public double measureRight1() {
+        return Math.log(x1) + Math.log(x2);
+    }
 
-  /**
-   * 通过 Blackhole 消费中间结果, 防止编译器优化
-   *
-   * @param bh
-   */
-  @Benchmark
-  public void measureRight2(Blackhole bh) {
-    bh.consume(Math.log(x1));
-    bh.consume(Math.log(x2));
-  }
+    /**
+     * 通过 Blackhole 消费中间结果, 防止编译器优化
+     *
+     * @param bh
+     */
+    @Benchmark
+    public void measureRight2(Blackhole bh) {
+        bh.consume(Math.log(x1));
+        bh.consume(Math.log(x2));
+    }
 }

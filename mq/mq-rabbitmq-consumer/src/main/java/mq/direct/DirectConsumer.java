@@ -33,82 +33,79 @@ import javax.annotation.PostConstruct;
 @Slf4j
 public class DirectConsumer {
 
-  @Value("${mq.direct.exchange}")
-  private String exchangeName;
+    @Autowired RabbitTemplate rabbitTemplate;
+    @Autowired AmqpAdmin amqpAdmin;
+    @Value("${mq.direct.exchange}")
+    private String exchangeName;
+    @Value("${mq.direct.queue}")
+    private String queueName;
+    @Value("${mq.direct.routing-key}")
+    private String routingKey;
 
-  @Value("${mq.direct.queue}")
-  private String queueName;
+    @PostConstruct
+    public void init() {
+        // String name, boolean durable, boolean autoDelete
+        amqpAdmin.declareExchange(new DirectExchange(exchangeName, true, false));
+        // String name, boolean durable, boolean exclusive, boolean autoDelete
+        amqpAdmin.declareQueue(new Queue(queueName, true, false, false));
+        // String destination, DestinationType destinationType, String exchange,
+        // String routingKey, @Nullable Map<String, Object> arguments
+        amqpAdmin.declareBinding(
+                new Binding(
+                        queueName, Binding.DestinationType.QUEUE, exchangeName, routingKey, null));
+    }
 
-  @Value("${mq.direct.routing-key}")
-  private String routingKey;
+    /**
+     * 消费端特点
+     *
+     * <pre>
+     *    1. 此时如果启动多个 consumer 则一条消息只能被某一个 consumer 获取进行消费
+     *    2. 此时代码是消费完一次消息才会去拿第二次, 每次多少个可以通过prefetch_count设置
+     *    3. 此时在消息处理过程中出现异常或者 consumer 服务器宕机了, 则队列中的消息就会丢失
+     *        - 原因: consumer 自动 ack 导致的消息丢失
+     *        - 方法: 手动确认 ack
+     * </pre>
+     *
+     * @param content
+     */
+    //    @RabbitHandler
+    //    @SneakyThrows
+    //    public void receive(Message message, Object content, Channel channel) {
+    //
+    //      TimeUnit.SECONDS.sleep(10);
+    //
+    //      log.info(
+    //          "Get message from {}, message properties: {}", queueName,
+    //   message.getMessageProperties());
+    //      log.info("Get message from {}, message detail: {} ", queueName, content);
+    //    }
 
-  @Autowired RabbitTemplate rabbitTemplate;
+    @SneakyThrows
+    @RabbitHandler
+    public void receive(Message message, String content, Channel channel) {
 
-  @Autowired AmqpAdmin amqpAdmin;
+        MessageProperties properties = message.getMessageProperties();
+        log.info(
+                "Get message from {}, message properties: {}, message body[json]: {}",
+                queueName,
+                properties,
+                content);
 
-  @PostConstruct
-  public void init() {
-    // String name, boolean durable, boolean autoDelete
-    amqpAdmin.declareExchange(new DirectExchange(exchangeName, true, false));
-    // String name, boolean durable, boolean exclusive, boolean autoDelete
-    amqpAdmin.declareQueue(new Queue(queueName, true, false, false));
-    // String destination, DestinationType destinationType, String exchange,
-    // String routingKey, @Nullable Map<String, Object> arguments
-    amqpAdmin.declareBinding(
-        new Binding(queueName, Binding.DestinationType.QUEUE, exchangeName, routingKey, null));
-  }
+        channel.basicAck(properties.getDeliveryTag(), false);
+    }
 
-  /**
-   * 消费端特点
-   *
-   * <pre>
-   *    1. 此时如果启动多个 consumer 则一条消息只能被某一个 consumer 获取进行消费
-   *    2. 此时代码是消费完一次消息才会去拿第二次, 每次多少个可以通过prefetch_count设置
-   *    3. 此时在消息处理过程中出现异常或者 consumer 服务器宕机了, 则队列中的消息就会丢失
-   *        - 原因: consumer 自动 ack 导致的消息丢失
-   *        - 方法: 手动确认 ack
-   * </pre>
-   *
-   * @param content
-   */
-  //    @RabbitHandler
-  //    @SneakyThrows
-  //    public void receive(Message message, Object content, Channel channel) {
-  //
-  //      TimeUnit.SECONDS.sleep(10);
-  //
-  //      log.info(
-  //          "Get message from {}, message properties: {}", queueName,
-  //   message.getMessageProperties());
-  //      log.info("Get message from {}, message detail: {} ", queueName, content);
-  //    }
+    @SneakyThrows
+    @RabbitHandler
+    public void receive(@Payload Person content, Message message, Channel channel) {
+        MessageProperties properties = message.getMessageProperties();
 
-  @SneakyThrows
-  @RabbitHandler
-  public void receive(Message message, String content, Channel channel) {
+        log.info(
+                "Get message from {}, message properties: {}, message body[json]: {}",
+                queueName,
+                properties,
+                content);
 
-    MessageProperties properties = message.getMessageProperties();
-    log.info(
-        "Get message from {}, message properties: {}, message body[json]: {}",
-        queueName,
-        properties,
-        content);
-
-    channel.basicAck(properties.getDeliveryTag(), false);
-  }
-
-  @SneakyThrows
-  @RabbitHandler
-  public void receive(@Payload Person content, Message message, Channel channel) {
-    MessageProperties properties = message.getMessageProperties();
-
-    log.info(
-        "Get message from {}, message properties: {}, message body[json]: {}",
-        queueName,
-        properties,
-        content);
-
-    // 拒绝 ack 改消息并重新 requeue
-    channel.basicNack(properties.getDeliveryTag(), false, false);
-  }
+        // 拒绝 ack 改消息并重新 requeue
+        channel.basicNack(properties.getDeliveryTag(), false, false);
+    }
 }

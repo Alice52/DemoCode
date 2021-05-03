@@ -34,57 +34,62 @@ import static cn.edu.ntu.zookeeper.constants.Constants.PATH;
 @Slf4j
 public class HelloZooKeeper {
 
-  public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-    HelloZooKeeper helloZooKeeper = new HelloZooKeeper();
-    ZooKeeper zooKeeper = helloZooKeeper.startZookeeper();
+        HelloZooKeeper helloZooKeeper = new HelloZooKeeper();
+        ZooKeeper zooKeeper = helloZooKeeper.startZookeeper();
 
-    if (zooKeeper.exists(PATH, false) == null) {
-      helloZooKeeper.createZNode(zooKeeper, PATH, DATA);
-    } else {
-      log.info("this node already exists.");
+        if (zooKeeper.exists(PATH, false) == null) {
+            helloZooKeeper.createZNode(zooKeeper, PATH, DATA);
+        } else {
+            log.info("this node already exists.");
+        }
+
+        String zNode = helloZooKeeper.getZNode(zooKeeper, PATH);
+        log.info("Get {} value: {}", PATH, zNode);
+
+        helloZooKeeper.stopZookeeper(zooKeeper);
     }
 
-    String zNode = helloZooKeeper.getZNode(zooKeeper, PATH);
-    log.info("Get {} value: {}", PATH, zNode);
+    private ZooKeeper startZookeeper() {
 
-    helloZooKeeper.stopZookeeper(zooKeeper);
-  }
+        try {
+            return new ZooKeeper(
+                    Constants.ZOOKEEPER_SERVICE,
+                    Constants.SESSION_TIME_OUT,
+                    (event) -> log.info(event.toString()));
+        } catch (IOException e) {
+            log.error(
+                    "Get Zookeeper connection failed from {}, and cause by: {}",
+                    Constants.ZOOKEEPER_SERVICE,
+                    e);
+        }
 
-  private ZooKeeper startZookeeper() {
-
-    try {
-      return new ZooKeeper(
-              Constants.ZOOKEEPER_SERVICE, Constants.SESSION_TIME_OUT, (event) -> log.info(event.toString()));
-    } catch (IOException e) {
-      log.error("Get Zookeeper connection failed from {}, and cause by: {}",  Constants.ZOOKEEPER_SERVICE, e);
+        return null;
     }
 
-    return null;
-  }
+    private void createZNode(ZooKeeper zooKeeper, String path, String data)
+            throws KeeperException, InterruptedException {
 
-  private void createZNode(ZooKeeper zooKeeper, String path, String data)
-      throws KeeperException, InterruptedException {
+        zooKeeper.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+    }
 
-    zooKeeper.create(path, data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-  }
+    private String getZNode(ZooKeeper zooKeeper, String path)
+            throws KeeperException, InterruptedException {
 
-  private String getZNode(ZooKeeper zooKeeper, String path)
-      throws KeeperException, InterruptedException {
+        return new String(zooKeeper.getData(path, false, new Stat()));
+    }
 
-    return new String(zooKeeper.getData(path, false, new Stat()));
-  }
+    private void stopZookeeper(ZooKeeper zooKeeper) {
 
-  private void stopZookeeper(ZooKeeper zooKeeper) {
-
-    Optional<ZooKeeper> zooKeeperOptional = Optional.ofNullable(zooKeeper);
-    zooKeeperOptional.ifPresent(
-        zooKeeper1 -> {
-          try {
-            zooKeeper1.close();
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-        });
-  }
+        Optional<ZooKeeper> zooKeeperOptional = Optional.ofNullable(zooKeeper);
+        zooKeeperOptional.ifPresent(
+                zooKeeper1 -> {
+                    try {
+                        zooKeeper1.close();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
 }

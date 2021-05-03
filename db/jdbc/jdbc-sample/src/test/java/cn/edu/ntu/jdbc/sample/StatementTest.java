@@ -19,49 +19,51 @@ import java.util.Properties;
 @Slf4j
 public class StatementTest {
 
-  private Connection conn;
+    private Connection conn;
 
-  @Before
-  public void initConnection() throws Exception {
+    @Before
+    public void initConnection() throws Exception {
 
-    InputStream in = ConnectionTest.class.getClassLoader().getResourceAsStream("db.properties");
-    Properties properties = new Properties();
+        InputStream in = ConnectionTest.class.getClassLoader().getResourceAsStream("db.properties");
+        Properties properties = new Properties();
 
-    properties.load(in);
+        properties.load(in);
 
-    this.conn =
-        DriverManager.getConnection(
-            properties.getProperty("url"),
-            properties.getProperty("user"),
-            properties.getProperty("password"));
+        this.conn =
+                DriverManager.getConnection(
+                        properties.getProperty("url"),
+                        properties.getProperty("user"),
+                        properties.getProperty("password"));
 
-    log.info(conn.toString());
-  }
-
-  @After
-  public void closeConnection() throws Exception {
-    this.conn.close();
-  }
-
-  @Test
-  public void testStatement() throws SQLException {
-
-    Statement statement = conn.createStatement();
-    ResultSet resultSet = statement.executeQuery("SELECT * FROM cloud_payment");
-
-    // contain database schema info
-    log.info(resultSet.getMetaData().toString());
-
-    while (resultSet.next()) {
-      log.info(resultSet.getLong("id") + "");
-      log.info(resultSet.getString("serial"));
+        log.info(conn.toString());
     }
-  }
 
-  @Test
-  public void testQueryUtil() throws Exception {
+    @After
+    public void closeConnection() throws Exception {
+        this.conn.close();
+    }
 
-    List<SerialModel> query = QueryUtil.getForList(SerialModel.class, "SELECT * FROM cloud_payment where id = ?", 1);
-    query.stream().forEach(System.out::println);
-  }
+    @Test
+    public void testStatement() throws SQLException {
+
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM cloud_payment");
+
+        // contain database schema info
+        log.info(resultSet.getMetaData().toString());
+
+        while (resultSet.next()) {
+            log.info(resultSet.getLong("id") + "");
+            log.info(resultSet.getString("serial"));
+        }
+    }
+
+    @Test
+    public void testQueryUtil() throws Exception {
+
+        List<SerialModel> query =
+                QueryUtil.getForList(
+                        SerialModel.class, "SELECT * FROM cloud_payment where id = ?", 1);
+        query.stream().forEach(System.out::println);
+    }
 }

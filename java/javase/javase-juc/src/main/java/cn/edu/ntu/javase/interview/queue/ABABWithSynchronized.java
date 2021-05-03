@@ -15,39 +15,39 @@ import java.util.stream.IntStream;
 @Slf4j
 public class ABABWithSynchronized {
 
-  @SneakyThrows
-  public static void main(String[] args) {
-    ResourceWithSynchronized v1 = new ResourceWithSynchronized();
-    IntStream.rangeClosed(1, 5).forEach(i -> new Thread(v1::produce, "AA" + i).start());
-    IntStream.rangeClosed(1, 5).forEach(i -> new Thread(v1::consume, "BB" + i).start());
-    TimeUnit.SECONDS.sleep(1);
-    OptionalInt.of(v1.number).ifPresent(System.out::println);
-  }
+    @SneakyThrows
+    public static void main(String[] args) {
+        ResourceWithSynchronized v1 = new ResourceWithSynchronized();
+        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(v1::produce, "AA" + i).start());
+        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(v1::consume, "BB" + i).start());
+        TimeUnit.SECONDS.sleep(1);
+        OptionalInt.of(v1.number).ifPresent(System.out::println);
+    }
 }
 
 @Slf4j
 class ResourceWithSynchronized extends AbstractResource {
 
-  @Override
-  @SneakyThrows
-  public synchronized void produce() {
+    @Override
+    @SneakyThrows
+    public synchronized void produce() {
 
-    while (number >= MAX_COUNT) {
-      this.wait();
+        while (number >= MAX_COUNT) {
+            this.wait();
+        }
+        number++;
+        log.info("produce number is {}", number);
+        this.notifyAll();
     }
-    number++;
-    log.info("produce number is {}", number);
-    this.notifyAll();
-  }
 
-  @Override
-  @SneakyThrows
-  public synchronized void consume() {
-    while (number <= 0) {
-      this.wait();
+    @Override
+    @SneakyThrows
+    public synchronized void consume() {
+        while (number <= 0) {
+            this.wait();
+        }
+        number--;
+        log.info("consume number is {}", number);
+        this.notifyAll();
     }
-    number--;
-    log.info("consume number is {}", number);
-    this.notifyAll();
-  }
 }

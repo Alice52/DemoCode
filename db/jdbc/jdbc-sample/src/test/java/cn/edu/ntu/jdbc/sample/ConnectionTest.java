@@ -17,76 +17,76 @@ import java.util.Properties;
 @Slf4j
 public class ConnectionTest {
 
-  private static final String USERNAME = "root";
-  private static final String PASSWORD = "Yu**?";
-  private static final String CONNECTION_URL = "jdbc:mysql://101.132.45.28:3306/tutorials";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "Yu**?";
+    private static final String CONNECTION_URL = "jdbc:mysql://101.132.45.28:3306/tutorials";
 
-  @Test
-  public void testConnectionByDriver() throws SQLException {
-    Driver driver = new com.mysql.jdbc.Driver();
+    @Test
+    public void testConnectionByDriver() throws SQLException {
+        Driver driver = new com.mysql.jdbc.Driver();
 
-    Properties info = new Properties();
-    info.setProperty("user", USERNAME);
-    info.setProperty("password", PASSWORD);
+        Properties info = new Properties();
+        info.setProperty("user", USERNAME);
+        info.setProperty("password", PASSWORD);
 
-    Connection conn = driver.connect(CONNECTION_URL, info);
-    log.info(conn.toString());
+        Connection conn = driver.connect(CONNECTION_URL, info);
+        log.info(conn.toString());
 
-    conn.close();
-  }
+        conn.close();
+    }
 
-  @Test
-  public void testConnectionByReflect() throws Exception {
+    @Test
+    public void testConnectionByReflect() throws Exception {
 
-    Class clazz = Class.forName("com.mysql.jdbc.Driver");
-    Driver driver = (Driver) clazz.newInstance();
+        Class clazz = Class.forName("com.mysql.jdbc.Driver");
+        Driver driver = (Driver) clazz.newInstance();
 
-    Properties info = new Properties();
-    info.setProperty("user", USERNAME);
-    info.setProperty("password", PASSWORD);
+        Properties info = new Properties();
+        info.setProperty("user", USERNAME);
+        info.setProperty("password", PASSWORD);
 
-    Connection conn = driver.connect(CONNECTION_URL, info);
-    log.info(conn.toString());
+        Connection conn = driver.connect(CONNECTION_URL, info);
+        log.info(conn.toString());
 
-    conn.close();
-  }
+        conn.close();
+    }
 
-  @Test
-  public void testConnectionByDriverManager0() throws Exception {
+    @Test
+    public void testConnectionByDriverManager0() throws Exception {
 
-    Class clazz = Class.forName("com.mysql.jdbc.Driver");
-    Driver driver = (Driver) clazz.newInstance();
-    DriverManager.registerDriver(driver);
+        Class clazz = Class.forName("com.mysql.jdbc.Driver");
+        Driver driver = (Driver) clazz.newInstance();
+        DriverManager.registerDriver(driver);
 
-    Connection conn = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+        Connection conn = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
 
-    log.info(conn.toString());
-    conn.close();
-  }
+        log.info(conn.toString());
+        conn.close();
+    }
 
-  @Test
-  public void testConnectionByDriverManager() throws SQLException {
-    Connection conn = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+    @Test
+    public void testConnectionByDriverManager() throws SQLException {
+        Connection conn = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
 
-    log.info(conn.toString());
-    conn.close();
-  }
+        log.info(conn.toString());
+        conn.close();
+    }
 
-  @Test
-  public void testConnectionByDriverManagerAndConfig() throws Exception {
+    @Test
+    public void testConnectionByDriverManagerAndConfig() throws Exception {
 
-    InputStream in = ConnectionTest.class.getClassLoader().getResourceAsStream("db.properties");
-    Properties properties = new Properties();
+        InputStream in = ConnectionTest.class.getClassLoader().getResourceAsStream("db.properties");
+        Properties properties = new Properties();
 
-    properties.load(in);
+        properties.load(in);
 
-    Connection conn =
-        DriverManager.getConnection(
-            properties.getProperty("url"),
-            properties.getProperty("user"),
-            properties.getProperty("password"));
+        Connection conn =
+                DriverManager.getConnection(
+                        properties.getProperty("url"),
+                        properties.getProperty("user"),
+                        properties.getProperty("password"));
 
-    log.info(conn.toString());
-    conn.close();
-  }
+        log.info(conn.toString());
+        conn.close();
+    }
 }

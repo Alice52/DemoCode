@@ -16,21 +16,21 @@ import java.util.Arrays;
 @Slf4j
 public class PropertyConfigTest {
 
-  private ApplicationContext applicationContext =
-      new AnnotationConfigApplicationContext(PropertyConfig.class);
+    private ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(PropertyConfig.class);
 
-  @Test
-  public void testBeanInitAndDestroy() {
-    Cat cat = applicationContext.getBean(Cat.class);
-    log.info(String.valueOf(cat));
+    @Test
+    public void testBeanInitAndDestroy() {
+        Cat cat = applicationContext.getBean(Cat.class);
+        log.info(String.valueOf(cat));
 
-    String weight = Cat.getWeight();
-    log.info(weight);
-  }
+        String weight = Cat.getWeight();
+        log.info(weight);
+    }
 
-  @Test
-  public void testGetBeansFromIoc() {
-    String[] definitionNames = applicationContext.getBeanDefinitionNames();
-    Arrays.stream(definitionNames).forEach(System.out::println);
-  }
+    @Test
+    public void testGetBeansFromIoc() {
+        String[] definitionNames = applicationContext.getBeanDefinitionNames();
+        Arrays.stream(definitionNames).forEach(System.out::println);
+    }
 }

@@ -21,20 +21,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class Animal {
 
-  private Integer age;
+    private Integer age;
 
-  private Dog dog;
+    private Dog dog;
 
-  public Dog getDog() {
-    return dog;
-  }
+    public Dog getDog() {
+        return dog;
+    }
 
-  /**
-   *
-   * @param dog the value get from ioc container.
-   */
-  @Autowired
-  public void setDog(Dog dog) {
-    this.dog = dog;
-  }
+    /** @param dog the value get from ioc container. */
+    @Autowired
+    public void setDog(Dog dog) {
+        this.dog = dog;
+    }
 }

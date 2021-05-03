@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-  @Qualifier(value = "helloService2")
-  @Autowired(required = false)
-  public HelloService helloService;
+    @Qualifier(value = "helloService2")
+    @Autowired(required = false)
+    public HelloService helloService;
 }

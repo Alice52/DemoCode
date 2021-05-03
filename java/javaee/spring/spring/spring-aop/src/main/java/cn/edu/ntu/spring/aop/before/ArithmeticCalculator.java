@@ -7,19 +7,19 @@ package cn.edu.ntu.spring.aop.before;
  */
 public interface ArithmeticCalculator {
 
-  default int add(int a, int b) {
-    return a + b;
-  }
+    default int add(int a, int b) {
+        return a + b;
+    }
 
-  default int sub(int a, int b) {
-    return a - b;
-  }
+    default int sub(int a, int b) {
+        return a - b;
+    }
 
-  default int mul(int a, int b) {
-    return a * b;
-  }
+    default int mul(int a, int b) {
+        return a * b;
+    }
 
-  default int div(int a, int b) {
-    return a / b;
-  }
+    default int div(int a, int b) {
+        return a / b;
+    }
 }

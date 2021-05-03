@@ -34,9 +34,9 @@ eureka:
     service-url:
       defaultZone: http://eureka7002.com:7002/eureka/
   server:
-      # disable self protect
-      enable-self-preservation: false
-      # remove instance interval time
-      eviction-interval-timer-in-ms: 2000
+    # disable self protect
+    enable-self-preservation: false
+    # remove instance interval time
+    eviction-interval-timer-in-ms: 2000
 
 

@@ -24,42 +24,43 @@ import java.io.IOException;
 @RequestMapping("/base")
 public class BaseController {
 
-  @RequestMapping(
-      value = "/hello",
-      method = {RequestMethod.DELETE, RequestMethod.GET})
-  public String hello() {
-    return "index";
-  }
+    @RequestMapping(
+            value = "/hello",
+            method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String hello() {
+        return "index";
+    }
 
-  /** http://--/base/hello/1?name=zack&age=18 */
-  @GetMapping("/hello/{id}")
-  public String hello(
-      // need servlet-api dependency
-      HttpServletRequest request,
-      HttpServletResponse response,
-      @ModelAttribute("user") User user,
-      @PathVariable("id") String id,
-      @RequestParam("name") String name,
-      @RequestParam(value = "age", required = false, defaultValue = "0") int age,
-      @RequestHeader(value = "Accept-Language", required = false, defaultValue = "0")
-          String acceptLanguage,
-      @CookieValue(value = "JSESSIONID", required = false, defaultValue = "0") String sessionId) {
+    /** http://--/base/hello/1?name=zack&age=18 */
+    @GetMapping("/hello/{id}")
+    public String hello(
+            // need servlet-api dependency
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @ModelAttribute("user") User user,
+            @PathVariable("id") String id,
+            @RequestParam("name") String name,
+            @RequestParam(value = "age", required = false, defaultValue = "0") int age,
+            @RequestHeader(value = "Accept-Language", required = false, defaultValue = "0")
+                    String acceptLanguage,
+            @CookieValue(value = "JSESSIONID", required = false, defaultValue = "0")
+                    String sessionId) {
 
-    return "index";
-  }
+        return "index";
+    }
 
-  @RequestMapping(value = "/servlet/{id}")
-  public String getContainerFServletContext(HttpSession session, @PathVariable("id") String id)
-      throws ServletException, IOException {
+    @RequestMapping(value = "/servlet/{id}")
+    public String getContainerFServletContext(HttpSession session, @PathVariable("id") String id)
+            throws ServletException, IOException {
 
-    ServletContext servletContext = session.getServletContext();
-    ApplicationContext ctx =
-        (ApplicationContext)
-            servletContext.getAttribute(
-                WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-    WebApplicationContext webApplicationContext =
-        WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        ServletContext servletContext = session.getServletContext();
+        ApplicationContext ctx =
+                (ApplicationContext)
+                        servletContext.getAttribute(
+                                WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+        WebApplicationContext webApplicationContext =
+                WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
-    return "index";
-  }
+        return "index";
+    }
 }

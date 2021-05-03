@@ -14,11 +14,11 @@ import javax.annotation.Resource;
  */
 @RestController
 public class OrderController {
-  @Resource private OrderService orderService;
+    @Resource private OrderService orderService;
 
-  @GetMapping("/order/create")
-  public JsonResult create(Order order) {
-    orderService.create(order);
-    return new JsonResult(200, "订单创建成功");
-  }
+    @GetMapping("/order/create")
+    public JsonResult create(Order order) {
+        orderService.create(order);
+        return new JsonResult(200, "订单创建成功");
+    }
 }

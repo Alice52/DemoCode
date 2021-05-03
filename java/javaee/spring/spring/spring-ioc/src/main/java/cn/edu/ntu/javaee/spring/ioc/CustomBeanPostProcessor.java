@@ -13,43 +13,46 @@ import java.util.Optional;
  * @function CustomBeanPostProcessor
  */
 public class CustomBeanPostProcessor implements BeanPostProcessor {
-  private static final Logger LOG = LoggerFactory.getLogger(BeanLifecycle.class);
-
-  /**
-   * @param bean
-   * @param beanName
-   * @return bean
-   * @throws BeansException
-   * @function do property validate
-   */
-  @Override
-  public Object postProcessBeforeInitialization(Object bean, String beanName)
-      throws BeansException {
-
-    Optional.ofNullable(beanName)
-        .filter(name -> name.equals("person4LifeCycle"))
-        .ifPresent(
-            name ->
-                LOG.info("bean lifecycle: step3: pass bean to postProcessBeforeInitialization"));
-
-    return bean;
-  }
+    private static final Logger LOG = LoggerFactory.getLogger(BeanLifecycle.class);
 
     /**
-     *
+     * @param bean
+     * @param beanName
+     * @return bean
+     * @throws BeansException
+     * @function do property validate
+     */
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName)
+            throws BeansException {
+
+        Optional.ofNullable(beanName)
+                .filter(name -> name.equals("person4LifeCycle"))
+                .ifPresent(
+                        name ->
+                                LOG.info(
+                                        "bean lifecycle: step3: pass bean to postProcessBeforeInitialization"));
+
+        return bean;
+    }
+
+    /**
      * @param bean
      * @param beanName
      * @return bean
      * @throws BeansException
      * @function validate init method whether work
      */
-  @Override
-  public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName)
+            throws BeansException {
 
-    Optional.ofNullable(beanName)
-        .filter(name -> name.equals("person4LifeCycle"))
-        .ifPresent(
-            name -> LOG.info("bean lifecycle: step5: pass bean to postProcessAfterInitialization"));
-    return bean;
-  }
+        Optional.ofNullable(beanName)
+                .filter(name -> name.equals("person4LifeCycle"))
+                .ifPresent(
+                        name ->
+                                LOG.info(
+                                        "bean lifecycle: step5: pass bean to postProcessAfterInitialization"));
+        return bean;
+    }
 }

@@ -25,52 +25,52 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 public class AutowireTest {
 
-  AnnotationConfigApplicationContext applicationContext =
-      new AnnotationConfigApplicationContext(AutowireApplication.class);
+    AnnotationConfigApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(AutowireApplication.class);
 
-  @Autowired private HelloService helloService;
+    @Autowired private HelloService helloService;
 
-  @Test
-  public void testAutowire() {
-    HelloController bean1 = applicationContext.getBean(HelloController.class);
-    log.info(String.valueOf(bean1.helloService));
-    HelloService bean = (HelloService) applicationContext.getBean("helloService2");
+    @Test
+    public void testAutowire() {
+        HelloController bean1 = applicationContext.getBean(HelloController.class);
+        log.info(String.valueOf(bean1.helloService));
+        HelloService bean = (HelloService) applicationContext.getBean("helloService2");
 
-    Assert.isTrue(bean == bean1.helloService);
-    Assert.isFalse(helloService == bean1.helloService);
-  }
+        Assert.isTrue(bean == bean1.helloService);
+        Assert.isFalse(helloService == bean1.helloService);
+    }
 
-  @Test
-  public void testJsrResource() {
-    JsrController bean1 = applicationContext.getBean(JsrController.class);
-    log.info(String.valueOf(bean1.helloService));
-    HelloService bean = (HelloService) applicationContext.getBean("helloService");
+    @Test
+    public void testJsrResource() {
+        JsrController bean1 = applicationContext.getBean(JsrController.class);
+        log.info(String.valueOf(bean1.helloService));
+        HelloService bean = (HelloService) applicationContext.getBean("helloService");
 
-    Assert.isTrue(bean == bean1.helloService);
-    Assert.isFalse(helloService == bean1.helloService);
-  }
+        Assert.isTrue(bean == bean1.helloService);
+        Assert.isFalse(helloService == bean1.helloService);
+    }
 
-  @Test
-  public void testMarkedInMethod() {
-    Dog bean = applicationContext.getBean(Dog.class);
-    Animal bean1 = applicationContext.getBean(Animal.class);
-    Dog dog = bean1.getDog();
-    Assert.isTrue(bean == dog);
-  }
+    @Test
+    public void testMarkedInMethod() {
+        Dog bean = applicationContext.getBean(Dog.class);
+        Animal bean1 = applicationContext.getBean(Animal.class);
+        Dog dog = bean1.getDog();
+        Assert.isTrue(bean == dog);
+    }
 
-  @Test
-  public void testMarkedInConstructor() {
-    Dog bean = applicationContext.getBean(Dog.class);
-    Animal2 bean1 = applicationContext.getBean(Animal2.class);
-    Dog dog = bean1.getDog();
-    Assert.isTrue(bean == dog);
-  }
+    @Test
+    public void testMarkedInConstructor() {
+        Dog bean = applicationContext.getBean(Dog.class);
+        Animal2 bean1 = applicationContext.getBean(Animal2.class);
+        Dog dog = bean1.getDog();
+        Assert.isTrue(bean == dog);
+    }
 
-  @Test
-  public void testMarkedInArg() {
-    Dog bean = applicationContext.getBean(Dog.class);
-    Animal3 bean1 = applicationContext.getBean(Animal3.class);
-    Dog dog = bean1.getDog();
-    Assert.isTrue(bean == dog);
-  }
+    @Test
+    public void testMarkedInArg() {
+        Dog bean = applicationContext.getBean(Dog.class);
+        Animal3 bean1 = applicationContext.getBean(Animal3.class);
+        Dog dog = bean1.getDog();
+        Assert.isTrue(bean == dog);
+    }
 }

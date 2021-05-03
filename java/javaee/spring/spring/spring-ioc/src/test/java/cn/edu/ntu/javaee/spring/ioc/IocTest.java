@@ -14,17 +14,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @function
  */
 public class IocTest {
-  private ApplicationContext ctx;
-  private static final Logger LOG = LoggerFactory.getLogger(IocTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IocTest.class);
+    private ApplicationContext ctx;
 
-  @Before
-  public void init() {
-    ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_XML_PATH);
-  }
+    @Before
+    public void init() {
+        ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_XML_PATH);
+    }
 
-  @Test
-  public void testFactoryBean() {
-    Person person = ctx.getBean("person4FactoryBean", Person.class);
-    LOG.info("get person bean: {} from FactoryBean success.", person.toString());
-  }
+    @Test
+    public void testFactoryBean() {
+        Person person = ctx.getBean("person4FactoryBean", Person.class);
+        LOG.info("get person bean: {} from FactoryBean success.", person.toString());
+    }
 }

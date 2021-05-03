@@ -18,5 +18,5 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
 @EnableEurekaClient
 @RibbonClient(name = "CLOUD-PAYMENT-SERVICE", configuration = CustomLbRule.class)
 public class OrderLbApplication {
-  private static final Logger LOG = LoggerFactory.getLogger(OrderLbApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrderLbApplication.class);
 }

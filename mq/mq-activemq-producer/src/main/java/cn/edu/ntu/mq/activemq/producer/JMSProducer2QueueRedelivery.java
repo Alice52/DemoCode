@@ -8,7 +8,6 @@ import javax.jms.*;
 
 import static cn.edu.ntu.mq.constants.Constants.QUEUE_NAME;
 
-
 /**
  * @author zack
  * @create 2019-10-26 22:42

@@ -25,7 +25,6 @@ public class DirectReceiver {
         receiveMsg();
     }
 
-
     public static void receiveMsg() {
 
         Channel channel;
@@ -34,14 +33,24 @@ public class DirectReceiver {
             channel = connection.createChannel();
             channel.exchangeDeclare(Constants.EXCHANGE_DIRECT_NAME, BuiltinExchangeType.DIRECT);
 
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), "UTF-8");
-                LOG.info(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
-            };
+            DeliverCallback deliverCallback =
+                    (consumerTag, delivery) -> {
+                        String message = new String(delivery.getBody(), "UTF-8");
+                        LOG.info(
+                                " [x] Received '"
+                                        + delivery.getEnvelope().getRoutingKey()
+                                        + "':'"
+                                        + message
+                                        + "'");
+                    };
 
-            channel.basicConsume(Constants.QUEUE_DIRECT_NAME, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(
+                    Constants.QUEUE_DIRECT_NAME, true, deliverCallback, consumerTag -> {});
         } catch (IOException e) {
-            LOG.error("RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } finally {
             // close resources

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * @author zack <br>
@@ -17,28 +16,23 @@ import org.springframework.stereotype.Component;
 @ToString
 public class Cat {
 
-  @Value("#{20-15}")
-  private Integer age;
+    private static String weight;
+    @Value("#{20-15}")
+    private Integer age;
+    @Value("zack")
+    private String name;
+    @Value("${color:blue}")
+    private String color;
+    @Value("${os.name}")
+    private String os;
+    private String owner;
 
-  @Value("zack")
-  private String name;
+    public static String getWeight() {
+        return weight;
+    }
 
-  @Value("${color:blue}")
-  private String color;
-
-  @Value("${os.name}")
-  private String os;
-
-  private String owner;
-
-  private static String weight;
-
-  public static String getWeight() {
-    return weight;
-  }
-
-  @Value("${weight}")
-  public void setWeight(String weight) {
-    Cat.weight = weight;
-  }
+    @Value("${weight}")
+    public void setWeight(String weight) {
+        Cat.weight = weight;
+    }
 }

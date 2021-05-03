@@ -18,10 +18,10 @@ import java.io.IOException;
  */
 public class TopicsReceiver {
     private static final Logger LOG = LoggerFactory.getLogger(TopicsReceiver.class);
-    private static Connection connection = ConnectionUtils.getConnection();
     // *表示只匹配一个词
     // #表示匹配多个词
-    private static final String[] topicsGuides = new String[]{"topicsKey.*", "topicsKey.#"};
+    private static final String[] topicsGuides = new String[] {"topicsKey.*", "topicsKey.#"};
+    private static Connection connection = ConnectionUtils.getConnection();
 
     public static void main(String[] args) {
         receiveMsg();
@@ -40,14 +40,23 @@ public class TopicsReceiver {
                 channel.queueBind(queueName, Constants.EXCHANGE_TOPICS_NAME, s);
             }
 
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), "UTF-8");
-                LOG.info(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
-            };
+            DeliverCallback deliverCallback =
+                    (consumerTag, delivery) -> {
+                        String message = new String(delivery.getBody(), "UTF-8");
+                        LOG.info(
+                                " [x] Received '"
+                                        + delivery.getEnvelope().getRoutingKey()
+                                        + "':'"
+                                        + message
+                                        + "'");
+                    };
 
-            channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {});
         } catch (IOException e) {
-            LOG.error("RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } finally {
             // close resources

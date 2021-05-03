@@ -6,5 +6,5 @@ package cn.edu.ntu.javase.java8.function;
  */
 @FunctionalInterface
 public interface FilterInterface<T> {
-  boolean condition(T t);
+    boolean condition(T t);
 }

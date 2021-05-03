@@ -13,31 +13,31 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
  */
 @State(Scope.Thread)
 public class JmhSetupAndTearDown {
-  double x;
+    double x;
 
-  public static void main(String[] args) throws RunnerException {
-    Options opt =
-        new OptionsBuilder()
-            .include(JmhSetupAndTearDown.class.getSimpleName())
-            .forks(1)
-            .jvmArgs("-ea")
-            .build();
+    public static void main(String[] args) throws RunnerException {
+        Options opt =
+                new OptionsBuilder()
+                        .include(JmhSetupAndTearDown.class.getSimpleName())
+                        .forks(1)
+                        .jvmArgs("-ea")
+                        .build();
 
-    new Runner(opt).run();
-  }
+        new Runner(opt).run();
+    }
 
-  @Setup
-  public void prepare() {
-    x = Math.PI;
-  }
+    @Setup
+    public void prepare() {
+        x = Math.PI;
+    }
 
-  @TearDown
-  public void check() {
-    assert x > Math.PI : "Nothing changed?";
-  }
+    @TearDown
+    public void check() {
+        assert x > Math.PI : "Nothing changed?";
+    }
 
-  @Benchmark
-  public void measureRight() {
-    x++;
-  }
+    @Benchmark
+    public void measureRight() {
+        x++;
+    }
 }

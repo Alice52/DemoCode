@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
  * @create 2020-04-04 23:56 <br>
  */
 public class HandlerImpl1 implements Handler {
-  private static final Logger LOG = LoggerFactory.getLogger(HandlerImpl1.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HandlerImpl1.class);
 
-  @Override
-  public void handle(String msg) {
-    LOG.info("HandlerImpl1:" + msg);
-  }
+    @Override
+    public void handle(String msg) {
+        LOG.info("HandlerImpl1:" + msg);
+    }
 }

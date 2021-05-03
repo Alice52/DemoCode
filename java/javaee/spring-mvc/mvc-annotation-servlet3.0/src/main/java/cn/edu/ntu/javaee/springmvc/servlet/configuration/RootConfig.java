@@ -13,10 +13,10 @@ import org.springframework.stereotype.Controller;
  */
 @Configuration
 @ComponentScan(
-    value = "cn.edu.ntu.javaee.springmvc.servlet",
-    excludeFilters = {
-      @ComponentScan.Filter(
-          type = FilterType.ANNOTATION,
-          classes = {Controller.class})
-    })
+        value = "cn.edu.ntu.javaee.springmvc.servlet",
+        excludeFilters = {
+            @ComponentScan.Filter(
+                    type = FilterType.ANNOTATION,
+                    classes = {Controller.class})
+        })
 public class RootConfig {}

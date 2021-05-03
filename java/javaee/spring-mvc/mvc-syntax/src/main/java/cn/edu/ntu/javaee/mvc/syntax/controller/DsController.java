@@ -17,79 +17,79 @@ import java.util.Map;
 @Controller
 public class DsController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DsController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DsController.class);
 
-  @RequestMapping("/testRedirectView")
-  public String testRedirectView() {
+    @RequestMapping("/testRedirectView")
+    public String testRedirectView() {
 
-    return "redirect:/ok";
-  }
+        return "redirect:/ok";
+    }
 
-  @RequestMapping("/ok")
-  public String ok() {
+    @RequestMapping("/ok")
+    public String ok() {
 
-    return "ok";
-  }
+        return "ok";
+    }
 
-  @RequestMapping("/testView")
-  public String testView() {
+    @RequestMapping("/testView")
+    public String testView() {
 
-    return "success";
-  }
+        return "success";
+    }
 
-  /**
-   * usage: ${requestScope.loginMsg }
-   *
-   * @param model
-   * @return success.jsp
-   */
-  @RequestMapping("/testModel")
-  public String testModel(Model model) {
-    model.addAttribute("loginMsg", "wrong password");
-    return "success";
-  }
+    /**
+     * usage: ${requestScope.loginMsg }
+     *
+     * @param model
+     * @return success.jsp
+     */
+    @RequestMapping("/testModel")
+    public String testModel(Model model) {
+        model.addAttribute("loginMsg", "wrong password");
+        return "success";
+    }
 
-  /**
-   * usage: ${requestScope.password}
-   *
-   * @param map
-   * @return success.jsp
-   */
-  @RequestMapping("/testMap")
-  public String testMap(Map<String, Object> map) {
-    // BindingAwareModelMap
-    LOG.info(map.getClass().getName());
-    map.put("password", "123456");
+    /**
+     * usage: ${requestScope.password}
+     *
+     * @param map
+     * @return success.jsp
+     */
+    @RequestMapping("/testMap")
+    public String testMap(Map<String, Object> map) {
+        // BindingAwareModelMap
+        LOG.info(map.getClass().getName());
+        map.put("password", "123456");
 
-    return "success";
-  }
+        return "success";
+    }
 
-  /**
-   * this map cannot be retrieved.
-   *
-   * @return
-   */
-  @RequestMapping("/testMap2")
-  public String testMap2() {
-    Map<String, Object> map = new HashMap<>(4);
-    // BindingAwareModelMap
-    LOG.info(map.getClass().getName());
-    map.put("password", "123456");
+    /**
+     * this map cannot be retrieved.
+     *
+     * @return
+     */
+    @RequestMapping("/testMap2")
+    public String testMap2() {
+        Map<String, Object> map = new HashMap<>(4);
+        // BindingAwareModelMap
+        LOG.info(map.getClass().getName());
+        map.put("password", "123456");
 
-    return "success";
-  }
+        return "success";
+    }
 
-  /**
-   * usage: ${requestScope.username}
-   *
-   * @return success.jsp
-   */
-  @RequestMapping("/testModelAndView")
-  public ModelAndView testModelAndView() {
-    ModelAndView mav = new ModelAndView();
-    mav.addObject("username", "Admin");
-    mav.setViewName("success");
+    /**
+     * usage: ${requestScope.username}
+     *
+     * @return success.jsp
+     */
+    @RequestMapping("/testModelAndView")
+    public ModelAndView testModelAndView() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("username", "Admin");
+        mav.setViewName("success");
 
-    return mav;
-  }
+        return mav;
+    }
 }

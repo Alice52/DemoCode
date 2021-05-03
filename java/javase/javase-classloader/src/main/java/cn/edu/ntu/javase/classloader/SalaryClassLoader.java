@@ -16,27 +16,27 @@ import java.security.SecureClassLoader;
 @Slf4j
 public class SalaryClassLoader extends SecureClassLoader {
 
-  private String filePath;
+    private String filePath;
 
-  public SalaryClassLoader(String jarPath) {
-    this.filePath = jarPath;
-  }
-
-  @SneakyThrows
-  @Override
-  protected Class<?> findClass(String name) throws ClassNotFoundException {
-
-    String classPath = filePath + name.replace(".", "\\").concat("class");
-    FileInputStream inputStream = new FileInputStream(new File(classPath));
-    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-    byte[] b;
-    int code;
-    while ((code = inputStream.read()) != -1) {
-      buffer.write(code);
+    public SalaryClassLoader(String jarPath) {
+        this.filePath = jarPath;
     }
 
-    b = buffer.toByteArray();
+    @SneakyThrows
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
 
-    return defineClass(name, b, 0, b.length);
-  }
+        String classPath = filePath + name.replace(".", "\\").concat("class");
+        FileInputStream inputStream = new FileInputStream(new File(classPath));
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        byte[] b;
+        int code;
+        while ((code = inputStream.read()) != -1) {
+            buffer.write(code);
+        }
+
+        b = buffer.toByteArray();
+
+        return defineClass(name, b, 0, b.length);
+    }
 }

@@ -16,16 +16,16 @@ import java.util.stream.IntStream;
 @Slf4j
 public class SourceCode {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    ArrayList<Integer> list = new ArrayList<>();
-    IntStream.rangeClosed(0, 10).forEach(i -> list.add(i));
-    IntStream.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).forEach(i -> list.remove(i));
+        ArrayList<Integer> list = new ArrayList<>();
+        IntStream.rangeClosed(0, 10).forEach(i -> list.add(i));
+        IntStream.of(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).forEach(i -> list.remove(i));
 
-    Optional.of(list.remove(new Integer(5))).ifPresent(System.out::println);
+        Optional.of(list.remove(new Integer(5))).ifPresent(System.out::println);
 
-    new Vector<>().add(1);
+        new Vector<>().add(1);
 
-    new LinkedList<Integer>().element();
-  }
+        new LinkedList<Integer>().element();
+    }
 }

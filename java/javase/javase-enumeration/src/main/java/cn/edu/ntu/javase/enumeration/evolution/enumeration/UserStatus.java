@@ -8,7 +8,7 @@ package cn.edu.ntu.javase.enumeration.evolution.enumeration;
  * @create 2020-01-31 16:00 <br>
  */
 public enum UserStatus {
-  // this means name is ENABLE, value is also ENABLE, and ordinal is 0.
-  ENABLE,
-  DISABLE
+    // this means name is ENABLE, value is also ENABLE, and ordinal is 0.
+    ENABLE,
+    DISABLE
 }

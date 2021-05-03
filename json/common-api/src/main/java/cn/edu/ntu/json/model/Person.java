@@ -17,11 +17,11 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
-  private String name;
-  private FullName fullName;
-  private int age;
-  private Date birthday;
-  private List<String> hobbies;
-  private Map<String, String> clothes;
-  private List<Person> friends;
+    private String name;
+    private FullName fullName;
+    private int age;
+    private Date birthday;
+    private List<String> hobbies;
+    private Map<String, String> clothes;
+    private List<Person> friends;
 }

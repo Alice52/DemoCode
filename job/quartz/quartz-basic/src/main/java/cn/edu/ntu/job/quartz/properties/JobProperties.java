@@ -12,15 +12,15 @@ import org.slf4j.LoggerFactory;
  * @project job <br>
  */
 public class JobProperties {
-  private static final Logger LOG = LoggerFactory.getLogger(JobProperties.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JobProperties.class);
 
-  public static void main(String[] args) throws SchedulerException {
+    public static void main(String[] args) throws SchedulerException {
 
-    Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-    scheduler.start();
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        scheduler.start();
 
-    LOG.info("pool size: {}", scheduler.getMetaData().getThreadPoolSize());
-    LOG.info("scheduler name: {}", scheduler.getMetaData().getSchedulerName());
-    scheduler.shutdown();
-  }
+        LOG.info("pool size: {}", scheduler.getMetaData().getThreadPoolSize());
+        LOG.info("scheduler name: {}", scheduler.getMetaData().getSchedulerName());
+        scheduler.shutdown();
+    }
 }

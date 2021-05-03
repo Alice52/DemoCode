@@ -19,22 +19,22 @@ import java.io.IOException;
 @Slf4j
 public class HelloServlet extends HttpServlet {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
-    log.info(Thread.currentThread() + " start...");
-    try {
-      sayHello();
-    } catch (Exception e) {
-      e.printStackTrace();
+        log.info(Thread.currentThread() + " start...");
+        try {
+            sayHello();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        resp.getWriter().write("hello...");
+        log.info(Thread.currentThread() + " end...");
     }
-    resp.getWriter().write("hello...");
-    log.info(Thread.currentThread() + " end...");
-  }
 
-  public void sayHello() throws Exception {
-    log.info(Thread.currentThread() + " processing...");
-    Thread.sleep(3000);
-  }
+    public void sayHello() throws Exception {
+        log.info(Thread.currentThread() + " processing...");
+        Thread.sleep(3000);
+    }
 }

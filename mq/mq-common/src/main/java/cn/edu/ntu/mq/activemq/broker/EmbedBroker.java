@@ -7,16 +7,16 @@ package cn.edu.ntu.mq.activemq.broker;
  */
 public class EmbedBroker {
 
-//  public static void main(String[] args) {
-//    //
-//      BrokerService brokerService = new BrokerService();
-//      brokerService.setUseJmx(true);
-//      try {
-//          // if would this to work, shoud add dependency of 'activemq-all'
-//          brokerService.addConnector("tcp://localhost:61616");
-//          brokerService.start();
-//      } catch (Exception e) {
-//          e.printStackTrace();
-//      }
-//  }
+    //  public static void main(String[] args) {
+    //    //
+    //      BrokerService brokerService = new BrokerService();
+    //      brokerService.setUseJmx(true);
+    //      try {
+    //          // if would this to work, shoud add dependency of 'activemq-all'
+    //          brokerService.addConnector("tcp://localhost:61616");
+    //          brokerService.start();
+    //      } catch (Exception e) {
+    //          e.printStackTrace();
+    //      }
+    //  }
 }

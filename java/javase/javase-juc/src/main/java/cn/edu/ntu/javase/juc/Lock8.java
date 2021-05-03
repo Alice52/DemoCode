@@ -26,36 +26,36 @@ import java.util.concurrent.TimeUnit;
  */
 public class Lock8 {
 
-  public static void main(String[] args) throws InterruptedException {
-    Phone phone = new Phone();
-    Phone phone2 = new Phone();
+    public static void main(String[] args) throws InterruptedException {
+        Phone phone = new Phone();
+        Phone phone2 = new Phone();
 
-    new Thread(() -> phone.sendSMS(), "A").start();
-    // make sure A can first get access
-    TimeUnit.SECONDS.sleep(1);
-    new Thread(() -> Phone.sendEmail(), "B").start();
-  }
+        new Thread(() -> phone.sendSMS(), "A").start();
+        // make sure A can first get access
+        TimeUnit.SECONDS.sleep(1);
+        new Thread(() -> Phone.sendEmail(), "B").start();
+    }
 }
 
 class Phone {
-  private static final Logger LOG = LoggerFactory.getLogger(Phone.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Phone.class);
 
-  public static synchronized void sendEmail() {
+    public static synchronized void sendEmail() {
 
-    LOG.info(Thread.currentThread().getName() + ", Send Email");
-  }
-
-  public synchronized void sendSMS() {
-    try {
-      TimeUnit.SECONDS.sleep(4);
-      // this.wait();
-      LOG.info(Thread.currentThread().getName() + ", Send SMS");
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+        LOG.info(Thread.currentThread().getName() + ", Send Email");
     }
-  }
 
-  public void openPC() {
-    LOG.info(Thread.currentThread().getName() + ", open");
-  }
+    public synchronized void sendSMS() {
+        try {
+            TimeUnit.SECONDS.sleep(4);
+            // this.wait();
+            LOG.info(Thread.currentThread().getName() + ", Send SMS");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openPC() {
+        LOG.info(Thread.currentThread().getName() + ", open");
+    }
 }

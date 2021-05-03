@@ -13,19 +13,18 @@ import org.springframework.stereotype.Controller;
  */
 @Configuration
 @ComponentScan(
-    basePackages = {"cn.edu.ntu.javaee.annotation"},
-    includeFilters =  {
-      @ComponentScan.Filter(
-          type = FilterType.ANNOTATION,
-          classes = {Controller.class}),
-      @ComponentScan.Filter(
-          type = FilterType.ASSIGNABLE_TYPE,
-          classes = {PersonService.class}),
-      @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*Service"),
-      @ComponentScan.Filter(
-          type = FilterType.CUSTOM,
-          classes = {CustomTypeFilter.class})
-    }, useDefaultFilters = false)
-public class ComponentScanConfig {
-
-}
+        basePackages = {"cn.edu.ntu.javaee.annotation"},
+        includeFilters = {
+            @ComponentScan.Filter(
+                    type = FilterType.ANNOTATION,
+                    classes = {Controller.class}),
+            @ComponentScan.Filter(
+                    type = FilterType.ASSIGNABLE_TYPE,
+                    classes = {PersonService.class}),
+            @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*Service"),
+            @ComponentScan.Filter(
+                    type = FilterType.CUSTOM,
+                    classes = {CustomTypeFilter.class})
+        },
+        useDefaultFilters = false)
+public class ComponentScanConfig {}

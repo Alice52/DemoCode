@@ -24,21 +24,21 @@ import java.io.IOException;
 @Slf4j
 public class HelloFilter extends HttpFilter {
 
-  public HelloFilter() {
-    super();
-  }
+    public HelloFilter() {
+        super();
+    }
 
-  @Override
-  public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-      throws IOException, ServletException {
-    log.info("HelloFilter...doFilter1");
-    super.doFilter(req, res, chain);
-  }
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
+        log.info("HelloFilter...doFilter1");
+        super.doFilter(req, res, chain);
+    }
 
-  @Override
-  protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
-      throws IOException, ServletException {
-    log.info("HelloFilter...doFilter2");
-    super.doFilter(req, res, chain);
-  }
+    @Override
+    protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
+        log.info("HelloFilter...doFilter2");
+        super.doFilter(req, res, chain);
+    }
 }

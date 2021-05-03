@@ -16,49 +16,49 @@ import java.security.SecureClassLoader;
 @Slf4j
 public class SalaryJarClassLoader extends SecureClassLoader {
 
-  private String jarPath;
+    private String jarPath;
 
-  public SalaryJarClassLoader(String jarPath) {
-    this.jarPath = jarPath;
-  }
-
-  /**
-   * @param name
-   * @return
-   * @throws ClassNotFoundException
-   */
-  @SneakyThrows
-  @Override
-  protected Class<?> findClass(String name) throws ClassNotFoundException {
-
-    String classPath = "jar:file:\\" + jarPath + "!/" + name.replace(".", "\\").concat("class");
-    InputStream inputStream = new URL(classPath).openStream();
-    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-    int code;
-    while ((code = inputStream.read()) != -1) {
-      buffer.write(code);
+    public SalaryJarClassLoader(String jarPath) {
+        this.jarPath = jarPath;
     }
 
-    byte[] b = buffer.toByteArray();
+    /**
+     * @param name
+     * @return
+     * @throws ClassNotFoundException
+     */
+    @SneakyThrows
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
 
-    return defineClass(name, b, 0, b.length);
-  }
+        String classPath = "jar:file:\\" + jarPath + "!/" + name.replace(".", "\\").concat("class");
+        InputStream inputStream = new URL(classPath).openStream();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int code;
+        while ((code = inputStream.read()) != -1) {
+            buffer.write(code);
+        }
 
-  /**
-   * 在这里打破双亲委派机制
-   *
-   * @param name
-   * @return
-   * @throws ClassNotFoundException
-   */
-  @Override
-  public Class<?> loadClass(String name) throws ClassNotFoundException {
+        byte[] b = buffer.toByteArray();
 
-    // 在使用该类的时候, 发现符合规则, 就直接加载, 不走双亲委派机制
-    if (name.startsWith("tp.cn.edu.ntu")) {
-      return findClass(name);
+        return defineClass(name, b, 0, b.length);
     }
 
-    return super.loadClass(name);
-  }
+    /**
+     * 在这里打破双亲委派机制
+     *
+     * @param name
+     * @return
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+
+        // 在使用该类的时候, 发现符合规则, 就直接加载, 不走双亲委派机制
+        if (name.startsWith("tp.cn.edu.ntu")) {
+            return findClass(name);
+        }
+
+        return super.loadClass(name);
+    }
 }

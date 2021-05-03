@@ -15,26 +15,26 @@ import java.util.Date;
  */
 public class JobLogUtils {
 
-  private static final Logger LOG = LoggerFactory.getLogger(JobLogUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JobLogUtils.class);
 
-  public static void logSimpleJob(JobDetail job, SimpleTrigger trigger, Date ft) {
-    LOG.info(
-        job.getKey()
-            + " will run at: "
-            + ft
-            + " and repeat: "
-            + trigger.getRepeatCount()
-            + " times, every "
-            + trigger.getRepeatInterval() / 1000
-            + " seconds");
-  }
+    public static void logSimpleJob(JobDetail job, SimpleTrigger trigger, Date ft) {
+        LOG.info(
+                job.getKey()
+                        + " will run at: "
+                        + ft
+                        + " and repeat: "
+                        + trigger.getRepeatCount()
+                        + " times, every "
+                        + trigger.getRepeatInterval() / 1000
+                        + " seconds");
+    }
 
-  public static void logCronJob(JobDetail job, CronTrigger trigger, Date ft) {
-    LOG.info(
-        job.getKey()
-            + " has been scheduled to run at: "
-            + ft
-            + " and repeat based on expression: "
-            + trigger.getCronExpression());
-  }
+    public static void logCronJob(JobDetail job, CronTrigger trigger, Date ft) {
+        LOG.info(
+                job.getKey()
+                        + " has been scheduled to run at: "
+                        + ft
+                        + " and repeat based on expression: "
+                        + trigger.getCronExpression());
+    }
 }

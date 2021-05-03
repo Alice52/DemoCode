@@ -9,18 +9,18 @@ import org.springframework.beans.factory.FactoryBean;
  */
 public class DogFactoryBean implements FactoryBean<Dog> {
 
-  @Override
-  public boolean isSingleton() {
-    return true;
-  }
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
 
-  @Override
-  public Dog getObject() throws Exception {
-    return new Dog();
-  }
+    @Override
+    public Dog getObject() throws Exception {
+        return new Dog();
+    }
 
-  @Override
-  public Class<?> getObjectType() {
-    return Dog.class;
-  }
+    @Override
+    public Class<?> getObjectType() {
+        return Dog.class;
+    }
 }

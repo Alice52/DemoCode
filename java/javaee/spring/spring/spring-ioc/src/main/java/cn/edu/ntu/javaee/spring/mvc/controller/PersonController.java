@@ -12,8 +12,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class PersonController {
 
-    @Autowired
-    private PersonService personService;
+    @Autowired private PersonService personService;
 
     public void register() {
         personService.handleRegister();

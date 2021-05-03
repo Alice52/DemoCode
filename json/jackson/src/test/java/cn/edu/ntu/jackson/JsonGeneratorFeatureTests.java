@@ -18,175 +18,176 @@ import static com.fasterxml.jackson.core.JsonGenerator.Feature.WRITE_NUMBERS_AS_
  */
 public class JsonGeneratorFeatureTests {
 
-  /**
-   * AUTO_CLOSE_TARGET
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testAutoCloseTarget() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) {}
+    /**
+     * AUTO_CLOSE_TARGET
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testAutoCloseTarget() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jsonGenerator =
+                factory.createGenerator(System.err, JsonEncoding.UTF8)) {}
 
-    // jsonGenerator io will be closed automatically
-  }
-
-  @Test
-  public void testAutoCloseTarget2() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    //  PrintStream is Closeable, so it will be closed automatically by try-with-resources.
-    try (PrintStream err = System.err;
-        JsonGenerator jg = factory.createGenerator(err, JsonEncoding.UTF8)) {
-      // set AUTO_CLOSE_TARGET to false
-      jg.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
-
-      // doSomething
+        // jsonGenerator io will be closed automatically
     }
-  }
 
-  /**
-   * Call JsonGenerator close() or flush() method, it will flush data to disk.
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testFlushPassed2Stream() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8);
+    @Test
+    public void testAutoCloseTarget2() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        //  PrintStream is Closeable, so it will be closed automatically by try-with-resources.
+        try (PrintStream err = System.err;
+                JsonGenerator jg = factory.createGenerator(err, JsonEncoding.UTF8)) {
+            // set AUTO_CLOSE_TARGET to false
+            jg.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
 
-    jg.writeStartObject();
-    jg.writeStringField("name", "zack");
-    jg.writeEndObject();
-
-    jg.close(); // jg.flush();
-  }
-
-  /**
-   * Should ensure json is complete.
-   *
-   * @throws IOException
-   */
-  @Test
-  @Deprecated
-  public void testAutoCloseJsonContent() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      jg.writeStartObject();
-      jg.writeFieldName("names");
-      // arrays
-      jg.writeStartArray();
-      jg.writeString("zack");
-      jg.writeString("timothy");
+            // doSomething
+        }
     }
-  }
 
-  /**
-   * // {arrays:[3,4,5]}
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testQuoteFieldNames() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+    /**
+     * Call JsonGenerator close() or flush() method, it will flush data to disk.
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testFlushPassed2Stream() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8);
 
-      // jg.disable(QUOTE_FIELD_NAMES); // {arrays:[3,4,5]}
+        jg.writeStartObject();
+        jg.writeStringField("name", "zack");
+        jg.writeEndObject();
 
-      jg.writeStartObject();
-      jg.writeFieldName("arrays");
-      jg.writeArray(new int[] {1, 2, 3, 4, 5, 6}, 2, 3);
-
-      jg.writeEndObject();
+        jg.close(); // jg.flush();
     }
-  }
 
-  /**
-   * 0.9 1.9 "NaN" "-Infinity" "Infinity"
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testQuoteNonNumericNumbers() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      // 0.9 1.9 NaN -Infinity Infinity // and it is invalid json
-      // jg.disable(JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS);
-
-      jg.writeNumber(0.9);
-      jg.writeNumber(1.9);
-
-      jg.writeNumber(Float.NaN);
-      jg.writeNumber(Float.NEGATIVE_INFINITY);
-      jg.writeNumber(Float.POSITIVE_INFINITY);
+    /**
+     * Should ensure json is complete.
+     *
+     * @throws IOException
+     */
+    @Test
+    @Deprecated
+    public void testAutoCloseJsonContent() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            jg.writeStartObject();
+            jg.writeFieldName("names");
+            // arrays
+            jg.writeStartArray();
+            jg.writeString("zack");
+            jg.writeString("timothy");
+        }
     }
-  }
 
-  /**
-   * "zack 好人"
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testEscapeNonAscii() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      // jg.enable(ESCAPE_NON_ASCII); // "zack \u597D\u4EBA"
-      jg.writeString("zack 好人");
+    /**
+     * // {arrays:[3,4,5]}
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testQuoteFieldNames() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+
+            // jg.disable(QUOTE_FIELD_NAMES); // {arrays:[3,4,5]}
+
+            jg.writeStartObject();
+            jg.writeFieldName("arrays");
+            jg.writeArray(new int[] {1, 2, 3, 4, 5, 6}, 2, 3);
+
+            jg.writeEndObject();
+        }
     }
-  }
 
-  /**
-   * 9223372036854775807
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testWriteNumbersAsStrings() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      // jg.enable(WRITE_NUMBERS_AS_STRINGS); // "9223372036854775807"
+    /**
+     * 0.9 1.9 "NaN" "-Infinity" "Infinity"
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testQuoteNonNumericNumbers() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            // 0.9 1.9 NaN -Infinity Infinity // and it is invalid json
+            // jg.disable(JsonGenerator.Feature.QUOTE_NON_NUMERIC_NUMBERS);
 
-      Long num = Long.MAX_VALUE;
-      jg.writeNumber(num);
+            jg.writeNumber(0.9);
+            jg.writeNumber(1.9);
+
+            jg.writeNumber(Float.NaN);
+            jg.writeNumber(Float.NEGATIVE_INFINITY);
+            jg.writeNumber(Float.POSITIVE_INFINITY);
+        }
     }
-  }
 
-  /**
-   * 1 1.0 1E+11
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testWriteBigDecimalAsPlain() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      // jg.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);  //1 1.0 100000000000
-
-      BigDecimal bigDecimal1 = new BigDecimal(1.0);
-      BigDecimal bigDecimal2 = new BigDecimal("1.0");
-      BigDecimal bigDecimal3 = new BigDecimal("1E11");
-      jg.writeNumber(bigDecimal1);
-      jg.writeNumber(bigDecimal2);
-      jg.writeNumber(bigDecimal3);
+    /**
+     * "zack 好人"
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testEscapeNonAscii() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            // jg.enable(ESCAPE_NON_ASCII); // "zack \u597D\u4EBA"
+            jg.writeString("zack 好人");
+        }
     }
-  }
 
-  /**
-   * {"name":"YourBatman","name":"zack"}
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testStrictDuplicateDetection() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      // com.fasterxml.jackson.core.JsonGenerationException: Duplicate field 'name'
-      // jg.enable(JsonGenerator.Feature.STRICT_DUPLICATE_DETECTION);
+    /**
+     * 9223372036854775807
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testWriteNumbersAsStrings() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            // jg.enable(WRITE_NUMBERS_AS_STRINGS); // "9223372036854775807"
 
-      jg.writeStartObject();
-      jg.writeStringField("name", "YourBatman");
-      jg.writeStringField("name", "zack");
-      jg.writeEndObject();
+            Long num = Long.MAX_VALUE;
+            jg.writeNumber(num);
+        }
     }
-  }
+
+    /**
+     * 1 1.0 1E+11
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testWriteBigDecimalAsPlain() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            // jg.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);  //1 1.0 100000000000
+
+            BigDecimal bigDecimal1 = new BigDecimal(1.0);
+            BigDecimal bigDecimal2 = new BigDecimal("1.0");
+            BigDecimal bigDecimal3 = new BigDecimal("1E11");
+            jg.writeNumber(bigDecimal1);
+            jg.writeNumber(bigDecimal2);
+            jg.writeNumber(bigDecimal3);
+        }
+    }
+
+    /**
+     * {"name":"YourBatman","name":"zack"}
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testStrictDuplicateDetection() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            // com.fasterxml.jackson.core.JsonGenerationException: Duplicate field 'name'
+            // jg.enable(JsonGenerator.Feature.STRICT_DUPLICATE_DETECTION);
+
+            jg.writeStartObject();
+            jg.writeStringField("name", "YourBatman");
+            jg.writeStringField("name", "zack");
+            jg.writeEndObject();
+        }
+    }
 }

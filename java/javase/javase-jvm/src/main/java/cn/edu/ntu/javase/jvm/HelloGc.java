@@ -14,15 +14,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HelloGc {
 
-  @SneakyThrows
-  public static void main(String[] args) {
+    @SneakyThrows
+    public static void main(String[] args) {
 
-    log.info("HelloGc");
+        log.info("HelloGc");
 
-    long xms = Runtime.getRuntime().totalMemory();
-    long xmx = Runtime.getRuntime().maxMemory();
+        long xms = Runtime.getRuntime().totalMemory();
+        long xmx = Runtime.getRuntime().maxMemory();
 
-    byte[] bytes = new byte[1024 * 1024 * 50];
-    // TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
-  }
+        byte[] bytes = new byte[1024 * 1024 * 50];
+        // TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+    }
 }

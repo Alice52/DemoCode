@@ -21,14 +21,19 @@ public class MyMessageListener implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
-        Optional.ofNullable(message).ifPresent(mg-> {
-            TextMessage textMessage = (TextMessage) mg;
-            try {
-                String text = textMessage.getText();
-                LOGGER.info("Consume text message: {} success.", text);
-            } catch (JMSException jmsException) {
-                LOGGER.info("Failed to consume text message: {}, cause by {}.", textMessage, jmsException);
-            }
-        });
+        Optional.ofNullable(message)
+                .ifPresent(
+                        mg -> {
+                            TextMessage textMessage = (TextMessage) mg;
+                            try {
+                                String text = textMessage.getText();
+                                LOGGER.info("Consume text message: {} success.", text);
+                            } catch (JMSException jmsException) {
+                                LOGGER.info(
+                                        "Failed to consume text message: {}, cause by {}.",
+                                        textMessage,
+                                        jmsException);
+                            }
+                        });
     }
 }

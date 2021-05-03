@@ -21,7 +21,7 @@ import java.util.Set;
  */
 public class UnsafeHashSet {
 
-  public static void main(String[] args) {
-    Set<String> hashSet = Collections.synchronizedSet(new HashSet<>());
-  }
+    public static void main(String[] args) {
+        Set<String> hashSet = Collections.synchronizedSet(new HashSet<>());
+    }
 }

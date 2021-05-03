@@ -10,10 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DisplayOutOfMemoryErrorHeap {
 
-  // -Xmx10m -Xms10m
-  public static void main(String[] args) {
+    // -Xmx10m -Xms10m
+    public static void main(String[] args) {
 
-    // java.lang.OutOfMemoryError: Java heap space
-    byte[] bytes = new byte[50 * 1024 * 1024];
-  }
+        // java.lang.OutOfMemoryError: Java heap space
+        byte[] bytes = new byte[50 * 1024 * 1024];
+    }
 }

@@ -17,20 +17,20 @@ import javax.jms.TextMessage;
  */
 @Service
 public class Producer2Queue {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Producer2Queue.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Producer2Queue.class);
 
-  @Autowired private JmsTemplate jmsTemplate;
+    @Autowired private JmsTemplate jmsTemplate;
 
-  public static void main(String[] args) {
-    ApplicationContext applicationContext =
-        new ClassPathXmlApplicationContext("applicationContext.xml");
-    Producer2Queue producer = (Producer2Queue) applicationContext.getBean("producer2Queue");
-    producer.jmsTemplate.send(
-        session -> {
-          TextMessage message = session.createTextMessage("Spring integration ActiveMQ!");
-          LOGGER.info("Send text message: {} success.", message);
-          return message;
-        });
-    LOGGER.info("Send message over!");
-  }
+    public static void main(String[] args) {
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+        Producer2Queue producer = (Producer2Queue) applicationContext.getBean("producer2Queue");
+        producer.jmsTemplate.send(
+                session -> {
+                    TextMessage message = session.createTextMessage("Spring integration ActiveMQ!");
+                    LOGGER.info("Send text message: {} success.", message);
+                    return message;
+                });
+        LOGGER.info("Send message over!");
+    }
 }

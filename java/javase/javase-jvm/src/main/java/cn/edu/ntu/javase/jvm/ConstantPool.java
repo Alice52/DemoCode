@@ -6,7 +6,7 @@ package cn.edu.ntu.javase.jvm;
  * @project javase <br>
  */
 public class ConstantPool {
-  public void method() {
-    System.out.println("Hello");
-  }
+    public void method() {
+        System.out.println("Hello");
+    }
 }

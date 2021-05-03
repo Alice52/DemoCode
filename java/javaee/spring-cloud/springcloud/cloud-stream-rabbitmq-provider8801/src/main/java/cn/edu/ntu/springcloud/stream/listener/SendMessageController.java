@@ -16,12 +16,12 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/message")
 public class SendMessageController {
 
-  @Resource private IMessageProvider messageProvider;
+    @Resource private IMessageProvider messageProvider;
 
-  @GetMapping(value = "/send")
-  public JsonResult sendMessage() {
+    @GetMapping(value = "/send")
+    public JsonResult sendMessage() {
 
-    Object sendData = messageProvider.send();
-    return new JsonResult(200, "send message success", sendData);
-  }
+        Object sendData = messageProvider.send();
+        return new JsonResult(200, "send message success", sendData);
+    }
 }

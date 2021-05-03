@@ -14,33 +14,33 @@ import java.nio.charset.Charset;
 @Slf4j
 public class ConvertDataTest {
 
-  @Test
-  public void testConvertFromBytes() {
+    @Test
+    public void testConvertFromBytes() {
 
-    String str = ConvertData.convert(new byte[] {1, 2, 'f', 'e', 'z'});
-    log.info(str);
-  }
+        String str = ConvertData.convert(new byte[] {1, 2, 'f', 'e', 'z'});
+        log.info(str);
+    }
 
-  @Test
-  public void testConvertFromStr() {
+    @Test
+    public void testConvertFromStr() {
 
-    byte[] bytes = ConvertData.convert("hhh");
+        byte[] bytes = ConvertData.convert("hhh");
 
-    // byte nature is int8
-    log.info(String.valueOf(bytes[0]));
+        // byte nature is int8
+        log.info(String.valueOf(bytes[0]));
 
-    // this will log ClassName
-    log.info(String.valueOf(bytes));
+        // this will log ClassName
+        log.info(String.valueOf(bytes));
 
-    // this will log String value
-    log.info(new String(bytes));
-  }
+        // this will log String value
+        log.info(new String(bytes));
+    }
 
-  @Test
-  public void testChar2String() {
-    String hello = StrUtil.str("hello", Charset.defaultCharset());
-    char[] chars = hello.toCharArray();
+    @Test
+    public void testChar2String() {
+        String hello = StrUtil.str("hello", Charset.defaultCharset());
+        char[] chars = hello.toCharArray();
 
-    log.info(String.valueOf(chars[0]));
-  }
+        log.info(String.valueOf(chars[0]));
+    }
 }

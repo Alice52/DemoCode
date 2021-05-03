@@ -15,10 +15,10 @@ import java.io.IOException;
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
-    new Server().sayHello("timothy");
-  }
+        new Server().sayHello("timothy");
+    }
 }

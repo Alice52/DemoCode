@@ -15,39 +15,39 @@ import java.io.IOException;
  */
 public class JsonParserTests {
 
-  @Test
-  public void testJson2Bean() throws IOException {
-    String jsonStr = "{\"name\":\"zack\",\"age\":18}";
-    User user = new User();
+    @Test
+    public void testJson2Bean() throws IOException {
+        String jsonStr = "{\"name\":\"zack\",\"age\":18}";
+        User user = new User();
 
-    JsonFactory factory = new JsonFactory();
-    try (JsonParser jsonParser = factory.createParser(jsonStr)) {
+        JsonFactory factory = new JsonFactory();
+        try (JsonParser jsonParser = factory.createParser(jsonStr)) {
 
-      // 只要还没结束"}", 就一直读
-      while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
-        String fieldName = jsonParser.getCurrentName();
-        if ("name".equals(fieldName)) {
-          jsonParser.nextToken();
-          user.setName(jsonParser.getText());
-        } else if ("age".equals(fieldName)) {
-          jsonParser.nextToken();
-          user.setAge(jsonParser.getIntValue());
+            // 只要还没结束"}", 就一直读
+            while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = jsonParser.getCurrentName();
+                if ("name".equals(fieldName)) {
+                    jsonParser.nextToken();
+                    user.setName(jsonParser.getText());
+                } else if ("age".equals(fieldName)) {
+                    jsonParser.nextToken();
+                    user.setAge(jsonParser.getIntValue());
+                }
+            }
+
+            System.out.println(user);
         }
-      }
-
-      System.out.println(user);
     }
-  }
 
-  @Test
-  public void testObjectCodec() throws IOException {
-    String jsonStr = "{\"name\":\"zack\",\"age\":18}";
+    @Test
+    public void testObjectCodec() throws IOException {
+        String jsonStr = "{\"name\":\"zack\",\"age\":18}";
 
-    JsonFactory factory = JsonFactory.builder().build();
-    try (JsonParser parser = factory.createParser(jsonStr)) {
-      parser.setCodec(new UserObjectCodec());
-      User user = parser.readValueAs(User.class);
-      System.out.println(user);
+        JsonFactory factory = JsonFactory.builder().build();
+        try (JsonParser parser = factory.createParser(jsonStr)) {
+            parser.setCodec(new UserObjectCodec());
+            User user = parser.readValueAs(User.class);
+            System.out.println(user);
+        }
     }
-  }
 }

@@ -2,8 +2,8 @@ package cn.edu.ntu.springcloud.order1.controller;
 
 import cn.edu.ntu.springcloud.common.entities.JsonResult;
 import cn.edu.ntu.springcloud.common.entities.Payment;
-import lombok.extern.slf4j.Slf4j;
 import cn.edu.ntu.springcloud.order1.customlb.CustomLoadBalancer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,41 +27,44 @@ import java.util.concurrent.atomic.AtomicReference;
 @RequestMapping(value = "/consumer")
 public class OrderController {
 
-  private static final String PAYMENT_URL = "http://CLOUD-PROVIDER-PAYMENT-SERVICE";
-  @Resource private RestTemplate restTemplate;
-  @Resource private DiscoveryClient discoveryClient;
-  @Resource private CustomLoadBalancer customLoadBalancer;
+    private static final String PAYMENT_URL = "http://CLOUD-PROVIDER-PAYMENT-SERVICE";
+    @Resource private RestTemplate restTemplate;
+    @Resource private DiscoveryClient discoveryClient;
+    @Resource private CustomLoadBalancer customLoadBalancer;
 
-  @GetMapping(value = "/payment/create")
-  public JsonResult<Payment> create(Payment payment) {
+    @GetMapping(value = "/payment/create")
+    public JsonResult<Payment> create(Payment payment) {
 
-    return restTemplate.postForObject(PAYMENT_URL + "/payment/create", payment, JsonResult.class);
-  }
+        return restTemplate.postForObject(
+                PAYMENT_URL + "/payment/create", payment, JsonResult.class);
+    }
 
-  @GetMapping(value = "/payment/get/{id}")
-  public JsonResult getPaymentById(@PathVariable("id") Long id) {
-    return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, JsonResult.class);
-  }
+    @GetMapping(value = "/payment/get/{id}")
+    public JsonResult getPaymentById(@PathVariable("id") Long id) {
+        return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, JsonResult.class);
+    }
 
-  @GetMapping(value = "/payment/getEntity/{id}")
-  public JsonResult getPaymentById2(@PathVariable("id") Long id) {
-    return new JsonResult(
-        200, "ok", restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, JsonResult.class));
-  }
+    @GetMapping(value = "/payment/getEntity/{id}")
+    public JsonResult getPaymentById2(@PathVariable("id") Long id) {
+        return new JsonResult(
+                200,
+                "ok",
+                restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, JsonResult.class));
+    }
 
-  @GetMapping(value = "/payment/lb")
-  public JsonResult getPaymentLB() {
+    @GetMapping(value = "/payment/lb")
+    public JsonResult getPaymentLB() {
 
-    List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
 
-    AtomicReference<ServiceInstance> instance = new AtomicReference<>();
-    Optional.ofNullable(instances)
-        .ifPresent(
-            x -> {
-              instance.set(customLoadBalancer.instance(x));
-            });
+        AtomicReference<ServiceInstance> instance = new AtomicReference<>();
+        Optional.ofNullable(instances)
+                .ifPresent(
+                        x -> {
+                            instance.set(customLoadBalancer.instance(x));
+                        });
 
-    URI uri = instance.get().getUri();
-    return restTemplate.getForObject(uri + "/payment/lb/", JsonResult.class);
-  }
+        URI uri = instance.get().getUri();
+        return restTemplate.getForObject(uri + "/payment/lb/", JsonResult.class);
+    }
 }

@@ -18,18 +18,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(classes = {LoggingAspect4Anno.class, ArithmeticCalculatorImpl.class})
 public class AnnoAspectTest {
 
-  @Autowired private IArithmeticCalculator arithmeticCalculator;
+    @Autowired private IArithmeticCalculator arithmeticCalculator;
 
-  @Test
-  public void testAspect() {
+    @Test
+    public void testAspect() {
 
-    arithmeticCalculator.add(1, 5);
-  }
+        arithmeticCalculator.add(1, 5);
+    }
 
-  @Test
-  @Ignore
-  public void testAspectException() {
+    @Test
+    @Ignore
+    public void testAspectException() {
 
-    arithmeticCalculator.div(1, 0);
-  }
+        arithmeticCalculator.div(1, 0);
+    }
 }

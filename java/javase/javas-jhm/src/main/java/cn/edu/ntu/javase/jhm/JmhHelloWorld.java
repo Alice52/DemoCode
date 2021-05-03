@@ -24,49 +24,49 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 public class JmhHelloWorld {
-  static List<Demo> demoList;
+    static List<Demo> demoList;
 
-  static {
-    demoList = new ArrayList();
-    for (int i = 0; i < 10000; i++) {
-      demoList.add(new Demo(i, "test"));
+    static {
+        demoList = new ArrayList();
+        for (int i = 0; i < 10000; i++) {
+            demoList.add(new Demo(i, "test"));
+        }
     }
-  }
 
-  public static void main(String[] args) throws RunnerException {
-    Options opt =
-        new OptionsBuilder().include(JmhHelloWorld.class.getSimpleName()).forks(1).build();
+    public static void main(String[] args) throws RunnerException {
+        Options opt =
+                new OptionsBuilder().include(JmhHelloWorld.class.getSimpleName()).forks(1).build();
 
-    new Runner(opt).run();
-  }
-
-  @Benchmark
-  @BenchmarkMode(Mode.AverageTime)
-  @OutputTimeUnit(TimeUnit.MICROSECONDS)
-  public void testHashMapWithoutSize() {
-    Map map = new HashMap();
-    for (Demo demo : demoList) {
-      map.put(demo.id, demo.name);
+        new Runner(opt).run();
     }
-  }
 
-  @Benchmark
-  @BenchmarkMode(Mode.AverageTime)
-  @OutputTimeUnit(TimeUnit.MICROSECONDS)
-  public void testHashMap() {
-    Map map = new HashMap((int) (demoList.size() / 0.75f) + 1);
-    for (Demo demo : demoList) {
-      map.put(demo.id, demo.name);
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public void testHashMapWithoutSize() {
+        Map map = new HashMap();
+        for (Demo demo : demoList) {
+            map.put(demo.id, demo.name);
+        }
     }
-  }
 
-  static class Demo {
-    int id;
-    String name;
-
-    public Demo(int id, String name) {
-      this.id = id;
-      this.name = name;
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public void testHashMap() {
+        Map map = new HashMap((int) (demoList.size() / 0.75f) + 1);
+        for (Demo demo : demoList) {
+            map.put(demo.id, demo.name);
+        }
     }
-  }
+
+    static class Demo {
+        int id;
+        String name;
+
+        public Demo(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+    }
 }

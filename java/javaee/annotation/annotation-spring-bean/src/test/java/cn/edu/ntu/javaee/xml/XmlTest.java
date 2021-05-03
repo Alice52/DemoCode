@@ -15,27 +15,27 @@ import java.util.Arrays;
 @Slf4j
 public class XmlTest {
 
-  private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+    private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
 
-  @Test
-  public void testIocContainer() {
+    @Test
+    public void testIocContainer() {
 
-    Person person = (Person) applicationContext.getBean("person");
-    log.info(String.valueOf(person));
-  }
+        Person person = (Person) applicationContext.getBean("person");
+        log.info(String.valueOf(person));
+    }
 
-  @Test
-  /** The bean name is bean id in xml. */
-  public void testGetBeanName() {
-    String[] names = applicationContext.getBeanNamesForType(Person.class);
-    Arrays.stream(names).forEach(System.out::println);
-  }
+    @Test
+    /** The bean name is bean id in xml. */
+    public void testGetBeanName() {
+        String[] names = applicationContext.getBeanNamesForType(Person.class);
+        Arrays.stream(names).forEach(System.out::println);
+    }
 
-  @Test
-  public void testIocObjects() {
+    @Test
+    public void testIocObjects() {
 
-    String[] definitionNames = applicationContext.getBeanDefinitionNames();
+        String[] definitionNames = applicationContext.getBeanDefinitionNames();
 
-    Arrays.stream(definitionNames).forEach(System.out::println);
-  }
+        Arrays.stream(definitionNames).forEach(System.out::println);
+    }
 }

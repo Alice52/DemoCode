@@ -15,6 +15,6 @@ import lombok.ToString;
 @ToString
 public class SerialModel {
 
-  private Long id;
-  private String serial;
+    private Long id;
+    private String serial;
 }

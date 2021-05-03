@@ -19,7 +19,6 @@ public class OrderController {
 
     @Resource private FeignService feignService;
 
-
     @GetMapping(value = "/payment/get/{id}")
     public JsonResult getPaymentById(@PathVariable("id") Long id) {
         return feignService.getPaymentById(id);

@@ -14,12 +14,12 @@ import java.util.Arrays;
 public class ComponentScanConfigTest {
 
     private ApplicationContext componentScanConfigApplicationContext =
-      new AnnotationConfigApplicationContext(ComponentScanConfig.class);
+            new AnnotationConfigApplicationContext(ComponentScanConfig.class);
 
-  @Test
-  public void testIocObjectsForComponentScanConfig() {
-    String[] definitionNames = componentScanConfigApplicationContext.getBeanDefinitionNames();
+    @Test
+    public void testIocObjectsForComponentScanConfig() {
+        String[] definitionNames = componentScanConfigApplicationContext.getBeanDefinitionNames();
 
-    Arrays.stream(definitionNames).forEach(System.out::println);
-  }
+        Arrays.stream(definitionNames).forEach(System.out::println);
+    }
 }

@@ -21,32 +21,35 @@ import java.util.concurrent.TimeUnit;
  */
 public class SemaphoreDemo {
 
-  private static final int PARK_NUMBER = 5;
-  private static final Logger LOG = LoggerFactory.getLogger(SemaphoreDemo.class);
+    private static final int PARK_NUMBER = 5;
+    private static final Logger LOG = LoggerFactory.getLogger(SemaphoreDemo.class);
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    // mockup park number
-    Semaphore semaphore = new Semaphore(PARK_NUMBER);
+        // mockup park number
+        Semaphore semaphore = new Semaphore(PARK_NUMBER);
 
-    for (int i = 0; i < PARK_NUMBER * 2; i++) {
-      new Thread(
-              () -> {
-                try {
-                  semaphore.acquire();
-                  LOG.info(Thread.currentThread().getName() + " get access to park");
+        for (int i = 0; i < PARK_NUMBER * 2; i++) {
+            new Thread(
+                            () -> {
+                                try {
+                                    semaphore.acquire();
+                                    LOG.info(
+                                            Thread.currentThread().getName()
+                                                    + " get access to park");
 
-                  TimeUnit.SECONDS.sleep(
-                      new Random().nextInt(10)); // park random second, then leave
-                  LOG.info(Thread.currentThread().getName() + " leave park");
-                } catch (InterruptedException e) {
-                  e.printStackTrace();
-                } finally {
-                  semaphore.release();
-                }
-              },
-              String.valueOf(i))
-          .start();
+                                    TimeUnit.SECONDS.sleep(
+                                            new Random()
+                                                    .nextInt(10)); // park random second, then leave
+                                    LOG.info(Thread.currentThread().getName() + " leave park");
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    semaphore.release();
+                                }
+                            },
+                            String.valueOf(i))
+                    .start();
+        }
     }
-  }
 }

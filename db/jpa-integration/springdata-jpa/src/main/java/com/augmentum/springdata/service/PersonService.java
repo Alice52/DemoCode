@@ -13,18 +13,18 @@ import java.util.List;
 @Service
 public interface PersonService {
 
-  /**
-   * save person in batch
-   *
-   * @param persons
-   */
-  void savePersons(List<Person> persons);
+    /**
+     * save person in batch
+     *
+     * @param persons
+     */
+    void savePersons(List<Person> persons);
 
-  /**
-   * update person info
-   *
-   * @param email
-   * @param id
-   */
-  void updatePersonEmail(String email, Integer id);
+    /**
+     * update person info
+     *
+     * @param email
+     * @param id
+     */
+    void updatePersonEmail(String email, Integer id);
 }

@@ -16,26 +16,26 @@ import static cn.edu.ntu.javase.collection.ObjectFactory.persons;
  */
 public class CollectionsAndArraysTest {
 
-  public static void main(String[] args) {}
-  /** 对List列表中的数据按年龄生序排序 */
-  @Test
-  public void ListSort() {
-    Arrays.sort(new int[] {});
-    Collections.sort(persons, Comparator.comparing(Person::getAge));
-    persons.forEach(System.out::println);
-  }
+    public static void main(String[] args) {}
+    /** 对List列表中的数据按年龄生序排序 */
+    @Test
+    public void ListSort() {
+        Arrays.sort(new int[] {});
+        Collections.sort(persons, Comparator.comparing(Person::getAge));
+        persons.forEach(System.out::println);
+    }
 
-  /**
-   * 取集合 Collection 中最小值[按需求找<br>
-   *
-   * <pre>
-   *    1. Object min(Collection)             // 自然排序-对象要实现 Comparable 接口
-   *    2. Object min(Collection, Comparator) // 定制排序, 传入比较器
-   * </pre>
-   */
-  @Test
-  public void testMin() {
-    Person sortByAge = Collections.min(persons, Comparator.comparingInt(Person::getAge));
-    Person sortByName = Collections.min(persons, Comparator.comparing(Person::getName));
-  }
+    /**
+     * 取集合 Collection 中最小值[按需求找<br>
+     *
+     * <pre>
+     *    1. Object min(Collection)             // 自然排序-对象要实现 Comparable 接口
+     *    2. Object min(Collection, Comparator) // 定制排序, 传入比较器
+     * </pre>
+     */
+    @Test
+    public void testMin() {
+        Person sortByAge = Collections.min(persons, Comparator.comparingInt(Person::getAge));
+        Person sortByName = Collections.min(persons, Comparator.comparing(Person::getName));
+    }
 }

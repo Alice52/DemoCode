@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * @author zack <br/>
- * @create 2020-04-29 19:22 <br/>
+ * @author zack <br>
+ * @create 2020-04-29 19:22 <br>
  */
 @Slf4j
 public class LazyLoadAnnoTest {

@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
  * @create 2020-05-03 17:25 <br>
  */
 public interface IHelloService {
-  Logger LOG = LoggerFactory.getLogger(IHelloService.class);
+    Logger LOG = LoggerFactory.getLogger(IHelloService.class);
 
-  public default void say() {
-    LOG.info("IHelloService say()");
-  }
+    public default void say() {
+        LOG.info("IHelloService say()");
+    }
 }

@@ -13,20 +13,20 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class ScopeAnno {
 
-  /**
-   * The instance of person is singleton default, can change by @Scope<br>
-   *
-   * @see ConfigurableBeanFactory#SCOPE_PROTOTYPE: will create object and put it to IOC container
-   *     when get this bean from IOC for each time rather than IOC created.
-   * @see ConfigurableBeanFactory#SCOPE_SINGLETON: will create object and put it to IOC container
-   *     when IOC created.
-   * @see org.springframework.web.context.WebApplicationContext#SCOPE_REQUEST
-   * @see org.springframework.web.context.WebApplicationContext#SCOPE_SESSION
-   * @return Person
-   */
-  @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-  @Bean(value = "person")
-  public Person injectPerson() {
-    return new Person(19, "alice52");
-  }
+    /**
+     * The instance of person is singleton default, can change by @Scope<br>
+     *
+     * @see ConfigurableBeanFactory#SCOPE_PROTOTYPE: will create object and put it to IOC container
+     *     when get this bean from IOC for each time rather than IOC created.
+     * @see ConfigurableBeanFactory#SCOPE_SINGLETON: will create object and put it to IOC container
+     *     when IOC created.
+     * @see org.springframework.web.context.WebApplicationContext#SCOPE_REQUEST
+     * @see org.springframework.web.context.WebApplicationContext#SCOPE_SESSION
+     * @return Person
+     */
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    @Bean(value = "person")
+    public Person injectPerson() {
+        return new Person(19, "alice52");
+    }
 }

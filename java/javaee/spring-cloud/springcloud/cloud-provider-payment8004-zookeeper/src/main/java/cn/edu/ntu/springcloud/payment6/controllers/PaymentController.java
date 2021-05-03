@@ -18,18 +18,18 @@ import java.util.UUID;
 @RequestMapping(value = "/payment")
 public class PaymentController {
 
-  @Value("${server.port}")
-  private String port;
+    @Value("${server.port}")
+    private String port;
 
-  @GetMapping(value = "/zookeeper")
-  public JsonResult paymentZK() {
+    @GetMapping(value = "/zookeeper")
+    public JsonResult paymentZK() {
 
-    return new JsonResult(
-        200,
-        "spring cloud integration zookeeper: port: "
-            + port
-            + " random id: "
-            + UUID.randomUUID().toString(),
-        null);
-  }
+        return new JsonResult(
+                200,
+                "spring cloud integration zookeeper: port: "
+                        + port
+                        + " random id: "
+                        + UUID.randomUUID().toString(),
+                null);
+    }
 }

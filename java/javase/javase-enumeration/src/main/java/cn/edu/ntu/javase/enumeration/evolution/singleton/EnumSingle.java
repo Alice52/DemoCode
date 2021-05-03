@@ -13,5 +13,5 @@ import org.slf4j.LoggerFactory;
  * @create 2020-01-31 16:12 <br>
  */
 public class EnumSingle {
-  private static final Logger LOG = LoggerFactory.getLogger(EnumSingle.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EnumSingle.class);
 }

@@ -26,53 +26,59 @@ import java.util.HashMap;
 @Configuration
 public class RabbitmqDirectDeadDeclareConfiguration {
 
-  private String deadExchangeName = "direct-dead-dl-exchange";
-  private String deadQueueName = "direct-dead-dl-queue";
-  private String deadRoutingKey = "dead-dl-routing-key";
-  private String exchangeName = "direct-dead-exchange";
-  private String queueName = "direct-dead-queue";
-  private String routingKey = "dead-routing-key";;
+    private String deadExchangeName = "direct-dead-dl-exchange";
+    private String deadQueueName = "direct-dead-dl-queue";
+    private String deadRoutingKey = "dead-dl-routing-key";
+    private String exchangeName = "direct-dead-exchange";
+    private String queueName = "direct-dead-queue";
+    private String routingKey = "dead-routing-key";
+    ;
 
-  @Bean
-  public Exchange directExchange() {
+    @Bean
+    public Exchange directExchange() {
 
-    return new DirectExchange(exchangeName, true, false);
-  }
+        return new DirectExchange(exchangeName, true, false);
+    }
 
-  /**
-   * 1. 声明正常的 queue 并绑定 DL 相关的参数<br>
-   * 2. 需要进入 dl-queue 时会抛弃之前的 routingkey, 并带上 deadRoutingKey 作为 routingkey 发送到 deadExchangeName
-   *
-   * @return
-   */
-  @Bean
-  public Queue directQueue() {
-    HashMap<String, Object> map = new HashMap<>(2);
-    map.put("x-dead-letter-exchange", deadExchangeName);
-    map.put("x-dead-letter-routing-key", deadRoutingKey);
-    return new Queue(queueName, true, false, false, map);
-  }
+    /**
+     * 1. 声明正常的 queue 并绑定 DL 相关的参数<br>
+     * 2. 需要进入 dl-queue 时会抛弃之前的 routingkey, 并带上 deadRoutingKey 作为 routingkey 发送到 deadExchangeName
+     *
+     * @return
+     */
+    @Bean
+    public Queue directQueue() {
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put("x-dead-letter-exchange", deadExchangeName);
+        map.put("x-dead-letter-routing-key", deadRoutingKey);
+        return new Queue(queueName, true, false, false, map);
+    }
 
-  @Bean
-  public Binding directBinding() {
+    @Bean
+    public Binding directBinding() {
 
-    return new Binding(queueName, Binding.DestinationType.QUEUE, exchangeName, routingKey, null);
-  }
+        return new Binding(
+                queueName, Binding.DestinationType.QUEUE, exchangeName, routingKey, null);
+    }
 
-  @Bean
-  public Exchange directDeadExchange() {
-    return new DirectExchange(deadExchangeName, true, false);
-  }
+    @Bean
+    public Exchange directDeadExchange() {
+        return new DirectExchange(deadExchangeName, true, false);
+    }
 
-  @Bean
-  public Queue directDeadQueue() {
-    return new Queue(deadQueueName, true, false, false);
-  }
+    @Bean
+    public Queue directDeadQueue() {
+        return new Queue(deadQueueName, true, false, false);
+    }
 
-  @Bean
-  public Binding directDeadBinding() {
+    @Bean
+    public Binding directDeadBinding() {
 
-    return new Binding(
-        deadQueueName, Binding.DestinationType.QUEUE, deadExchangeName, deadRoutingKey, null);
-  }
+        return new Binding(
+                deadQueueName,
+                Binding.DestinationType.QUEUE,
+                deadExchangeName,
+                deadRoutingKey,
+                null);
+    }
 }

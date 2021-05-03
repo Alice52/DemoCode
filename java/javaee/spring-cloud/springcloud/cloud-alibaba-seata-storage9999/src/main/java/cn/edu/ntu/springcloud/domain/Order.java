@@ -15,10 +15,10 @@ import java.math.BigDecimal;
 @Data
 public class Order {
 
-  private Long id;
-  private Long userId;
-  private Long productId;
-  private Integer count;
-  private Integer status;
-  private BigDecimal money;
+    private Long id;
+    private Long userId;
+    private Long productId;
+    private Integer count;
+    private Integer status;
+    private BigDecimal money;
 }

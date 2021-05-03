@@ -14,18 +14,18 @@ import java.lang.ref.WeakReference;
 @Slf4j
 public class WeakRefer {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    Object o = new Object();
-    WeakReference<Object> weakReference = new WeakReference<>(o);
-    log.info("o: {}", o);
-    log.info("softReference: {}", weakReference.get());
+        Object o = new Object();
+        WeakReference<Object> weakReference = new WeakReference<>(o);
+        log.info("o: {}", o);
+        log.info("softReference: {}", weakReference.get());
 
-    o = null;
-    System.gc();
-    // null
-    log.info("o: {}", o);
-    // null
-    log.info("softReference: {}", weakReference.get());
-  }
+        o = null;
+        System.gc();
+        // null
+        log.info("o: {}", o);
+        // null
+        log.info("softReference: {}", weakReference.get());
+    }
 }

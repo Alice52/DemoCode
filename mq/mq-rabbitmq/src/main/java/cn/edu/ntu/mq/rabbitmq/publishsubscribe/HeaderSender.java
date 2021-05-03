@@ -19,7 +19,5 @@ public class HeaderSender {
         sendMsg();
     }
 
-    public static void sendMsg() {
-
-    }
+    public static void sendMsg() {}
 }

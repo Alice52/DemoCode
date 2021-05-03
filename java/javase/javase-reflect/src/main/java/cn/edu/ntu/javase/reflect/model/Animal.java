@@ -9,15 +9,15 @@ import org.slf4j.LoggerFactory;
  */
 public interface Animal {
 
-  Logger LOG = LoggerFactory.getLogger(Animal.class);
+    Logger LOG = LoggerFactory.getLogger(Animal.class);
 
-  /**
-   * Get animal type.
-   *
-   * @return animal name
-   */
-  default String getType() {
-    LOG.warn("un implement exception: UnsupportedOperationException");
-    throw new UnsupportedOperationException();
-  }
+    /**
+     * Get animal type.
+     *
+     * @return animal name
+     */
+    default String getType() {
+        LOG.warn("un implement exception: UnsupportedOperationException");
+        throw new UnsupportedOperationException();
+    }
 }

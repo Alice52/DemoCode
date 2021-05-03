@@ -15,23 +15,23 @@ import org.springframework.context.annotation.Bean;
 @EnableCircuitBreaker
 public class PaymentApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(PaymentApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(PaymentApplication.class, args);
+    }
 
-  /**
-   * when spring cloud upgrate, then ServletRegistrationBean default is bot /hystrix.stream due to
-   * spring boot<br>
-   *
-   * @return ServletRegistrationBean
-   */
-  @Bean
-  public ServletRegistrationBean getServlet() {
-    HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
-    ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
-    registrationBean.setLoadOnStartup(1);
-    registrationBean.addUrlMappings("/hystrix.stream");
-    registrationBean.setName("HystrixMetricsStreamServlet");
-    return registrationBean;
-  }
+    /**
+     * when spring cloud upgrate, then ServletRegistrationBean default is bot /hystrix.stream due to
+     * spring boot<br>
+     *
+     * @return ServletRegistrationBean
+     */
+    @Bean
+    public ServletRegistrationBean getServlet() {
+        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
+        registrationBean.setLoadOnStartup(1);
+        registrationBean.addUrlMappings("/hystrix.stream");
+        registrationBean.setName("HystrixMetricsStreamServlet");
+        return registrationBean;
+    }
 }

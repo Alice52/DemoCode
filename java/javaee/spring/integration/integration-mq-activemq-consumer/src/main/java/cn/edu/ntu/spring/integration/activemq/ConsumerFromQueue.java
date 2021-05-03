@@ -2,7 +2,6 @@ package cn.edu.ntu.spring.integration.activemq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
@@ -17,18 +16,18 @@ import javax.annotation.Resource;
  */
 @Service
 public class ConsumerFromQueue {
-  private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerFromQueue.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerFromQueue.class);
 
-  @Resource private JmsTemplate jmsTemplate;
+    @Resource private JmsTemplate jmsTemplate;
 
-  public static void main(String[] args) {
-    ApplicationContext applicationContext =
-        new ClassPathXmlApplicationContext("applicationContext.xml");
-    ConsumerFromQueue consumer =
-        (ConsumerFromQueue) applicationContext.getBean("consumerFromQueue");
-    // just get one message from queue
-    String value = (String) consumer.jmsTemplate.receiveAndConvert();
+    public static void main(String[] args) {
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+        ConsumerFromQueue consumer =
+                (ConsumerFromQueue) applicationContext.getBean("consumerFromQueue");
+        // just get one message from queue
+        String value = (String) consumer.jmsTemplate.receiveAndConvert();
 
-    LOGGER.info("Consume text message: {} success!", value);
-  }
+        LOGGER.info("Consume text message: {} success!", value);
+    }
 }

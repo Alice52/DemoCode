@@ -6,10 +6,10 @@ package cn.edu.ntu.javase.reflect.proxy;
  */
 public interface Handler {
 
-  /**
-   * handle data <br>
-   *
-   * @param data
-   */
-  void handle(String data);
+    /**
+     * handle data <br>
+     *
+     * @param data
+     */
+    void handle(String data);
 }

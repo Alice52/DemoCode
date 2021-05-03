@@ -11,9 +11,9 @@ import java.util.Objects;
  */
 public class GenericMethodImpl extends BaseGenericMethod<Person> {
 
-  @Override
-  public int hash() {
-    Person instance = this.createInstance(Person.class);
-    return Objects.hash(instance);
-  }
+    @Override
+    public int hash() {
+        Person instance = this.createInstance(Person.class);
+        return Objects.hash(instance);
+    }
 }

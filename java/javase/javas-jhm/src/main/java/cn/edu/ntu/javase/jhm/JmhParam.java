@@ -16,17 +16,17 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
  */
 @State(Scope.Benchmark)
 public class JmhParam {
-  @Param({"1", "2", "3"})
-  int testNum;
+    @Param({"1", "2", "3"})
+    int testNum;
 
-  public static void main(String[] args) throws RunnerException {
-    Options opt = new OptionsBuilder().include(JmhParam.class.getSimpleName()).forks(1).build();
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder().include(JmhParam.class.getSimpleName()).forks(1).build();
 
-    new Runner(opt).run();
-  }
+        new Runner(opt).run();
+    }
 
-  @Benchmark
-  public String test() {
-    return String.valueOf(testNum);
-  }
+    @Benchmark
+    public String test() {
+        return String.valueOf(testNum);
+    }
 }

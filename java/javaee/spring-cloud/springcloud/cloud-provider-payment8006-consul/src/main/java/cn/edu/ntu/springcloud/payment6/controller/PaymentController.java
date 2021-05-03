@@ -16,10 +16,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/payment")
 public class PaymentController {
-  private static final Logger LOG = LoggerFactory.getLogger(PaymentController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PaymentController.class);
 
-  @GetMapping(value = "/consul")
-  public JsonResult get() {
-    return new JsonResult(200, UUID.randomUUID().toString(), null);
-  }
+    @GetMapping(value = "/consul")
+    public JsonResult get() {
+        return new JsonResult(200, UUID.randomUUID().toString(), null);
+    }
 }

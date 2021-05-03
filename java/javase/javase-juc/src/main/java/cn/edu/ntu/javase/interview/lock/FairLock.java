@@ -15,8 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @Slf4j
 public class FairLock {
-  public static void main(String[] args) {
-    // This is equivalent to using {@code ReentrantLock(false)}.
-    Lock lock = new ReentrantLock();
-  }
+    public static void main(String[] args) {
+        // This is equivalent to using {@code ReentrantLock(false)}.
+        Lock lock = new ReentrantLock();
+    }
 }

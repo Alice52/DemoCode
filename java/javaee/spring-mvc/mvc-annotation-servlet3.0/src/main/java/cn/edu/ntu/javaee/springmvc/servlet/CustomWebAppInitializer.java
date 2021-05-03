@@ -14,33 +14,33 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 @Slf4j
 public class CustomWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-  /**
-   * this class is same function with config application.xml in web.xml
-   *
-   * @return
-   */
-  @Override
-  protected Class<?>[] getRootConfigClasses() {
-    return new Class<?>[] {RootConfig.class};
-  }
+    /**
+     * this class is same function with config application.xml in web.xml
+     *
+     * @return
+     */
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[] {RootConfig.class};
+    }
 
-  /**
-   * this class is same function with config application4mvc.xml in web.xml
-   *
-   * @return
-   */
-  @Override
-  protected Class<?>[] getServletConfigClasses() {
-    return new Class<?>[] {ServletConfig.class};
-  }
+    /**
+     * this class is same function with config application4mvc.xml in web.xml
+     *
+     * @return
+     */
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[] {ServletConfig.class};
+    }
 
-  /**
-   * this class is same function with config mapping servlet in web.xml
-   *
-   * @return
-   */
-  @Override
-  protected String[] getServletMappings() {
-    return new String[] {"/"};
-  }
+    /**
+     * this class is same function with config mapping servlet in web.xml
+     *
+     * @return
+     */
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] {"/"};
+    }
 }

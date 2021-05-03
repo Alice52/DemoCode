@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JsonResult<T> {
 
-  private Integer code;
-  private String message;
+    private Integer code;
+    private String message;
 
-  private T data;
+    private T data;
 
-  public JsonResult(Integer code, String message) {
-   this(code, message, null);
-  }
+    public JsonResult(Integer code, String message) {
+        this(code, message, null);
+    }
 }

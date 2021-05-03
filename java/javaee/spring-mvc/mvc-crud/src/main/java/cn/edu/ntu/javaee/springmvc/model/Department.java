@@ -3,35 +3,34 @@ package cn.edu.ntu.javaee.springmvc.model;
 /** @author zack */
 public class Department {
 
-  private Integer id;
-  private String departmentName;
+    private Integer id;
+    private String departmentName;
 
-  public Department() {
-  }
+    public Department() {}
 
-  public Department(int i, String string) {
-    this.id = i;
-    this.departmentName = string;
-  }
+    public Department(int i, String string) {
+        this.id = i;
+        this.departmentName = string;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public String getDepartmentName() {
-    return departmentName;
-  }
+    public String getDepartmentName() {
+        return departmentName;
+    }
 
-  public void setDepartmentName(String departmentName) {
-    this.departmentName = departmentName;
-  }
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 
-  @Override
-  public String toString() {
-    return "Department [id=" + id + ", departmentName=" + departmentName + "]";
-  }
+    @Override
+    public String toString() {
+        return "Department [id=" + id + ", departmentName=" + departmentName + "]";
+    }
 }

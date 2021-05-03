@@ -24,27 +24,27 @@ import java.util.stream.Stream;
 @Slf4j
 public class SimpleMethods {
 
-  public static void main(String[] args) {
-    Thread thread =
-        new Thread(
-            () -> {
-              log.info("start");
-              try {
-                TimeUnit.SECONDS.sleep(10);
-              } catch (InterruptedException e) {
-                log.info("error:{}", e);
-              }
-            },
-            "AAA");
+    public static void main(String[] args) {
+        Thread thread =
+                new Thread(
+                        () -> {
+                            log.info("start");
+                            try {
+                                TimeUnit.SECONDS.sleep(10);
+                            } catch (InterruptedException e) {
+                                log.info("error:{}", e);
+                            }
+                        },
+                        "AAA");
 
-    ThreadGroup group = thread.getThreadGroup();
-    log.info("group: {}, main group: {}", group, Thread.currentThread().getThreadGroup());
-    // thread.run();
-    thread.setDaemon(true);
-    thread.start();
+        ThreadGroup group = thread.getThreadGroup();
+        log.info("group: {}, main group: {}", group, Thread.currentThread().getThreadGroup());
+        // thread.run();
+        thread.setDaemon(true);
+        thread.start();
 
-    Thread[] allThreads = new Thread[Thread.activeCount()];
-    Thread.enumerate(allThreads);
-    Stream.of(allThreads).forEach(System.out::println);
-  }
+        Thread[] allThreads = new Thread[Thread.activeCount()];
+        Thread.enumerate(allThreads);
+        Stream.of(allThreads).forEach(System.out::println);
+    }
 }

@@ -18,32 +18,32 @@ import java.util.stream.IntStream;
 @Slf4j
 public class MemoryStruct {
 
-  @Test
-  public void testMapStruct() {
+    @Test
+    public void testMapStruct() {
 
-    Map map = new HashMap<>(2);
-    map.put("age", 18);
-    map.put("name", "zack");
+        Map map = new HashMap<>(2);
+        map.put("age", 18);
+        map.put("name", "zack");
 
-    IntStream.rangeClosed(0, 10).forEach(x -> map.put("name" + x, x));
-    log.info(ClassLayout.parseInstance(map).toPrintable());
-  }
+        IntStream.rangeClosed(0, 10).forEach(x -> map.put("name" + x, x));
+        log.info(ClassLayout.parseInstance(map).toPrintable());
+    }
 
-  @Test
-  public void testPersonStruct() {
-    Person person = new Person("zack", 18);
-    log.info(ClassLayout.parseInstance(person).toPrintable());
-  }
+    @Test
+    public void testPersonStruct() {
+        Person person = new Person("zack", 18);
+        log.info(ClassLayout.parseInstance(person).toPrintable());
+    }
 
-  @Test
-  public void testArrayStruct() {
-    ArrayList<Integer> list = new ArrayList<>(10);
-    log.info(ClassLayout.parseInstance(list).toPrintable());
-  }
+    @Test
+    public void testArrayStruct() {
+        ArrayList<Integer> list = new ArrayList<>(10);
+        log.info(ClassLayout.parseInstance(list).toPrintable());
+    }
 
-  @Test
-  public void testObjectStruct() {
-    Object o = new Object();
-    log.info(ClassLayout.parseInstance(o).toPrintable());
-  }
+    @Test
+    public void testObjectStruct() {
+        Object o = new Object();
+        log.info(ClassLayout.parseInstance(o).toPrintable());
+    }
 }

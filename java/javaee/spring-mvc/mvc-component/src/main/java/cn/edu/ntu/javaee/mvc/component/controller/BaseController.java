@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BaseController {
 
-  @RequestMapping(value = "/helloServlet")
-  public String hello() {
-    return "success";
-  }
+    @RequestMapping(value = "/helloServlet")
+    public String hello() {
+        return "success";
+    }
 }

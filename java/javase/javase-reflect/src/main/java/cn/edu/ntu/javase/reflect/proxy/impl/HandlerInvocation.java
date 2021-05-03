@@ -11,23 +11,23 @@ import java.lang.reflect.Method;
  * @create 2020-04-04 23:53 <br>
  */
 public class HandlerInvocation implements InvocationHandler {
-  private static final Logger LOG = LoggerFactory.getLogger(HandlerInvocation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HandlerInvocation.class);
 
-  private final Object target;
+    private final Object target;
 
-  public HandlerInvocation(Object target) {
-    this.target = target;
-  }
-
-  @Override
-  public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-    LOG.info("call method " + method + " ,args " + args);
-    long start = System.currentTimeMillis();
-    try {
-      return method.invoke(this.target, args);
-    } finally {
-      long end = System.currentTimeMillis();
-      System.out.println("cost " + (end - start) + "ms");
+    public HandlerInvocation(Object target) {
+        this.target = target;
     }
-  }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        LOG.info("call method " + method + " ,args " + args);
+        long start = System.currentTimeMillis();
+        try {
+            return method.invoke(this.target, args);
+        } finally {
+            long end = System.currentTimeMillis();
+            System.out.println("cost " + (end - start) + "ms");
+        }
+    }
 }

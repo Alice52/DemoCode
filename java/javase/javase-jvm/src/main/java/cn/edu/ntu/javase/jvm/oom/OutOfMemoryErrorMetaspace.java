@@ -12,12 +12,12 @@ import java.util.Optional;
 @Slf4j
 public class OutOfMemoryErrorMetaspace {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    Optional.ofNullable(OmmTest.obj).ifPresent(System.out::println);
-  }
+        Optional.ofNullable(OmmTest.obj).ifPresent(System.out::println);
+    }
 
-  static class OmmTest {
-    static Object obj = new byte[500 * 1024 * 1024];
-  }
+    static class OmmTest {
+        static Object obj = new byte[500 * 1024 * 1024];
+    }
 }

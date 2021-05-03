@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="cn.edu.ntu.spring.integration.activemq"/>
@@ -30,9 +30,9 @@
 
     <!--&lt;!&ndash; config listener: do not need start consumer &ndash;&gt;-->
     <!--<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">-->
-        <!--<property name="connectionFactory" ref="jmsFactory"/>-->
-        <!--<property name="destination" ref="destinationTopic"/>-->
-        <!--<property name="messageListener" ref="myMessageListener"/>-->
+    <!--<property name="connectionFactory" ref="jmsFactory"/>-->
+    <!--<property name="destination" ref="destinationTopic"/>-->
+    <!--<property name="messageListener" ref="myMessageListener"/>-->
     <!--</bean>-->
 
     <!-- config JMS tool -->
@@ -41,7 +41,7 @@
         <property name="defaultDestination" ref="destinationTopic"/>
         <!-- open sub mode -->
         <!--<property name="pubSubDomain" value="true"/>-->
-        <property name="receiveTimeout" value="10000" />
+        <property name="receiveTimeout" value="10000"/>
         <!-- deliveryMode, priority, timeToLive 的开关要生效，必须配置为true，默认false-->
         <property name="explicitQosEnabled" value="true"/>
         <property name="deliveryMode" value="2"/>

@@ -15,11 +15,11 @@ import org.springframework.messaging.Message;
 @Slf4j
 public class MessageListener {
 
-  @Value("${server.port}")
-  private String port;
+    @Value("${server.port}")
+    private String port;
 
-  @StreamListener(Sink.INPUT)
-  public void receive(Message<?> message) {
-    log.info("consumer02 receive message: {}, and port: {}", message.getPayload(), port);
-  }
+    @StreamListener(Sink.INPUT)
+    public void receive(Message<?> message) {
+        log.info("consumer02 receive message: {}, and port: {}", message.getPayload(), port);
+    }
 }

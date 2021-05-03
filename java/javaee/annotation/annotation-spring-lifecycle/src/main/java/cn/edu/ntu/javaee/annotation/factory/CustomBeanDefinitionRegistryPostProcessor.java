@@ -16,22 +16,24 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
  */
 @Slf4j
 public class CustomBeanDefinitionRegistryPostProcessor
-    implements BeanDefinitionRegistryPostProcessor {
+        implements BeanDefinitionRegistryPostProcessor {
 
-  @Override
-  public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry)
-      throws BeansException {
-    log.info("1. CustomBeanDefinitionRegistryPostProcessor...postProcessBeanDefinitionRegistry");
+    @Override
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry)
+            throws BeansException {
+        log.info(
+                "1. CustomBeanDefinitionRegistryPostProcessor...postProcessBeanDefinitionRegistry");
 
-    registry.registerBeanDefinition("PERSON", new RootBeanDefinition(Person.class));
-    registry.registerBeanDefinition(
-        "PERSON2", BeanDefinitionBuilder.rootBeanDefinition(Person.class).getBeanDefinition());
-    registry.removeBeanDefinition("PERSON2");
-  }
+        registry.registerBeanDefinition("PERSON", new RootBeanDefinition(Person.class));
+        registry.registerBeanDefinition(
+                "PERSON2",
+                BeanDefinitionBuilder.rootBeanDefinition(Person.class).getBeanDefinition());
+        registry.removeBeanDefinition("PERSON2");
+    }
 
-  @Override
-  public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-      throws BeansException {
-    log.info("2. CustomBeanDefinitionRegistryPostProcessor...postProcessBeanFactory");
-  }
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+            throws BeansException {
+        log.info("2. CustomBeanDefinitionRegistryPostProcessor...postProcessBeanFactory");
+    }
 }

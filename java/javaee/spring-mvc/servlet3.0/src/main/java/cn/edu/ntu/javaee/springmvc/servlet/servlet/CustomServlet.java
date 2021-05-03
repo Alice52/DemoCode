@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 /** @author zack */
 public class CustomServlet extends HttpServlet {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    resp.getWriter().write("CustomServlet...");
-  }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        resp.getWriter().write("CustomServlet...");
+    }
 }

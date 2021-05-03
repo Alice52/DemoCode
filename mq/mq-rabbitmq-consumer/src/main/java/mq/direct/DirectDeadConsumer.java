@@ -23,29 +23,28 @@ import java.io.IOException;
 @Slf4j
 public class DirectDeadConsumer {
 
-  private String queueName = "direct-dead-queue";
+    @Autowired RabbitTemplate rabbitTemplate;
+    private String queueName = "direct-dead-queue";
 
-  @Autowired RabbitTemplate rabbitTemplate;
+    @SneakyThrows
+    @RabbitHandler
+    public void receive(Message message, String content, Channel channel) {
 
-  @SneakyThrows
-  @RabbitHandler
-  public void receive(Message message, String content, Channel channel) {
+        MessageProperties properties = message.getMessageProperties();
+        log.info(
+                "Get message from {}, message properties: {}, message body[json]: {}",
+                queueName,
+                properties,
+                content);
 
-    MessageProperties properties = message.getMessageProperties();
-    log.info(
-        "Get message from {}, message properties: {}, message body[json]: {}",
-        queueName,
-        properties,
-        content);
-
-    try {
-      channel.basicAck(properties.getDeliveryTag(), false);
-    } catch (IOException e) {
-      if (properties.getRedelivered()) {
-        channel.basicNack(properties.getDeliveryTag(), false, false);
-      } else {
-        channel.basicNack(properties.getDeliveryTag(), false, true);
-      }
+        try {
+            channel.basicAck(properties.getDeliveryTag(), false);
+        } catch (IOException e) {
+            if (properties.getRedelivered()) {
+                channel.basicNack(properties.getDeliveryTag(), false, false);
+            } else {
+                channel.basicNack(properties.getDeliveryTag(), false, true);
+            }
+        }
     }
-  }
 }

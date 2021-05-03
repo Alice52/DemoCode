@@ -27,23 +27,25 @@ import java.util.stream.IntStream;
 @Slf4j
 public class UnsafeHashMap {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    Map<String, String> safeMap = Collections.synchronizedMap(new HashMap<String, String>());
+        Map<String, String> safeMap = Collections.synchronizedMap(new HashMap<String, String>());
 
-    HashMap<String, Object> unsafeMap = new HashMap<>(10);
+        HashMap<String, Object> unsafeMap = new HashMap<>(10);
 
-    IntStream.rangeClosed(1, 100)
-        .forEach(
-            i ->
-                new Thread(
-                        () -> {
-                          String key = UUID.randomUUID().toString();
-                          unsafeMap.put(key, key);
-                          log.info("map: {}", unsafeMap); // exception
-                          log.info("map: {}", unsafeMap.get(key)); // unsafe
-                        },
-                        "AAA" + i)
-                    .start());
-  }
+        IntStream.rangeClosed(1, 100)
+                .forEach(
+                        i ->
+                                new Thread(
+                                                () -> {
+                                                    String key = UUID.randomUUID().toString();
+                                                    unsafeMap.put(key, key);
+                                                    log.info("map: {}", unsafeMap); // exception
+                                                    log.info(
+                                                            "map: {}",
+                                                            unsafeMap.get(key)); // unsafe
+                                                },
+                                                "AAA" + i)
+                                        .start());
+    }
 }

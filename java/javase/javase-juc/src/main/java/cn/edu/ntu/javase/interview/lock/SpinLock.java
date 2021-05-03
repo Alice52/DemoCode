@@ -22,59 +22,59 @@ import java.util.concurrent.atomic.AtomicReference;
 @Slf4j
 public class SpinLock {
 
-  /**
-   * 此时没有被调用所以之内存中还是 null<br>
-   * 基本数据类型, new 出来时是默认值,<br>
-   * 引用类型则是 null
-   */
-  private AtomicReference<Thread> reference = new AtomicReference<>();
+    /**
+     * 此时没有被调用所以之内存中还是 null<br>
+     * 基本数据类型, new 出来时是默认值,<br>
+     * 引用类型则是 null
+     */
+    private AtomicReference<Thread> reference = new AtomicReference<>();
 
-  @SneakyThrows
-  public static void main(String[] args) {
-    SpinLock lock = new SpinLock();
+    @SneakyThrows
+    public static void main(String[] args) {
+        SpinLock lock = new SpinLock();
 
-    new Thread(
-            () -> {
-              try {
-                lock.Lock();
-                TimeUnit.SECONDS.sleep(5);
-              } catch (InterruptedException e) {
-              } finally {
-                lock.UnLock();
-              }
-            },
-            "AAA")
-        .start();
+        new Thread(
+                        () -> {
+                            try {
+                                lock.Lock();
+                                TimeUnit.SECONDS.sleep(5);
+                            } catch (InterruptedException e) {
+                            } finally {
+                                lock.UnLock();
+                            }
+                        },
+                        "AAA")
+                .start();
 
-    // 保证 AAA 先获取到锁
-    TimeUnit.SECONDS.sleep(1);
+        // 保证 AAA 先获取到锁
+        TimeUnit.SECONDS.sleep(1);
 
-    new Thread(
-            () -> {
-              try {
-                lock.Lock();
-                TimeUnit.SECONDS.sleep(1);
-              } catch (InterruptedException e) {
-              } finally {
-                lock.UnLock();
-              }
-            },
-            "BBB")
-        .start();
-  }
-
-  private void Lock() {
-
-    // 成功比较并设置则停止循环
-    while (!reference.compareAndSet(null, Thread.currentThread())) {
-      // logic
-      log.info("thread: {} do-while", Thread.currentThread().getName());
+        new Thread(
+                        () -> {
+                            try {
+                                lock.Lock();
+                                TimeUnit.SECONDS.sleep(1);
+                            } catch (InterruptedException e) {
+                            } finally {
+                                lock.UnLock();
+                            }
+                        },
+                        "BBB")
+                .start();
     }
-    log.info("thread: {} got lock", Thread.currentThread().getName());
-  }
 
-  private void UnLock() {
-    reference.compareAndSet(Thread.currentThread(), null);
-    log.info("thread: {} unlock", Thread.currentThread().getName());
-  }
+    private void Lock() {
+
+        // 成功比较并设置则停止循环
+        while (!reference.compareAndSet(null, Thread.currentThread())) {
+            // logic
+            log.info("thread: {} do-while", Thread.currentThread().getName());
+        }
+        log.info("thread: {} got lock", Thread.currentThread().getName());
+    }
+
+    private void UnLock() {
+        reference.compareAndSet(Thread.currentThread(), null);
+        log.info("thread: {} unlock", Thread.currentThread().getName());
+    }
 }

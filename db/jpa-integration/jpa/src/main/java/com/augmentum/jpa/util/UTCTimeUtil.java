@@ -6,87 +6,87 @@ import java.util.TimeZone;
 
 public final class UTCTimeUtil {
 
-  /** util class should not be initial */
-  private UTCTimeUtil() {}
+    /** util class should not be initial */
+    private UTCTimeUtil() {}
 
-  /**
-   * Get calendar that time zone is UTC
-   *
-   * @param date
-   * @return
-   */
-  public static Calendar toUTCCalendar(Date date) {
-    if (date == null) {
-      return null;
+    /**
+     * Get calendar that time zone is UTC
+     *
+     * @param date
+     * @return
+     */
+    public static Calendar toUTCCalendar(Date date) {
+        if (date == null) {
+            return null;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return calendar;
     }
 
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(date);
-    calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-    return calendar;
-  }
+    /**
+     * Convert local time to utc time (time subtract local timezone offset)
+     *
+     * @param date
+     * @param local
+     * @return
+     */
+    public static Date localToUtc(Date date, TimeZone local) {
 
-  /**
-   * Convert local time to utc time (time subtract local timezone offset)
-   *
-   * @param date
-   * @param local
-   * @return
-   */
-  public static Date localToUtc(Date date, TimeZone local) {
+        if (date == null || local == null) {
+            return null;
+        }
 
-    if (date == null || local == null) {
-      return null;
+        Date utc = null;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MILLISECOND, 0 - local.getRawOffset() - local.getDSTSavings());
+        utc = calendar.getTime();
+
+        return utc;
     }
 
-    Date utc = null;
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(date);
-    calendar.add(Calendar.MILLISECOND, 0 - local.getRawOffset() - local.getDSTSavings());
-    utc = calendar.getTime();
+    /**
+     * Convert local time to utc time (time subtract local timezone offset)
+     *
+     * @param date
+     * @return utc Date
+     */
+    public static Date localToUtc(Date date) {
 
-    return utc;
-  }
-
-  /**
-   * Convert local time to utc time (time subtract local timezone offset)
-   *
-   * @param date
-   * @return utc Date
-   */
-  public static Date localToUtc(Date date) {
-
-    return localToUtc(date, TimeZone.getDefault());
-  }
-
-  /**
-   * Convert utc time to local time (time add local timezone offset)
-   *
-   * @param date
-   * @param local
-   * @return
-   */
-  public static Date utcToLocal(Date date, TimeZone local) {
-
-    Date localDate = null;
-    if (date != null) {
-      Calendar calendar = Calendar.getInstance();
-      calendar.setTime(date);
-      calendar.add(Calendar.MILLISECOND, local.getRawOffset() + local.getDSTSavings());
-      localDate = calendar.getTime();
+        return localToUtc(date, TimeZone.getDefault());
     }
 
-    return localDate;
-  }
+    /**
+     * Convert utc time to local time (time add local timezone offset)
+     *
+     * @param date
+     * @param local
+     * @return
+     */
+    public static Date utcToLocal(Date date, TimeZone local) {
 
-  /**
-   * Convert utc time to local time (time add local timezone offset)
-   *
-   * @param date
-   * @return local Date
-   */
-  public static Date utcToLocal(Date date) {
+        Date localDate = null;
+        if (date != null) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.MILLISECOND, local.getRawOffset() + local.getDSTSavings());
+            localDate = calendar.getTime();
+        }
 
-    return utcToLocal(date, TimeZone.getDefault());
-  }
+        return localDate;
+    }
+
+    /**
+     * Convert utc time to local time (time add local timezone offset)
+     *
+     * @param date
+     * @return local Date
+     */
+    public static Date utcToLocal(Date date) {
+
+        return utcToLocal(date, TimeZone.getDefault());
+    }
 }

@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FeignLogConfiguration {
 
-  @Bean
-  public Logger.Level feignLogLevel() {
-    return Logger.Level.FULL;
-  }
+    @Bean
+    public Logger.Level feignLogLevel() {
+        return Logger.Level.FULL;
+    }
 }

@@ -20,38 +20,39 @@ import java.io.InputStream;
 @Slf4j
 public class DepartmentTest {
 
-  public SqlSessionFactory getSqlSessionFactory() throws IOException {
-    String resource = "mybatis.xml";
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    return new SqlSessionFactoryBuilder().build(inputStream);
-  }
-
-  @Test
-  public void test() throws IOException {
-    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-
-    SqlSession openSession = sqlSessionFactory.openSession();
-    try {
-      Department department =
-          openSession.selectOne("cn.edu.ntu.mybatis.sample.DepartmentMapper.getDeptById", 1);
-      log.info(String.valueOf(department));
-    } finally {
-      openSession.close();
+    public SqlSessionFactory getSqlSessionFactory() throws IOException {
+        String resource = "mybatis.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        return new SqlSessionFactoryBuilder().build(inputStream);
     }
-  }
 
-  @Test
-  public void test01() throws IOException {
-    SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+    @Test
+    public void test() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
 
-    SqlSession openSession = sqlSessionFactory.openSession();
-    try {
-      DepartmentMapper mapper = openSession.getMapper(DepartmentMapper.class);
-      Department department = mapper.getDeptByIdStep(1);
-      log.info(String.valueOf(mapper.getClass()));
-      log.info(String.valueOf(department));
-    } finally {
-      openSession.close();
+        SqlSession openSession = sqlSessionFactory.openSession();
+        try {
+            Department department =
+                    openSession.selectOne(
+                            "cn.edu.ntu.mybatis.sample.DepartmentMapper.getDeptById", 1);
+            log.info(String.valueOf(department));
+        } finally {
+            openSession.close();
+        }
     }
-  }
+
+    @Test
+    public void test01() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+
+        SqlSession openSession = sqlSessionFactory.openSession();
+        try {
+            DepartmentMapper mapper = openSession.getMapper(DepartmentMapper.class);
+            Department department = mapper.getDeptByIdStep(1);
+            log.info(String.valueOf(mapper.getClass()));
+            log.info(String.valueOf(department));
+        } finally {
+            openSession.close();
+        }
+    }
 }

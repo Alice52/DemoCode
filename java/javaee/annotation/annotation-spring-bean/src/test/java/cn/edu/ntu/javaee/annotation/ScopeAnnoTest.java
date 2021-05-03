@@ -16,27 +16,27 @@ import java.util.Arrays;
 @Slf4j
 public class ScopeAnnoTest {
 
-  private ApplicationContext applicationContext =
-      new AnnotationConfigApplicationContext(ScopeAnno.class);
+    private ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(ScopeAnno.class);
 
-  @Test
-  public void testIocContainer() {
+    @Test
+    public void testIocContainer() {
 
-    Person person = applicationContext.getBean(Person.class);
-    log.info(String.valueOf(person));
-  }
+        Person person = applicationContext.getBean(Person.class);
+        log.info(String.valueOf(person));
+    }
 
-  @Test
-  /** The bean name is @Bean method default, and @Bean value. */
-  public void testGetBeanName() {
-    String[] names = applicationContext.getBeanNamesForType(Person.class);
-    Arrays.stream(names).forEach(System.out::println);
-  }
+    @Test
+    /** The bean name is @Bean method default, and @Bean value. */
+    public void testGetBeanName() {
+        String[] names = applicationContext.getBeanNamesForType(Person.class);
+        Arrays.stream(names).forEach(System.out::println);
+    }
 
-  @Test
-  public void testIocObjectsForComponentScanConfig() {
-    String[] definitionNames = applicationContext.getBeanDefinitionNames();
+    @Test
+    public void testIocObjectsForComponentScanConfig() {
+        String[] definitionNames = applicationContext.getBeanDefinitionNames();
 
-    Arrays.stream(definitionNames).forEach(System.out::println);
-  }
+        Arrays.stream(definitionNames).forEach(System.out::println);
+    }
 }

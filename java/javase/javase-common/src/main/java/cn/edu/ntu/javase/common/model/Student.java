@@ -5,36 +5,36 @@ package cn.edu.ntu.javase.common.model;
  * @create 2020-04-04 15:31 <br>
  */
 public class Student extends Person {
-  private String school;
+    private String school;
 
-  public Student() {}
+    public Student() {}
 
-  public Student(int age, String name, String school) {
-    super(name, age);
-    this.school = school;
-  }
+    public Student(int age, String name, String school) {
+        super(name, age);
+        this.school = school;
+    }
 
-  public Student(String name, int age) {
-    super(name, age);
-  }
+    public Student(String name, int age) {
+        super(name, age);
+    }
 
-  public String getSchool() {
-    return school;
-  }
+    public String getSchool() {
+        return school;
+    }
 
-  public void setSchool(String school) {
-    this.school = school;
-  }
+    public void setSchool(String school) {
+        this.school = school;
+    }
 
-  @Override
-  public String toString() {
+    @Override
+    public String toString() {
 
-    return "Student [age="
-        + super.getAge()
-        + ", name="
-        + super.getName()
-        + " [school="
-        + school
-        + "]";
-  }
+        return "Student [age="
+                + super.getAge()
+                + ", name="
+                + super.getName()
+                + " [school="
+                + school
+                + "]";
+    }
 }

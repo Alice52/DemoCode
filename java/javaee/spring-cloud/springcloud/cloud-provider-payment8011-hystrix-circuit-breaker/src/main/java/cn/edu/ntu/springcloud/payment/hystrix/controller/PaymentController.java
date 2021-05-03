@@ -18,23 +18,23 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/payment")
 public class PaymentController {
 
-  @Resource private PaymentService paymentService;
+    @Resource private PaymentService paymentService;
 
-  @Value("${server.port}")
-  private String port;
+    @Value("${server.port}")
+    private String port;
 
-  @GetMapping("/hystrix/success-info")
-  public JsonResult getPaymentInfo() {
-    return new JsonResult(200, "port: " + port, paymentService.getPaymentInfo(port));
-  }
+    @GetMapping("/hystrix/success-info")
+    public JsonResult getPaymentInfo() {
+        return new JsonResult(200, "port: " + port, paymentService.getPaymentInfo(port));
+    }
 
-  @GetMapping("/hystrix/fail-info")
-  public JsonResult getPaymentInfoTimeout() throws InterruptedException {
-    return new JsonResult(200, "port: " + port, paymentService.getPaymentInfoTimeout(port));
-  }
+    @GetMapping("/hystrix/fail-info")
+    public JsonResult getPaymentInfoTimeout() throws InterruptedException {
+        return new JsonResult(200, "port: " + port, paymentService.getPaymentInfoTimeout(port));
+    }
 
-  @GetMapping("/hystrix/circuit-breaker/{id}")
-  public JsonResult paymentCircuitBreaker(@PathVariable("id") Integer id) {
-    return new JsonResult(200, "port: " + port, paymentService.paymentCircuitBreaker(id));
-  }
+    @GetMapping("/hystrix/circuit-breaker/{id}")
+    public JsonResult paymentCircuitBreaker(@PathVariable("id") Integer id) {
+        return new JsonResult(200, "port: " + port, paymentService.paymentCircuitBreaker(id));
+    }
 }

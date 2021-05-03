@@ -32,45 +32,42 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class DirectSender {
 
-  @Value("${mq.direct.exchange}")
-  private String exchangeName;
+    @Autowired RabbitTemplate rabbitTemplate;
+    @Autowired AmqpAdmin amqpAdmin;
+    @Value("${mq.direct.exchange}")
+    private String exchangeName;
+    @Value("${mq.direct.queue}")
+    private String queueName;
+    @Value("${mq.direct.routing-key}")
+    private String routingKey;
 
-  @Value("${mq.direct.queue}")
-  private String queueName;
+    /** replaced by {@link RabbitmqDirectDeclareConfiguration } */
+    //  @PostConstruct
+    //  public void init() {
+    //    amqpAdmin.declareExchange(new DirectExchange(exchangeName, true, false));
+    //    amqpAdmin.declareQueue(new Queue(queueName, true, false, false));
+    //    amqpAdmin.declareBinding(
+    //        new Binding(queueName, Binding.DestinationType.QUEUE, exchangeName, routingKey,
+    // null));
+    //  }
 
-  @Value("${mq.direct.routing-key}")
-  private String routingKey;
+    @SneakyThrows
+    public void sendImmediately() {
+        // https://docs.spring.io/spring-amqp/docs/1.6.11.RELEASE/reference/html/_reference.html#_converting_from_a_message_2
+        // 发送 map consumer 会报错: 只能使用 Object 接受
+        rabbitTemplate.convertAndSend(exchangeName, routingKey, "immediately message");
 
-  @Autowired RabbitTemplate rabbitTemplate;
+        TimeUnit.SECONDS.sleep(5);
 
-  @Autowired AmqpAdmin amqpAdmin;
-
-  /** replaced by {@link RabbitmqDirectDeclareConfiguration } */
-  //  @PostConstruct
-  //  public void init() {
-  //    amqpAdmin.declareExchange(new DirectExchange(exchangeName, true, false));
-  //    amqpAdmin.declareQueue(new Queue(queueName, true, false, false));
-  //    amqpAdmin.declareBinding(
-  //        new Binding(queueName, Binding.DestinationType.QUEUE, exchangeName, routingKey, null));
-  //  }
-
-  @SneakyThrows
-  public void sendImmediately() {
-    // https://docs.spring.io/spring-amqp/docs/1.6.11.RELEASE/reference/html/_reference.html#_converting_from_a_message_2
-    // 发送 map consumer 会报错: 只能使用 Object 接受
-    rabbitTemplate.convertAndSend(exchangeName, routingKey, "immediately message");
-
-    TimeUnit.SECONDS.sleep(5);
-
-    String uuid = IdUtil.simpleUUID();
-    rabbitTemplate.convertAndSend(
-        exchangeName,
-        routingKey,
-        new Person("zack", 18),
-        m -> {
-          m.getMessageProperties().setCorrelationId(uuid);
-          return m;
-        },
-        new CorrelationData(uuid));
-  }
+        String uuid = IdUtil.simpleUUID();
+        rabbitTemplate.convertAndSend(
+                exchangeName,
+                routingKey,
+                new Person("zack", 18),
+                m -> {
+                    m.getMessageProperties().setCorrelationId(uuid);
+                    return m;
+                },
+                new CorrelationData(uuid));
+    }
 }

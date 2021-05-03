@@ -22,18 +22,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("classpath:ApplicationContext.xml")
 public class AspectTest {
 
-  private static final Logger LOG = LoggerFactory.getLogger(AspectTest.class);
-  private ApplicationContext ctx;
-  @Autowired private ArithmeticCalculator arithmeticCalculator;
+    private static final Logger LOG = LoggerFactory.getLogger(AspectTest.class);
+    private ApplicationContext ctx;
+    @Autowired private ArithmeticCalculator arithmeticCalculator;
 
-  @Before
-  public void init() {
-    ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_XML_PATH);
-  }
+    @Before
+    public void init() {
+        ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_XML_PATH);
+    }
 
-  @Test
-  public void testAspect() {
+    @Test
+    public void testAspect() {
 
-    arithmeticCalculator.add(1, 5);
-  }
+        arithmeticCalculator.add(1, 5);
+    }
 }

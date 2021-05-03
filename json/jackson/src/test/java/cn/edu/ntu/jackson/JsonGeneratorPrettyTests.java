@@ -16,26 +16,23 @@ import java.io.IOException;
 public class JsonGeneratorPrettyTests {
 
     /**
+     * { "name" : "zack", "20200908" : 18 }
      *
-     {
-        "name" : "zack",
-        "20200908" : 18
-     }
      * @throws IOException
      */
-  @Test
-  public void testPretty() throws IOException {
+    @Test
+    public void testPretty() throws IOException {
 
-    JsonFactory factory = JsonFactory.builder().build();
+        JsonFactory factory = JsonFactory.builder().build();
 
-    try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      jg.useDefaultPrettyPrinter(); // jg.setPrettyPrinter(new DefaultPrettyPrinter());
-      jg.writeStartObject();
+        try (JsonGenerator jg = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            jg.useDefaultPrettyPrinter(); // jg.setPrettyPrinter(new DefaultPrettyPrinter());
+            jg.writeStartObject();
 
-      jg.writeStringField("name", "zack");
-      jg.writeFieldId(20200908);
-      jg.writeNumber(18);
-      jg.writeEndObject();
+            jg.writeStringField("name", "zack");
+            jg.writeFieldId(20200908);
+            jg.writeNumber(18);
+            jg.writeEndObject();
+        }
     }
-  }
 }

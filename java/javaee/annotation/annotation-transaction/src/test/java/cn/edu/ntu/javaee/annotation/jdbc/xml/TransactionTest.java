@@ -16,10 +16,10 @@ import javax.annotation.Resource;
 @ContextConfiguration({"classpath:/application.xml"})
 public class TransactionTest {
 
-  @Resource private IUserService userService;
+    @Resource private IUserService userService;
 
-  @Test
-  public void test01() {
-    userService.insertEmp();
-  }
+    @Test
+    public void test01() {
+        userService.insertEmp();
+    }
 }

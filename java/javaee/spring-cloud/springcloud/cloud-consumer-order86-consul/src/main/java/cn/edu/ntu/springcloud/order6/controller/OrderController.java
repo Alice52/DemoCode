@@ -18,12 +18,12 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/consumer")
 public class OrderController {
 
-  private static final String PAYMENT_URL = "http://cloud-payment-service-consul";
+    private static final String PAYMENT_URL = "http://cloud-payment-service-consul";
 
-  @Resource private RestTemplate restTemplate;
+    @Resource private RestTemplate restTemplate;
 
-  @GetMapping(value = "/consul")
-  public JsonResult getPaymentById() {
-    return restTemplate.getForObject(PAYMENT_URL + "/payment/consul", JsonResult.class);
-  }
+    @GetMapping(value = "/consul")
+    public JsonResult getPaymentById() {
+        return restTemplate.getForObject(PAYMENT_URL + "/payment/consul", JsonResult.class);
+    }
 }

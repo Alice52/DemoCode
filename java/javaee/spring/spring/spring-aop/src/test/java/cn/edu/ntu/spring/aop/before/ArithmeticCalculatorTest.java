@@ -10,15 +10,15 @@ import org.junit.Test;
  * @function
  */
 public class ArithmeticCalculatorTest {
-  private ArithmeticCalculator calculator;
+    private ArithmeticCalculator calculator;
 
-  @Before
-  public void init() {
-    calculator = new ArithmeticCalculatorImpl();
-  }
+    @Before
+    public void init() {
+        calculator = new ArithmeticCalculatorImpl();
+    }
 
-  @Test
-  public void testAdd() {
-    calculator.add(2, 3);
-  }
+    @Test
+    public void testAdd() {
+        calculator.add(2, 3);
+    }
 }

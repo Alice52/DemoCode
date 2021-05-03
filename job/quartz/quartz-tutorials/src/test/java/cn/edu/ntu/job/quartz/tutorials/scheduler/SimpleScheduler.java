@@ -23,28 +23,28 @@ import static org.quartz.TriggerBuilder.newTrigger;
  */
 public class SimpleScheduler {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SimpleScheduler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleScheduler.class);
 
-  @Test
-  public void testScheduler() throws SchedulerException, InterruptedException {
-    SchedulerFactory sf = new StdSchedulerFactory();
-    Scheduler scheduler = sf.getScheduler();
+    @Test
+    public void testScheduler() throws SchedulerException, InterruptedException {
+        SchedulerFactory sf = new StdSchedulerFactory();
+        Scheduler scheduler = sf.getScheduler();
 
-    // computer a time that is on the next round minute
-    Date runTime = evenMinuteDate(new Date());
-    JobDetail job = newJob(HelloJob.class).withIdentity("job1", "group1").build();
-    // Trigger the job to run on the next round minute
-    Trigger trigger = newTrigger().withIdentity("trigger1", "group1").startAt(runTime).build();
+        // computer a time that is on the next round minute
+        Date runTime = evenMinuteDate(new Date());
+        JobDetail job = newJob(HelloJob.class).withIdentity("job1", "group1").build();
+        // Trigger the job to run on the next round minute
+        Trigger trigger = newTrigger().withIdentity("trigger1", "group1").startAt(runTime).build();
 
-    // Tell quartz to schedule the job using our trigger
-    scheduler.scheduleJob(job, trigger);
-    LOG.info(job.getKey() + " will run at: " + runTime);
+        // Tell quartz to schedule the job using our trigger
+        scheduler.scheduleJob(job, trigger);
+        LOG.info(job.getKey() + " will run at: " + runTime);
 
-    scheduler.start();
-    // wait 65 seconds to show job
-    TimeUnit.SECONDS.sleep(65);
+        scheduler.start();
+        // wait 65 seconds to show job
+        TimeUnit.SECONDS.sleep(65);
 
-    scheduler.shutdown(true);
-    LOG.info("Shutdown Complete");
-  }
+        scheduler.shutdown(true);
+        LOG.info("Shutdown Complete");
+    }
 }

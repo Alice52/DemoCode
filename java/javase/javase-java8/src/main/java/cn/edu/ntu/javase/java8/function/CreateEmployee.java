@@ -6,5 +6,5 @@ package cn.edu.ntu.javase.java8.function;
  */
 @FunctionalInterface
 public interface CreateEmployee<T, U, W, R> {
-  R sup(T t, U u, W w);
+    R sup(T t, U u, W w);
 }

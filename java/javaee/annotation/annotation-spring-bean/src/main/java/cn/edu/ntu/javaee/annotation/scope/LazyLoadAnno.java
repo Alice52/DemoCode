@@ -12,14 +12,14 @@ import org.springframework.context.annotation.Lazy;
 @Configuration
 public class LazyLoadAnno {
 
-  /**
-   * donot created when IOC container created, created in first used
-   *
-   * @return Person
-   */
-  @Lazy
-  @Bean(value = "person")
-  public Person injectPerson() {
-    return new Person(19, "alice52");
-  }
+    /**
+     * donot created when IOC container created, created in first used
+     *
+     * @return Person
+     */
+    @Lazy
+    @Bean(value = "person")
+    public Person injectPerson() {
+        return new Person(19, "alice52");
+    }
 }

@@ -21,7 +21,7 @@ public class Receiver {
     private static Connection connection = ConnectionUtils.getConnection();
 
     public static void main(String[] args) {
-            receiveMsg();
+        receiveMsg();
     }
 
     private static void receiveMsg() {
@@ -33,14 +33,19 @@ public class Receiver {
 
             channel.queueDeclare(Constants.SIMPLE_QUEUE_NAME, false, false, false, null);
 
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                LOG.info(" [x] Received '" + message + "'");
-            };
+            DeliverCallback deliverCallback =
+                    (consumerTag, delivery) -> {
+                        String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+                        LOG.info(" [x] Received '" + message + "'");
+                    };
 
-            channel.basicConsume(Constants.SIMPLE_QUEUE_NAME, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(
+                    Constants.SIMPLE_QUEUE_NAME, true, deliverCallback, consumerTag -> {});
         } catch (IOException e) {
-            LOG.error("RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } finally {
             // ConnectionUtils.closeConnection(channel,connection);

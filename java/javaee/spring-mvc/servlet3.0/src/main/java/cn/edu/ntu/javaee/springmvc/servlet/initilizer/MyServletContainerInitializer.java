@@ -22,33 +22,33 @@ import java.util.Set;
 @HandlesTypes(value = {IHelloService.class})
 public class MyServletContainerInitializer implements ServletContainerInitializer {
 
-  /**
-   * 应用启动的时候，会运行onStartup方法；
-   *
-   * <p>Set<Class<?>> claz：感兴趣的类型的所有子类型； ServletContext
-   * arg1:代表当前Web应用的ServletContext；一个Web应用一个ServletContext；
-   *
-   * <p>1）、使用ServletContext注册Web组件（Servlet、Filter、Listener）
-   * 2）、使用编码的方式，在项目启动的时候给ServletContext里面添加组件； 必须在项目启动的时候来添加；
-   * 1）、ServletContainerInitializer得到的ServletContext； 2）、ServletContextListener得到的ServletContext；
-   */
-  @Override
-  public void onStartup(Set<Class<?>> claz, ServletContext sc) throws ServletException {
+    /**
+     * 应用启动的时候，会运行onStartup方法；
+     *
+     * <p>Set<Class<?>> claz：感兴趣的类型的所有子类型； ServletContext
+     * arg1:代表当前Web应用的ServletContext；一个Web应用一个ServletContext；
+     *
+     * <p>1）、使用ServletContext注册Web组件（Servlet、Filter、Listener）
+     * 2）、使用编码的方式，在项目启动的时候给ServletContext里面添加组件； 必须在项目启动的时候来添加；
+     * 1）、ServletContainerInitializer得到的ServletContext； 2）、ServletContextListener得到的ServletContext；
+     */
+    @Override
+    public void onStartup(Set<Class<?>> claz, ServletContext sc) throws ServletException {
 
-    Optional.ofNullable(claz).ifPresent(x -> claz.stream().forEach(System.out::println));
+        Optional.ofNullable(claz).ifPresent(x -> claz.stream().forEach(System.out::println));
 
-    // 注册组件  ServletRegistration
-    ServletRegistration.Dynamic servlet = sc.addServlet("userServlet", new CustomServlet());
-    // 配置servlet的映射信息
-    servlet.addMapping("/custom");
+        // 注册组件  ServletRegistration
+        ServletRegistration.Dynamic servlet = sc.addServlet("userServlet", new CustomServlet());
+        // 配置servlet的映射信息
+        servlet.addMapping("/custom");
 
-    // 注册Listener
-    sc.addListener(CustomListener.class);
+        // 注册Listener
+        sc.addListener(CustomListener.class);
 
-    // 注册Filter  FilterRegistration
-    FilterRegistration.Dynamic filter = sc.addFilter("customFilter", CustomFilter.class);
-    filter.setAsyncSupported(true);
-    // 配置Filter的映射信息
-    filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
-  }
+        // 注册Filter  FilterRegistration
+        FilterRegistration.Dynamic filter = sc.addFilter("customFilter", CustomFilter.class);
+        filter.setAsyncSupported(true);
+        // 配置Filter的映射信息
+        filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+    }
 }

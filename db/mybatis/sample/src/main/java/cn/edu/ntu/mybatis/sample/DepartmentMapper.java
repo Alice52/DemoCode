@@ -10,19 +10,19 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface DepartmentMapper {
 
-  /**
-   * Get by id.
-   *
-   * @param id
-   * @return
-   */
-  Department getDeptById(@Param("id") Integer id);
+    /**
+     * Get by id.
+     *
+     * @param id
+     * @return
+     */
+    Department getDeptById(@Param("id") Integer id);
 
-  /**
-   * Get step.
-   *
-   * @param id
-   * @return
-   */
-  Department getDeptByIdStep(@Param("id") Integer id);
+    /**
+     * Get step.
+     *
+     * @param id
+     * @return
+     */
+    Department getDeptByIdStep(@Param("id") Integer id);
 }

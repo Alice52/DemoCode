@@ -19,20 +19,20 @@ import java.util.StringJoiner;
  */
 public class SimpleJob implements Job {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SimpleJob.class);
-  private static final DateTimeFormatter ofPattern =
-      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleJob.class);
+    private static final DateTimeFormatter ofPattern =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-  @Override
-  public void execute(JobExecutionContext jobExecutionContext) {
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) {
 
-    StringJoiner outStr =
-        new StringJoiner(" ")
-            .add(this.getClass().getSimpleName())
-            .add(UTCTimeUtil.localToUtc(LocalDateTime.now()).format(ofPattern))
-            .add(Thread.currentThread().getName())
-            .add(jobExecutionContext.getTrigger().getKey().getName());
+        StringJoiner outStr =
+                new StringJoiner(" ")
+                        .add(this.getClass().getSimpleName())
+                        .add(UTCTimeUtil.localToUtc(LocalDateTime.now()).format(ofPattern))
+                        .add(Thread.currentThread().getName())
+                        .add(jobExecutionContext.getTrigger().getKey().getName());
 
-    LOG.info("execute quartz job: {}", outStr);
-  }
+        LOG.info("execute quartz job: {}", outStr);
+    }
 }

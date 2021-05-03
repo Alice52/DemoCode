@@ -17,25 +17,26 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class CustomInterceptor implements HandlerInterceptor {
 
-  /** from first to last */
-  @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
-    return true;
-  }
+    /** from first to last */
+    @Override
+    public boolean preHandle(
+            HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
+        return true;
+    }
 
-  /** from last to first */
-  @Override
-  public void postHandle(
-      HttpServletRequest request,
-      HttpServletResponse response,
-      Object handler,
-      ModelAndView modelAndView)
-      throws Exception {}
+    /** from last to first */
+    @Override
+    public void postHandle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler,
+            ModelAndView modelAndView)
+            throws Exception {}
 
-  /** from last to first */
-  @Override
-  public void afterCompletion(
-      HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-      throws Exception {}
+    /** from last to first */
+    @Override
+    public void afterCompletion(
+            HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {}
 }

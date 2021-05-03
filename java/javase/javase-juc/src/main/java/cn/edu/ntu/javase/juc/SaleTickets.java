@@ -20,33 +20,35 @@ import java.util.stream.IntStream;
  * @create 2019-12-04 20:50
  */
 public class SaleTickets {
-  private static final int NUMBER = 500;
+    private static final int NUMBER = 500;
 
-  public static void main(String[] args) {
-    Ticket tickets = new Ticket();
-    tickets.setNumber(NUMBER);
+    public static void main(String[] args) {
+        Ticket tickets = new Ticket();
+        tickets.setNumber(NUMBER);
 
-    new Thread(() -> IntStream.rangeClosed(1, NUMBER * 2).forEach(i -> tickets.sale()), "seller01")
-        .start();
-    new Thread(() -> IntStream.rangeClosed(1, NUMBER).forEach(i -> tickets.sale()), "seller02")
-        .start();
-  }
+        new Thread(
+                        () -> IntStream.rangeClosed(1, NUMBER * 2).forEach(i -> tickets.sale()),
+                        "seller01")
+                .start();
+        new Thread(() -> IntStream.rangeClosed(1, NUMBER).forEach(i -> tickets.sale()), "seller02")
+                .start();
+    }
 }
 
 @Slf4j
 @Data
 class Ticket {
-  private volatile int number = 3000;
-  private Lock lock = new ReentrantLock();
+    private volatile int number = 3000;
+    private Lock lock = new ReentrantLock();
 
-  public void sale() {
-    lock.lock();
-    try {
-      if (number > 0) {
-        log.info("ale number {} ticket and {} left.", number--, number);
-      }
-    } finally {
-      lock.unlock();
+    public void sale() {
+        lock.lock();
+        try {
+            if (number > 0) {
+                log.info("ale number {} ticket and {} left.", number--, number);
+            }
+        } finally {
+            lock.unlock();
+        }
     }
-  }
 }

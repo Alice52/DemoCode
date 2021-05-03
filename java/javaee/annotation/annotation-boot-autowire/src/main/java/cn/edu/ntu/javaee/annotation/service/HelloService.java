@@ -13,5 +13,5 @@ import org.springframework.stereotype.Service;
 @ToString
 public class HelloService {
 
-  private String label = "1";
+    private String label = "1";
 }

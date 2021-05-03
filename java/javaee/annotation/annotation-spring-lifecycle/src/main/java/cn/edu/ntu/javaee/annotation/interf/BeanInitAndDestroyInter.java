@@ -16,26 +16,26 @@ import org.springframework.context.annotation.FilterType;
  */
 @Configuration
 @ComponentScan(
-    basePackages = "cn.edu.ntu.javaee.annotation",
-    includeFilters = {
-      @ComponentScan.Filter(
-          type = FilterType.ASSIGNABLE_TYPE,
-          classes = {CustomBeanPostProcessor.class}),
-      @ComponentScan.Filter(
-          type = FilterType.ASSIGNABLE_TYPE,
-          classes = {
-            CustomBeanFactoryPostProcessor.class,
-            CustomBeanDefinitionRegistryPostProcessor.class
-          }),
-      @ComponentScan.Filter(
-          type = FilterType.ASSIGNABLE_TYPE,
-          classes = {CustomApplicationListener.class}),
-    })
+        basePackages = "cn.edu.ntu.javaee.annotation",
+        includeFilters = {
+            @ComponentScan.Filter(
+                    type = FilterType.ASSIGNABLE_TYPE,
+                    classes = {CustomBeanPostProcessor.class}),
+            @ComponentScan.Filter(
+                    type = FilterType.ASSIGNABLE_TYPE,
+                    classes = {
+                        CustomBeanFactoryPostProcessor.class,
+                        CustomBeanDefinitionRegistryPostProcessor.class
+                    }),
+            @ComponentScan.Filter(
+                    type = FilterType.ASSIGNABLE_TYPE,
+                    classes = {CustomApplicationListener.class}),
+        })
 public class BeanInitAndDestroyInter {
 
-  @Bean(value = "dog", initMethod = "init", destroyMethod = "destroy0")
-  public Dog injectPerson() {
+    @Bean(value = "dog", initMethod = "init", destroyMethod = "destroy0")
+    public Dog injectPerson() {
 
-    return new Dog();
-  }
+        return new Dog();
+    }
 }

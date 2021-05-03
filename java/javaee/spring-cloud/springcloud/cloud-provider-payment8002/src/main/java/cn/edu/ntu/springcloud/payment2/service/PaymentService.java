@@ -4,8 +4,8 @@ import cn.edu.ntu.springcloud.common.entities.Payment;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * @author zack <br/>
- * @create 2020-03-10 00:49 <br/>
+ * @author zack <br>
+ * @create 2020-03-10 00:49 <br>
  */
 public interface PaymentService {
     /**

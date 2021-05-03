@@ -24,20 +24,20 @@ public class TestSpringIntegration {
     private ApplicationContext ctx;
 
     @Before
-    public void init(){
+    public void init() {
         ctx = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_PATH);
         personService = ctx.getBean(PersonService.class);
     }
 
     // test dataSource
     @Test
-    public void testDataSource(){
+    public void testDataSource() {
         DataSource dataSource = ctx.getBean(DataSource.class);
-        LOG.info("get dataSource success: "+ dataSource);
+        LOG.info("get dataSource success: " + dataSource);
     }
 
     @Test
-    public void testPersonService(){
+    public void testPersonService() {
         Person p1 = new Person();
         p1.setAge(11);
         p1.setLastName("AA");

@@ -21,29 +21,31 @@ import org.slf4j.LoggerFactory;
  * @project job <br>
  */
 public class TriggerWithJob {
-  private static final Logger LOG = LoggerFactory.getLogger(TriggerWithJob.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TriggerWithJob.class);
 
-  public static void main(String[] args) throws SchedulerException {
-    Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+    public static void main(String[] args) throws SchedulerException {
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 
-    JobDetail newJobDetail =
-        JobBuilder.newJob(SimpleJob.class)
-            .withIdentity("new-job", "group1")
-            .storeDurably(true)
-            .build();
-    Trigger newTrigger =
-        TriggerBuilder.newTrigger()
-            .withIdentity("new-trigger", "auto")
-            .forJob("new-job", "group1")
-            .startNow()
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
-            .build();
-    // error: due to scheduler cannot know newJobDetail
-    // scheduler.scheduleJob(newTrigger);
+        JobDetail newJobDetail =
+                JobBuilder.newJob(SimpleJob.class)
+                        .withIdentity("new-job", "group1")
+                        .storeDurably(true)
+                        .build();
+        Trigger newTrigger =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("new-trigger", "auto")
+                        .forJob("new-job", "group1")
+                        .startNow()
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(2)
+                                        .repeatForever())
+                        .build();
+        // error: due to scheduler cannot know newJobDetail
+        // scheduler.scheduleJob(newTrigger);
 
-    // it's ok.
-    scheduler.addJob(newJobDetail, true);
-    scheduler.scheduleJob(newTrigger);
-  }
+        // it's ok.
+        scheduler.addJob(newJobDetail, true);
+        scheduler.scheduleJob(newTrigger);
+    }
 }

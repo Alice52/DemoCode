@@ -17,99 +17,100 @@ import java.util.Iterator;
  */
 public class UserObjectCodec extends ObjectCodec {
 
-  @Override
-  public Version version() {
-    return null;
-  }
-
-  @SneakyThrows
-  @Override
-  public <T> T readValue(JsonParser jsonParser, Class<T> aClass) throws IOException {
-
-    User user = (User) aClass.newInstance();
-
-    // 只要还没结束"}"，就一直读
-    while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
-      String fieldName = jsonParser.getCurrentName();
-      if ("name".equals(fieldName)) {
-        jsonParser.nextToken();
-        user.setName(jsonParser.getText());
-      } else if ("age".equals(fieldName)) {
-        jsonParser.nextToken();
-        user.setAge(jsonParser.getIntValue());
-      }
+    @Override
+    public Version version() {
+        return null;
     }
 
-    return (T) user;
-  }
+    @SneakyThrows
+    @Override
+    public <T> T readValue(JsonParser jsonParser, Class<T> aClass) throws IOException {
 
-  @Override
-  public <T> T readValue(JsonParser jsonParser, TypeReference<T> typeReference) throws IOException {
-    return null;
-  }
+        User user = (User) aClass.newInstance();
 
-  @Override
-  public <T> T readValue(JsonParser jsonParser, ResolvedType resolvedType) throws IOException {
-    return null;
-  }
+        // 只要还没结束"}"，就一直读
+        while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
+            String fieldName = jsonParser.getCurrentName();
+            if ("name".equals(fieldName)) {
+                jsonParser.nextToken();
+                user.setName(jsonParser.getText());
+            } else if ("age".equals(fieldName)) {
+                jsonParser.nextToken();
+                user.setAge(jsonParser.getIntValue());
+            }
+        }
 
-  @Override
-  public <T> Iterator<T> readValues(JsonParser jsonParser, Class<T> aClass) throws IOException {
-    return null;
-  }
-
-  @Override
-  public <T> Iterator<T> readValues(JsonParser jsonParser, TypeReference<T> typeReference)
-      throws IOException {
-    return null;
-  }
-
-  @Override
-  public <T> Iterator<T> readValues(JsonParser jsonParser, ResolvedType resolvedType)
-      throws IOException {
-    return null;
-  }
-
-  @Override
-  public void writeValue(JsonGenerator gen, Object value) throws IOException {
-    User user = null;
-    if (value instanceof User) {
-      user = User.class.cast(value);
-    } else if (value instanceof TreeNode) {
-      user = UserTreeNode.class.cast(value).getUser();
+        return (T) user;
     }
 
-    gen.writeStartObject();
-    gen.writeStringField("name", user.getName());
-    gen.writeNumberField("age", user.getAge());
-    gen.writeEndObject();
-  }
+    @Override
+    public <T> T readValue(JsonParser jsonParser, TypeReference<T> typeReference)
+            throws IOException {
+        return null;
+    }
 
-  @Override
-  public <T extends TreeNode> T readTree(JsonParser jsonParser) throws IOException {
-    return null;
-  }
+    @Override
+    public <T> T readValue(JsonParser jsonParser, ResolvedType resolvedType) throws IOException {
+        return null;
+    }
 
-  @Override
-  public void writeTree(JsonGenerator jsonGenerator, TreeNode treeNode) throws IOException {}
+    @Override
+    public <T> Iterator<T> readValues(JsonParser jsonParser, Class<T> aClass) throws IOException {
+        return null;
+    }
 
-  @Override
-  public TreeNode createObjectNode() {
-    return null;
-  }
+    @Override
+    public <T> Iterator<T> readValues(JsonParser jsonParser, TypeReference<T> typeReference)
+            throws IOException {
+        return null;
+    }
 
-  @Override
-  public TreeNode createArrayNode() {
-    return null;
-  }
+    @Override
+    public <T> Iterator<T> readValues(JsonParser jsonParser, ResolvedType resolvedType)
+            throws IOException {
+        return null;
+    }
 
-  @Override
-  public JsonParser treeAsTokens(TreeNode treeNode) {
-    return null;
-  }
+    @Override
+    public void writeValue(JsonGenerator gen, Object value) throws IOException {
+        User user = null;
+        if (value instanceof User) {
+            user = User.class.cast(value);
+        } else if (value instanceof TreeNode) {
+            user = UserTreeNode.class.cast(value).getUser();
+        }
 
-  @Override
-  public <T> T treeToValue(TreeNode treeNode, Class<T> aClass) throws JsonProcessingException {
-    return null;
-  }
+        gen.writeStartObject();
+        gen.writeStringField("name", user.getName());
+        gen.writeNumberField("age", user.getAge());
+        gen.writeEndObject();
+    }
+
+    @Override
+    public <T extends TreeNode> T readTree(JsonParser jsonParser) throws IOException {
+        return null;
+    }
+
+    @Override
+    public void writeTree(JsonGenerator jsonGenerator, TreeNode treeNode) throws IOException {}
+
+    @Override
+    public TreeNode createObjectNode() {
+        return null;
+    }
+
+    @Override
+    public TreeNode createArrayNode() {
+        return null;
+    }
+
+    @Override
+    public JsonParser treeAsTokens(TreeNode treeNode) {
+        return null;
+    }
+
+    @Override
+    public <T> T treeToValue(TreeNode treeNode, Class<T> aClass) throws JsonProcessingException {
+        return null;
+    }
 }

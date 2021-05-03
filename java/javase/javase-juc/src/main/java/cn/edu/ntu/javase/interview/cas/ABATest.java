@@ -15,34 +15,34 @@ import java.util.concurrent.atomic.AtomicReference;
 @Slf4j
 public class ABATest {
 
-  static AtomicReference<Integer> atomicReference = new AtomicReference<>(100);
+    static AtomicReference<Integer> atomicReference = new AtomicReference<>(100);
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    new Thread(
-            () -> {
-              atomicReference.compareAndSet(100, 101);
-              atomicReference.compareAndSet(101, 100);
-            },
-            "AAA")
-        .start();
+        new Thread(
+                        () -> {
+                            atomicReference.compareAndSet(100, 101);
+                            atomicReference.compareAndSet(101, 100);
+                        },
+                        "AAA")
+                .start();
 
-    new Thread(
-            () -> {
-              try {
-                // 保证AAA线程完成一次ABA操作
-                TimeUnit.SECONDS.sleep(1);
-                atomicReference.compareAndSet(100, 102);
-              } catch (InterruptedException e) {
-              }
-            },
-            "BBB")
-        .start();
+        new Thread(
+                        () -> {
+                            try {
+                                // 保证AAA线程完成一次ABA操作
+                                TimeUnit.SECONDS.sleep(1);
+                                atomicReference.compareAndSet(100, 102);
+                            } catch (InterruptedException e) {
+                            }
+                        },
+                        "BBB")
+                .start();
 
-    // 等待 AAA, BBB 线程执行结束
-    while (Thread.activeCount() > 2) {
-      Thread.yield();
+        // 等待 AAA, BBB 线程执行结束
+        while (Thread.activeCount() > 2) {
+            Thread.yield();
+        }
+        log.info("main thread atomicReference value: {}", atomicReference.get());
     }
-    log.info("main thread atomicReference value: {}", atomicReference.get());
-  }
 }

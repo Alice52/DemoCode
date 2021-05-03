@@ -6,5 +6,5 @@ package cn.edu.ntu.javaee.spring.mvc.service;
  * @function
  */
 public interface PersonService {
-   void handleRegister();
+    void handleRegister();
 }

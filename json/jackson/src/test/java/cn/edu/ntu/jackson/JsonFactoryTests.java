@@ -20,35 +20,35 @@ import static com.fasterxml.jackson.core.json.JsonReadFeature.ALLOW_SINGLE_QUOTE
  */
 public class JsonFactoryTests {
 
-  @Test
-  public void testCreateGenerator() throws IOException {
-    String jsonStr = "{\"age\":18, \"age\": 28 }";
-    JsonFactory factory =
-        JsonFactory.builder()
-            // factory
-            .enable(INTERN_FIELD_NAMES)
-            // parser
-            .enable(ALLOW_SINGLE_QUOTES, ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
-            // generator
-            .enable(AUTO_CLOSE_CONTENT)
-            .build();
-    // if un-comment will throw JsonParseException
-    // factory.enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION);
+    @Test
+    public void testCreateGenerator() throws IOException {
+        String jsonStr = "{\"age\":18, \"age\": 28 }";
+        JsonFactory factory =
+                JsonFactory.builder()
+                        // factory
+                        .enable(INTERN_FIELD_NAMES)
+                        // parser
+                        .enable(ALLOW_SINGLE_QUOTES, ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER)
+                        // generator
+                        .enable(AUTO_CLOSE_CONTENT)
+                        .build();
+        // if un-comment will throw JsonParseException
+        // factory.enable(JsonParser.Feature.STRICT_DUPLICATE_DETECTION);
 
-    try (JsonParser jsonParser = factory.createParser(jsonStr)) {
-      while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
-        String fieldName = jsonParser.getCurrentName();
-        if ("age".equals(fieldName)) {
-          jsonParser.nextToken();
-          System.out.println(jsonParser.getIntValue());
+        try (JsonParser jsonParser = factory.createParser(jsonStr)) {
+            while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = jsonParser.getCurrentName();
+                if ("age".equals(fieldName)) {
+                    jsonParser.nextToken();
+                    System.out.println(jsonParser.getIntValue());
+                }
+            }
         }
-      }
     }
-  }
 
-  @Test
-  public void testSpiCreate() {
-    ServiceLoader<JsonFactory> jsonFactories = ServiceLoader.load(JsonFactory.class);
-    System.out.println(jsonFactories.iterator().next());
-  }
+    @Test
+    public void testSpiCreate() {
+        ServiceLoader<JsonFactory> jsonFactories = ServiceLoader.load(JsonFactory.class);
+        System.out.println(jsonFactories.iterator().next());
+    }
 }

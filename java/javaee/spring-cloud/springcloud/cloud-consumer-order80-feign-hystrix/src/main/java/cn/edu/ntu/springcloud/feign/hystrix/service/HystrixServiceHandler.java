@@ -12,18 +12,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class HystrixServiceHandler implements HystrixService {
 
-  @Override
-  public JsonResult getPaymentInfos() {
-    return new JsonResult(400, "getPaymentInfos", null);
-  }
+    @Override
+    public JsonResult getPaymentInfos() {
+        return new JsonResult(400, "getPaymentInfos", null);
+    }
 
-  @Override
-  public JsonResult getPaymentInfoTimeout() {
-    return new JsonResult(400, "getPaymentInfoTimeout", null);
-  }
+    @Override
+    public JsonResult getPaymentInfoTimeout() {
+        return new JsonResult(400, "getPaymentInfoTimeout", null);
+    }
 
-  @Override
-  public JsonResult getPaymentInfoError() {
-    return new JsonResult(400, "getPaymentInfoError", null);
-  }
+    @Override
+    public JsonResult getPaymentInfoError() {
+        return new JsonResult(400, "getPaymentInfoError", null);
+    }
 }

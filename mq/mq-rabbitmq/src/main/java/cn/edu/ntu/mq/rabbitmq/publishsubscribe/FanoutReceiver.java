@@ -34,14 +34,18 @@ public class FanoutReceiver {
             String queueName = channel.queueDeclare().getQueue();
             channel.queueBind(queueName, Constants.EXCHANGE_LOG_NAME, "");
 
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), "UTF-8");
-                LOG.info(" [x] Received '" + message + "'");
-            };
+            DeliverCallback deliverCallback =
+                    (consumerTag, delivery) -> {
+                        String message = new String(delivery.getBody(), "UTF-8");
+                        LOG.info(" [x] Received '" + message + "'");
+                    };
 
-            channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {});
         } catch (IOException e) {
-            LOG.error("RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } finally {
             // close resources

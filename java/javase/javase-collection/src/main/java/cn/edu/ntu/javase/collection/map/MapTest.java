@@ -15,28 +15,28 @@ import java.util.*;
  * @create 2020-04-04 22:26 <br>
  */
 public class MapTest {
-  private static final String TEST_DATA_PATH =
-      "F:\\repository\\Algorithms\\deprecate\\algs4-data\\movies.txt";
+    private static final String TEST_DATA_PATH =
+            "F:\\repository\\Algorithms\\deprecate\\algs4-data\\movies.txt";
 
-  public static void main(String[] args) throws IOException {
-    BufferedReader bufferedReader =
-        new BufferedReader(new InputStreamReader(new FileInputStream(TEST_DATA_PATH)));
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader =
+                new BufferedReader(new InputStreamReader(new FileInputStream(TEST_DATA_PATH)));
 
-    Map<String, Integer> map = new HashMap<>(16);
+        Map<String, Integer> map = new HashMap<>(16);
 
-    String str;
-    for (; (str = bufferedReader.readLine()) != null; ) {
-      String[] arr = str.replace(StrUtil.COMMA, StrUtil.SPACE).split(StrUtil.SPACE);
-      Arrays.stream(arr).forEach(x -> map.compute(x, (k, v) -> v == null ? 1 : ++v));
+        String str;
+        for (; (str = bufferedReader.readLine()) != null; ) {
+            String[] arr = str.replace(StrUtil.COMMA, StrUtil.SPACE).split(StrUtil.SPACE);
+            Arrays.stream(arr).forEach(x -> map.compute(x, (k, v) -> v == null ? 1 : ++v));
+        }
+        bufferedReader.close();
+
+        // 按照 key 排序
+        Map<String, Integer> map2 = new TreeMap<>(Comparator.naturalOrder());
+        map2.putAll(map);
+
+        // 案值排序: 相对计较麻烦, 将map中的键值对放入list列表中
+        // method1: Collections.sort(List<T> list, Comparator<? super T> c)
+        new ArrayList<>(map.entrySet()).sort(Map.Entry.comparingByValue());
     }
-    bufferedReader.close();
-
-    // 按照 key 排序
-    Map<String, Integer> map2 = new TreeMap<>(Comparator.naturalOrder());
-    map2.putAll(map);
-
-    // 案值排序: 相对计较麻烦, 将map中的键值对放入list列表中
-    // method1: Collections.sort(List<T> list, Comparator<? super T> c)
-    new ArrayList<>(map.entrySet()).sort(Map.Entry.comparingByValue());
-  }
 }

@@ -19,67 +19,67 @@ import java.util.concurrent.TimeUnit;
  * @create 2020-01-30 17:18
  */
 public class MemoryLeakTest {
-  private static final Logger LOG = LoggerFactory.getLogger(MemoryLeakTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MemoryLeakTest.class);
 
-  public static void main(String[] args) throws InterruptedException {
-    MyComponent myComponent = new MyComponent();
-    myComponent.create();
-    myComponent.myWindow.clickListener.onClick(new Object());
-    myComponent.destroy();
-    // this operation will do not recycled memory
-    myComponent = null;
-    System.gc();
+    public static void main(String[] args) throws InterruptedException {
+        MyComponent myComponent = new MyComponent();
+        myComponent.create();
+        myComponent.myWindow.clickListener.onClick(new Object());
+        myComponent.destroy();
+        // this operation will do not recycled memory
+        myComponent = null;
+        System.gc();
 
-    TimeUnit.HOURS.sleep(5);
-  }
-
-  public interface OnClickListener {
-    void onClick(Object obj);
-  }
-
-  abstract static class Component {
-
-    final void create() {
-      onCreate();
+        TimeUnit.HOURS.sleep(5);
     }
 
-    final void destroy() {
-      onDestroy();
+    public interface OnClickListener {
+        void onClick(Object obj);
     }
 
-    /** This is for subClass overwrite. */
-    abstract void onCreate();
+    abstract static class Component {
 
-    /** This is for subClass overwrite. */
-    abstract void onDestroy();
-  }
+        final void create() {
+            onCreate();
+        }
 
-  static class MyComponent extends Component {
-    OnClickListener clickListener;
-    MyWindow myWindow;
+        final void destroy() {
+            onDestroy();
+        }
 
-    @Override
-    void onCreate() {
-      clickListener = obj -> LOG.info("Object " + obj + " is clicked.");
-      myWindow = new MyWindow();
-      myWindow.setClickListener(clickListener);
+        /** This is for subClass overwrite. */
+        abstract void onCreate();
+
+        /** This is for subClass overwrite. */
+        abstract void onDestroy();
     }
 
-    @Override
-    void onDestroy() {
-      myWindow.removeClickListener();
-    }
-  }
+    static class MyComponent extends Component {
+        OnClickListener clickListener;
+        MyWindow myWindow;
 
-  static class MyWindow {
-    OnClickListener clickListener;
+        @Override
+        void onCreate() {
+            clickListener = obj -> LOG.info("Object " + obj + " is clicked.");
+            myWindow = new MyWindow();
+            myWindow.setClickListener(clickListener);
+        }
 
-    void setClickListener(OnClickListener clickListener) {
-      this.clickListener = clickListener;
+        @Override
+        void onDestroy() {
+            myWindow.removeClickListener();
+        }
     }
 
-    void removeClickListener() {
-      this.clickListener = null;
+    static class MyWindow {
+        OnClickListener clickListener;
+
+        void setClickListener(OnClickListener clickListener) {
+            this.clickListener = clickListener;
+        }
+
+        void removeClickListener() {
+            this.clickListener = null;
+        }
     }
-  }
 }

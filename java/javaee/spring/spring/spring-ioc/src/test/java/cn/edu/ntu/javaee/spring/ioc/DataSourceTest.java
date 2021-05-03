@@ -16,19 +16,20 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class DataSourceTest {
 
-  private ApplicationContext ctx;
-  private static final Logger LOG = LoggerFactory.getLogger(DataSourceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DataSourceTest.class);
+    private ApplicationContext ctx;
 
-  @Before
-  public void init() {
-    ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_XML_PATH);
-  }
+    @Before
+    public void init() {
+        ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_XML_PATH);
+    }
 
-  @Test
-  public void testConnection() {
-    ComboPooledDataSource comboPooledDataSource =
-        ctx.getBean("dataSource", ComboPooledDataSource.class);
-    LOG.info(
-        "get dataSource connection bean: {} from IOC container success.", comboPooledDataSource);
-  }
+    @Test
+    public void testConnection() {
+        ComboPooledDataSource comboPooledDataSource =
+                ctx.getBean("dataSource", ComboPooledDataSource.class);
+        LOG.info(
+                "get dataSource connection bean: {} from IOC container success.",
+                comboPooledDataSource);
+    }
 }

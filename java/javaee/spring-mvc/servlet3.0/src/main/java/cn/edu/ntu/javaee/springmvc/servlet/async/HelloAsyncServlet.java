@@ -24,48 +24,51 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class HelloAsyncServlet extends HttpServlet {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    log.info("main thread.." + Thread.currentThread() + "==>" + System.currentTimeMillis());
-    AsyncContext asyncContext = req.startAsync();
-
-    // business logic
-    asyncContext.start(
-        () -> {
-          log.info(
-              "assist thread start ... {} ==> {} ",
-              Thread.currentThread(),
-              System.currentTimeMillis());
-
-          try {
-            sayHello();
-
-            // get AsyncContext, same as asyncContext
-            // AsyncContext asyncContext = req.getAsyncContext();
-            // get ServletResponse
-            ServletResponse response = asyncContext.getResponse();
-            response.getWriter().write("hello async...");
-            asyncContext.complete();
-          } catch (IOException e) {
+    public static final void sayHello() {
+        log.info(Thread.currentThread() + " processing...");
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
             e.printStackTrace();
-          }
-
-          log.info(
-              "assist thread stop ...{} ==> {} ",
-              Thread.currentThread(),
-              System.currentTimeMillis());
-        });
-
-    log.info("main thread stop ...{} ==> {} ", Thread.currentThread(), System.currentTimeMillis());
-  }
-
-  public static final void sayHello() {
-    log.info(Thread.currentThread() + " processing...");
-    try {
-      TimeUnit.SECONDS.sleep(3);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+        }
     }
-  }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        log.info("main thread.." + Thread.currentThread() + "==>" + System.currentTimeMillis());
+        AsyncContext asyncContext = req.startAsync();
+
+        // business logic
+        asyncContext.start(
+                () -> {
+                    log.info(
+                            "assist thread start ... {} ==> {} ",
+                            Thread.currentThread(),
+                            System.currentTimeMillis());
+
+                    try {
+                        sayHello();
+
+                        // get AsyncContext, same as asyncContext
+                        // AsyncContext asyncContext = req.getAsyncContext();
+                        // get ServletResponse
+                        ServletResponse response = asyncContext.getResponse();
+                        response.getWriter().write("hello async...");
+                        asyncContext.complete();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    log.info(
+                            "assist thread stop ...{} ==> {} ",
+                            Thread.currentThread(),
+                            System.currentTimeMillis());
+                });
+
+        log.info(
+                "main thread stop ...{} ==> {} ",
+                Thread.currentThread(),
+                System.currentTimeMillis());
+    }
 }

@@ -13,29 +13,31 @@ import java.util.concurrent.TimeUnit;
  */
 public class HelloQuartz {
 
-  public static void main(String[] args) throws SchedulerException, InterruptedException {
-    // 1. get schedule
-    Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-    scheduler.start();
+    public static void main(String[] args) throws SchedulerException, InterruptedException {
+        // 1. get schedule
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        scheduler.start();
 
-    // 2. define job-detail
-    JobDetail jobDetail =
-        JobBuilder.newJob(SimpleJob.class).withIdentity("simple-job", "group1").build();
+        // 2. define job-detail
+        JobDetail jobDetail =
+                JobBuilder.newJob(SimpleJob.class).withIdentity("simple-job", "group1").build();
 
-    // 3. define trigger
-    Trigger trigger =
-        TriggerBuilder.newTrigger()
-            .withIdentity("simple-trigger1", "auto")
-            .startNow()
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
-            .build();
+        // 3. define trigger
+        Trigger trigger =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("simple-trigger1", "auto")
+                        .startNow()
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(2)
+                                        .repeatForever())
+                        .build();
 
-    // 4. build trigger and job-detail by schedule
-    scheduler.scheduleJob(jobDetail, trigger);
+        // 4. build trigger and job-detail by schedule
+        scheduler.scheduleJob(jobDetail, trigger);
 
-    TimeUnit.SECONDS.sleep(50);
-    // 5. shutdown
-    scheduler.shutdown();
-  }
+        TimeUnit.SECONDS.sleep(50);
+        // 5. shutdown
+        scheduler.shutdown();
+    }
 }

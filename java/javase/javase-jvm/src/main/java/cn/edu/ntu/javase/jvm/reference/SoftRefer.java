@@ -14,35 +14,35 @@ import java.lang.ref.SoftReference;
 @Slf4j
 public class SoftRefer {
 
-  public static void main(String[] args) {
-    testMemoryEnough();
-    testMemoryOutMemory();
-  }
-
-  /** -XX:+PrintGCDetails -Xmx10m -Xms10m */
-  public static void testMemoryOutMemory() {
-    Object o = new Object();
-    SoftReference<Object> softReference = new SoftReference<>(o);
-    o = null;
-
-    try {
-      byte[] b = new byte[50 * 1024 * 1024];
-    } finally {
-      // null
-      log.info("o: {}", o);
-      // softReference 对象存在, 但是值是 null
-      log.info("softReference: {}", softReference.get());
+    public static void main(String[] args) {
+        testMemoryEnough();
+        testMemoryOutMemory();
     }
-  }
 
-  public static void testMemoryEnough() {
-    Object o = new Object();
-    SoftReference<Object> softReference = new SoftReference<>(o);
-    o = null;
+    /** -XX:+PrintGCDetails -Xmx10m -Xms10m */
+    public static void testMemoryOutMemory() {
+        Object o = new Object();
+        SoftReference<Object> softReference = new SoftReference<>(o);
+        o = null;
 
-    // null
-    log.info("o: {}", o);
-    // java.lang.ref.SoftReference@5010be6
-    log.info("softReference: {}", softReference.get());
-  }
+        try {
+            byte[] b = new byte[50 * 1024 * 1024];
+        } finally {
+            // null
+            log.info("o: {}", o);
+            // softReference 对象存在, 但是值是 null
+            log.info("softReference: {}", softReference.get());
+        }
+    }
+
+    public static void testMemoryEnough() {
+        Object o = new Object();
+        SoftReference<Object> softReference = new SoftReference<>(o);
+        o = null;
+
+        // null
+        log.info("o: {}", o);
+        // java.lang.ref.SoftReference@5010be6
+        log.info("softReference: {}", softReference.get());
+    }
 }

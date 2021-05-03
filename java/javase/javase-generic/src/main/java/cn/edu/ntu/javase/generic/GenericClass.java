@@ -12,19 +12,19 @@ import java.lang.reflect.ParameterizedType;
  */
 public class GenericClass<T> {
 
-  @SneakyThrows
-  public T createInstance(Class<T> clazz) {
+    @SneakyThrows
+    public T createInstance(Class<T> clazz) {
 
-    return clazz.newInstance();
-  }
+        return clazz.newInstance();
+    }
 
-  @SneakyThrows
-  public T createInstance2() {
+    @SneakyThrows
+    public T createInstance2() {
 
-    ParameterizedType ptype = (ParameterizedType) this.getClass().getGenericSuperclass();
-    Class clazz = (Class<T>) ptype.getActualTypeArguments()[0];
-    T o = (T) clazz.newInstance();
+        ParameterizedType ptype = (ParameterizedType) this.getClass().getGenericSuperclass();
+        Class clazz = (Class<T>) ptype.getActualTypeArguments()[0];
+        T o = (T) clazz.newInstance();
 
-    return o;
-  }
+        return o;
+    }
 }

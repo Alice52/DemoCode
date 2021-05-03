@@ -14,14 +14,14 @@ import java.util.Properties;
  * @create 2020-01-31 11:03 <br>
  */
 public class PropertiesUsage {
-  private static final Logger LOG = LoggerFactory.getLogger(PropertiesUsage.class);
-  private static final String FILE_PATH = "";
-  private static final String SPECIFY_PROP = "";
-  private static final String DEFAULT_PROP_VALUE = "";
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesUsage.class);
+    private static final String FILE_PATH = "";
+    private static final String SPECIFY_PROP = "";
+    private static final String DEFAULT_PROP_VALUE = "";
 
-  public static void main(String[] args) throws IOException {
-    Properties properties = new Properties();
-    properties.load(new FileInputStream(FILE_PATH));
-    properties.getProperty(SPECIFY_PROP, DEFAULT_PROP_VALUE);
-  }
+    public static void main(String[] args) throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(FILE_PATH));
+        properties.getProperty(SPECIFY_PROP, DEFAULT_PROP_VALUE);
+    }
 }

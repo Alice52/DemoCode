@@ -18,10 +18,8 @@ public class ConnectionUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(ConnectionUtils.class);
 
-
     /**
      * @return Connection
-     *
      * @function Get the connection of MQ.
      */
     public static Connection getConnection() {
@@ -37,10 +35,16 @@ public class ConnectionUtils {
         try {
             connection = connectionFactory.newConnection();
         } catch (IOException e) {
-            LOG.error("RabbitMQ: get connection IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: get connection IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } catch (TimeoutException e) {
-            LOG.error("RabbitMQ: get connection TimeoutException exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: get connection TimeoutException exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         }
 
@@ -48,24 +52,23 @@ public class ConnectionUtils {
         return connection;
     }
 
-
-//    public static Channel getChannel() {
-//        LOG.info("Start get channel of rabbitmq.");
-//
-//        Channel channel;
-//        Connection connection = ConnectionUtils.getConnection();
-//
-//        try {
-//            channel = connection.createChannel();
-//        } catch (IOException e) {
-//            LOG.error("RabbitMQ: get channel IOException exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
-//            throw new RuntimeException();
-//        }
-//
-//        LOG.info("End get channel of rabbitmq success.");
-//        return channel;
-//    }
-
+    //    public static Channel getChannel() {
+    //        LOG.info("Start get channel of rabbitmq.");
+    //
+    //        Channel channel;
+    //        Connection connection = ConnectionUtils.getConnection();
+    //
+    //        try {
+    //            channel = connection.createChannel();
+    //        } catch (IOException e) {
+    //            LOG.error("RabbitMQ: get channel IOException exception. exception cause: {};
+    // exception message: {}", e.getCause(), e.getMessage());
+    //            throw new RuntimeException();
+    //        }
+    //
+    //        LOG.info("End get channel of rabbitmq success.");
+    //        return channel;
+    //    }
 
     public static void closeConnection(Channel channel, Connection connection) {
         LOG.info("Start close connection and channel of rabbitmq.");
@@ -74,17 +77,26 @@ public class ConnectionUtils {
             try {
                 channel.close();
             } catch (IOException e) {
-                LOG.error("RabbitMQ: close channel IOException exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+                LOG.error(
+                        "RabbitMQ: close channel IOException exception. exception cause: {}; exception message: {}",
+                        e.getCause(),
+                        e.getMessage());
                 throw new RuntimeException();
             } catch (TimeoutException e) {
-                LOG.error("RabbitMQ: close channel TimeoutException exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+                LOG.error(
+                        "RabbitMQ: close channel TimeoutException exception. exception cause: {}; exception message: {}",
+                        e.getCause(),
+                        e.getMessage());
                 throw new RuntimeException();
             } finally {
                 if (connection != null) {
                     try {
                         connection.close();
                     } catch (IOException e) {
-                        LOG.error("RabbitMQ: close connection IOException exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+                        LOG.error(
+                                "RabbitMQ: close connection IOException exception. exception cause: {}; exception message: {}",
+                                e.getCause(),
+                                e.getMessage());
                         throw new RuntimeException();
                     }
                 }

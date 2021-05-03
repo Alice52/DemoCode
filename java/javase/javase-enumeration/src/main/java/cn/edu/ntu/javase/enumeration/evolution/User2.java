@@ -13,31 +13,31 @@ import org.slf4j.LoggerFactory;
  */
 public class User2 {
 
-  private static final Logger LOG = LoggerFactory.getLogger(User2.class);
-  private String name;
-  private UserStatus status;
+    private static final Logger LOG = LoggerFactory.getLogger(User2.class);
+    private String name;
+    private UserStatus status;
 
-  public UserStatus getStatus() {
-    return status;
-  }
+    public UserStatus getStatus() {
+        return status;
+    }
 
-  public void setStatus(UserStatus status) {
-    this.status = status;
-  }
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  @Test
-  public void testUser2() {
-    User2 user = new User2();
-    user.setName("zack");
-    // this make sure status is 0 or 1.
-    user.setStatus(UserStatus.ENABLE);
-  }
+    @Test
+    public void testUser2() {
+        User2 user = new User2();
+        user.setName("zack");
+        // this make sure status is 0 or 1.
+        user.setStatus(UserStatus.ENABLE);
+    }
 }

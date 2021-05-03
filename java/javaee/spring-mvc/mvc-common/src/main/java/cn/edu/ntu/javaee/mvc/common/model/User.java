@@ -19,6 +19,6 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class User {
 
-  private Integer age;
-  private String name;
+    private Integer age;
+    private String name;
 }

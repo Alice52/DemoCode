@@ -12,34 +12,34 @@ import java.util.List;
  */
 public interface EmployeeDynamicSQLMapper {
 
-  List<Employee> getEmpsTestInnerParameter(Employee employee);
+    List<Employee> getEmpsTestInnerParameter(Employee employee);
 
-  /**
-   * Get by condition.
-   *
-   * @param employee
-   * @return
-   */
-  List<Employee> getEmpsByConditionIf(Employee employee);
+    /**
+     * Get by condition.
+     *
+     * @param employee
+     * @return
+     */
+    List<Employee> getEmpsByConditionIf(Employee employee);
 
-  List<Employee> getEmpsByConditionTrim(Employee employee);
+    List<Employee> getEmpsByConditionTrim(Employee employee);
 
-  List<Employee> getEmpsByConditionChoose(Employee employee);
+    List<Employee> getEmpsByConditionChoose(Employee employee);
 
-  void updateEmp(Employee employee);
+    void updateEmp(Employee employee);
 
-  /**
-   * 查询员工 id 在给定集合中的
-   *
-   * @param ids
-   * @return
-   */
-  List<Employee> getEmpsByConditionForeach(@Param("ids") List<Integer> ids);
+    /**
+     * 查询员工 id 在给定集合中的
+     *
+     * @param ids
+     * @return
+     */
+    List<Employee> getEmpsByConditionForeach(@Param("ids") List<Integer> ids);
 
-  /**
-   * Insert .
-   *
-   * @param emps
-   */
-  void addEmps1(@Param("emps") List<Employee> emps);
+    /**
+     * Insert .
+     *
+     * @param emps
+     */
+    void addEmps1(@Param("emps") List<Employee> emps);
 }

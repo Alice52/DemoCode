@@ -13,11 +13,11 @@ import java.util.concurrent.ForkJoinPool;
 @Slf4j
 public class ForkJoinPoolTest {
 
-  @SneakyThrows
-  public static void main(String[] args) {
+    @SneakyThrows
+    public static void main(String[] args) {
 
-    ForkJoinPool pool = new ForkJoinPool();
-    log.info("pool size: {}", pool.getPoolSize());
-    log.info("pool active size: {}", pool.getActiveThreadCount());
-  }
+        ForkJoinPool pool = new ForkJoinPool();
+        log.info("pool size: {}", pool.getPoolSize());
+        log.info("pool active size: {}", pool.getActiveThreadCount());
+    }
 }

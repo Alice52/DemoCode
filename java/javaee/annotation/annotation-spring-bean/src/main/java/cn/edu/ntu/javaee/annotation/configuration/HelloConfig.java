@@ -13,13 +13,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class HelloConfig {
 
-  /**
-   * method name is bean name in IOC container, but if specify value, which will be bean name.</br>
-   *
-   * @return Person
-   */
-  @Bean(value = "person")
-  public Person injectPerson() {
-    return new Person(19, "alice52");
-  }
+    /**
+     * method name is bean name in IOC container, but if specify value, which will be bean
+     * name.</br>
+     *
+     * @return Person
+     */
+    @Bean(value = "person")
+    public Person injectPerson() {
+        return new Person(19, "alice52");
+    }
 }

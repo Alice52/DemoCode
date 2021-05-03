@@ -16,33 +16,34 @@ import java.util.StringJoiner;
  * @project quartz <br>
  */
 public class HelloJob implements Job {
-  private static Logger LOG = LoggerFactory.getLogger(HelloJob.class);
+    private static Logger LOG = LoggerFactory.getLogger(HelloJob.class);
 
-  /**
-   * Empty constructor for job initialization
-   *
-   * <p>Quartz requires a public empty constructor so that the scheduler can instantiate the class
-   * whenever it needs.
-   */
-  public HelloJob() {}
+    /**
+     * Empty constructor for job initialization
+     *
+     * <p>Quartz requires a public empty constructor so that the scheduler can instantiate the class
+     * whenever it needs.
+     */
+    public HelloJob() {}
 
-  /**
-   * Called by the <code>{@link org.quartz.Scheduler}</code> when a <code>{@link org.quartz.Trigger}
-   * </code> fires that is associated with the <code>Job</code>.
-   *
-   * @throws JobExecutionException if there is an exception while executing the job.
-   */
-  @Override
-  public void execute(JobExecutionContext context) throws JobExecutionException {
+    /**
+     * Called by the <code>{@link org.quartz.Scheduler}</code> when a <code>
+     * {@link org.quartz.Trigger}
+     * </code> fires that is associated with the <code>Job</code>.
+     *
+     * @throws JobExecutionException if there is an exception while executing the job.
+     */
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
 
-    StringJoiner outStr =
-        new StringJoiner(" ")
-            .add(this.getClass().getSimpleName())
-            .add(DFUtils.format(new Date()))
-            .add(Thread.currentThread().getName())
-            .add(context.getTrigger().getKey().getName())
-            .add(context.getJobDetail().getKey().getName());
+        StringJoiner outStr =
+                new StringJoiner(" ")
+                        .add(this.getClass().getSimpleName())
+                        .add(DFUtils.format(new Date()))
+                        .add(Thread.currentThread().getName())
+                        .add(context.getTrigger().getKey().getName())
+                        .add(context.getJobDetail().getKey().getName());
 
-    LOG.info(String.valueOf(outStr));
-  }
+        LOG.info(String.valueOf(outStr));
+    }
 }

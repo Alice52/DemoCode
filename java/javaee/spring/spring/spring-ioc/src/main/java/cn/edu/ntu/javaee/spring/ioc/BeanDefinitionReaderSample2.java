@@ -14,17 +14,17 @@ import java.util.Arrays;
  * @project spring <br>
  */
 public class BeanDefinitionReaderSample2 {
-  private static final Logger LOG = LoggerFactory.getLogger(BeanDefinitionReaderSample2.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BeanDefinitionReaderSample2.class);
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 
-    XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-    reader.setResourceLoader(new DefaultResourceLoader());
-    reader.loadBeanDefinitions("ApplicationContext.xml");
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
+        reader.setResourceLoader(new DefaultResourceLoader());
+        reader.loadBeanDefinitions("ApplicationContext.xml");
 
-    Arrays.stream(factory.getBeanDefinitionNames()).forEach(x -> LOG.info(x));
-    LOG.info(factory.getBean("person").toString());
-  }
+        Arrays.stream(factory.getBeanDefinitionNames()).forEach(x -> LOG.info(x));
+        LOG.info(factory.getBean("person").toString());
+    }
 }

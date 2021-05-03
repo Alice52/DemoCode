@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
@@ -27,7 +27,8 @@
     <bean class="cn.edu.ntu.javaee.spring.ioc.CustomBeanPostProcessor"/>
 
     <!--config autowire-->
-    <bean id="address" class="cn.edu.ntu.javaee.spring.common.entity.Address" p:zipCode="220000" p:province="JiangSu" p:city="XuZhou"/>
+    <bean id="address" class="cn.edu.ntu.javaee.spring.common.entity.Address" p:zipCode="220000" p:province="JiangSu"
+          p:city="XuZhou"/>
     <bean id="person" class="cn.edu.ntu.javaee.spring.common.entity.Person" autowire="byName">
         <property name="gender" value="true"/>
         <property name="age" value="18"/>

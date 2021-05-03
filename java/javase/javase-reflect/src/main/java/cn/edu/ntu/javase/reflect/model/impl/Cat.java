@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
  * @create 2020-04-04 23:50 <br>
  */
 public class Cat implements Animal {
-  private static final Logger LOG = LoggerFactory.getLogger(Cat.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Cat.class);
 
-  @Override
-  public String getType() {
-    final String name = "Cat";
-    LOG.info("get animal type: {}", name);
-    return name;
-  }
+    @Override
+    public String getType() {
+        final String name = "Cat";
+        LOG.info("get animal type: {}", name);
+        return name;
+    }
 }

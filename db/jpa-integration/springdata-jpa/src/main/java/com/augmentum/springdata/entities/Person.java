@@ -11,96 +11,96 @@ import java.util.Date;
 @Entity
 @Table(name = "person")
 public class Person {
-  private Integer id;
-  private String lastName;
+    private Integer id;
+    private String lastName;
 
-  private String email;
-  private Date birthday;
-  private int age;
-  private Address address;
+    private String email;
+    private Date birthday;
+    private int age;
+    private Address address;
 
-  private Integer addressId;
+    private Integer addressId;
 
-  @Column(name = "add_id")
-  public Integer getAddressId() {
-    return addressId;
-  }
+    @Column(name = "add_id")
+    public Integer getAddressId() {
+        return addressId;
+    }
 
-  public void setAddressId(Integer addressId) {
-    this.addressId = addressId;
-  }
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
 
-  @JoinColumn(name = "address_id")
-  @ManyToOne
-  public Address getAddress() {
-    return address;
-  }
+    @JoinColumn(name = "address_id")
+    @ManyToOne
+    public Address getAddress() {
+        return address;
+    }
 
-  public void setAddress(Address address) {
-    this.address = address;
-  }
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-  @Column(name = "birthday")
-  public Date getBirthday() {
-    return birthday;
-  }
+    @Column(name = "birthday")
+    public Date getBirthday() {
+        return birthday;
+    }
 
-  public void setBirthday(Date birthday) {
-    this.birthday = birthday;
-  }
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
-  @GeneratedValue
-  @Id
-  public Integer getId() {
-    return id;
-  }
+    @GeneratedValue
+    @Id
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  @Column(name = "last_name")
-  public String getLastName() {
-    return lastName;
-  }
+    @Column(name = "last_name")
+    public String getLastName() {
+        return lastName;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public int getAge() {
-    return age;
-  }
+    public int getAge() {
+        return age;
+    }
 
-  public void setAge(int age) {
-    this.age = age;
-  }
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-  @Override
-  public String toString() {
-    return "Person{"
-        + "id="
-        + id
-        + ", lastName='"
-        + lastName
-        + '\''
-        + ", email='"
-        + email
-        + '\''
-        + ", birthday="
-        + birthday
-        + ", age="
-        + age
-        + ", address="
-        + address
-        + '}';
-  }
+    @Override
+    public String toString() {
+        return "Person{"
+                + "id="
+                + id
+                + ", lastName='"
+                + lastName
+                + '\''
+                + ", email='"
+                + email
+                + '\''
+                + ", birthday="
+                + birthday
+                + ", age="
+                + age
+                + ", address="
+                + address
+                + '}';
+    }
 }

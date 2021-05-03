@@ -7,19 +7,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Storage{
+public class Storage {
 
-  private Long id;
+    private Long id;
 
-  /** 产品id */
-  private Long productId;
+    /** 产品id */
+    private Long productId;
 
-  /** 总库存 */
-  private Integer total;
+    /** 总库存 */
+    private Integer total;
 
-  /** 已用库存 */
-  private Integer used;
+    /** 已用库存 */
+    private Integer used;
 
-  /** 剩余库存 */
-  private Integer residue;
+    /** 剩余库存 */
+    private Integer residue;
 }

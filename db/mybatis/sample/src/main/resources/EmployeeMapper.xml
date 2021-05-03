@@ -31,7 +31,7 @@
     <!-- public List<Employee> getEmpsByLastNameLike(String lastName); -->
     <!--resultType: 如果返回的是一个集合, 要写集合中元素的类型  -->
     <select id="getEmpsByLastNameLike" resultMap="BaseResultMap">
-        SELECT  id, name, email, gender FROM `mybatis.employee` WHERE name LIKE '${lastName}%'
+        SELECT id, name, email, gender FROM `mybatis.employee` WHERE name LIKE '${lastName}%'
     </select>
 
     <select id="getEmpByIdReturnMap" resultType="map" databaseId="mysql">

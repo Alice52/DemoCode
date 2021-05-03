@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
  * @create 2020-04-04 23:51 <br>
  */
 public class Elephant implements Animal {
-  private static final Logger LOG = LoggerFactory.getLogger(Elephant.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Elephant.class);
 
-  @Override
-  public String getType() {
-    final String name = "Elephant";
-    LOG.info("get animal type: {}", name);
-    return name;
-  }
+    @Override
+    public String getType() {
+        final String name = "Elephant";
+        LOG.info("get animal type: {}", name);
+        return name;
+    }
 }

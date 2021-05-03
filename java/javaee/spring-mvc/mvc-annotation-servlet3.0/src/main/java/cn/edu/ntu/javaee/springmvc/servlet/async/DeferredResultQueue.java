@@ -8,14 +8,14 @@ import org.springframework.web.context.request.async.DeferredResult;
 /** @author zack */
 public class DeferredResultQueue {
 
-  private static Queue<DeferredResult<Object>> queue =
-      new ConcurrentLinkedQueue<DeferredResult<Object>>();
+    private static Queue<DeferredResult<Object>> queue =
+            new ConcurrentLinkedQueue<DeferredResult<Object>>();
 
-  public static void save(DeferredResult<Object> deferredResult) {
-    queue.add(deferredResult);
-  }
+    public static void save(DeferredResult<Object> deferredResult) {
+        queue.add(deferredResult);
+    }
 
-  public static DeferredResult<Object> get() {
-    return queue.poll();
-  }
+    public static DeferredResult<Object> get() {
+        return queue.poll();
+    }
 }

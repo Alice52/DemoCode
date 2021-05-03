@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 
-  @ResponseBody
-  @RequestMapping("/hello")
-  public String hello() {
-    return "hello";
-  }
+    @ResponseBody
+    @RequestMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
 
-  /** /WEB-INF/views/success.jsp */
-  @RequestMapping("/success")
-  public String success() {
-    return "success";
-  }
+    /** /WEB-INF/views/success.jsp */
+    @RequestMapping("/success")
+    public String success() {
+        return "success";
+    }
 }

@@ -9,49 +9,49 @@ import java.util.regex.Pattern;
  */
 public class WildcardMatcher {
 
-  private final Pattern pattern;
+    private final Pattern pattern;
 
-  public WildcardMatcher(final String expression) {
+    public WildcardMatcher(final String expression) {
 
-    final String[] parts = expression.split("&");
-    final StringBuilder regex = new StringBuilder(expression.length() * 2);
-    boolean next = false;
+        final String[] parts = expression.split("&");
+        final StringBuilder regex = new StringBuilder(expression.length() * 2);
+        boolean next = false;
 
-    for (final String part : parts) {
-      if (next) {
-        regex.append("|");
-      }
+        for (final String part : parts) {
+            if (next) {
+                regex.append("|");
+            }
 
-      regex.append("(").append(toRegex(part)).append(")");
+            regex.append("(").append(toRegex(part)).append(")");
 
-      next = true;
+            next = true;
+        }
+
+        this.pattern = Pattern.compile(regex.toString());
     }
 
-    this.pattern = Pattern.compile(regex.toString());
-  }
+    private CharSequence toRegex(final String expression) {
 
-  private CharSequence toRegex(final String expression) {
+        final StringBuilder regex = new StringBuilder(expression.length() * 2);
 
-    final StringBuilder regex = new StringBuilder(expression.length() * 2);
+        for (final char c : expression.toCharArray()) {
+            switch (c) {
+                case '?':
+                    regex.append(".?");
+                    break;
+                case '*':
+                    regex.append(".*");
+                    break;
+                default:
+                    regex.append(Pattern.quote(String.valueOf(c)));
+                    break;
+            }
+        }
 
-    for (final char c : expression.toCharArray()) {
-      switch (c) {
-        case '?':
-          regex.append(".?");
-          break;
-        case '*':
-          regex.append(".*");
-          break;
-        default:
-          regex.append(Pattern.quote(String.valueOf(c)));
-          break;
-      }
+        return regex;
     }
 
-    return regex;
-  }
-
-  public boolean matches(final String s) {
-    return pattern.matcher(s).matches();
-  }
+    public boolean matches(final String s) {
+        return pattern.matcher(s).matches();
+    }
 }

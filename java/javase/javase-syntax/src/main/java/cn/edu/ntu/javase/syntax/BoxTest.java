@@ -12,13 +12,13 @@ import java.util.Map;
  */
 public class BoxTest {
 
-  // 在小于 JDK 1.8 的版本中执行的结果是 NPE，在 JDK 1.8 及以后的版本中执行结果是 null
-  // jdk7的推断能力比较弱, 推断不出:前后的类型, 所以会先拆箱再装箱
-  // jdk8的推断能力比较强, 可以推断出类型是Boolean[泛型擦除之后的引用类型], 所以不会拆箱
-  Map<String, Boolean> map = new HashMap<>();
-  Boolean b = (map != null ? map.get("Hollis") : false);
+    // 在小于 JDK 1.8 的版本中执行的结果是 NPE，在 JDK 1.8 及以后的版本中执行结果是 null
+    // jdk7的推断能力比较弱, 推断不出:前后的类型, 所以会先拆箱再装箱
+    // jdk8的推断能力比较强, 可以推断出类型是Boolean[泛型擦除之后的引用类型], 所以不会拆箱
+    Map<String, Boolean> map = new HashMap<>();
+    Boolean b = (map != null ? map.get("Hollis") : false);
 
-  // NPE
-  Integer i = null;
-  Long a = 1 == 1 ? i : new Long(1);
+    // NPE
+    Integer i = null;
+    Long a = 1 == 1 ? i : new Long(1);
 }

@@ -10,43 +10,43 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode
 public class Person implements Serializable {
-  private String name;
-  private int age;
+    private String name;
+    private int age;
 
-  public Person() {}
+    public Person() {}
 
-  public Person(String name, int age) {
-    this.name = name;
-    this.age = age;
-  }
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public int getAge() {
-    return age;
-  }
+    public int getAge() {
+        return age;
+    }
 
-  public void setAge(int age) {
-    this.age = age;
-  }
+    public void setAge(int age) {
+        this.age = age;
+    }
 
-  @Override
-  public String toString() {
-    return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
-  }
+    @Override
+    public String toString() {
+        return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
+    }
 
-  /** test for Reflect */
-  public void testReflect() {
-    System.out.println("Reflect");
-  }
+    /** test for Reflect */
+    public void testReflect() {
+        System.out.println("Reflect");
+    }
 
-  public void testReflect2(String str, Integer integer) {
-    System.out.println("Reflect2: " + str + "-" + integer);
-  }
+    public void testReflect2(String str, Integer integer) {
+        System.out.println("Reflect2: " + str + "-" + integer);
+    }
 }

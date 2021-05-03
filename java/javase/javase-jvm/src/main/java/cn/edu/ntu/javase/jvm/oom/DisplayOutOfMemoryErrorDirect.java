@@ -13,21 +13,22 @@ import java.util.OptionalLong;
  */
 @Slf4j
 public class DisplayOutOfMemoryErrorDirect {
-  /**
-   *
-   *
-   * <pre>
-   *     1. -Xms20m -Xmx20m -XX:MaxDirectMemorySize=5m
-   *     2. java.lang.OutOfMemoryError: Direct buffer memory
-   * </pre>
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
+    /**
+     *
+     *
+     * <pre>
+     *     1. -Xms20m -Xmx20m -XX:MaxDirectMemorySize=5m
+     *     2. java.lang.OutOfMemoryError: Direct buffer memory
+     * </pre>
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
 
-    OptionalLong.of(VM.maxDirectMemory())
-        .ifPresent(x -> log.info("max direct memory: {}", x / (double) 1024 / (double) 1024));
+        OptionalLong.of(VM.maxDirectMemory())
+                .ifPresent(
+                        x -> log.info("max direct memory: {}", x / (double) 1024 / (double) 1024));
 
-    ByteBuffer.allocateDirect(10 * 1024 * 1024);
-  }
+        ByteBuffer.allocateDirect(10 * 1024 * 1024);
+    }
 }

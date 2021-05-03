@@ -16,14 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PersonService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PersonService.class);
 
-  @Autowired
-  @Qualifier(value = "personRepositoryMybatisImpl")
-  private PersonRepository personRepository;
+    @Autowired
+    @Qualifier(value = "personRepositoryMybatisImpl")
+    private PersonRepository personRepository;
 
-  @Override
-  public void handleRegister() {
-    personRepository.addUser();
-  }
+    @Override
+    public void handleRegister() {
+        personRepository.addUser();
+    }
 }

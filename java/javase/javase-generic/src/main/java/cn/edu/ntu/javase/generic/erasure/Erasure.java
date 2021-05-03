@@ -6,13 +6,13 @@ package cn.edu.ntu.javase.generic.erasure;
  * @project javase <br>
  */
 public class Erasure<T> {
-  T object;
+    T object;
 
-  public Erasure() {}
+    public Erasure() {}
 
-  public Erasure(T object) {
-    this.object = object;
-  }
+    public Erasure(T object) {
+        this.object = object;
+    }
 
-  public void add(T object) {}
+    public void add(T object) {}
 }

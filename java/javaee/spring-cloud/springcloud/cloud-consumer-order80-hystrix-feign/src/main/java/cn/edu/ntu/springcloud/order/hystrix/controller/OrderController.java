@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author zack <br>
@@ -23,40 +22,42 @@ import java.util.concurrent.TimeUnit;
 @DefaultProperties(defaultFallback = "getPaymentInfoTimeoutHandler")
 public class OrderController {
 
-  @Resource private HystrixService hystrixService;
+    @Resource private HystrixService hystrixService;
 
-  @GetMapping("/hystrix/success-info")
-  @HystrixCommand()
-  public JsonResult getPaymentInfo() {
-    return hystrixService.getPaymentInfos();
-  }
+    @GetMapping("/hystrix/success-info")
+    @HystrixCommand()
+    public JsonResult getPaymentInfo() {
+        return hystrixService.getPaymentInfos();
+    }
 
-  @GetMapping("/hystrix/fail-info")
-  @HystrixCommand(
-          fallbackMethod = "getPaymentInfoTimeoutHandler",
-          commandProperties = {
-                  @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "4000")
-          })
-  public JsonResult getPaymentInfoTimeout() {
-    log.warn("message");
-    return hystrixService.getPaymentInfoTimeout();
-  }
+    @GetMapping("/hystrix/fail-info")
+    @HystrixCommand(
+            fallbackMethod = "getPaymentInfoTimeoutHandler",
+            commandProperties = {
+                @HystrixProperty(
+                        name = "execution.isolation.thread.timeoutInMilliseconds",
+                        value = "4000")
+            })
+    public JsonResult getPaymentInfoTimeout() {
+        log.warn("message");
+        return hystrixService.getPaymentInfoTimeout();
+    }
 
-  @GetMapping("/hystrix/error-info")
-  @HystrixCommand()
-  public JsonResult getPaymentInfoError() {
-    return hystrixService.getPaymentInfoError();
-  }
+    @GetMapping("/hystrix/error-info")
+    @HystrixCommand()
+    public JsonResult getPaymentInfoError() {
+        return hystrixService.getPaymentInfoError();
+    }
 
-  public JsonResult getPaymentInfoTimeoutHandler() {
+    public JsonResult getPaymentInfoTimeoutHandler() {
 
-    String message =
-        "Consumer Thread Pool: "
-            + Thread.currentThread().getName()
-            + ",call getPaymentInfoTimeoutHandler("
-            + "): success";
-    log.warn(message);
+        String message =
+                "Consumer Thread Pool: "
+                        + Thread.currentThread().getName()
+                        + ",call getPaymentInfoTimeoutHandler("
+                        + "): success";
+        log.warn(message);
 
-    return new JsonResult(400, message, null);
-  }
+        return new JsonResult(400, message, null);
+    }
 }

@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/payment")
 public class PaymentController {
 
-  @Value("${server.port}")
-  private String port;
+    @Value("${server.port}")
+    private String port;
 
-  @GetMapping(value = "/nacos/get/{id}")
-  public JsonResult getPaymentById(@PathVariable("id") Long id) {
+    @GetMapping(value = "/nacos/get/{id}")
+    public JsonResult getPaymentById(@PathVariable("id") Long id) {
 
-    return new JsonResult(200, "success, and port: " + port, id);
-  }
+        return new JsonResult(200, "success, and port: " + port, id);
+    }
 }

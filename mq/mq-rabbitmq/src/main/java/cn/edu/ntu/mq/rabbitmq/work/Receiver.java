@@ -21,7 +21,7 @@ public class Receiver {
     private static Connection connection = ConnectionUtils.getConnection();
 
     public static void main(String[] argv) {
-        for (int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
             receiveMsg();
         }
     }
@@ -35,24 +35,27 @@ public class Receiver {
             // Fair dispatch
             channel.basicQos(1);
 
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), "UTF-8");
+            DeliverCallback deliverCallback =
+                    (consumerTag, delivery) -> {
+                        String message = new String(delivery.getBody(), "UTF-8");
 
-                LOG.info(" [x] Received '" + message + "'");
-                try {
-                    doWork(message);
-                } finally {
-                    LOG.info(" [x] Done");
-                    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-                }
-            };
-            channel.basicConsume(Constants.WORK_QUEUE_NAME, false, deliverCallback, consumerTag -> { });
+                        LOG.info(" [x] Received '" + message + "'");
+                        try {
+                            doWork(message);
+                        } finally {
+                            LOG.info(" [x] Done");
+                            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+                        }
+                    };
+            channel.basicConsume(
+                    Constants.WORK_QUEUE_NAME, false, deliverCallback, consumerTag -> {});
         } catch (IOException e) {
-            LOG.error("RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: receiveMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         }
-
-
     }
 
     private static void doWork(String task) {

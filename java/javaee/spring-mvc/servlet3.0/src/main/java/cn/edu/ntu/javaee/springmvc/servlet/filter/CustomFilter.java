@@ -15,18 +15,16 @@ import javax.servlet.ServletResponse;
 @Slf4j
 public class CustomFilter implements Filter {
 
-  @Override
-  public void destroy() {
+    @Override
+    public void destroy() {}
 
-  }
+    @Override
+    public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+            throws IOException, ServletException {
+        log.info("UserFilter...doFilter...");
+        arg2.doFilter(arg0, arg1);
+    }
 
-  @Override
-  public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
-      throws IOException, ServletException {
-    log.info("UserFilter...doFilter...");
-    arg2.doFilter(arg0, arg1);
-  }
-
-  @Override
-  public void init(FilterConfig arg0) throws ServletException {}
+    @Override
+    public void init(FilterConfig arg0) throws ServletException {}
 }

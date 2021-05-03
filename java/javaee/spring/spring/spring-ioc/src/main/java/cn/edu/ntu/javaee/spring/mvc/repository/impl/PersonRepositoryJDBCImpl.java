@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository(value = "personRepository")
 public class PersonRepositoryJDBCImpl implements PersonRepository {
-  private static final Logger LOG = LoggerFactory.getLogger(PersonRepository.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PersonRepository.class);
 
-  @Override
-  public void addUser() {
-    LOG.info("MVC processor is success by use {}.", this.getClass());
-  }
+    @Override
+    public void addUser() {
+        LOG.info("MVC processor is success by use {}.", this.getClass());
+    }
 }

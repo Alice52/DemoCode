@@ -12,8 +12,8 @@ import org.springframework.context.ApplicationListener;
 @Slf4j
 public class CustomApplicationListener implements ApplicationListener {
 
-  @Override
-  public void onApplicationEvent(ApplicationEvent event) {
-    log.info("event: {}", event);
-  }
+    @Override
+    public void onApplicationEvent(ApplicationEvent event) {
+        log.info("event: {}", event);
+    }
 }

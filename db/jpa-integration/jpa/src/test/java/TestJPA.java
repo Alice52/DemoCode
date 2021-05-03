@@ -16,10 +16,10 @@ import java.util.Date;
  */
 public class TestJPA {
 
+    private static final String persistenceUnitName = "NewPersistenceUnit";
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
     private EntityTransaction transaction;
-    private static final String persistenceUnitName = "NewPersistenceUnit";
 
     @Before
     public void init() {

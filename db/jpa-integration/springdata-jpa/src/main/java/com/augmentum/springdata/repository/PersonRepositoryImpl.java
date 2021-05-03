@@ -13,12 +13,12 @@ import javax.persistence.PersistenceContext;
  */
 public class PersonRepositoryImpl implements PersonDao {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PersonRepositoryImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PersonRepositoryImpl.class);
 
-  @PersistenceContext private EntityManager entityManager;
+    @PersistenceContext private EntityManager entityManager;
 
-  public void test() {
-    LOG.error(
-        "PersonRepositoryImpl can do not implements PersonRepository, just implements PersonDao. And PersonRepository can use the method in PersonDao.");
-  }
+    public void test() {
+        LOG.error(
+                "PersonRepositoryImpl can do not implements PersonRepository, just implements PersonDao. And PersonRepository can use the method in PersonDao.");
+    }
 }

@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @create 2020-02-10 23:21 <br>
  */
 public interface Handler {
-  Logger LOG = LoggerFactory.getLogger(Handler.class);
+    Logger LOG = LoggerFactory.getLogger(Handler.class);
 
-  void handle(String msg);
+    void handle(String msg);
 }

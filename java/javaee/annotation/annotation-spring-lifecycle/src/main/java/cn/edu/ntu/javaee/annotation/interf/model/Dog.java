@@ -21,35 +21,35 @@ import javax.annotation.PreDestroy;
 @ToString
 @Slf4j
 public class Dog implements InitializingBean, DisposableBean {
-  private Integer age;
-  private String name;
-  private String color;
+    private Integer age;
+    private String name;
+    private String color;
 
-  @PostConstruct
-  public void init1() {
-    log.info("2. Person object init1 method execute.");
-  }
+    @PostConstruct
+    public void init1() {
+        log.info("2. Person object init1 method execute.");
+    }
 
-  @Override
-  public void afterPropertiesSet() throws Exception {
-    log.info("3. Person object afterPropertiesSet method execute.");
-  }
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        log.info("3. Person object afterPropertiesSet method execute.");
+    }
 
-  public void init() {
-    log.info("4. Person object init method execute.");
-  }
+    public void init() {
+        log.info("4. Person object init method execute.");
+    }
 
-  @PreDestroy
-  public void destroy1() {
-    log.info("6. Person object destroy1 method execute.");
-  }
+    @PreDestroy
+    public void destroy1() {
+        log.info("6. Person object destroy1 method execute.");
+    }
 
-  @Override
-  public void destroy() throws Exception {
-    log.info("7. Person object destroy[DisposableBean] method execute.");
-  }
+    @Override
+    public void destroy() throws Exception {
+        log.info("7. Person object destroy[DisposableBean] method execute.");
+    }
 
-  public void destroy0() {
-    log.info("8. Person object destroy0 method execute.");
-  }
+    public void destroy0() {
+        log.info("8. Person object destroy0 method execute.");
+    }
 }

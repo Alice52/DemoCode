@@ -23,14 +23,14 @@ import java.io.IOException;
 @Slf4j
 public class HelloListener implements ServletContextListener {
 
-  @Override
-  public void contextDestroyed(ServletContextEvent arg0) {
-    log.info("HelloListener...contextDestroyed...");
-  }
+    @Override
+    public void contextDestroyed(ServletContextEvent arg0) {
+        log.info("HelloListener...contextDestroyed...");
+    }
 
-  @Override
-  public void contextInitialized(ServletContextEvent arg0) {
-    ServletContext servletContext = arg0.getServletContext();
-    log.info("HelloListener...contextInitialized...");
-  }
+    @Override
+    public void contextInitialized(ServletContextEvent arg0) {
+        ServletContext servletContext = arg0.getServletContext();
+        log.info("HelloListener...contextInitialized...");
+    }
 }

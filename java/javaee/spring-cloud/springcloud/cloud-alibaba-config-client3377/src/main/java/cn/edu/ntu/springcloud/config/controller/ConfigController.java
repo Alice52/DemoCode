@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RequestMapping(value = "/config")
 public class ConfigController {
-  private static final Logger LOG = LoggerFactory.getLogger(ConfigController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConfigController.class);
 
-  @Value("${config.info}")
-  private String configInfo;
+    @Value("${config.info}")
+    private String configInfo;
 
-  @GetMapping(value = "/get")
-  public JsonResult getConfigInfo() {
+    @GetMapping(value = "/get")
+    public JsonResult getConfigInfo() {
 
-    return new JsonResult(200, "success", configInfo);
-  }
+        return new JsonResult(200, "success", configInfo);
+    }
 }

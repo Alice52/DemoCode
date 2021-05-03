@@ -15,17 +15,17 @@ import java.util.Arrays;
 @Slf4j
 public class PropertyTest {
 
-  ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
 
-  @Test
-  public void testBeanInitAndDestroy() {
-    Cat cat = applicationContext.getBean(Cat.class);
-    log.info(String.valueOf(cat));
-  }
+    @Test
+    public void testBeanInitAndDestroy() {
+        Cat cat = applicationContext.getBean(Cat.class);
+        log.info(String.valueOf(cat));
+    }
 
-  @Test
-  public void testGetBeansFromIoc() {
-    String[] definitionNames = applicationContext.getBeanDefinitionNames();
-    Arrays.stream(definitionNames).forEach(System.out::println);
-  }
+    @Test
+    public void testGetBeansFromIoc() {
+        String[] definitionNames = applicationContext.getBeanDefinitionNames();
+        Arrays.stream(definitionNames).forEach(System.out::println);
+    }
 }

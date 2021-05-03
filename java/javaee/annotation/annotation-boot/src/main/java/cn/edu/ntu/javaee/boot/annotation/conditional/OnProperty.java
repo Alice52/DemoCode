@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(
-    prefix = "swagger2",
-    value = {"enable"},
-    havingValue = "true")
+        prefix = "swagger2",
+        value = {"enable"},
+        havingValue = "true")
 public class OnProperty {}

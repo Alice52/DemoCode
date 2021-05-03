@@ -12,15 +12,13 @@ import java.math.BigDecimal;
 @RestController
 public class AccountController {
 
-    @Resource
-    AccountService accountService;
+    @Resource AccountService accountService;
 
-    /**
-     * 扣减账户余额
-     */
+    /** 扣减账户余额 */
     @RequestMapping("/account/decrease")
-    public JsonResult decrease(@RequestParam("userId") Long userId, @RequestParam("money") BigDecimal money){
-        accountService.decrease(userId,money);
-        return new JsonResult(200,"扣减账户余额成功！");
+    public JsonResult decrease(
+            @RequestParam("userId") Long userId, @RequestParam("money") BigDecimal money) {
+        accountService.decrease(userId, money);
+        return new JsonResult(200, "扣减账户余额成功！");
     }
 }

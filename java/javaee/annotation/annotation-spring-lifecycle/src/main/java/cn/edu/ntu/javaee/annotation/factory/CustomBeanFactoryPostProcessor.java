@@ -16,16 +16,16 @@ import java.util.Arrays;
 @Slf4j
 public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
-  @Override
-  public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-      throws BeansException {
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+            throws BeansException {
 
-    String[] definitionNames = beanFactory.getBeanDefinitionNames();
-    Arrays.stream(definitionNames).forEach(System.out::println);
+        String[] definitionNames = beanFactory.getBeanDefinitionNames();
+        Arrays.stream(definitionNames).forEach(System.out::println);
 
-    String[] namesForType = beanFactory.getBeanNamesForType(Dog.class);
-    Arrays.stream(namesForType).forEach(System.out::println);
+        String[] namesForType = beanFactory.getBeanNamesForType(Dog.class);
+        Arrays.stream(namesForType).forEach(System.out::println);
 
-    log.info("CustomBeanFactoryPostProcessor...postProcessBeanFactory");
-  }
+        log.info("CustomBeanFactoryPostProcessor...postProcessBeanFactory");
+    }
 }

@@ -14,28 +14,28 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 @Slf4j
 public class BeanAnnoTest {
-  private ApplicationContext applicationContext =
-      new AnnotationConfigApplicationContext(BeanAnno.class);
+    private ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(BeanAnno.class);
 
-  @Test
-  public void testIocContainer() {
+    @Test
+    public void testIocContainer() {
 
-    Person person = (Person) applicationContext.getBean("person");
-    log.info(String.valueOf(person));
+        Person person = (Person) applicationContext.getBean("person");
+        log.info(String.valueOf(person));
 
-    Person alice52 = (Person) applicationContext.getBean("alice52");
-    log.info(String.valueOf(alice52));
-  }
+        Person alice52 = (Person) applicationContext.getBean("alice52");
+        log.info(String.valueOf(alice52));
+    }
 
-  @Test
-  @Ignore
-  /**
-   * This will throw {@link org.springframework.beans.factory.NoUniqueBeanDefinitionException}
-   * exception due to IOC container has two beans. <br>
-   */
-  public void testIoc() {
+    @Test
+    @Ignore
+    /**
+     * This will throw {@link org.springframework.beans.factory.NoUniqueBeanDefinitionException}
+     * exception due to IOC container has two beans. <br>
+     */
+    public void testIoc() {
 
-    Person person = applicationContext.getBean(Person.class);
-    log.info(String.valueOf(person));
-  }
+        Person person = applicationContext.getBean(Person.class);
+        log.info(String.valueOf(person));
+    }
 }

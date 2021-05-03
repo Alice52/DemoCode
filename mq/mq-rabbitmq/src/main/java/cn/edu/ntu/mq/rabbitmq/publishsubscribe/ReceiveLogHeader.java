@@ -2,7 +2,10 @@ package cn.edu.ntu.mq.rabbitmq.publishsubscribe;
 
 import cn.edu.ntu.mq.constants.Constants;
 import cn.edu.ntu.mq.rabbitmq.Utils.ConnectionUtils;
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.BuiltinExchangeType;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.DeliverCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,16 +33,23 @@ public class ReceiveLogHeader {
 
         headers.put("SOAP_ACTION", "greet");
 
-        String queueName = channel.queueDeclare(Constants.SIMPLE_QUEUE_NAME, false, false, false, null).getQueue();
+        String queueName =
+                channel.queueDeclare(Constants.SIMPLE_QUEUE_NAME, false, false, false, null)
+                        .getQueue();
         channel.queueBind(queueName, EXCHANGE_NAME, routingKeyFromUser, headers);
 
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
-        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String message = new String(delivery.getBody(), "UTF-8");
-            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
-        };
-        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
+        DeliverCallback deliverCallback =
+                (consumerTag, delivery) -> {
+                    String message = new String(delivery.getBody(), "UTF-8");
+                    System.out.println(
+                            " [x] Received '"
+                                    + delivery.getEnvelope().getRoutingKey()
+                                    + "':'"
+                                    + message
+                                    + "'");
+                };
+        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {});
     }
 }
-

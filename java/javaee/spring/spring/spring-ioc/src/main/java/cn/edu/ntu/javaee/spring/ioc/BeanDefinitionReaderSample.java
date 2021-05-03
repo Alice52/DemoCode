@@ -10,9 +10,9 @@ import org.springframework.core.io.DefaultResourceLoader;
 import java.util.Arrays;
 
 /**
- * @author zack <br/>
- * @create 2020-07-17 19:41 <br/>
- * @project spring <br/>
+ * @author zack <br>
+ * @create 2020-07-17 19:41 <br>
+ * @project spring <br>
  */
 public class BeanDefinitionReaderSample {
     private static final Logger LOG = LoggerFactory.getLogger(BeanDefinitionReaderSample.class);
@@ -37,6 +37,6 @@ public class BeanDefinitionReaderSample {
         // address
         // person4LifeCycle
         // cn.edu.ntu.javaee.spring.ioc.CustomBeanPostProcessor#0
-        Arrays.stream(register.getBeanDefinitionNames()).forEach(x->LOG.info(x));
+        Arrays.stream(register.getBeanDefinitionNames()).forEach(x -> LOG.info(x));
     }
 }

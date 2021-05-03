@@ -20,64 +20,64 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(value = "/payment")
 public class PaymentController {
 
-  @Value("${server.port}")
-  private String port;
+    @Value("${server.port}")
+    private String port;
 
-  @Resource private PaymentService paymentService;
+    @Resource private PaymentService paymentService;
 
-  @Resource private DiscoveryClient discoveryClient;
+    @Resource private DiscoveryClient discoveryClient;
 
-  @PostMapping(value = "/create")
-  public JsonResult create(@RequestBody Payment payment) {
+    @PostMapping(value = "/create")
+    public JsonResult create(@RequestBody Payment payment) {
 
-    int result = paymentService.create(payment);
-    log.info("Create: {}", result);
+        int result = paymentService.create(payment);
+        log.info("Create: {}", result);
 
-    return result > 0
-        ? new JsonResult<>(200, "success, and port: " + port, result)
-        : new JsonResult(999, "failed", null);
-  }
+        return result > 0
+                ? new JsonResult<>(200, "success, and port: " + port, result)
+                : new JsonResult(999, "failed", null);
+    }
 
-  @GetMapping(value = "/get/{id}")
-  public JsonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
-    Payment payment = paymentService.getPaymentById(id);
-    log.info("Query: {}", payment);
-    ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    @GetMapping(value = "/get/{id}")
+    public JsonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
+        Payment payment = paymentService.getPaymentById(id);
+        log.info("Query: {}", payment);
+        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
 
-    return payment == null
-        ? new JsonResult(999, "failed", null)
-        : new JsonResult(200, "success, and port: " + port, payment);
-  }
+        return payment == null
+                ? new JsonResult(999, "failed", null)
+                : new JsonResult(200, "success, and port: " + port, payment);
+    }
 
-  @GetMapping(value = "/discovery")
-  public Object discovery() {
+    @GetMapping(value = "/discovery")
+    public Object discovery() {
 
-    discoveryClient.getServices().stream().forEach(x -> log.info(x));
-    discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE").stream()
-        .forEach(
-            x ->
-                log.info(
-                    x.getServiceId()
-                        + ", host"
-                        + x.getHost()
-                        + ", port: "
-                        + x.getPort()
-                        + ", uri: "
-                        + x.getUri()));
+        discoveryClient.getServices().stream().forEach(x -> log.info(x));
+        discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE").stream()
+                .forEach(
+                        x ->
+                                log.info(
+                                        x.getServiceId()
+                                                + ", host"
+                                                + x.getHost()
+                                                + ", port: "
+                                                + x.getPort()
+                                                + ", uri: "
+                                                + x.getUri()));
 
-    return this.discoveryClient;
-  }
+        return this.discoveryClient;
+    }
 
-  @GetMapping(value = "/lb")
-  public JsonResult getPaymentLB() {
+    @GetMapping(value = "/lb")
+    public JsonResult getPaymentLB() {
 
-    return new JsonResult(200, port);
-  }
+        return new JsonResult(200, port);
+    }
 
-  @GetMapping(value = "/feign/timeout")
-  public JsonResult paymentTimeout() throws InterruptedException {
+    @GetMapping(value = "/feign/timeout")
+    public JsonResult paymentTimeout() throws InterruptedException {
 
-    TimeUnit.SECONDS.sleep(5);
-    return new JsonResult(200, port);
-  }
+        TimeUnit.SECONDS.sleep(5);
+        return new JsonResult(200, port);
+    }
 }

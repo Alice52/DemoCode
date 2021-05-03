@@ -17,29 +17,29 @@ import reactor.core.publisher.Mono;
  */
 @Component
 public class CustomFilter implements GlobalFilter, Ordered {
-  private static final Logger LOG = LoggerFactory.getLogger(CustomFilter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomFilter.class);
 
-  @Override
-  public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-    String name = exchange.getRequest().getQueryParams().getFirst("name");
+        String name = exchange.getRequest().getQueryParams().getFirst("name");
 
-    if (StrUtil.isBlank(name)) {
-      exchange.getResponse().setStatusCode(HttpStatus.NOT_ACCEPTABLE);
-      return exchange.getResponse().setComplete();
+        if (StrUtil.isBlank(name)) {
+            exchange.getResponse().setStatusCode(HttpStatus.NOT_ACCEPTABLE);
+            return exchange.getResponse().setComplete();
+        }
+
+        return chain.filter(exchange);
     }
 
-    return chain.filter(exchange);
-  }
-
-  /**
-   * the sequence of execute filter. <br>
-   * The smaller the value, the higher the priority
-   *
-   * @return sequence
-   */
-  @Override
-  public int getOrder() {
-    return 0;
-  }
+    /**
+     * the sequence of execute filter. <br>
+     * The smaller the value, the higher the priority
+     *
+     * @return sequence
+     */
+    @Override
+    public int getOrder() {
+        return 0;
+    }
 }

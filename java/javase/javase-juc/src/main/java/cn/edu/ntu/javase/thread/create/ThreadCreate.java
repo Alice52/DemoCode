@@ -1,7 +1,6 @@
 package cn.edu.ntu.javase.thread.create;
 
 import lombok.extern.slf4j.Slf4j;
-
 ;
 
 /**
@@ -22,20 +21,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ThreadCreate {
 
-  public static void main(String[] args) {
-    log.info("main method start ...");
-    CThread cThread = new CThread();
-    cThread.start();
+    public static void main(String[] args) {
+        log.info("main method start ...");
+        CThread cThread = new CThread();
+        cThread.start();
 
-    log.info("main method end ...");
-  }
-
-  public static class CThread extends Thread {
-    @Override
-    public void run() {
-      log.info("thread-id: {}", Thread.currentThread().getId());
-      int i = 10 / 2;
-      log.info("logic result: {}", i);
+        log.info("main method end ...");
     }
-  }
+
+    public static class CThread extends Thread {
+        @Override
+        public void run() {
+            log.info("thread-id: {}", Thread.currentThread().getId());
+            int i = 10 / 2;
+            log.info("logic result: {}", i);
+        }
+    }
 }

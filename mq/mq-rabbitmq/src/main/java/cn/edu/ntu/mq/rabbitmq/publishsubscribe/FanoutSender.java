@@ -34,11 +34,13 @@ public class FanoutSender {
             channel.basicPublish(Constants.EXCHANGE_LOG_NAME, "", null, message.getBytes("UTF-8"));
             System.out.println(" [x] Sent '" + message + "'");
         } catch (IOException e) {
-            LOG.error("RabbitMQ: sendMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: sendMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } finally {
-            ConnectionUtils.closeConnection(channel,connection);
+            ConnectionUtils.closeConnection(channel, connection);
         }
-
     }
 }

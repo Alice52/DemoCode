@@ -12,5 +12,5 @@ import javax.annotation.Resource;
 @RestController
 public class JsrController {
 
-  @Resource public HelloService helloService;
+    @Resource public HelloService helloService;
 }

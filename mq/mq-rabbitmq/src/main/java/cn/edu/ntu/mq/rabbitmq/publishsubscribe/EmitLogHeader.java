@@ -14,7 +14,6 @@ public class EmitLogHeader {
 
     public static void main(String[] args) throws Exception {
 
-
         // The API requires a routing key, but in fact if you are using a header exchange the
         // value of the routing key is not used in the routing. You can store information
         // for the receiver here as the routing key is still available in the received message.
@@ -22,8 +21,12 @@ public class EmitLogHeader {
 
         // Argument processing: the first arg is the message, the rest are
         // key value pairs for headers.
-//        String message = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope\">\n" + "<soapenv:Header/>\n" + "<soapenv:Body>\n" + "  <p:greet xmlns:p=\"http://greet.service.kishanthan.org\">\n" + "     <in>" + "------ZACK----" + "</in>\n" + "  </p:greet>\n" + "</soapenv:Body>\n" + "</soapenv:Envelope>";
-String message ="sa";
+        //        String message = "<soapenv:Envelope
+        // xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope\">\n" + "<soapenv:Header/>\n" +
+        // "<soapenv:Body>\n" + "  <p:greet xmlns:p=\"http://greet.service.kishanthan.org\">\n" + "
+        //    <in>" + "------ZACK----" + "</in>\n" + "  </p:greet>\n" + "</soapenv:Body>\n" +
+        // "</soapenv:Envelope>";
+        String message = "sa";
         // The map for the headers.
         Map<String, Object> headers = new HashMap<String, Object>();
         headers.put("SOAP_ACTION", "greet");
@@ -36,10 +39,12 @@ String message ="sa";
         try (Channel channel = connection.createChannel()) {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.HEADERS);
 
-            String replyQueueName = channel.queueDeclare(Constants.SIMPLE_QUEUE_NAME, false, false, false, null).getQueue();
+            String replyQueueName =
+                    channel.queueDeclare(Constants.SIMPLE_QUEUE_NAME, false, false, false, null)
+                            .getQueue();
             AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties.Builder();
 
-//            builder.messageId(messageID);
+            //            builder.messageId(messageID);
             builder.contentType("text/xml");
             builder.replyTo(replyQueueName);
             builder.correlationId(UUID.randomUUID().toString());
@@ -56,10 +61,10 @@ String message ="sa";
             // Use the builder to create the BasicProperties object.
             AMQP.BasicProperties theProps = builder.build();
 
-            // Now we add the headers.  This example only uses string headers, but they can also be integers
+            // Now we add the headers.  This example only uses string headers, but they can also be
+            // integers
             channel.basicPublish(EXCHANGE_NAME, routingKey, theProps, message.getBytes("UTF-8"));
             System.out.println(" [x] Sent message: '" + message + "'");
         }
     }
 }
-

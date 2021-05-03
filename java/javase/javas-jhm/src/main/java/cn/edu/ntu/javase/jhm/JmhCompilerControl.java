@@ -18,36 +18,36 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 public class JmhCompilerControl {
 
-  public static void main(String[] args) throws RunnerException {
-    Options opt =
-        new OptionsBuilder()
-            .include(JmhCompilerControl.class.getSimpleName())
-            .warmupIterations(0)
-            .measurementIterations(3)
-            .forks(1)
-            .build();
+    public static void main(String[] args) throws RunnerException {
+        Options opt =
+                new OptionsBuilder()
+                        .include(JmhCompilerControl.class.getSimpleName())
+                        .warmupIterations(0)
+                        .measurementIterations(3)
+                        .forks(1)
+                        .build();
 
-    new Runner(opt).run();
-  }
+        new Runner(opt).run();
+    }
 
-  public void targetBlank() {}
+    public void targetBlank() {}
 
-  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-  public void targetDontInline() {}
+    @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+    public void targetDontInline() {}
 
-  @CompilerControl(CompilerControl.Mode.INLINE)
-  public void targetInline() {}
+    @CompilerControl(CompilerControl.Mode.INLINE)
+    public void targetInline() {}
 
-  @Benchmark
-  public void baseline() {}
+    @Benchmark
+    public void baseline() {}
 
-  @Benchmark
-  public void dontInline() {
-    targetDontInline();
-  }
+    @Benchmark
+    public void dontInline() {
+        targetDontInline();
+    }
 
-  @Benchmark
-  public void inline() {
-    targetInline();
-  }
+    @Benchmark
+    public void inline() {
+        targetInline();
+    }
 }

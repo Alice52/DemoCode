@@ -9,5 +9,4 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @MapperScan({"cn.edu.ntu.springcloud.seata.dao"})
-public class MyBatisConfig {
-}
+public class MyBatisConfig {}

@@ -13,23 +13,23 @@ import org.springframework.core.type.AnnotationMetadata;
  */
 public class CustomImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
-  /**
-   * manual add bean to IOC container. <br>
-   *
-   * @param metadata annotation metadata of the importing class
-   * @param registry current bean definition registry
-   */
-  @Override
-  public void registerBeanDefinitions(
-      AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
+    /**
+     * manual add bean to IOC container. <br>
+     *
+     * @param metadata annotation metadata of the importing class
+     * @param registry current bean definition registry
+     */
+    @Override
+    public void registerBeanDefinitions(
+            AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
 
-    MergedAnnotations annotations = metadata.getAnnotations();
+        MergedAnnotations annotations = metadata.getAnnotations();
 
-    annotations.stream().forEach(System.out::println);
+        annotations.stream().forEach(System.out::println);
 
-    boolean containsStudentBeanDefinition = registry.containsBeanDefinition("student");
-    if (!containsStudentBeanDefinition) {
-      registry.registerBeanDefinition("student", new RootBeanDefinition(Student.class));
+        boolean containsStudentBeanDefinition = registry.containsBeanDefinition("student");
+        if (!containsStudentBeanDefinition) {
+            registry.registerBeanDefinition("student", new RootBeanDefinition(Student.class));
+        }
     }
-  }
 }

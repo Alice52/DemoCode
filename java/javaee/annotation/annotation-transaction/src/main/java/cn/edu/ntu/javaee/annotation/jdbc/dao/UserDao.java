@@ -13,11 +13,11 @@ import javax.annotation.Resource;
 @Repository
 public class UserDao {
 
-  @Resource private JdbcTemplate jdbcTemplate;
+    @Resource private JdbcTemplate jdbcTemplate;
 
-  public void insert() {
-    String sql = "INSERT INTO `db_emp`(name, deptId) VALUES(?,?)";
-    String username = IdUtil.simpleUUID();
-    jdbcTemplate.update(sql, "zack", 2);
-  }
+    public void insert() {
+        String sql = "INSERT INTO `db_emp`(name, deptId) VALUES(?,?)";
+        String username = IdUtil.simpleUUID();
+        jdbcTemplate.update(sql, "zack", 2);
+    }
 }

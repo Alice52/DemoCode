@@ -2,7 +2,10 @@ package cn.edu.ntu.mq.rabbitmq.rpc;
 
 import cn.edu.ntu.mq.constants.Constants;
 import cn.edu.ntu.mq.rabbitmq.Utils.ConnectionUtils;
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.DeliverCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,19 +51,25 @@ public class RPCSender implements AutoCloseable {
 
         try {
             replyQueueName = channel.queueDeclare().getQueue();
-            AMQP.BasicProperties props = new AMQP.BasicProperties.Builder().correlationId(corrId).replyTo(replyQueueName).build();
+            AMQP.BasicProperties props =
+                    new AMQP.BasicProperties.Builder()
+                            .correlationId(corrId)
+                            .replyTo(replyQueueName)
+                            .build();
 
             channel.basicPublish("", Constants.RPC_QUEUE_NAME, props, message.getBytes("UTF-8"));
 
             final BlockingQueue<String> response = new ArrayBlockingQueue<>(1);
 
-            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                if (delivery.getProperties().getCorrelationId().equals(corrId)) {
-                    response.offer(new String(delivery.getBody(), "UTF-8"));
-                }
-            };
+            DeliverCallback deliverCallback =
+                    (consumerTag, delivery) -> {
+                        if (delivery.getProperties().getCorrelationId().equals(corrId)) {
+                            response.offer(new String(delivery.getBody(), "UTF-8"));
+                        }
+                    };
 
-            String ctag = channel.basicConsume(replyQueueName, true, deliverCallback, consumerTag -> {});
+            String ctag =
+                    channel.basicConsume(replyQueueName, true, deliverCallback, consumerTag -> {});
 
             result = response.take();
             channel.basicCancel(ctag);

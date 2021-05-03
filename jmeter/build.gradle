@@ -6,32 +6,32 @@
  */
 
 buildscript {
-  repositories {
-      maven { url "https://maven.aliyun.com/repository/central" }
-  }
-  dependencies {
-      classpath 'net.sourceforge.jtds:jtds:1.2.4'
-  }
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+    }
+    dependencies {
+        classpath 'net.sourceforge.jtds:jtds:1.2.4'
+    }
 }
 
 plugins {
-  id 'base'
-  id 'distribution'
-  id 'net.saliman.properties' version '1.4.6'
-  id "net.foragerr.jmeter"  version '1.1.0-4.0'
+    id 'base'
+    id 'distribution'
+    id 'net.saliman.properties' version '1.4.6'
+    id "net.foragerr.jmeter" version '1.1.0-4.0'
 }
 
 jmeter {
-  jmPropertyFile = file("gradle-$environmentName" + ".properties")
-  enableReports = true
-  enableExtendedReports = true
-  ignoreErrors  = true
-  ignoreFailures  = true
-  failBuildOnError = false
-  csvLogFile = false
+    jmPropertyFile = file("gradle-$environmentName" + ".properties")
+    enableReports = true
+    enableExtendedReports = true
+    ignoreErrors = true
+    ignoreFailures = true
+    failBuildOnError = false
+    csvLogFile = false
 
-  // exclude the test file for preparate the load test data
-  excludes = ["table-xx/*.jmx"]
+    // exclude the test file for preparate the load test data
+    excludes = ["table-xx/*.jmx"]
 }
 
 // workaround report issue in this version

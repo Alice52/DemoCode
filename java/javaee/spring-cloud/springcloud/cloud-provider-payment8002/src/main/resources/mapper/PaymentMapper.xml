@@ -8,11 +8,15 @@
         <id column="serial" property="serial" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="create" parameterType="cn.edu.ntu.springcloud.common.entities.Payment" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO cloud_payment(serial) VALUES(#{serial});
+    <insert id="create" parameterType="cn.edu.ntu.springcloud.common.entities.Payment" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO cloud_payment(serial)
+        VALUES (#{serial});
     </insert>
 
     <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
-        SELECT * FROM cloud_payment WHERE id = #{id}
+        SELECT *
+        FROM cloud_payment
+        WHERE id = #{id}
     </select>
 </mapper>

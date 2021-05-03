@@ -12,24 +12,24 @@ import java.util.List;
  * @project javase <br>
  */
 public final class ObjectFactory {
-  public static List<Person> persons =
-      new ArrayList<Person>() {
-        {
-          add(new Person("A", 20));
-          add(new Person("B", 15));
-          add(new Person("C", 60));
-          add(new Person("D", 28));
-          add(new Person("E", 12));
-          add(new Person("F", 42));
-        }
-      };
+    public static List<Person> persons =
+            new ArrayList<Person>() {
+                {
+                    add(new Person("A", 20));
+                    add(new Person("B", 15));
+                    add(new Person("C", 60));
+                    add(new Person("D", 28));
+                    add(new Person("E", 12));
+                    add(new Person("F", 42));
+                }
+            };
 
-  public static List<Student> students =
-      new ArrayList<Student>() {
-        {
-          add(new Student(20, "zack", "hi"));
-          add(new Student(22, "lug", "hi"));
-          add(new Student(40, "1465", "hi"));
-        }
-      };
+    public static List<Student> students =
+            new ArrayList<Student>() {
+                {
+                    add(new Student(20, "zack", "hi"));
+                    add(new Student(22, "lug", "hi"));
+                    add(new Student(40, "1465", "hi"));
+                }
+            };
 }

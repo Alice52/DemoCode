@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class IntegrateWithCollection {
 
-  public static int countAge(List<? extends Person> persons) {
+    public static int countAge(List<? extends Person> persons) {
 
-    return persons.stream().map(x -> x.getAge()).reduce(0, Integer::sum);
-  }
+        return persons.stream().map(x -> x.getAge()).reduce(0, Integer::sum);
+    }
 
-  public static int countAge1(List<Person> persons) {
+    public static int countAge1(List<Person> persons) {
 
-    return persons.stream().map(x -> x.getAge()).reduce(0, Integer::sum);
-  }
+        return persons.stream().map(x -> x.getAge()).reduce(0, Integer::sum);
+    }
 }

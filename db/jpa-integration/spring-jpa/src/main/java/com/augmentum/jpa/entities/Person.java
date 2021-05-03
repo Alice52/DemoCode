@@ -38,7 +38,7 @@ public class Person {
         this.id = id;
     }
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }

@@ -13,37 +13,37 @@ import java.util.stream.IntStream;
 @Slf4j
 public class VolatileAtomicV0 {
 
-  static volatile int number = 0;
-  static AtomicInteger atomicInteger = new AtomicInteger(0);
+    static volatile int number = 0;
+    static AtomicInteger atomicInteger = new AtomicInteger(0);
 
-  /**
-   * 50个线程执行 plus 方法 1k 次: 理论上 number 需要是 5w[证明原子性]
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
+    /**
+     * 50个线程执行 plus 方法 1k 次: 理论上 number 需要是 5w[证明原子性]
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
 
-    for (int i = 0; i < 50; i++) {
-      new Thread(
-              () ->
-                  IntStream.rangeClosed(1, 1000)
-                      .forEach(
-                          x -> {
-                            number++;
-                            atomicInteger.addAndGet(1);
-                          }))
-          .start();
+        for (int i = 0; i < 50; i++) {
+            new Thread(
+                            () ->
+                                    IntStream.rangeClosed(1, 1000)
+                                            .forEach(
+                                                    x -> {
+                                                        number++;
+                                                        atomicInteger.addAndGet(1);
+                                                    }))
+                    .start();
+        }
+
+        // 需要等待上面 50 个线程都执行完成后 在 main 线程中去 number
+        while (Thread.activeCount() > 2) { // main + gc 两个线程
+            Thread.yield(); // 放弃执行, 把当前线程重新置入抢 CPU 时间的队列
+        }
+
+        log.info(
+                "thread: {} get number value is {}, atomic value: {}",
+                Thread.currentThread().getName(),
+                number,
+                atomicInteger.get());
     }
-
-    // 需要等待上面 50 个线程都执行完成后 在 main 线程中去 number
-    while (Thread.activeCount() > 2) { // main + gc 两个线程
-      Thread.yield(); // 放弃执行, 把当前线程重新置入抢 CPU 时间的队列
-    }
-
-    log.info(
-        "thread: {} get number value is {}, atomic value: {}",
-        Thread.currentThread().getName(),
-        number,
-        atomicInteger.get());
-  }
 }

@@ -28,78 +28,78 @@ import java.util.UUID;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:ApplicationContext.xml")
 public class JdbcTest {
-  private static final Logger LOG = LoggerFactory.getLogger(JdbcTest.class);
-  @Autowired private JdbcTemplate jdbcTemplate;
-  @Autowired private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcTest.class);
+    @Autowired private JdbcTemplate jdbcTemplate;
+    @Autowired private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-  @Test
-  public void testUpdate() {
-    String sql =
-        "insert into demo_user(name, age, birthDay, email, descripttion, create_time, salary) values(?,?,?,?,?,?, ?)";
-    jdbcTemplate.update(
-        sql,
-        "zack" + UUID.randomUUID().toString(),
-        20,
-        new Date(),
-        "zzhang_xz@163.com",
-        "lazy",
-        new Date(),
-        100.00);
-  }
+    @Test
+    public void testUpdate() {
+        String sql =
+                "insert into demo_user(name, age, birthDay, email, descripttion, create_time, salary) values(?,?,?,?,?,?, ?)";
+        jdbcTemplate.update(
+                sql,
+                "zack" + UUID.randomUUID().toString(),
+                20,
+                new Date(),
+                "zzhang_xz@163.com",
+                "lazy",
+                new Date(),
+                100.00);
+    }
 
-  @Test
-  public void testUpdate2() {
-    String sql =
-        "insert into demo_user(name, age, birthDay, email, salary) values(:name,:age,:birthDay,:email, :salary)";
+    @Test
+    public void testUpdate2() {
+        String sql =
+                "insert into demo_user(name, age, birthDay, email, salary) values(:name,:age,:birthDay,:email, :salary)";
 
-    Person person = new Person();
-    person.setAge(20);
-    person.setBirthDay(new Date());
-    person.setEmail("zzhang_xz@163.com");
-    person.setName("zack" + UUID.randomUUID().toString());
-    person.setGender(true);
-    person.setSalary(100.00);
-    SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(person);
-    namedParameterJdbcTemplate.update(sql, parameterSource);
-  }
+        Person person = new Person();
+        person.setAge(20);
+        person.setBirthDay(new Date());
+        person.setEmail("zzhang_xz@163.com");
+        person.setName("zack" + UUID.randomUUID().toString());
+        person.setGender(true);
+        person.setSalary(100.00);
+        SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(person);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
+    }
 
-  /** this operation is no transaction */
-  @Test
-  public void testBatchUpdate() {
-    String sql =
-        "insert into demo_user(name, age, birthDay, email, descripttion, create_time, salary) values(?,?,?,?,?,?,?)";
-    List<Object[]> batchArgs = new ArrayList<>();
-    batchArgs.add(
-        new Object[] {
-          "zack" + UUID.randomUUID().toString(),
-          20,
-          new Date(),
-          "zzhang_xz@163.com",
-          "lazy",
-          new Date(),
-          100.00
-        });
-    batchArgs.add(
-        new Object[] {
-          "zack" + UUID.randomUUID().toString(),
-          20,
-          new Date(),
-          "zzhang_xz@163.com",
-          "lazy",
-          new Date(),
-          100.00
-        });
+    /** this operation is no transaction */
+    @Test
+    public void testBatchUpdate() {
+        String sql =
+                "insert into demo_user(name, age, birthDay, email, descripttion, create_time, salary) values(?,?,?,?,?,?,?)";
+        List<Object[]> batchArgs = new ArrayList<>();
+        batchArgs.add(
+                new Object[] {
+                    "zack" + UUID.randomUUID().toString(),
+                    20,
+                    new Date(),
+                    "zzhang_xz@163.com",
+                    "lazy",
+                    new Date(),
+                    100.00
+                });
+        batchArgs.add(
+                new Object[] {
+                    "zack" + UUID.randomUUID().toString(),
+                    20,
+                    new Date(),
+                    "zzhang_xz@163.com",
+                    "lazy",
+                    new Date(),
+                    100.00
+                });
 
-    jdbcTemplate.batchUpdate(sql, batchArgs);
-  }
+        jdbcTemplate.batchUpdate(sql, batchArgs);
+    }
 
-  @Test
-  public void testQuery() {
-    // this place should not use *
-    String sql = "select * from demo_user";
-    RowMapper<Person> personRowMapper = new BeanPropertyRowMapper<>(Person.class);
+    @Test
+    public void testQuery() {
+        // this place should not use *
+        String sql = "select * from demo_user";
+        RowMapper<Person> personRowMapper = new BeanPropertyRowMapper<>(Person.class);
 
-    List<Person> person = jdbcTemplate.query(sql, personRowMapper);
-    LOG.info("Get person {} from db success.", person);
-  }
+        List<Person> person = jdbcTemplate.query(sql, personRowMapper);
+        LOG.info("Get person {} from db success.", person);
+    }
 }

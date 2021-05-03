@@ -10,7 +10,8 @@ import cn.edu.ntu.mq.rabbitmq.publishsubscribe.DirectReceiver;
 public class DR {
 
     public static void main(String[] args) {
-        cn.edu.ntu.mq.rabbitmq.publishsubscribe.DirectReceiver directReceiver =  new DirectReceiver();
+        cn.edu.ntu.mq.rabbitmq.publishsubscribe.DirectReceiver directReceiver =
+                new DirectReceiver();
         directReceiver.receiveMsg();
     }
 }

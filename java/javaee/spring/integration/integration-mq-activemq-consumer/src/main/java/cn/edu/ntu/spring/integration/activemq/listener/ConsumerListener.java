@@ -17,21 +17,23 @@ import java.util.Optional;
  */
 @Component
 public class ConsumerListener implements MessageListener {
-  private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerListener.class);
 
-  @Override
-  public void onMessage(Message message) {
-    Optional.ofNullable(message)
-        .ifPresent(
-            mg -> {
-              TextMessage textMessage = (TextMessage) mg;
-              try {
-                String text = textMessage.getText();
-                LOGGER.info("Consume text message: {} success.", text);
-              } catch (JMSException jmsException) {
-                LOGGER.info(
-                    "Failed to consume text message: {}, cause by {}.", textMessage, jmsException);
-              }
-            });
-  }
+    @Override
+    public void onMessage(Message message) {
+        Optional.ofNullable(message)
+                .ifPresent(
+                        mg -> {
+                            TextMessage textMessage = (TextMessage) mg;
+                            try {
+                                String text = textMessage.getText();
+                                LOGGER.info("Consume text message: {} success.", text);
+                            } catch (JMSException jmsException) {
+                                LOGGER.info(
+                                        "Failed to consume text message: {}, cause by {}.",
+                                        textMessage,
+                                        jmsException);
+                            }
+                        });
+    }
 }

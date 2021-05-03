@@ -7,11 +7,11 @@ package cn.edu.ntu.javase.agent;
  */
 public class HelloAgentTests {
 
-  // -javaagent:F:\repository\tutorials-sample\java\javase\javase-agent\target\javase-agent-1.0-SNAPSHOT.jar
-  public static void main(String[] args) {
+    // -javaagent:F:\repository\tutorials-sample\java\javase\javase-agent\target\javase-agent-1.0-SNAPSHOT.jar
+    public static void main(String[] args) {
 
-    System.out.println("hello java agent test: " + args);
+        System.out.println("hello java agent test: " + args);
 
-    new Server().sayHello("zack");
-  }
+        new Server().sayHello("zack");
+    }
 }

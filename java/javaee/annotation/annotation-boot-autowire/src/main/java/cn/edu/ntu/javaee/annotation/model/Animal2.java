@@ -20,15 +20,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class Animal2 {
-  private Integer age;
-  private Dog dog;
+    private Integer age;
+    private Dog dog;
 
-  @Autowired
-  public Animal2(Dog dog) {
-    this.dog = dog;
-  }
+    @Autowired
+    public Animal2(Dog dog) {
+        this.dog = dog;
+    }
 
-  //    public Animal2(@Autowired Dog dog) {
-  //        this.dog = dog;
-  //    }
+    //    public Animal2(@Autowired Dog dog) {
+    //        this.dog = dog;
+    //    }
 }

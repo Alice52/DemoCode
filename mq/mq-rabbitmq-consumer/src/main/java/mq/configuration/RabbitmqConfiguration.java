@@ -14,10 +14,10 @@ import static org.springframework.amqp.support.converter.Jackson2JavaTypeMapper.
 @Component
 public class RabbitmqConfiguration {
 
-  @Bean
-  public Jackson2JsonMessageConverter converter() {
-    Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter();
-    converter.setTypePrecedence(TYPE_ID);
-    return converter;
-  }
+    @Bean
+    public Jackson2JsonMessageConverter converter() {
+        Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter();
+        converter.setTypePrecedence(TYPE_ID);
+        return converter;
+    }
 }

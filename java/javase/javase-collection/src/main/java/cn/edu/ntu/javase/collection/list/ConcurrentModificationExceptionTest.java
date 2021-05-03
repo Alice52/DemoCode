@@ -14,29 +14,29 @@ import java.util.stream.IntStream;
 @Slf4j
 public class ConcurrentModificationExceptionTest {
 
-  public static void main(String[] args) {
-    threadSafe();
-    //    List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3));
-    //    list.forEach(
-    //        x -> {
-    //          list.add(1);
-    //          log.info("element: {}", x);
-    //        });
-  }
+    public static void main(String[] args) {
+        threadSafe();
+        //    List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3));
+        //    list.forEach(
+        //        x -> {
+        //          list.add(1);
+        //          log.info("element: {}", x);
+        //        });
+    }
 
-  /** 同时读写一个 List 会出现 ConcurrentModificationException 异常 */
-  public static void threadSafe() {
-    ArrayList<String> unsafeList = new ArrayList<>();
-    IntStream.rangeClosed(1, 1000)
-        .forEach(
-            i ->
-                new Thread(
-                        () -> {
-                          String uuid = UUID.fastUUID().toString();
-                          unsafeList.add(uuid);
-                          log.info("{}", unsafeList);
-                        },
-                        "AAA" + i)
-                    .start());
-  }
+    /** 同时读写一个 List 会出现 ConcurrentModificationException 异常 */
+    public static void threadSafe() {
+        ArrayList<String> unsafeList = new ArrayList<>();
+        IntStream.rangeClosed(1, 1000)
+                .forEach(
+                        i ->
+                                new Thread(
+                                                () -> {
+                                                    String uuid = UUID.fastUUID().toString();
+                                                    unsafeList.add(uuid);
+                                                    log.info("{}", unsafeList);
+                                                },
+                                                "AAA" + i)
+                                        .start());
+    }
 }

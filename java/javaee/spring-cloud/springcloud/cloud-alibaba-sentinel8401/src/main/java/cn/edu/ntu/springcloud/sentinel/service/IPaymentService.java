@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @create 2020-04-18 12:57 <br>
  */
 @FeignClient(
-    value = "${service-url.nacos-payment-service}",
-    fallback = PaymentServiceFallbackHandler.class)
+        value = "${service-url.nacos-payment-service}",
+        fallback = PaymentServiceFallbackHandler.class)
 public interface IPaymentService {
 
-  @GetMapping(value = "/payment/nacos/get/{id}")
-  public JsonResult getPaymentById(@PathVariable("id") Long id);
+    @GetMapping(value = "/payment/nacos/get/{id}")
+    public JsonResult getPaymentById(@PathVariable("id") Long id);
 }

@@ -22,27 +22,27 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class JoinMethods {
 
-  @SneakyThrows
-  public static void main(String[] args) {
-    Thread thread =
-        new Thread(
-            () -> {
-              log.info("running");
-              try {
-                TimeUnit.SECONDS.sleep(10);
-                log.info("finished");
-              } catch (InterruptedException e) {
-                log.info("{}", e);
-              }
-            },
-            "AAA");
-    thread.start();
-    // thread will execute first in specified time than main thread.
-    // then after specified time, it will become normal
-    thread.join(9_000, 10);
+    @SneakyThrows
+    public static void main(String[] args) {
+        Thread thread =
+                new Thread(
+                        () -> {
+                            log.info("running");
+                            try {
+                                TimeUnit.SECONDS.sleep(10);
+                                log.info("finished");
+                            } catch (InterruptedException e) {
+                                log.info("{}", e);
+                            }
+                        },
+                        "AAA");
+        thread.start();
+        // thread will execute first in specified time than main thread.
+        // then after specified time, it will become normal
+        thread.join(9_000, 10);
 
-    Optional.of("All task finished.").ifPresent(System.out::println);
+        Optional.of("All task finished.").ifPresent(System.out::println);
 
-    Thread.currentThread().join();
-  }
+        Thread.currentThread().join();
+    }
 }

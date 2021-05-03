@@ -5,6 +5,6 @@ package cn.edu.ntu.javase.enumeration.evolution.constants;
  * @create 2020-04-05 00:06 <br>
  */
 public class UserStatusConstants {
-  public static final int ENABLE = 0;
-  public static final int DISABLE = 1;
+    public static final int ENABLE = 0;
+    public static final int DISABLE = 1;
 }

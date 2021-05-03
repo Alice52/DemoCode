@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class PaymentServiceFallbackHandler implements IPaymentService {
 
-  @Override
-  public JsonResult getPaymentById(Long id) {
-    return new JsonResult(400, "PaymentServiceFallbackHandler");
-  }
+    @Override
+    public JsonResult getPaymentById(Long id) {
+        return new JsonResult(400, "PaymentServiceFallbackHandler");
+    }
 }

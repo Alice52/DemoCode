@@ -9,12 +9,13 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
  */
 public class CustomBlockHandler {
 
-  public static JsonResult customBlockHandler(String p1, String p2, BlockException blockException) {
-    return new JsonResult(400, "success", "CustomBlockHandler Method");
-  }
+    public static JsonResult customBlockHandler(
+            String p1, String p2, BlockException blockException) {
+        return new JsonResult(400, "success", "CustomBlockHandler Method");
+    }
 
-  public static JsonResult defaultBlockHandler(
-      String p1, String p2, BlockException blockException) {
-    return new JsonResult(400, "success", "DefaultBlockHandler Method");
-  }
+    public static JsonResult defaultBlockHandler(
+            String p1, String p2, BlockException blockException) {
+        return new JsonResult(400, "success", "DefaultBlockHandler Method");
+    }
 }

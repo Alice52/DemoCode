@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @author zack <br>
@@ -19,6 +17,6 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Slf4j
 public class Animal3 {
-  private Integer age;
-  private Dog dog;
+    private Integer age;
+    private Dog dog;
 }

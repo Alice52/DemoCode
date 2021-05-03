@@ -10,17 +10,17 @@ import org.junit.Test;
  * @function
  */
 public class CalculatorProxyTest {
-  private ArithmeticCalculator calculatorProxy;
+    private ArithmeticCalculator calculatorProxy;
 
-  @Before
-  public void init() {
-    calculatorProxy =
-        (ArithmeticCalculator)
-            new ArithmeticCalculatorProxy(new ArithmeticCalculatorImpl()).getProxy();
-  }
+    @Before
+    public void init() {
+        calculatorProxy =
+                (ArithmeticCalculator)
+                        new ArithmeticCalculatorProxy(new ArithmeticCalculatorImpl()).getProxy();
+    }
 
-  @Test
-  public void testCalculatorProxy() {
-    calculatorProxy.mul(1, 3);
-  }
+    @Test
+    public void testCalculatorProxy() {
+        calculatorProxy.mul(1, 3);
+    }
 }

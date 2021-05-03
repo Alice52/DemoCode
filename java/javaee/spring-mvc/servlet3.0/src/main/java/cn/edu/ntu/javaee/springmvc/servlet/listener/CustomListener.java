@@ -10,14 +10,14 @@ import javax.servlet.ServletContextListener;
 @Slf4j
 public class CustomListener implements ServletContextListener {
 
-  @Override
-  public void contextDestroyed(ServletContextEvent arg0) {
-    log.info("UserListener...contextDestroyed...");
-  }
+    @Override
+    public void contextDestroyed(ServletContextEvent arg0) {
+        log.info("UserListener...contextDestroyed...");
+    }
 
-  @Override
-  public void contextInitialized(ServletContextEvent arg0) {
-    ServletContext servletContext = arg0.getServletContext();
-    log.info("UserListener...contextInitialized...");
-  }
+    @Override
+    public void contextInitialized(ServletContextEvent arg0) {
+        ServletContext servletContext = arg0.getServletContext();
+        log.info("UserListener...contextInitialized...");
+    }
 }

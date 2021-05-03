@@ -6,65 +6,65 @@ package cn.edu.ntu.javase.agent.common;
  * @project javase <br>
  */
 public class TraceSession {
-  static ThreadLocal<TraceSession> session = new ThreadLocal<>();
+    static ThreadLocal<TraceSession> session = new ThreadLocal<>();
 
-  private String traceId;
-  private String parentId;
+    private String traceId;
+    private String parentId;
 
-  private int currentEventId;
+    private int currentEventId;
 
-  public TraceSession(String traceId) {
-    this(traceId, "0");
-  }
+    public TraceSession(String traceId) {
+        this(traceId, "0");
+    }
 
-  public TraceSession(String traceId, String parentId) {
-    this.traceId = traceId;
-    this.parentId = parentId;
-    session.set(this);
-  }
+    public TraceSession(String traceId, String parentId) {
+        this.traceId = traceId;
+        this.parentId = parentId;
+        session.set(this);
+    }
 
-  public static TraceSession getCurrentSession() {
+    public static TraceSession getCurrentSession() {
 
-    return session.get();
-  }
+        return session.get();
+    }
 
-  public static ThreadLocal<TraceSession> getSession() {
-    return session;
-  }
+    public static ThreadLocal<TraceSession> getSession() {
+        return session;
+    }
 
-  public static void setSession(ThreadLocal<TraceSession> session) {
-    TraceSession.session = session;
-  }
+    public static void setSession(ThreadLocal<TraceSession> session) {
+        TraceSession.session = session;
+    }
 
-  public int getNextCurrentEventId() {
-    return ++currentEventId;
-  }
+    public int getNextCurrentEventId() {
+        return ++currentEventId;
+    }
 
-  public void close() {
-    session.remove();
-  }
+    public void close() {
+        session.remove();
+    }
 
-  public String getTraceId() {
-    return traceId;
-  }
+    public String getTraceId() {
+        return traceId;
+    }
 
-  public void setTraceId(String traceId) {
-    this.traceId = traceId;
-  }
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
+    }
 
-  public String getParentId() {
-    return parentId;
-  }
+    public String getParentId() {
+        return parentId;
+    }
 
-  public void setParentId(String parentId) {
-    this.parentId = parentId;
-  }
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
 
-  public int getCurrentEventId() {
-    return currentEventId;
-  }
+    public int getCurrentEventId() {
+        return currentEventId;
+    }
 
-  public void setCurrentEventId(int currentEventId) {
-    this.currentEventId = currentEventId;
-  }
+    public void setCurrentEventId(int currentEventId) {
+        this.currentEventId = currentEventId;
+    }
 }

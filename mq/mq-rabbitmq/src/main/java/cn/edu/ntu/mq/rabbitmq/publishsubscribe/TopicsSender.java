@@ -18,10 +18,9 @@ import java.io.IOException;
 public class TopicsSender {
 
     private static final Logger LOG = LoggerFactory.getLogger(TopicsSender.class);
+    private static final String[] topicsGuides =
+            new String[] {"topicsKey.aa", "topicsKey.bb", "topicsKey.cc.ee"};
     private static Connection connection = ConnectionUtils.getConnection();
-
-    private static final String[] topicsGuides = new String[]{"topicsKey.aa", "topicsKey.bb", "topicsKey.cc.ee"};
-
 
     public static void main(String[] args) {
         sendMsg();
@@ -35,16 +34,19 @@ public class TopicsSender {
 
             String message = Constants.WPUBLISH_QUEUE_MESSAGE;
 
-            for (String key: topicsGuides){
-                channel.basicPublish(Constants.EXCHANGE_TOPICS_NAME, key, null, message.getBytes("UTF-8"));
+            for (String key : topicsGuides) {
+                channel.basicPublish(
+                        Constants.EXCHANGE_TOPICS_NAME, key, null, message.getBytes("UTF-8"));
                 LOG.info(" [x] Sent '" + key + "':'" + message + "'");
             }
         } catch (IOException e) {
-            LOG.error("RabbitMQ: sendMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: sendMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } finally {
             ConnectionUtils.closeConnection(channel, connection);
         }
-
     }
 }

@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Dog {
-  private Integer age;
-  private String name;
-  private String color;
+    private Integer age;
+    private String name;
+    private String color;
 }

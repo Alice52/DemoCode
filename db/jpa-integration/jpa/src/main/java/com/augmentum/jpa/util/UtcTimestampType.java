@@ -13,43 +13,42 @@ import java.util.Comparator;
 import java.util.Date;
 
 public class UtcTimestampType extends AbstractSingleColumnStandardBasicType<Date>
-    implements VersionType<Date>, LiteralType<Date> {
-  private static final long serialVersionUID = 5848852471383340492L;
+        implements VersionType<Date>, LiteralType<Date> {
+    public static final UtcTimestampType INSTANCE = new UtcTimestampType();
+    private static final long serialVersionUID = 5848852471383340492L;
 
-  public static final UtcTimestampType INSTANCE = new UtcTimestampType();
+    public UtcTimestampType() {
+        super(UtcTimestampTypeDescriptor.INSTANCE, JdbcTimestampTypeDescriptor.INSTANCE);
+    }
 
-  public UtcTimestampType() {
-    super(UtcTimestampTypeDescriptor.INSTANCE, JdbcTimestampTypeDescriptor.INSTANCE);
-  }
+    public String getName() {
+        return TimestampType.INSTANCE.getName();
+    }
 
-  public String getName() {
-    return TimestampType.INSTANCE.getName();
-  }
+    @Override
+    public String[] getRegistrationKeys() {
+        return UtcTimestampType.INSTANCE.getRegistrationKeys();
+    }
 
-  @Override
-  public String[] getRegistrationKeys() {
-    return UtcTimestampType.INSTANCE.getRegistrationKeys();
-  }
+    @Override
+    public Date seed(SharedSessionContractImplementor sharedSessionContractImplementor) {
+        return UtcTimestampType.INSTANCE.seed(sharedSessionContractImplementor);
+    }
 
-  @Override
-  public Date seed(SharedSessionContractImplementor sharedSessionContractImplementor) {
-    return UtcTimestampType.INSTANCE.seed(sharedSessionContractImplementor);
-  }
+    @Override
+    public Date next(Date date, SharedSessionContractImplementor sharedSessionContractImplementor) {
+        return UtcTimestampType.INSTANCE.next(date, sharedSessionContractImplementor);
+    }
 
-  @Override
-  public Date next(Date date, SharedSessionContractImplementor sharedSessionContractImplementor) {
-    return UtcTimestampType.INSTANCE.next(date, sharedSessionContractImplementor);
-  }
+    public Comparator<Date> getComparator() {
+        return UtcTimestampType.INSTANCE.getComparator();
+    }
 
-  public Comparator<Date> getComparator() {
-    return UtcTimestampType.INSTANCE.getComparator();
-  }
+    public String objectToSQLString(Date value, Dialect dialect) {
+        return UtcTimestampType.INSTANCE.objectToSQLString(value, dialect);
+    }
 
-  public String objectToSQLString(Date value, Dialect dialect) {
-    return UtcTimestampType.INSTANCE.objectToSQLString(value, dialect);
-  }
-
-  public Date fromStringValue(String xml) throws HibernateException {
-    return UtcTimestampType.INSTANCE.fromStringValue(xml);
-  }
+    public Date fromStringValue(String xml) throws HibernateException {
+        return UtcTimestampType.INSTANCE.fromStringValue(xml);
+    }
 }

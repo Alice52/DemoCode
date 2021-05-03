@@ -18,13 +18,14 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/consumer")
 public class OrderController {
 
-  @Resource private RestTemplate restTemplate;
+    @Resource private RestTemplate restTemplate;
 
-  @Value("${service-url.nacos-payment-service}")
-  private String PROVIDER_URL;
+    @Value("${service-url.nacos-payment-service}")
+    private String PROVIDER_URL;
 
-  @GetMapping(value = "/payment/get/{id}")
-  public JsonResult getPaymentById(@PathVariable("id") Long id) {
-    return restTemplate.getForObject(PROVIDER_URL + "/payment/nacos/get/" + id, JsonResult.class);
-  }
+    @GetMapping(value = "/payment/get/{id}")
+    public JsonResult getPaymentById(@PathVariable("id") Long id) {
+        return restTemplate.getForObject(
+                PROVIDER_URL + "/payment/nacos/get/" + id, JsonResult.class);
+    }
 }

@@ -1,8 +1,8 @@
 package cn.edu.ntu.javaee.spring.ioc;
 
 import cn.edu.ntu.javaee.spring.common.entity.Address;
-import org.springframework.beans.factory.FactoryBean;
 import cn.edu.ntu.javaee.spring.common.entity.Person;
+import org.springframework.beans.factory.FactoryBean;
 
 import java.util.Date;
 
@@ -12,20 +12,20 @@ import java.util.Date;
  * @function
  */
 public class PersonFactoryBean implements FactoryBean<Person> {
-  @Override
-  public Person getObject() throws Exception {
-    return new Person(10, new Date(), "zack", true, new Address(), "zzhang_xz@163.com", 200.00);
-  }
+    @Override
+    public Person getObject() throws Exception {
+        return new Person(10, new Date(), "zack", true, new Address(), "zzhang_xz@163.com", 200.00);
+    }
 
-  /** @return Specify Bean Type */
-  @Override
-  public Class<?> getObjectType() {
-    return null;
-  }
+    /** @return Specify Bean Type */
+    @Override
+    public Class<?> getObjectType() {
+        return null;
+    }
 
-  /** @return whether is singleton */
-  @Override
-  public boolean isSingleton() {
-    return true;
-  }
+    /** @return whether is singleton */
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
 }

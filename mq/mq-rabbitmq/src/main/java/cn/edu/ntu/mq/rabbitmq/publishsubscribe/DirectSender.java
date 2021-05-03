@@ -18,6 +18,7 @@ import java.io.IOException;
 public class DirectSender {
     private static final Logger LOG = LoggerFactory.getLogger(DirectSender.class);
     private static Connection connection = ConnectionUtils.getConnection();
+
     public static void main(String[] args) {
         sendMsg();
     }
@@ -30,14 +31,20 @@ public class DirectSender {
 
             String message = Constants.WPUBLISH_QUEUE_MESSAGE;
 
-            channel.basicPublish(Constants.EXCHANGE_DIRECT_NAME, Constants.ROUTING_DIRECT_KEY, null, message.getBytes("UTF-8"));
+            channel.basicPublish(
+                    Constants.EXCHANGE_DIRECT_NAME,
+                    Constants.ROUTING_DIRECT_KEY,
+                    null,
+                    message.getBytes("UTF-8"));
             LOG.info(" [x] Sent '" + Constants.ROUTING_DIRECT_KEY + "':'" + message + "'");
         } catch (IOException e) {
-            LOG.error("RabbitMQ: sendMsg IO exception. exception cause: {}; exception message: {}", e.getCause(), e.getMessage());
+            LOG.error(
+                    "RabbitMQ: sendMsg IO exception. exception cause: {}; exception message: {}",
+                    e.getCause(),
+                    e.getMessage());
             throw new RuntimeException();
         } finally {
-            ConnectionUtils.closeConnection(channel,connection);
+            ConnectionUtils.closeConnection(channel, connection);
         }
-
     }
 }

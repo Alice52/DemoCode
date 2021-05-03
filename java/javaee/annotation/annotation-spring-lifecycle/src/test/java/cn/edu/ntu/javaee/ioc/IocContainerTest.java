@@ -15,21 +15,21 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @Slf4j
 public class IocContainerTest {
 
-  private ApplicationContext applicationContext =
-      new AnnotationConfigApplicationContext(IocContainer.class);
+    private ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(IocContainer.class);
 
-  @Test
-  public void testGetIocContainer() {
-    IocContainer contextBean = applicationContext.getBean(IocContainer.class);
-    ApplicationContext applicationContext = contextBean.getApplicationContext();
+    @Test
+    public void testGetIocContainer() {
+        IocContainer contextBean = applicationContext.getBean(IocContainer.class);
+        ApplicationContext applicationContext = contextBean.getApplicationContext();
 
-    Person person0 = applicationContext.getBean(Person.class);
-    log.info(String.valueOf(person0));
+        Person person0 = applicationContext.getBean(Person.class);
+        log.info(String.valueOf(person0));
 
-    Person person = applicationContext.getBean(Person.class);
-    log.info(String.valueOf(person));
+        Person person = applicationContext.getBean(Person.class);
+        log.info(String.valueOf(person));
 
-    Assert.isTrue(person0 == person);
-    Assert.isFalse(applicationContext == contextBean);
-  }
+        Assert.isTrue(person0 == person);
+        Assert.isFalse(applicationContext == contextBean);
+    }
 }

@@ -13,17 +13,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class GatewayConfiguration {
 
-  @Bean
-  public RouteLocator routes(RouteLocatorBuilder builder) {
-    RouteLocatorBuilder.Builder routes = builder.routes();
-    routes
-        .route(IdUtil.simpleUUID(), r -> r.path("/guonei").uri("http://news.baidu.com/guonei"))
-        .build();
+    @Bean
+    public RouteLocator routes(RouteLocatorBuilder builder) {
+        RouteLocatorBuilder.Builder routes = builder.routes();
+        routes.route(
+                        IdUtil.simpleUUID(),
+                        r -> r.path("/guonei").uri("http://news.baidu.com/guonei"))
+                .build();
 
-    routes
-        .route(IdUtil.simpleUUID(), r -> r.path("/guoji").uri("http://news.baidu.com/guoji"))
-        .build();
+        routes.route(IdUtil.simpleUUID(), r -> r.path("/guoji").uri("http://news.baidu.com/guoji"))
+                .build();
 
-    return routes.build();
-  }
+        return routes.build();
+    }
 }

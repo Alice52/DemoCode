@@ -22,46 +22,50 @@ import java.util.concurrent.TimeUnit;
  * @project job <br>
  */
 public class MultiTrigger {
-  public static void main(String[] args) throws SchedulerException, InterruptedException {
+    public static void main(String[] args) throws SchedulerException, InterruptedException {
 
-    // 1. get schedule
-    Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-    scheduler.start();
+        // 1. get schedule
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        scheduler.start();
 
-    // 2. define job-detail
-    JobDetail jobDetail =
-        JobBuilder.newJob(SimpleJob.class).withIdentity("simple-job", "group1").build();
+        // 2. define job-detail
+        JobDetail jobDetail =
+                JobBuilder.newJob(SimpleJob.class).withIdentity("simple-job", "group1").build();
 
-    // 3.1 define trigger1
-    Trigger trigger =
-        TriggerBuilder.newTrigger()
-            .withIdentity("simple-trigger1", "auto")
-            .startNow()
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
-            .build();
+        // 3.1 define trigger1
+        Trigger trigger =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("simple-trigger1", "auto")
+                        .startNow()
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(2)
+                                        .repeatForever())
+                        .build();
 
-    // 3.2 define trigger3
-    Trigger trigger2 =
-        TriggerBuilder.newTrigger()
-            .withIdentity("simple-trigger2", "manual")
-            .forJob(jobDetail)
-            .startNow()
-            .withSchedule(
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
-            .build();
+        // 3.2 define trigger3
+        Trigger trigger2 =
+                TriggerBuilder.newTrigger()
+                        .withIdentity("simple-trigger2", "manual")
+                        .forJob(jobDetail)
+                        .startNow()
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(2)
+                                        .repeatForever())
+                        .build();
 
-    // 4. build trigger and job-detail by schedule
-    scheduler.scheduleJob(jobDetail, trigger);
-    scheduler.scheduleJob(trigger2);
-    /**
-     * This will throw exception: {@link org.quartz.ObjectAlreadyExistsException } <br>
-     * Unable to store Job : 'group1.simple-job', because one already exists with this
-     * identification.
-     */
-    /** scheduler.scheduleJob(jobDetail, trigger2); */
-    TimeUnit.SECONDS.sleep(50);
-    // 5. shutdown
-    scheduler.shutdown();
-  }
+        // 4. build trigger and job-detail by schedule
+        scheduler.scheduleJob(jobDetail, trigger);
+        scheduler.scheduleJob(trigger2);
+        /**
+         * This will throw exception: {@link org.quartz.ObjectAlreadyExistsException } <br>
+         * Unable to store Job : 'group1.simple-job', because one already exists with this
+         * identification.
+         */
+        /** scheduler.scheduleJob(jobDetail, trigger2); */
+        TimeUnit.SECONDS.sleep(50);
+        // 5. shutdown
+        scheduler.shutdown();
+    }
 }

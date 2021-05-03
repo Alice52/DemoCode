@@ -18,16 +18,16 @@ import java.io.IOException;
 @Component
 public class CustomServlet extends HttpServlet {
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    ServletContext context = getServletContext();
-    ApplicationContext ctx = (ApplicationContext) context.getAttribute("applicationContext");
-  }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        ServletContext context = getServletContext();
+        ApplicationContext ctx = (ApplicationContext) context.getAttribute("applicationContext");
+    }
 
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    super.doPost(req, resp);
-  }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
 }

@@ -12,70 +12,70 @@ import java.util.Arrays;
 @Slf4j
 public class CustomArrayList<T> {
 
-  private static final int DEFAULT_CAPACITY = 10;
-  private static final Object[] EMPTY_ELEMENTDATA = {};
-  transient Object[] elementData;
-  private int size;
+    private static final int DEFAULT_CAPACITY = 10;
+    private static final Object[] EMPTY_ELEMENTDATA = {};
+    transient Object[] elementData;
+    private int size;
 
-  public CustomArrayList() {
-    this.elementData = EMPTY_ELEMENTDATA;
-  }
-
-  public CustomArrayList(int initialCapacity) {
-    this.elementData = new Object[initialCapacity];
-  }
-
-  /**
-   * ensureCapacity:
-   *
-   * <pre>
-   *     1. 如果使用无参构造函数创建数组, 则第一次 add 元素时会分配空间 10
-   *     2. 如果使用有参构造函数创建数组, 则空间分配发生在创建数组时
-   *
-   *     3. 接下来就是考虑数组扩容
-   *          - 判断 elementData 是否有空余空间, 有就存放
-   *          - 没有则扩容 1.5 倍[Arrays.copyOf]之后存放
-   * </pre>
-   *
-   * @param t
-   */
-  public void add(T t) {
-    if (this.elementData == EMPTY_ELEMENTDATA) {
-      this.elementData = new Object[DEFAULT_CAPACITY];
+    public CustomArrayList() {
+        this.elementData = EMPTY_ELEMENTDATA;
     }
 
-    int minCapacity = size + 1;
-    if (minCapacity - elementData.length > 0) {
-      int newCapacity = elementData.length + (elementData.length >> 1);
-      elementData = Arrays.copyOf(elementData, newCapacity);
+    public CustomArrayList(int initialCapacity) {
+        this.elementData = new Object[initialCapacity];
     }
 
-    elementData[size++] = t;
-  }
+    /**
+     * ensureCapacity:
+     *
+     * <pre>
+     *     1. 如果使用无参构造函数创建数组, 则第一次 add 元素时会分配空间 10
+     *     2. 如果使用有参构造函数创建数组, 则空间分配发生在创建数组时
+     *
+     *     3. 接下来就是考虑数组扩容
+     *          - 判断 elementData 是否有空余空间, 有就存放
+     *          - 没有则扩容 1.5 倍[Arrays.copyOf]之后存放
+     * </pre>
+     *
+     * @param t
+     */
+    public void add(T t) {
+        if (this.elementData == EMPTY_ELEMENTDATA) {
+            this.elementData = new Object[DEFAULT_CAPACITY];
+        }
 
-  public T get(int index) {
-    assert index < size;
-    return (T) elementData[index];
-  }
+        int minCapacity = size + 1;
+        if (minCapacity - elementData.length > 0) {
+            int newCapacity = elementData.length + (elementData.length >> 1);
+            elementData = Arrays.copyOf(elementData, newCapacity);
+        }
 
-  public T remove(int index) {
-    assert index < size;
-    T oldValue = (T) elementData[index];
-    System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
-    elementData[--size] = null;
+        elementData[size++] = t;
+    }
 
-    return oldValue;
-  }
+    public T get(int index) {
+        assert index < size;
+        return (T) elementData[index];
+    }
 
-  public boolean remove(T t) {
-    for (int index = 0; index < size; index++) {
-      if (t.equals(elementData[index])) {
+    public T remove(int index) {
+        assert index < size;
+        T oldValue = (T) elementData[index];
         System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
         elementData[--size] = null;
-        return true;
-      }
+
+        return oldValue;
     }
 
-    return false;
-  }
+    public boolean remove(T t) {
+        for (int index = 0; index < size; index++) {
+            if (t.equals(elementData[index])) {
+                System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
+                elementData[--size] = null;
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

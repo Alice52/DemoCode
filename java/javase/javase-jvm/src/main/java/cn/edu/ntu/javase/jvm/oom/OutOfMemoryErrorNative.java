@@ -13,33 +13,33 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class OutOfMemoryErrorNative {
 
-  /**
-   * java.lang.OutOfMemoryError: unable to create new native thread
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
+    /**
+     * java.lang.OutOfMemoryError: unable to create new native thread
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
 
-    int i = 0;
+        int i = 0;
 
-    try {
-      while (true) {
-        new Thread(
-                () -> {
-                  try {
-                    TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
-                  } catch (InterruptedException e) {
-                    e.printStackTrace();
-                  }
-                },
-                "AA" + ++i)
-            .start();
-        OptionalInt.of(i).ifPresent(System.out::println);
-      }
+        try {
+            while (true) {
+                new Thread(
+                                () -> {
+                                    try {
+                                        TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                },
+                                "AA" + ++i)
+                        .start();
+                OptionalInt.of(i).ifPresent(System.out::println);
+            }
 
-    } finally {
+        } finally {
 
-      OptionalInt.of(i).ifPresent(System.out::println);
+            OptionalInt.of(i).ifPresent(System.out::println);
+        }
     }
-  }
 }

@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(value = "CLOUD-PROVIDER-PAYMENT-HYSTRIX")
 public interface HystrixService {
 
-  /**
-   * this is just mock success api.<br>
-   *
-   * @return JsonResult
-   */
-  @GetMapping("/payment/hystrix/success-info")
-  JsonResult getPaymentInfos();
+    /**
+     * this is just mock success api.<br>
+     *
+     * @return JsonResult
+     */
+    @GetMapping("/payment/hystrix/success-info")
+    JsonResult getPaymentInfos();
 
-  /**
-   * this is just mock timeout error api.<br>
-   *
-   * @return JsonResult
-   */
-  @GetMapping("/payment/hystrix/fail-info")
-  JsonResult getPaymentInfoTimeout();
+    /**
+     * this is just mock timeout error api.<br>
+     *
+     * @return JsonResult
+     */
+    @GetMapping("/payment/hystrix/fail-info")
+    JsonResult getPaymentInfoTimeout();
 
-  /**
-   * this is just mock timeout error api.<br>
-   *
-   * @return JsonResult
-   */
-  @GetMapping("/payment/hystrix/error-info")
-  JsonResult getPaymentInfoError();
+    /**
+     * this is just mock timeout error api.<br>
+     *
+     * @return JsonResult
+     */
+    @GetMapping("/payment/hystrix/error-info")
+    JsonResult getPaymentInfoError();
 }

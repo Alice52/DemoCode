@@ -3,79 +3,79 @@ package cn.edu.ntu.javaee.springmvc.model;
 /** @author zack */
 public class Employee {
 
-  private Integer id;
-  private String lastName;
+    private Integer id;
+    private String lastName;
 
-  private String email;
-  /** 1 male, 0 female */
-  private Integer gender;
+    private String email;
+    /** 1 male, 0 female */
+    private Integer gender;
 
-  private Department department;
+    private Department department;
 
-  public Integer getId() {
-    return id;
-  }
+    public Employee(
+            Integer id, String lastName, String email, Integer gender, Department department) {
+        super();
+        this.id = id;
+        this.lastName = lastName;
+        this.email = email;
+        this.gender = gender;
+        this.department = department;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public Employee() {}
 
-  public String getLastName() {
-    return lastName;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public String getLastName() {
+        return lastName;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-  public Integer getGender() {
-    return gender;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public void setGender(Integer gender) {
-    this.gender = gender;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public Department getDepartment() {
-    return department;
-  }
+    public Integer getGender() {
+        return gender;
+    }
 
-  public void setDepartment(Department department) {
-    this.department = department;
-  }
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
 
-  @Override
-  public String toString() {
-    return "Employee [id="
-        + id
-        + ", lastName="
-        + lastName
-        + ", email="
-        + email
-        + ", gender="
-        + gender
-        + ", department="
-        + department
-        + "]";
-  }
+    public Department getDepartment() {
+        return department;
+    }
 
-  public Employee(
-      Integer id, String lastName, String email, Integer gender, Department department) {
-    super();
-    this.id = id;
-    this.lastName = lastName;
-    this.email = email;
-    this.gender = gender;
-    this.department = department;
-  }
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
-  public Employee() {}
+    @Override
+    public String toString() {
+        return "Employee [id="
+                + id
+                + ", lastName="
+                + lastName
+                + ", email="
+                + email
+                + ", gender="
+                + gender
+                + ", department="
+                + department
+                + "]";
+    }
 }

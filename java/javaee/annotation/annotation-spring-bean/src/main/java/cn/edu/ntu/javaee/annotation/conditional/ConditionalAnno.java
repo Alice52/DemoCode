@@ -15,14 +15,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConditionalAnno {
 
-  @Conditional({CustomCondition.class})
-  @Bean(value = "alice52")
-  public Person injectPerson() {
-    return new Person(19, "alice52");
-  }
+    @Conditional({CustomCondition.class})
+    @Bean(value = "alice52")
+    public Person injectPerson() {
+        return new Person(19, "alice52");
+    }
 
-  @Bean(value = "zack")
-  public Person injectPerson2() {
-    return new Person(190, "zack");
-  }
+    @Bean(value = "zack")
+    public Person injectPerson2() {
+        return new Person(190, "zack");
+    }
 }

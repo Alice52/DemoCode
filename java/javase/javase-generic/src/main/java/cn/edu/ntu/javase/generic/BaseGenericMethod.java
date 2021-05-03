@@ -15,46 +15,46 @@ import java.util.Iterator;
  */
 public abstract class BaseGenericMethod<T> {
 
-  public static <A extends Comparable<A>> A max(Collection<A> xs) {
-    Iterator<A> xi = xs.iterator();
-    A w = xi.next();
-    while (xi.hasNext()) {
-      A x = xi.next();
-      if (w.compareTo(x) < 0) {
-        w = x;
-      }
+    public static <A extends Comparable<A>> A max(Collection<A> xs) {
+        Iterator<A> xi = xs.iterator();
+        A w = xi.next();
+        while (xi.hasNext()) {
+            A x = xi.next();
+            if (w.compareTo(x) < 0) {
+                w = x;
+            }
+        }
+        return w;
     }
-    return w;
-  }
 
-  /**
-   * Generate class
-   *
-   * <pre>
-   *    1. requirement:
-   *      - must be sub class: `public class GenericImpl extends BaseGeneric<Person>{}`
-   * </pre>
-   *
-   * @return
-   */
-  public T produce() {
-    Type type = this.getClass().getGenericSuperclass();
-    ParameterizedType parameterizedType = (ParameterizedType) type;
-    Class<T> clazz = (Class<T>) parameterizedType.getActualTypeArguments()[0];
+    /**
+     * Generate class
+     *
+     * <pre>
+     *    1. requirement:
+     *      - must be sub class: `public class GenericImpl extends BaseGeneric<Person>{}`
+     * </pre>
+     *
+     * @return
+     */
+    public T produce() {
+        Type type = this.getClass().getGenericSuperclass();
+        ParameterizedType parameterizedType = (ParameterizedType) type;
+        Class<T> clazz = (Class<T>) parameterizedType.getActualTypeArguments()[0];
 
-    return createInstance(clazz);
-  }
+        return createInstance(clazz);
+    }
 
-  @SneakyThrows
-  public T createInstance(Class<T> clazz) {
+    @SneakyThrows
+    public T createInstance(Class<T> clazz) {
 
-    return clazz.newInstance();
-  }
+        return clazz.newInstance();
+    }
 
-  /**
-   * Get Object Hash.
-   *
-   * @return
-   */
-  public abstract int hash();
+    /**
+     * Get Object Hash.
+     *
+     * @return
+     */
+    public abstract int hash();
 }

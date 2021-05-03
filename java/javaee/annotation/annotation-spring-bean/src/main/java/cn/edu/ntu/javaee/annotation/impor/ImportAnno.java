@@ -19,9 +19,9 @@ import org.springframework.context.annotation.Import;
 @Import({Person.class, CustomImportSelector.class, CustomImportBeanDefinitionRegistrar.class})
 public class ImportAnno {
 
-  @Bean
-  public DogFactoryBean dogFactoryBean() {
+    @Bean
+    public DogFactoryBean dogFactoryBean() {
 
-    return new DogFactoryBean();
-  }
+        return new DogFactoryBean();
+    }
 }

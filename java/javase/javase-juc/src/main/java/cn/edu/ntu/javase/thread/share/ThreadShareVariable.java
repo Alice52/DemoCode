@@ -11,25 +11,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ThreadShareVariable {
 
-  public static void main(String[] args) {
-    new AppleThread("0001").start();
-    new AppleThread("0002").start();
-  }
-
-  @NoArgsConstructor
-  public static class AppleThread extends Thread {
-    // 同类的多个线程共享同一块内存空间和一组系统资源
-    private static int i;
-
-    public AppleThread(String name) {
-      super(name);
+    public static void main(String[] args) {
+        new AppleThread("0001").start();
+        new AppleThread("0002").start();
     }
 
-    @Override
-    public void run() {
-      for (; i <= 1000; i++) {
-        log.info("{}: {}", Thread.currentThread().getName(), i);
-      }
+    @NoArgsConstructor
+    public static class AppleThread extends Thread {
+        // 同类的多个线程共享同一块内存空间和一组系统资源
+        private static int i;
+
+        public AppleThread(String name) {
+            super(name);
+        }
+
+        @Override
+        public void run() {
+            for (; i <= 1000; i++) {
+                log.info("{}: {}", Thread.currentThread().getName(), i);
+            }
+        }
     }
-  }
 }

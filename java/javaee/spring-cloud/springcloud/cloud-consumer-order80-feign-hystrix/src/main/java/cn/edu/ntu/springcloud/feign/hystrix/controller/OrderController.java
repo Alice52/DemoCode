@@ -18,33 +18,33 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/consumer")
 public class OrderController {
 
-  @Resource private HystrixService hystrixService;
+    @Resource private HystrixService hystrixService;
 
-  @GetMapping("/hystrix/success-info")
-  public JsonResult getPaymentInfo() {
-    return hystrixService.getPaymentInfos();
-  }
+    @GetMapping("/hystrix/success-info")
+    public JsonResult getPaymentInfo() {
+        return hystrixService.getPaymentInfos();
+    }
 
-  @GetMapping("/hystrix/fail-info")
-  public JsonResult getPaymentInfoTimeout() {
-    log.warn("message");
-    return hystrixService.getPaymentInfoTimeout();
-  }
+    @GetMapping("/hystrix/fail-info")
+    public JsonResult getPaymentInfoTimeout() {
+        log.warn("message");
+        return hystrixService.getPaymentInfoTimeout();
+    }
 
-  @GetMapping("/hystrix/error-info")
-  public JsonResult getPaymentInfoError() {
-    return hystrixService.getPaymentInfoError();
-  }
+    @GetMapping("/hystrix/error-info")
+    public JsonResult getPaymentInfoError() {
+        return hystrixService.getPaymentInfoError();
+    }
 
-  public JsonResult getPaymentInfoTimeoutHandler() {
+    public JsonResult getPaymentInfoTimeoutHandler() {
 
-    String message =
-        "Consumer Thread Pool: "
-            + Thread.currentThread().getName()
-            + ",call getPaymentInfoTimeoutHandler("
-            + "): success";
-    log.warn(message);
+        String message =
+                "Consumer Thread Pool: "
+                        + Thread.currentThread().getName()
+                        + ",call getPaymentInfoTimeoutHandler("
+                        + "): success";
+        log.warn(message);
 
-    return new JsonResult(400, message, null);
-  }
+        return new JsonResult(400, message, null);
+    }
 }

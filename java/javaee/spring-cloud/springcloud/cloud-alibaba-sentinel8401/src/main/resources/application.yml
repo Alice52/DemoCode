@@ -13,7 +13,7 @@ spring:
         server-addr: ${custom-config.server-addr}
     sentinel:
       transport:
-#        dashboard: 101.37.174.197:8849
+        #        dashboard: 101.37.174.197:8849
         dashboard: 127.0.0.1:8080
         port: 8719
       datasource:

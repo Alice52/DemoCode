@@ -2,7 +2,6 @@ package cn.edu.ntu.javaee.annotation.configuration;
 
 import cn.edu.ntu.javaee.annotation.model.Cat;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -16,8 +15,8 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:cat.properties")
 public class PropertyConfig {
 
-  @Bean
-  public Cat cat() {
-    return new Cat();
-  }
+    @Bean
+    public Cat cat() {
+        return new Cat();
+    }
 }

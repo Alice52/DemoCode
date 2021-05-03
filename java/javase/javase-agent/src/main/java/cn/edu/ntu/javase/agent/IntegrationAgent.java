@@ -8,8 +8,8 @@ import java.lang.instrument.Instrumentation;
  * @project javase <br>
  */
 public class IntegrationAgent {
-  public static void premain(String arg, Instrumentation instrumentation) {
-    WebAgent.premain(arg, instrumentation);
-    ServerAgent.premain(arg, instrumentation);
-  }
+    public static void premain(String arg, Instrumentation instrumentation) {
+        WebAgent.premain(arg, instrumentation);
+        ServerAgent.premain(arg, instrumentation);
+    }
 }

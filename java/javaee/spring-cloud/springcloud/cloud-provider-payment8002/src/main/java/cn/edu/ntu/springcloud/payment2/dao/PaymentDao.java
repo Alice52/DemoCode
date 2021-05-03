@@ -10,19 +10,19 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface PaymentDao {
-  /**
-   * Create payment record. <br>
-   *
-   * @param payment entity
-   * @return id
-   */
-  int create(Payment payment);
+    /**
+     * Create payment record. <br>
+     *
+     * @param payment entity
+     * @return id
+     */
+    int create(Payment payment);
 
-  /**
-   * Get Payment info by id. <br>
-   *
-   * @param id pk
-   * @return Payment by id
-   */
-  Payment getPaymentById(@Param("id") Long id);
+    /**
+     * Get Payment info by id. <br>
+     *
+     * @param id pk
+     * @return Payment by id
+     */
+    Payment getPaymentById(@Param("id") Long id);
 }

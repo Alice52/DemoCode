@@ -14,33 +14,33 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 public class LockCount {
 
-  public static void main(String[] args) {
-    ReentrantLock lock = new ReentrantLock();
+    public static void main(String[] args) {
+        ReentrantLock lock = new ReentrantLock();
 
-    new Thread(
-            () -> {
-              lock.lock();
-              lock.lock();
-              try {
-                log.info("execute ...");
-              } finally {
-                lock.unlock();
-                lock.unlock();
-              }
-            },
-            "AA")
-        .start();
+        new Thread(
+                        () -> {
+                            lock.lock();
+                            lock.lock();
+                            try {
+                                log.info("execute ...");
+                            } finally {
+                                lock.unlock();
+                                lock.unlock();
+                            }
+                        },
+                        "AA")
+                .start();
 
-    new Thread(
-            () -> {
-              lock.lock();
-              try {
-                log.info("execute ...");
-              } finally {
-                lock.unlock();
-              }
-            },
-            "B")
-        .start();
-  }
+        new Thread(
+                        () -> {
+                            lock.lock();
+                            try {
+                                log.info("execute ...");
+                            } finally {
+                                lock.unlock();
+                            }
+                        },
+                        "B")
+                .start();
+    }
 }

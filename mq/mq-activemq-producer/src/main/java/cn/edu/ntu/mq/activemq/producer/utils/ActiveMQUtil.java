@@ -1,6 +1,5 @@
 package cn.edu.ntu.mq.activemq.producer.utils;
 
-
 import cn.edu.ntu.mq.constants.Constants;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
@@ -21,8 +20,8 @@ public class ActiveMQUtil {
     private static Connection connection;
 
     /**
-     * @notice This connection should be singleton, and all lifecycle just has one connection. And can
-     *     reference Rabbitmq[esb].
+     * @notice This connection should be singleton, and all lifecycle just has one connection. And
+     *     can reference Rabbitmq[esb].
      * @return
      */
     public static Connection getConnection() {

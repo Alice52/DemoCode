@@ -16,32 +16,32 @@ import java.io.IOException;
  */
 public class JsonGeneratorPojoTests {
 
-  /**
-   * {"name":"zack","age":10}
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testWriteObject() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      jsonGenerator.setCodec(new UserObjectCodec());
+    /**
+     * {"name":"zack","age":10}
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testWriteObject() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            jsonGenerator.setCodec(new UserObjectCodec());
 
-      jsonGenerator.writeObject(new User("zack", 10));
+            jsonGenerator.writeObject(new User("zack", 10));
+        }
     }
-  }
 
-  /**
-   * {"name":"zack","age":10}
-   *
-   * @throws IOException
-   */
-  @Test
-  public void testTreeNode() throws IOException {
-    JsonFactory factory = new JsonFactory();
-    try (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
-      jsonGenerator.setCodec(new UserObjectCodec());
-      jsonGenerator.writeObject(new UserTreeNode(new User("zack", 10)));
+    /**
+     * {"name":"zack","age":10}
+     *
+     * @throws IOException
+     */
+    @Test
+    public void testTreeNode() throws IOException {
+        JsonFactory factory = new JsonFactory();
+        try (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8)) {
+            jsonGenerator.setCodec(new UserObjectCodec());
+            jsonGenerator.writeObject(new UserTreeNode(new User("zack", 10)));
+        }
     }
-  }
 }

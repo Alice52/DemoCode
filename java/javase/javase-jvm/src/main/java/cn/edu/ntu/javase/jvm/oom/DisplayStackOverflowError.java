@@ -10,12 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DisplayStackOverflowError {
 
-  public static void main(String[] args) {
-    stackOverflowError();
-  }
+    public static void main(String[] args) {
+        stackOverflowError();
+    }
 
-  /** java.lang.StackOverflowError */
-  private static void stackOverflowError() {
-    stackOverflowError();
-  }
+    /** java.lang.StackOverflowError */
+    private static void stackOverflowError() {
+        stackOverflowError();
+    }
 }

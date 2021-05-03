@@ -25,171 +25,171 @@ import java.net.Socket;
  */
 public class SocketTest {
 
-  @Test
-  /** 客户端的Socket */
-  public void testClientSocket3() throws Exception {
-    // 1.创建Socket对象：ip+port;同时会自动向服务器端发出请求
-    InetAddress address = InetAddress.getByName("127.0.0.1");
-    Socket socket = new Socket(address, 8989);
+    @Test
+    /** 客户端的Socket */
+    public void testClientSocket3() throws Exception {
+        // 1.创建Socket对象：ip+port;同时会自动向服务器端发出请求
+        InetAddress address = InetAddress.getByName("127.0.0.1");
+        Socket socket = new Socket(address, 8989);
 
-    // 2.相关操作:读取输出流
-    // 2.1获取输入流：ServerSocket传过来的
-    InputStream inputStream = socket.getInputStream();
-    // 2.3创建输出流：输出到本地硬盘(带有缓冲)
-    OutputStream outputStream = new FileOutputStream("123.png");
-    // 2.4写入
-    int len = 0;
-    byte[] buffer = new byte[1024];
-    while ((len = inputStream.read(buffer)) != -1) {
-      outputStream.write(buffer, 0, len);
+        // 2.相关操作:读取输出流
+        // 2.1获取输入流：ServerSocket传过来的
+        InputStream inputStream = socket.getInputStream();
+        // 2.3创建输出流：输出到本地硬盘(带有缓冲)
+        OutputStream outputStream = new FileOutputStream("123.png");
+        // 2.4写入
+        int len = 0;
+        byte[] buffer = new byte[1024];
+        while ((len = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, len);
+        }
+        // 2.5关闭流资源
+        inputStream.close();
+        outputStream.close();
+
+        // 3.关闭Socket
+        socket.close();
     }
-    // 2.5关闭流资源
-    inputStream.close();
-    outputStream.close();
 
-    // 3.关闭Socket
-    socket.close();
-  }
+    @Test
+    /** 服务器端的Socket */
+    public void testServerSockeet3() throws IOException {
+        // 1.创建ServerSocket:
+        ServerSocket serverSocket = new ServerSocket(8989);
+        // 2.接受客户端的请求，并得到Socket套接字：ip+port
+        Socket socket = serverSocket.accept();
 
-  @Test
-  /** 服务器端的Socket */
-  public void testServerSockeet3() throws IOException {
-    // 1.创建ServerSocket:
-    ServerSocket serverSocket = new ServerSocket(8989);
-    // 2.接受客户端的请求，并得到Socket套接字：ip+port
-    Socket socket = serverSocket.accept();
-
-    // 3.相关操作：将要输出的对象弄进输出流；(曾本地读取的话就需要输入流)涉及到流资源，一般先是字节流获取，然后字符流处理
-    // 3.1获取输出流：ServerSocket要输出的
-    OutputStream outputStream = socket.getOutputStream();
-    // 3.3创建要输入流(要输出的)，并转换为带有缓冲的字符流
-    InputStream inputStream = new FileInputStream("abc.png");
-    // 3.4.读写
-    int len = 0;
-    byte[] buffer = new byte[1024];
-    while ((len = inputStream.read(buffer)) != -1) {
-      outputStream.write(buffer, 0, len);
+        // 3.相关操作：将要输出的对象弄进输出流；(曾本地读取的话就需要输入流)涉及到流资源，一般先是字节流获取，然后字符流处理
+        // 3.1获取输出流：ServerSocket要输出的
+        OutputStream outputStream = socket.getOutputStream();
+        // 3.3创建要输入流(要输出的)，并转换为带有缓冲的字符流
+        InputStream inputStream = new FileInputStream("abc.png");
+        // 3.4.读写
+        int len = 0;
+        byte[] buffer = new byte[1024];
+        while ((len = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, len);
+        }
+        // 3.5关闭流资源
+        inputStream.close();
+        outputStream.close();
+        // 4.关闭Socket资源
+        socket.close();
+        serverSocket.close();
     }
-    // 3.5关闭流资源
-    inputStream.close();
-    outputStream.close();
-    // 4.关闭Socket资源
-    socket.close();
-    serverSocket.close();
-  }
 
-  @Test
-  /** 客户端的Socket */
-  public void testClientSocket2() throws Exception {
-    // 1.创建Socket对象：ip+port;同时会自动向服务器端发出请求
-    InetAddress address = InetAddress.getByName("127.0.0.1");
-    Socket socket = new Socket(address, 8989);
+    @Test
+    /** 客户端的Socket */
+    public void testClientSocket2() throws Exception {
+        // 1.创建Socket对象：ip+port;同时会自动向服务器端发出请求
+        InetAddress address = InetAddress.getByName("127.0.0.1");
+        Socket socket = new Socket(address, 8989);
 
-    // 2.相关操作:读取输出流
-    // 2.1获取输入流：ServerSocket传过来的
-    InputStream inputStream = socket.getInputStream();
-    // 2.2将传过来的流转换为带缓冲的字符流
-    BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        // 2.相关操作:读取输出流
+        // 2.1获取输入流：ServerSocket传过来的
+        InputStream inputStream = socket.getInputStream();
+        // 2.2将传过来的流转换为带缓冲的字符流
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
-    // 2.3创建输出流：输出到本地硬盘(带有缓冲)
-    OutputStream OutputStream = new FileOutputStream("123.png");
-    BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(OutputStream);
+        // 2.3创建输出流：输出到本地硬盘(带有缓冲)
+        OutputStream OutputStream = new FileOutputStream("123.png");
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(OutputStream);
 
-    // 2.4写入
-    int len = 0;
-    byte[] buffer = new byte[1024];
-    while ((len = bufferedInputStream.read(buffer)) != -1) {
-      bufferedOutputStream.write(buffer, 0, len);
+        // 2.4写入
+        int len = 0;
+        byte[] buffer = new byte[1024];
+        while ((len = bufferedInputStream.read(buffer)) != -1) {
+            bufferedOutputStream.write(buffer, 0, len);
+        }
+        // 2.5关闭流资源
+        bufferedOutputStream.close();
+        bufferedInputStream.close();
+
+        // 3.关闭Socket
+        socket.close();
     }
-    // 2.5关闭流资源
-    bufferedOutputStream.close();
-    bufferedInputStream.close();
 
-    // 3.关闭Socket
-    socket.close();
-  }
+    @Test
+    /** 服务器端的Socket */
+    public void testServerSockeet2() throws IOException {
+        // 1.创建ServerSocket:
+        ServerSocket serverSocket = new ServerSocket(8989);
+        // 2.接受客户端的请求，并得到Socket套接字：ip+port
+        Socket socket = serverSocket.accept();
 
-  @Test
-  /** 服务器端的Socket */
-  public void testServerSockeet2() throws IOException {
-    // 1.创建ServerSocket:
-    ServerSocket serverSocket = new ServerSocket(8989);
-    // 2.接受客户端的请求，并得到Socket套接字：ip+port
-    Socket socket = serverSocket.accept();
-
-    // 3.相关操作：将要输出的对象弄进输出流；(曾本地读取的话就需要输入流)涉及到流资源，一般先是字节流获取，然后字符流处理
-    // 3.1获取输出流：ServerSocket要输出的
-    OutputStream outputStream = socket.getOutputStream();
-    // 3.2将输出流转换为带有缓冲的字符流
-    BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
-    // 3.3创建要输入流(要输出的)，并转换为带有缓冲的字符流
-    InputStream inputStream = new FileInputStream("abc.png");
-    BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-    // 3.4.读写
-    int len;
-    byte[] buffer = new byte[1024];
-    while ((len = bufferedInputStream.read(buffer)) != -1) {
-      bufferedOutputStream.write(buffer, 0, len);
+        // 3.相关操作：将要输出的对象弄进输出流；(曾本地读取的话就需要输入流)涉及到流资源，一般先是字节流获取，然后字符流处理
+        // 3.1获取输出流：ServerSocket要输出的
+        OutputStream outputStream = socket.getOutputStream();
+        // 3.2将输出流转换为带有缓冲的字符流
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+        // 3.3创建要输入流(要输出的)，并转换为带有缓冲的字符流
+        InputStream inputStream = new FileInputStream("abc.png");
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        // 3.4.读写
+        int len;
+        byte[] buffer = new byte[1024];
+        while ((len = bufferedInputStream.read(buffer)) != -1) {
+            bufferedOutputStream.write(buffer, 0, len);
+        }
+        // 3.5关闭流资源
+        bufferedInputStream.close();
+        bufferedOutputStream.close();
+        // 4.关闭Socket资源
+        socket.close();
+        serverSocket.close();
     }
-    // 3.5关闭流资源
-    bufferedInputStream.close();
-    bufferedOutputStream.close();
-    // 4.关闭Socket资源
-    socket.close();
-    serverSocket.close();
-  }
 
-  /** 客户端的Socket */
-  @Test
-  public void testClientSocket() throws Exception {
-    // 1.创建Socket对象：ip+port;同时会自动向服务器端发出请求
-    InetAddress address = InetAddress.getByName("127.0.0.1");
-    Socket socket = new Socket(address, 8989);
+    /** 客户端的Socket */
+    @Test
+    public void testClientSocket() throws Exception {
+        // 1.创建Socket对象：ip+port;同时会自动向服务器端发出请求
+        InetAddress address = InetAddress.getByName("127.0.0.1");
+        Socket socket = new Socket(address, 8989);
 
-    // 2.相关操作
-    InputStream inputStream = socket.getInputStream();
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-    System.out.println("^-^:" + bufferedReader.readLine());
-    inputStream.close();
-    bufferedReader.close();
-    // 3.关闭Socket
-    socket.close();
-  }
+        // 2.相关操作
+        InputStream inputStream = socket.getInputStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        System.out.println("^-^:" + bufferedReader.readLine());
+        inputStream.close();
+        bufferedReader.close();
+        // 3.关闭Socket
+        socket.close();
+    }
 
-  /** 服务器端的Socket */
-  @Test
-  public void testServerSockeet() throws IOException {
-    // 1.创建ServerSocket:
-    ServerSocket serverSocket = new ServerSocket(8989);
-    // 2.接受客户端的请求，并得到Socket套接字：ip+port
-    Socket socket = serverSocket.accept();
+    /** 服务器端的Socket */
+    @Test
+    public void testServerSockeet() throws IOException {
+        // 1.创建ServerSocket:
+        ServerSocket serverSocket = new ServerSocket(8989);
+        // 2.接受客户端的请求，并得到Socket套接字：ip+port
+        Socket socket = serverSocket.accept();
 
-    // 3.相关操作：socket读取输出流，并打印：涉及到流资源，一般先是字节流获取，然后字符流处理
-    OutputStream outputStream = socket.getOutputStream();
-    PrintWriter printWriter = new PrintWriter(outputStream);
-    printWriter.write("来自服务器的问候...");
+        // 3.相关操作：socket读取输出流，并打印：涉及到流资源，一般先是字节流获取，然后字符流处理
+        OutputStream outputStream = socket.getOutputStream();
+        PrintWriter printWriter = new PrintWriter(outputStream);
+        printWriter.write("来自服务器的问候...");
 
-    printWriter.close();
-    outputStream.close();
+        printWriter.close();
+        outputStream.close();
 
-    // 4.关闭Socket资源
-    socket.close();
-    serverSocket.close();
-  }
+        // 4.关闭Socket资源
+        socket.close();
+        serverSocket.close();
+    }
 
-  /**
-   * 功能： <br>
-   * 测试InetAddress类： <br>
-   * 1.获取IP地址的信息 <br>
-   */
-  @Test
-  public void testInetAddress() throws Exception {
+    /**
+     * 功能： <br>
+     * 测试InetAddress类： <br>
+     * 1.获取IP地址的信息 <br>
+     */
+    @Test
+    public void testInetAddress() throws Exception {
 
-    InetAddress address = InetAddress.getLocalHost();
-    System.out.println(address);
+        InetAddress address = InetAddress.getLocalHost();
+        System.out.println(address);
 
-    InetAddress address1 = InetAddress.getByName("www.baidu.com");
-    // www.baidu.com/119.75.213.61
-    System.out.println(address1);
-  }
+        InetAddress address1 = InetAddress.getByName("www.baidu.com");
+        // www.baidu.com/119.75.213.61
+        System.out.println(address1);
+    }
 }

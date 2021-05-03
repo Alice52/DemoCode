@@ -16,13 +16,13 @@ import javax.annotation.Resource;
 @Slf4j
 public class UserServiceImpl implements IUserService {
 
-  @Resource private UserDao userDao;
+    @Resource private UserDao userDao;
 
-  @Override
-  @Transactional
-  public void insertEmp() {
-    userDao.insert();
-    log.info("insert success");
-    int i = 10 / 0;
-  }
+    @Override
+    @Transactional
+    public void insertEmp() {
+        userDao.insert();
+        log.info("insert success");
+        int i = 10 / 0;
+    }
 }

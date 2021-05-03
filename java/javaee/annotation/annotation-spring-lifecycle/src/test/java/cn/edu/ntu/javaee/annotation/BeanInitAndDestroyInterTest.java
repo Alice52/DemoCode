@@ -8,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 
 /**
@@ -17,25 +16,25 @@ import java.util.Arrays;
  */
 @Slf4j
 public class BeanInitAndDestroyInterTest {
-  private ApplicationContext applicationContext =
-      new AnnotationConfigApplicationContext(BeanInitAndDestroyInter.class);
+    private ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(BeanInitAndDestroyInter.class);
 
-  @Test
-  public void testBeanInitAndDestroy() {
-    Dog dog = applicationContext.getBean(Dog.class);
-    log.info(String.valueOf(dog));
+    @Test
+    public void testBeanInitAndDestroy() {
+        Dog dog = applicationContext.getBean(Dog.class);
+        log.info(String.valueOf(dog));
 
-    // publish event
-    applicationContext.publishEvent(new ApplicationEvent(new StringBuffer("custom event")) {});
+        // publish event
+        applicationContext.publishEvent(new ApplicationEvent(new StringBuffer("custom event")) {});
 
-    AnnotationConfigApplicationContext context =
-        (AnnotationConfigApplicationContext) this.applicationContext;
-    context.close();
-  }
+        AnnotationConfigApplicationContext context =
+                (AnnotationConfigApplicationContext) this.applicationContext;
+        context.close();
+    }
 
-  @Test
-  public void testGetBeansFromIoc() {
-    String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-    Arrays.stream(beanDefinitionNames).forEach(System.out::println);
-  }
+    @Test
+    public void testGetBeansFromIoc() {
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        Arrays.stream(beanDefinitionNames).forEach(System.out::println);
+    }
 }

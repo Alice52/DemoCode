@@ -11,8 +11,8 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
  */
 public class CustomFallbackHandler {
 
-  public static JsonResult defaultFallbackHandler(
-      String p1, String p2, BlockException blockException) {
-    return new JsonResult(400, "success", "DefaultFallbackHandler Method");
-  }
+    public static JsonResult defaultFallbackHandler(
+            String p1, String p2, BlockException blockException) {
+        return new JsonResult(400, "success", "DefaultFallbackHandler Method");
+    }
 }

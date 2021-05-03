@@ -14,36 +14,36 @@ import java.util.stream.IntStream;
  */
 public class CustomForkJoinTest {
 
-  @Test
-  public void testAction() {
+    @Test
+    public void testAction() {
 
-    ForkJoinPool pool = new ForkJoinPool();
-    CustomAction action = new CustomAction(1, 100000);
-    pool.invoke(action);
+        ForkJoinPool pool = new ForkJoinPool();
+        CustomAction action = new CustomAction(1, 100000);
+        pool.invoke(action);
 
-    System.out.println(AccumulatorHelper.getResult());
-  }
+        System.out.println(AccumulatorHelper.getResult());
+    }
 
-  @Test
-  // Recommend
-  public void testTask() {
+    @Test
+    // Recommend
+    public void testTask() {
 
-    ForkJoinPool pool = new ForkJoinPool();
-    CustomTask task = new CustomTask(1, 100000);
-    Long result = pool.invoke(task);
+        ForkJoinPool pool = new ForkJoinPool();
+        CustomTask task = new CustomTask(1, 100000);
+        Long result = pool.invoke(task);
 
-    System.out.println(result);
-  }
+        System.out.println(result);
+    }
 
-  @Test
-  public void testSequence() {
-    // This will not exec step by step, it will be parallel[last tag]
-    IntStream.rangeClosed(1, 1000)
-        .parallel()
-        .filter(x -> x > 15)
-        .sequential()
-        .map(x -> x)
-        .parallel()
-        .forEach(System.out::println);
-  }
+    @Test
+    public void testSequence() {
+        // This will not exec step by step, it will be parallel[last tag]
+        IntStream.rangeClosed(1, 1000)
+                .parallel()
+                .filter(x -> x > 15)
+                .sequential()
+                .map(x -> x)
+                .parallel()
+                .forEach(System.out::println);
+    }
 }

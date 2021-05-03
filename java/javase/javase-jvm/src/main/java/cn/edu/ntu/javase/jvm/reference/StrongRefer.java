@@ -7,16 +7,16 @@ package cn.edu.ntu.javase.jvm.reference;
  */
 public class StrongRefer {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    Object o1 = new Object();
-    Object o2 = o1;
-    o1 = null;
-    System.gc();
+        Object o1 = new Object();
+        Object o2 = o1;
+        o1 = null;
+        System.gc();
 
-    // null
-    System.out.println(o1);
-    // java.lang.Object@12a3a380, 此时堆中的空间也没有被回收
-    System.out.println(o2);
-  }
+        // null
+        System.out.println(o1);
+        // java.lang.Object@12a3a380, 此时堆中的空间也没有被回收
+        System.out.println(o2);
+    }
 }

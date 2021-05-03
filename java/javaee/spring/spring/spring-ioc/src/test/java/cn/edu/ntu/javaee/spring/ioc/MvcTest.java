@@ -18,31 +18,31 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class MvcTest {
 
-  private ApplicationContext ctx;
-  private static final Logger LOG = LoggerFactory.getLogger(MvcTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MvcTest.class);
+    private ApplicationContext ctx;
 
-  @Before
-  public void init() {
-    ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_MVC_XML_PATH);
-  }
+    @Before
+    public void init() {
+        ctx = new ClassPathXmlApplicationContext(Constants.APPLICATION_CONTEXT_MVC_XML_PATH);
+    }
 
-  @Test
-  public void testAnnotationBean() {
-    PersonController controller = ctx.getBean("personController", PersonController.class);
-    LOG.info("Get personController: {} from IOC container success.", controller);
+    @Test
+    public void testAnnotationBean() {
+        PersonController controller = ctx.getBean("personController", PersonController.class);
+        LOG.info("Get personController: {} from IOC container success.", controller);
 
-    PersonService service = ctx.getBean("personServiceImpl", PersonService.class);
-    LOG.info("Get PersonService: {} from IOC container success.", service);
+        PersonService service = ctx.getBean("personServiceImpl", PersonService.class);
+        LOG.info("Get PersonService: {} from IOC container success.", service);
 
-    PersonRepository repository =
-        ctx.getBean("personRepositoryMybatisImpl", PersonRepository.class);
-    LOG.info("Get PersonRepository: {} from IOC container success.", repository);
-  }
+        PersonRepository repository =
+                ctx.getBean("personRepositoryMybatisImpl", PersonRepository.class);
+        LOG.info("Get PersonRepository: {} from IOC container success.", repository);
+    }
 
-  @Test
-  public void testMVCProcessor() {
-    PersonController controller = ctx.getBean("personController", PersonController.class);
-    LOG.info("Get personController: {} from IOC container success.", controller);
-    controller.register();
-  }
+    @Test
+    public void testMVCProcessor() {
+        PersonController controller = ctx.getBean("personController", PersonController.class);
+        LOG.info("Get personController: {} from IOC container success.", controller);
+        controller.register();
+    }
 }

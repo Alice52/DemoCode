@@ -13,6 +13,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-  private String name = "zack";
-  private Integer age = 18;
+    private String name = "zack";
+    private Integer age = 18;
 }

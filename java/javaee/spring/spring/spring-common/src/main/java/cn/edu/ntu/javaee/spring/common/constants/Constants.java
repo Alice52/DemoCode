@@ -11,12 +11,12 @@ package cn.edu.ntu.javaee.spring.common.constants;
  */
 public final class Constants {
 
-  // basic data
-  public static final String STRING_EMPTY = "";
-  public static final boolean BOOLEAN_FALSE = false;
-  public static final boolean BOOLEAN_TRUE = true;
+    // basic data
+    public static final String STRING_EMPTY = "";
+    public static final boolean BOOLEAN_FALSE = false;
+    public static final boolean BOOLEAN_TRUE = true;
 
-  // spring config
-  public static final String APPLICATION_CONTEXT_XML_PATH = "ApplicationContext.xml";
-  public static final String APPLICATION_CONTEXT_MVC_XML_PATH = "ApplicationContext4MVC.xml";
+    // spring config
+    public static final String APPLICATION_CONTEXT_XML_PATH = "ApplicationContext.xml";
+    public static final String APPLICATION_CONTEXT_MVC_XML_PATH = "ApplicationContext4MVC.xml";
 }

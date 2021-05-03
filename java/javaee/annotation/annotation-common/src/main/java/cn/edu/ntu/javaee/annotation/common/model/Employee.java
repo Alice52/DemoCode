@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Employee {
-  private Integer age;
-  private String name;
-  private String Company;
+    private Integer age;
+    private String name;
+    private String Company;
 }

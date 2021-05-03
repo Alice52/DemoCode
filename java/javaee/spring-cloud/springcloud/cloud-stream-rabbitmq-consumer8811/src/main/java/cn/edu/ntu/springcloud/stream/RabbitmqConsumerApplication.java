@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author zack <br/>
- * @create 2020-04-11 22:22 <br/>
+ * @author zack <br>
+ * @create 2020-04-11 22:22 <br>
  */
 @SpringBootApplication
 public class RabbitmqConsumerApplication {

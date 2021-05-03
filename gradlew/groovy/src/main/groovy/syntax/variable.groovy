@@ -45,7 +45,6 @@ String echo(String message) {
 }
 
 
-
 /*============================== string method ===================================*/
 name.center()
 // ...

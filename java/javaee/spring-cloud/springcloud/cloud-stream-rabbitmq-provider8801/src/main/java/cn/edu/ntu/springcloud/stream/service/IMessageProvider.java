@@ -6,6 +6,6 @@ package cn.edu.ntu.springcloud.stream.service;
  */
 public interface IMessageProvider {
 
-  /** send message */
-  Object send();
+    /** send message */
+    Object send();
 }

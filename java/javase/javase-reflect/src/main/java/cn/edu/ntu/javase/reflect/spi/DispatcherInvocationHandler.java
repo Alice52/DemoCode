@@ -15,18 +15,18 @@ import java.util.List;
  * @create 2020-02-10 23:27 <br>
  */
 public class DispatcherInvocationHandler implements InvocationHandler {
-  private static final Logger LOG = LoggerFactory.getLogger(DispatcherInvocationHandler.class);
-  private final List<Object> targets;
+    private static final Logger LOG = LoggerFactory.getLogger(DispatcherInvocationHandler.class);
+    private final List<Object> targets;
 
-  public DispatcherInvocationHandler(List<Object> targets) {
-    this.targets = targets;
-  }
-
-  @Override
-  public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-    for (Object target : targets) {
-      method.invoke(target, args);
+    public DispatcherInvocationHandler(List<Object> targets) {
+        this.targets = targets;
     }
-    return null;
-  }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        for (Object target : targets) {
+            method.invoke(target, args);
+        }
+        return null;
+    }
 }

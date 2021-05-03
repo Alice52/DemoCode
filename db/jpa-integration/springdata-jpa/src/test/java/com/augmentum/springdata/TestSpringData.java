@@ -1,19 +1,19 @@
 package com.augmentum.springdata;
 
-import com.augmentum.springdata.repository.PersonRepository;
 import com.augmentum.springdata.entities.Person;
+import com.augmentum.springdata.repository.PersonRepository;
 import com.augmentum.springdata.service.PersonService;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -33,7 +33,6 @@ public class TestSpringData {
     private PersonRepository personRepository = null;
     private PersonService personService;
 
-
     @Before
     public void init() {
         ctx = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_PATH);
@@ -46,7 +45,6 @@ public class TestSpringData {
         DataSource dataSource = ctx.getBean(DataSource.class);
         LOG.info("get dataSource success: " + dataSource);
     }
-
 
     @Test
     public void testHelloWorldSpringData() {
@@ -64,7 +62,8 @@ public class TestSpringData {
     }
 
     @Test
-    // config application entityManagerFactory -- jpaPropertyMap -- property can make it a true batch.
+    // config application entityManagerFactory -- jpaPropertyMap -- property can make it a true
+    // batch.
     public void testTransactionSaveAll() {
         List<Person> persons = new ArrayList<>();
 
@@ -88,12 +87,12 @@ public class TestSpringData {
 
     @Test
     public void testPagingAndSortingRepository() {
-        //pageNo 从 0 开始.
+        // pageNo 从 0 开始.
         int pageNo = 6 - 1;
         int pageSize = 5;
-        //Pageable 接口通常使用的其 PageRequest 实现类. 其中封装了需要分页的信息
-        //排序相关的. Sort 封装了排序的信息
-        //Order 是具体针对于某一个属性进行升序还是降序.
+        // Pageable 接口通常使用的其 PageRequest 实现类. 其中封装了需要分页的信息
+        // 排序相关的. Sort 封装了排序的信息
+        // Order 是具体针对于某一个属性进行升序还是降序.
         Order order1 = new Order(Direction.DESC, "id");
         Order order2 = new Order(Direction.ASC, "email");
         Sort sort = Sort.by(order1, order2);

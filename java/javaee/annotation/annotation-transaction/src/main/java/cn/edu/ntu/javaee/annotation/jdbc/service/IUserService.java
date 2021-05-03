@@ -6,5 +6,5 @@ package cn.edu.ntu.javaee.annotation.jdbc.service;
  */
 public interface IUserService {
 
-  default void insertEmp() {}
+    default void insertEmp() {}
 }

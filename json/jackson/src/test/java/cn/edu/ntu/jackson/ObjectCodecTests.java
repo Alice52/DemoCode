@@ -13,25 +13,26 @@ import java.io.IOException;
  */
 public class ObjectCodecTests {
 
-  private JsonFactory factory = new JsonFactoryBuilder().build();
+    private JsonFactory factory = new JsonFactoryBuilder().build();
 
-  @Test
-  public void testRead() throws IOException {
-    String json = "{\"name\": \"zack\", \"age\": 18 }";
-    try (JsonParser parser = factory.createParser(json); ) {
-      parser.setCodec(new UserObjectCodec());
-      User user = parser.readValueAs(User.class);
+    @Test
+    public void testRead() throws IOException {
+        String json = "{\"name\": \"zack\", \"age\": 18 }";
+        try (JsonParser parser = factory.createParser(json); ) {
+            parser.setCodec(new UserObjectCodec());
+            User user = parser.readValueAs(User.class);
 
-      System.out.println(user);
+            System.out.println(user);
+        }
     }
-  }
 
-  @Test
-  public void testWrite() throws IOException {
+    @Test
+    public void testWrite() throws IOException {
 
-    try (JsonGenerator jsonGenerator = factory.createGenerator(System.err, JsonEncoding.UTF8); ) {
-      jsonGenerator.setCodec(new UserObjectCodec());
-      jsonGenerator.writeObject(new User("zack", 18));
+        try (JsonGenerator jsonGenerator =
+                factory.createGenerator(System.err, JsonEncoding.UTF8); ) {
+            jsonGenerator.setCodec(new UserObjectCodec());
+            jsonGenerator.writeObject(new User("zack", 18));
+        }
     }
-  }
 }

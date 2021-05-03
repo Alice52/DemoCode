@@ -18,22 +18,22 @@ import javax.annotation.Resource;
 @RequestMapping("/direct")
 public class DirectController {
 
-  @Resource DirectSender directSender;
-  @Resource DirectTtlSender ttlSender;
-  @Resource DirectDeadSender deadSender;
+    @Resource DirectSender directSender;
+    @Resource DirectTtlSender ttlSender;
+    @Resource DirectDeadSender deadSender;
 
-  @GetMapping("/send")
-  public void send() {
-    directSender.sendImmediately();
-  }
+    @GetMapping("/send")
+    public void send() {
+        directSender.sendImmediately();
+    }
 
-  @GetMapping("/ttl-send")
-  public void ttlSend() {
-    ttlSender.sendImmediately();
-  }
+    @GetMapping("/ttl-send")
+    public void ttlSend() {
+        ttlSender.sendImmediately();
+    }
 
-  @GetMapping("/dead-send")
-  public void deadSend() {
-    deadSender.sendImmediately();
-  }
+    @GetMapping("/dead-send")
+    public void deadSend() {
+        deadSender.sendImmediately();
+    }
 }
