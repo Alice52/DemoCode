@@ -1,6 +1,11 @@
 name: Build JavaSE
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'java/javase/**'
+      - '.github/project-javaee.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest

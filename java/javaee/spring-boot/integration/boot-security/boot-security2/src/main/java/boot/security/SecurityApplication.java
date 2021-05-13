@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author zack <br>
  * @create 2021-04-26 10:52 <br>
- * @project webflux-server <br>
+ * @project boot-security2 <br>
  */
 @SpringBootApplication
 public class SecurityApplication {

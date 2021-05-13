@@ -1,6 +1,11 @@
 name: Build Job
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'job/**'
+      - '.github/project-job.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -1,6 +1,11 @@
 name: Build Json
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'json/**'
+      - '.github/project-json.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest

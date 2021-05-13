@@ -1,6 +1,11 @@
 name: Build Database Tutorial
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'db/**'
+      - '.github/project-db.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest

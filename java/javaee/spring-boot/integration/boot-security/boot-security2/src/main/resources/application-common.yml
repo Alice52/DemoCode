@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: boot-security2
+  jackson:
+    default-property-inclusion: non_null
+  resources:
+    add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+# 加解密根密码
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    root: info
+    boot.security2: debug
+
+jwt:
+  config:
+    key: xkcoding
+    ttl: 600000
+    remember: 604800000
+
+custom:
+  config:
+    ignores:
+      # 需要过滤的 post 请求
+      post:
+        - "/api/auth/login"
+        - "/api/auth/logout"
+      # 需要过滤的请求，不限方法
+      pattern:
+        - "/test/*"
