@@ -22,7 +22,9 @@ public interface RoleDao extends JpaRepository<Role, Long>, JpaSpecificationExec
      */
     @Query(
             value =
-                    "SELECT sec_role.* FROM sec_role,sec_user,sec_user_role WHERE sec_user.id = sec_user_role.user_id AND sec_role.id = sec_user_role.role_id AND sec_user.id = :userId",
+                    "SELECT boot_security2_role.* "
+                            + "FROM boot_security2_role,boot_security2_user,boot_security2_user_role "
+                            + "WHERE boot_security2_user.id = boot_security2_user_role.user_id AND boot_security2_role.id = boot_security2_user_role.role_id AND boot_security2_user.id = :userId",
             nativeQuery = true)
     List<Role> selectByUserId(@Param("userId") Long userId);
 }

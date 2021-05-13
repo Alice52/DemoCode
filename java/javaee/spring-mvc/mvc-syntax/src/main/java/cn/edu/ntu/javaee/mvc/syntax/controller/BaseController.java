@@ -2,7 +2,6 @@ package cn.edu.ntu.javaee.mvc.syntax.controller;
 
 import cn.edu.ntu.javaee.mvc.common.model.User;
 import org.springframework.context.ApplicationContext;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;

@@ -21,7 +21,7 @@
 
         <dependency>
             <groupId>cn.edu.ntu</groupId>
-            <artifactId>mvc-common</artifactId>
+            <artifactId>common-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 

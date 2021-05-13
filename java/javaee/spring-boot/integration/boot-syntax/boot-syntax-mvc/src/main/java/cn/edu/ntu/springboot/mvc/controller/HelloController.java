@@ -1,8 +1,7 @@
 package cn.edu.ntu.springboot.mvc.controller;
 
 import cn.edu.ntu.springboot.mvc.model.Person;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.validation.constraints.Email;
 
+/** @author zack */
 @PropertySource(value = {"classpath:person.properties"})
 @RestController
+@Slf4j
 public class HelloController {
-    private static final Logger LOG = LoggerFactory.getLogger(HelloController.class);
 
     @Resource public Person person;
 
@@ -31,7 +31,7 @@ public class HelloController {
 
     @GetMapping(value = "/person")
     public Person hello() {
-        LOG.info("Autowired person: {}", person);
+        log.info("Autowired person: {}", person);
         Person person = new Person();
         person.setName(name);
         person.setAge(age);

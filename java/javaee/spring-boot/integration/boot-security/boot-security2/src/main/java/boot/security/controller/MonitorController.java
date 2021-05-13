@@ -1,12 +1,15 @@
 package boot.security.controller;
 
+import boot.security.common.ApiResponse;
 import boot.security.common.PageResult;
+import boot.security.common.Status;
+import boot.security.exception.SecurityException;
 import boot.security.model.vo.OnlineUser;
 import boot.security.payload.PageCondition;
 import boot.security.service.MonitorService;
 import boot.security.util.PageUtil;
 import boot.security.util.SecurityUtil;
-import cn.edu.ntu.common.api.constants.enums.CommonResponseEnum;
+import cn.hutool.core.collection.CollUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +35,10 @@ public class MonitorController {
      * @param pageCondition 分页参数
      */
     @GetMapping("/online/user")
-    public PageResult onlineUser(PageCondition pageCondition) {
+    public ApiResponse onlineUser(PageCondition pageCondition) {
         PageUtil.checkPageCondition(pageCondition, PageCondition.class);
         PageResult<OnlineUser> pageResult = monitorService.onlineUser(pageCondition);
-        return pageResult;
+        return ApiResponse.ofSuccess(pageResult);
     }
 
     /**
@@ -44,10 +47,14 @@ public class MonitorController {
      * @param names 用户名列表
      */
     @DeleteMapping("/online/user/kickout")
-    public void kickoutOnlineUser(@RequestBody List<String> names) {
-        CommonResponseEnum.CUSTOM.assertIsNull(names);
-        CommonResponseEnum.CUSTOM.assertIsFalse(names.contains(SecurityUtil.getCurrentUsername()));
-
+    public ApiResponse kickoutOnlineUser(@RequestBody List<String> names) {
+        if (CollUtil.isEmpty(names)) {
+            throw new SecurityException(Status.PARAM_NOT_NULL);
+        }
+        if (names.contains(SecurityUtil.getCurrentUsername())) {
+            throw new SecurityException(Status.KICKOUT_SELF);
+        }
         monitorService.kickout(names);
+        return ApiResponse.ofSuccess();
     }
 }

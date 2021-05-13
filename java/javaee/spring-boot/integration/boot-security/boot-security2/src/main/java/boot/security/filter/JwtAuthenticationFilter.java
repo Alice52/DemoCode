@@ -1,8 +1,11 @@
 package boot.security.filter;
 
+import boot.security.common.Status;
 import boot.security.config.CustomConfig;
+import boot.security.exception.SecurityException;
 import boot.security.service.CustomUserDetailsService;
 import boot.security.util.JwtUtil;
+import boot.security.util.ResponseUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
@@ -65,16 +68,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 filterChain.doFilter(request, response);
             } catch (SecurityException e) {
-                response.setHeader("Access-Control-Allow-Origin", "*");
-                response.setHeader("Access-Control-Allow-Methods", "*");
-                response.setContentType("application/json;charset=UTF-8");
-                response.setStatus(500);
+                ResponseUtil.renderJson(response, e);
             }
         } else {
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Methods", "*");
-            response.setContentType("application/json;charset=UTF-8");
-            response.setStatus(401);
+            ResponseUtil.renderJson(response, Status.UNAUTHORIZED, null);
         }
     }
 

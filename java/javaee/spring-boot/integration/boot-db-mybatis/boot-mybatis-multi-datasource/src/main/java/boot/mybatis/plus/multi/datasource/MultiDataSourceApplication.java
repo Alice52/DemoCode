@@ -1,4 +1,4 @@
-package boot.mybatis.multi.datasource;
+package boot.mybatis.plus.multi.datasource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

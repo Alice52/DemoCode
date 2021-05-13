@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/test")
 public class TestController {
     @GetMapping
-    public String list() {
+    public Object list() {
         log.info("测试列表查询");
         return "测试列表查询";
     }

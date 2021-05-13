@@ -24,7 +24,10 @@ public interface PermissionDao
      */
     @Query(
             value =
-                    "SELECT DISTINCT sec_permission.* FROM sec_permission,sec_role,sec_role_permission WHERE sec_role.id = sec_role_permission.role_id AND sec_permission.id = sec_role_permission.permission_id AND sec_role.id IN (:ids)",
+                    "SELECT DISTINCT boot_security2_permission.* "
+                            + "FROM boot_security2_permission,boot_security2_role,boot_security2_role_permission "
+                            + "WHERE boot_security2_role.id = boot_security2_role_permission.role_id AND boot_security2_permission.id = boot_security2_role_permission.permission_id "
+                            + "AND boot_security2_role.id IN (:ids)",
             nativeQuery = true)
     List<Permission> selectByRoleIdList(@Param("ids") List<Long> ids);
 }

@@ -1,6 +1,8 @@
 package boot.security.controller;
 
-import boot.security.constants.enums.SecurityResponseEnum;
+import boot.security.common.ApiResponse;
+import boot.security.common.Status;
+import boot.security.exception.SecurityException;
 import boot.security.model.vo.JwtResponse;
 import boot.security.payload.LoginRequest;
 import boot.security.util.JwtUtil;
@@ -34,26 +36,26 @@ public class AuthController {
 
     /** 登录 */
     @PostMapping("/login")
-    public JwtResponse login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ApiResponse login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
-                                loginRequest.getUsernameOrEmailOrPhone(),
-                                loginRequest.getPassword()));
+                                loginRequest.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtUtil.createJWT(authentication, loginRequest.getRememberMe());
-        return new JwtResponse(jwt);
+        return ApiResponse.ofSuccess(new JwtResponse(jwt));
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletRequest request) {
+    public ApiResponse logout(HttpServletRequest request) {
         try {
             // 设置JWT过期
             jwtUtil.invalidateJWT(request);
         } catch (SecurityException e) {
-            SecurityResponseEnum.NO_AUTHORIZATION.assertFail();
+            throw new SecurityException(Status.UNAUTHORIZED);
         }
+        return ApiResponse.ofStatus(Status.LOGOUT);
     }
 }

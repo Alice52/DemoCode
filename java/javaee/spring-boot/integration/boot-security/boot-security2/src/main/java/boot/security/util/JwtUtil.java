@@ -1,8 +1,9 @@
 package boot.security.util;
 
 import boot.security.common.Constants;
+import boot.security.common.Status;
 import boot.security.config.JwtConfig;
-import boot.security.constants.enums.SecurityResponseEnum;
+import boot.security.exception.SecurityException;
 import boot.security.model.vo.UserPrincipal;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
@@ -23,6 +24,8 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * https://github.com/jwtk/jjwt
+ *
  * @author zack <br>
  * @create 2021-05-13 12:43 <br>
  * @project boot-security-shiro <br>
@@ -52,12 +55,14 @@ public class JwtUtil {
             List<String> roles,
             Collection<? extends GrantedAuthority> authorities) {
         Date now = new Date();
+
         JwtBuilder builder =
                 Jwts.builder()
                         .setId(id.toString())
                         .setSubject(subject)
                         .setIssuedAt(now)
-                        .signWith(SignatureAlgorithm.HS256, jwtConfig.getKey())
+                        // .setAudience()
+                        .signWith(SignatureAlgorithm.HS512, jwtConfig.getKey())
                         .claim("roles", roles)
                         .claim("authorities", authorities);
 
@@ -100,6 +105,7 @@ public class JwtUtil {
      */
     public Claims parseJWT(String jwt) {
         try {
+            // will validate signature when parse
             Claims claims =
                     Jwts.parser().setSigningKey(jwtConfig.getKey()).parseClaimsJws(jwt).getBody();
 
@@ -109,30 +115,31 @@ public class JwtUtil {
             // 校验redis中的JWT是否存在
             Long expire = stringRedisTemplate.getExpire(redisKey, TimeUnit.MILLISECONDS);
             if (Objects.isNull(expire) || expire <= 0) {
-                SecurityResponseEnum.NO_AUTHORIZATION.assertFailWithMsg("token 已过期，请重新登录！");
+                throw new SecurityException(Status.TOKEN_EXPIRED);
             }
 
             // 校验redis中的JWT是否与当前的一致，不一致则代表用户已注销/用户在不同设备登录，均代表JWT已过期
             String redisToken = stringRedisTemplate.opsForValue().get(redisKey);
             if (!StrUtil.equals(jwt, redisToken)) {
-                SecurityResponseEnum.NO_AUTHORIZATION.assertFailWithMsg("当前用户已在别处登录，请尝试更改密码或重新登录！");
+                throw new SecurityException(Status.TOKEN_OUT_OF_CTRL);
             }
             return claims;
         } catch (ExpiredJwtException e) {
             log.error("Token 已过期");
-            SecurityResponseEnum.NO_AUTHORIZATION.assertFailWithMsg("token 已过期，请重新登录！");
+            throw new SecurityException(Status.TOKEN_EXPIRED);
         } catch (UnsupportedJwtException e) {
             log.error("不支持的 Token");
-            SecurityResponseEnum.NO_AUTHORIZATION.assertFail2Response(5002, "token 解析失败，请尝试重新登录！");
+            throw new SecurityException(Status.TOKEN_PARSE_ERROR);
         } catch (MalformedJwtException e) {
             log.error("Token 无效");
-            SecurityResponseEnum.NO_AUTHORIZATION.assertFailWithMsg("Token 无效");
+            throw new SecurityException(Status.TOKEN_PARSE_ERROR);
+        } catch (SignatureException e) {
+            log.error("无效的 Token 签名");
+            throw new SecurityException(Status.TOKEN_PARSE_ERROR);
         } catch (IllegalArgumentException e) {
             log.error("Token 参数不存在");
-            SecurityResponseEnum.NO_AUTHORIZATION.assertFailWithMsg("Token 参数不存在！");
+            throw new SecurityException(Status.TOKEN_PARSE_ERROR);
         }
-
-        return null;
     }
 
     /**

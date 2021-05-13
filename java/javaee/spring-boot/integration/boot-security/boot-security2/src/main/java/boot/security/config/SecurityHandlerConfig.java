@@ -1,9 +1,10 @@
 package boot.security.config;
 
+import boot.security.common.Status;
+import boot.security.util.ResponseUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
 /**
  * @author zack <br>
@@ -15,6 +16,7 @@ public class SecurityHandlerConfig {
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
-        return new AccessDeniedHandlerImpl();
+        return (request, response, accessDeniedException) ->
+                ResponseUtil.renderJson(response, Status.ACCESS_DENIED, null);
     }
 }

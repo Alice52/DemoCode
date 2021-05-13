@@ -1,7 +1,8 @@
 package boot.security.service;
 
 import boot.security.common.Constants;
-import boot.security.constants.enums.SecurityResponseEnum;
+import boot.security.common.Status;
+import boot.security.exception.SecurityException;
 import boot.security.model.entity.Permission;
 import boot.security.model.entity.Role;
 import boot.security.model.vo.UserPrincipal;
@@ -13,13 +14,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -85,7 +86,7 @@ public class RbacAuthorityService {
     private void checkRequest(HttpServletRequest request) {
         // 获取当前 request 的方法
         String currentMethod = request.getMethod();
-        Map<String, List<String>> urlMapping = new HashMap<>();
+        Map<String, List<String>> urlMapping = allUrlMapping();
 
         for (String uri : urlMapping.keySet()) {
             // 通过 AntPathRequestMatcher 匹配 url
@@ -96,13 +97,39 @@ public class RbacAuthorityService {
             AntPathRequestMatcher antPathMatcher = new AntPathRequestMatcher(uri);
             if (antPathMatcher.matches(request)) {
                 if (!urlMapping.get(uri).contains(currentMethod)) {
-                    SecurityResponseEnum.NO_PERMISSION.assertFail();
+                    throw new SecurityException(Status.HTTP_BAD_METHOD);
                 } else {
                     return;
                 }
             }
         }
 
-        SecurityResponseEnum.NO_FOUND.assertFail();
+        throw new SecurityException(Status.REQUEST_NOT_FOUND);
+    }
+
+    /** 获取 所有URL Mapping，返回格式为{"/test":["GET","POST"],"/sys":["GET","DELETE"]} */
+    private Map<String, List<String>> allUrlMapping() {
+        Map<String, List<String>> urlMapping = new HashMap<String, List<String>>();
+
+        // 获取url与类和方法的对应信息
+        Map<RequestMappingInfo, HandlerMethod> handlerMethods = mapping.getHandlerMethods();
+
+        handlerMethods.forEach(
+                (k, v) -> {
+                    // 获取当前 key 下的获取所有URL
+                    Set<String> url = k.getPatternsCondition().getPatterns();
+                    RequestMethodsRequestCondition method = k.getMethodsCondition();
+
+                    // 为每个URL添加所有的请求方法
+                    url.forEach(
+                            s ->
+                                    urlMapping.put(
+                                            s,
+                                            method.getMethods().stream()
+                                                    .map(Enum::toString)
+                                                    .collect(Collectors.toList())));
+                });
+
+        return urlMapping;
     }
 }

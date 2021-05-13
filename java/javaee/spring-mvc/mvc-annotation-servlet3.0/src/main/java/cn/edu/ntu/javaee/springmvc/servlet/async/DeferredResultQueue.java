@@ -1,9 +1,9 @@
 package cn.edu.ntu.javaee.springmvc.servlet.async;
 
+import org.springframework.web.context.request.async.DeferredResult;
+
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import org.springframework.web.context.request.async.DeferredResult;
 
 /** @author zack */
 public class DeferredResultQueue {

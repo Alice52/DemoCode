@@ -1,11 +1,11 @@
 package cn.edu.ntu.javaee.springmvc.dao;
 
+import cn.edu.ntu.javaee.springmvc.model.Department;
+import org.springframework.stereotype.Repository;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import cn.edu.ntu.javaee.springmvc.model.Department;
-import org.springframework.stereotype.Repository;
 
 /** @author zack */
 @Repository

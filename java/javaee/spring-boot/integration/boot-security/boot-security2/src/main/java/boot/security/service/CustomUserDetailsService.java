@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  *
  * @author zack <br>
  * @create 2021-05-13 12:43 <br>
- * @project boot-security-shiro <br>
+ * @project boot-security <br>
  */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
