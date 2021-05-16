@@ -4,12 +4,16 @@ import com.ulisesbocchio.jasyptspringboot.properties.JasyptEncryptorConfiguratio
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
+import java.util.Optional;
+
 /**
  * @author zack <br>
  * @create 2021-05-16<br>
  * @project integration <br>
  */
 public final class JasyptUtils {
+
+    static String KEY = "JASYPT_ENCRYPTOR_PASSWORD";
 
     static PooledPBEStringEncryptor ENCRYPTOR = getInstance();
 
@@ -31,7 +35,9 @@ public final class JasyptUtils {
     private static PooledPBEStringEncryptor getInstance() {
         PooledPBEStringEncryptor pooledPBEStringEncryptor = new PooledPBEStringEncryptor();
 
-        String secret = System.getenv("JASYPT_ENCRYPTOR_PASSWORD");
+        // get from env: -D is used properties
+        String secret = Optional.ofNullable(System.getenv(KEY)).orElse(System.getProperty(KEY));
+
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         config.setPassword(secret);
         config.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
