@@ -60,8 +60,5 @@ public interface IMailService {
             String to, String subject, String content, String rscPath, String rscId, String... cc)
             throws MessagingException;
 
-
-    void sendImageMail(
-            List<String> to, Object subject, Object content)
-            throws MessagingException;
+    void sendImageMail(List<String> to, Object subject, Object content) throws MessagingException;
 }

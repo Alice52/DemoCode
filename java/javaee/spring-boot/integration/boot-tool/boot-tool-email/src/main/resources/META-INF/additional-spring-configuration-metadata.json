@@ -1,0 +1,100 @@
+{
+  "properties": [
+    {
+      "defaultValue": "${JASYPT_ENCRYPTOR_PASSWORD}",
+      "name": "jasypt.encryptor.password",
+      "description": "encryptor",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": "smtp",
+      "name": "spring.mail.protocol",
+      "description": "email protocol",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": "ENC(KwgyFVRJzE76uUF+B2EOyjJgijQDrxhRWzrUBa6eUfmduClTbtpaCVxXRWWctYSi)",
+      "name": "spring.mail.host",
+      "description": "email host",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": "ENC(nvvb0wOLlW+Kl+2CLMay0AyhVmWzXr5Ma2Tn4hTWSyMb95lPCjaIXpHm2Oms/9rB)",
+      "name": "spring.mail.port",
+      "description": "email port",
+      "type": "java.lang.Integer"
+    },
+    {
+      "defaultValue": "ENC(qB9K/XFkIcJGH80lNU2gJ2DVOLsFI6uuyui9MoAQA+ZI1WCLjAOjNfU7rrp3h3qo)",
+      "name": "spring.mail.default-encoding",
+      "description": "email encoding",
+      "type": "java.nio.charset.Charset"
+    },
+    {
+      "defaultValue": "ENC(XtxDqyspABu9dQ0xSZ0zRV7MfVfk/7tN1rE/wkjko5vcjA0vgqmcE10FxRRYlribavOUtBGNy2PDPHWtIrrFUg==)",
+      "name": "spring.mail.username",
+      "description": "email name",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": "ENC(cVfVnGq4tQ6J3+FtW0TejImmx2ESWomD/tuGN5bJqMGM8v+Of/onqraHBd9xhH0J)",
+      "name": "spring.mail.password",
+      "description": "email password",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": true,
+      "name": "spring.mail.properties.mail.smtp.ssl.enable",
+      "description": "email properties mail ssl",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": true,
+      "name": "spring.mail.properties.mail.smtp.ssl.required",
+      "description": "email properties mail ssl",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": true,
+      "name": "spring.mail.properties.mail.smtp.auth",
+      "description": "email properties mail auth",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": true,
+      "name": "spring.mail.properties.mail.smtp.starttls.enable",
+      "description": "email properties mail starttls",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": true,
+      "name": "spring.mail.properties.mail.smtp.starttls.required",
+      "description": "email properties mail starttls",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": 10000,
+      "name": "spring.mail.properties.mail.smtp.timeout",
+      "description": "email properties mail timeout",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": 10000,
+      "name": "spring.mail.properties.mail.smtp.connectiontimeout",
+      "description": "email properties mail connectiontimeout",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": 10000,
+      "name": "spring.mail.properties.mail.smtp.writetimeout",
+      "description": "email properties mail writetimeout",
+      "type": "java.lang.String"
+    },
+    {
+      "defaultValue": "spring-boot-demo",
+      "name": "spring.mail.properties.mail.smtp.display.sendmail",
+      "description": "email properties mail display.sendmail",
+      "type": "java.lang.String"
+    }
+  ]
+}

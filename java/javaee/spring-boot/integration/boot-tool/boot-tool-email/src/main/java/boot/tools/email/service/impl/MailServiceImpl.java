@@ -1,15 +1,15 @@
 package boot.tools.email.service.impl;
 
+import boot.tools.email.config.properties.ToolMailProperties;
 import boot.tools.email.service.IMailService;
 import cn.hutool.core.util.ArrayUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
@@ -22,10 +22,8 @@ import java.util.List;
  */
 @Service
 public class MailServiceImpl implements IMailService {
-    @Autowired private JavaMailSender mailSender;
-
-    @Value("${spring.mail.username}")
-    private String from;
+    @Resource private JavaMailSender mailSender;
+    @Resource private ToolMailProperties properties;
 
     /**
      * 发送文本邮件
@@ -38,7 +36,7 @@ public class MailServiceImpl implements IMailService {
     @Override
     public void sendSimpleMail(String to, String subject, String content, String... cc) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
+        message.setFrom(properties.getUsername());
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);
@@ -62,7 +60,7 @@ public class MailServiceImpl implements IMailService {
             throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
+        helper.setFrom(properties.getUsername());
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(content, true);
@@ -89,7 +87,7 @@ public class MailServiceImpl implements IMailService {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
+        helper.setFrom(properties.getUsername());
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(content, true);
@@ -121,7 +119,7 @@ public class MailServiceImpl implements IMailService {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
+        helper.setFrom(properties.getUsername());
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(content, true);
@@ -140,7 +138,7 @@ public class MailServiceImpl implements IMailService {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
+        helper.setFrom(properties.getUsername());
         helper.setTo(to.toArray(new String[1]));
         helper.setSubject(subject.toString());
         helper.setText(content.toString(), true);

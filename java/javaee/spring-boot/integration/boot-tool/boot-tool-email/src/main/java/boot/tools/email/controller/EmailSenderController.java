@@ -25,6 +25,7 @@ import java.util.Arrays;
  */
 @RestController
 @RequestMapping("/email/")
+@Deprecated
 public class EmailSenderController {
     @Autowired private IMailService mailService;
     @Autowired private TemplateEngine templateEngine;
@@ -103,7 +104,7 @@ public class EmailSenderController {
     }
 
     @PostMapping("/http")
-    public Object http() throws MessagingException {
+    public Object poems() throws MessagingException {
         String s = HttpUtil.get("https://v1.alapi.cn/api/shici");
         JSONObject jsonObject = JSONUtil.parseObj(s);
         JSONObject data = JSONUtil.parseObj(jsonObject.get("data"));

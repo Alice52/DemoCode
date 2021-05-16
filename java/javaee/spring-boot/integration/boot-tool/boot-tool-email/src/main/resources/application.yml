@@ -9,7 +9,6 @@ spring:
     default-encoding: ENC(qB9K/XFkIcJGH80lNU2gJ2DVOLsFI6uuyui9MoAQA+ZI1WCLjAOjNfU7rrp3h3qo)
     username: ENC(XtxDqyspABu9dQ0xSZ0zRV7MfVfk/7tN1rE/wkjko5vcjA0vgqmcE10FxRRYlribavOUtBGNy2PDPHWtIrrFUg==)
     password: ENC(cVfVnGq4tQ6J3+FtW0TejImmx2ESWomD/tuGN5bJqMGM8v+Of/onqraHBd9xhH0J)
-    test-connection: true
     properties:
       mail:
         smtp:
@@ -25,7 +24,6 @@ spring:
           connectiontimeout: 10000
           writetimeout: 10000
           display.sendmail: spring-boot-demo
-
 
 # 为 jasypt 配置解密秘钥
 jasypt:
