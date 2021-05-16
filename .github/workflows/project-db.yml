@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'db/**'
-      - '.github/project-db.yml'
+      - '.github/workflows/project-db.yml'
 
 jobs:
   build:

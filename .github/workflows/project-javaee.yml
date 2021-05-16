@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'java/javaee/**'
-      - '.github/project-javaee.yml'
+      - '.github/workflows/project-javaee.yml'
 
 jobs:
   build:

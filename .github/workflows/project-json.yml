@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'json/**'
-      - '.github/project-json.yml'
+      - '.github/workflows/project-json.yml'
 
 jobs:
   build:
