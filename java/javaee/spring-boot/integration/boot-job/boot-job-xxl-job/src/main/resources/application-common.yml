@@ -3,12 +3,12 @@ logging:
   config:
     classpath: logback.xml
 
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
 free-api:
   poems: https://v1.alapi.cn/api/shici
-
-spring:
-  mail:
-    host: ENC(KwgyFVRJzE76uUF+B2EOyjJgijQDrxhRWzrUBa6eUfmduClTbtpaCVxXRWWctYSi)
 
 xxl:
   job:
@@ -25,4 +25,3 @@ xxl:
       log-path: logs/spring-boot-demo-task-xxl-job/task-log
       # 执行器日志保存天数 [选填] ：值大于3时生效，启用执行器Log文件定期清理功能，否则不生效；
       log-retention-days: -1
-
