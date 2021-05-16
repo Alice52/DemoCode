@@ -1,9 +1,10 @@
-name: Build Image JavaEE
+name: Image JavaEE Build
 
 on:
   push:
     paths:
       - 'java/javaee/**'
+      - '.github/workflows/docker-image.yml'
 
 jobs:
   main:
@@ -46,8 +47,10 @@ jobs:
 
       - name: Push JavaEE-Boot-XxlJob
         run: |
+          PROJECT_NAME=spring-boot/integration
           MODULE_PREFIX=boot-job
           MODULE_NAME=boot-job-xxl-job
+
           cd $PROJECT_HOME/$PROJECT_PREFIX/$PROJECT_NAME/$MODULE_PREFIX/$MODULE_NAME/
           image=$IMAGE_PREFIX-$MODULE_NAME:${TAG}
           docker build -f Dockerfile --build-arg MODULE_NAME=$MODULE_NAME --build-arg JASYPT_ENCRYPTOR_PASSWORD=$JASYPT_ENCRYPTOR_PASSWORD -t ${image} .
