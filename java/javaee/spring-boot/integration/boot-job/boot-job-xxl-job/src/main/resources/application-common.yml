@@ -25,3 +25,11 @@ xxl:
       log-path: logs/spring-boot-demo-task-xxl-job/task-log
       # 执行器日志保存天数 [选填] ：值大于3时生效，启用执行器Log文件定期清理功能，否则不生效；
       log-retention-days: -1
+
+justauth:
+  type:
+    GITEE:
+      client-id: ENC(bXz07fs2NHON8GvzvMeezwKZQoKlNH657sK+suX/VCkf5jIjNHus1hR8AXZtIWxvU9ZD+ftcSVo1itgzECiLCQQovwzmwr0uYhX/Uziyq9oK7Y6QWsrWQj/TKSrHKTlMGxeNyvvurbiHVlTgEfrG+A==)
+      client-secret: ENC(32DFX7H1gHeogJFAsSj0PkuJJw2ZfxWVRQZ3KNf9Hk0BoejPL9VPvdwkYXxCqR+PtiSU7XfBgH9rPH9TUW5pE00A1ocAEpQii8+BG0qppkDIHE8YOjbzCp6gDElPKmCElyZDBBcucv6gbN7rgrIsxw==)
+      email: ENC(yvipFV7I83uXdPNEVjh+f7AfZrqze66YITAl3JnhKzwnmmtffqtt0UUTqWe90brm7Xq2TaOyekVwz9CkaFLzQw==)
+      password: ENC(dRnK8CE5bZ3YDANzM/YVKY+nDihHZDgt3OablOM0jtu6gsO1lOLj5f9R1IJm+wk3)

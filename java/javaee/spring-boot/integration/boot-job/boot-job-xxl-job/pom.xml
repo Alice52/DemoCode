@@ -30,5 +30,10 @@
             <artifactId>boot-tool-email</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.xkcoding.justauth</groupId>
+            <artifactId>justauth-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 </project>
