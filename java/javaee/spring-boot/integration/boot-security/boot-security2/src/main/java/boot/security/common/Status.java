@@ -42,8 +42,6 @@ public enum Status implements IStatus {
     /** 当前用户已被锁定，请联系管理员解锁！ */
     USER_DISABLED(403, "当前用户已被锁定，请联系管理员解锁！"),
 
-
-
     /** 用户名或密码错误！ */
     USERNAME_PASSWORD_ERROR(5001, "用户名或密码错误！"),
 

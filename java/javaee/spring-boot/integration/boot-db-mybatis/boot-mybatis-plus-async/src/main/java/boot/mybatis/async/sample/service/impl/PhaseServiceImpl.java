@@ -1,7 +1,7 @@
-package boot.mybatis.async.service.impl;
+package boot.mybatis.async.sample.service.impl;
 
-import boot.mybatis.async.mapper.PhaseMapper;
-import boot.mybatis.async.service.PhaseService;
+import boot.mybatis.async.sample.mapper.PhaseMapper;
+import boot.mybatis.async.sample.service.PhaseService;
 import boot.mybatis.common.constants.enums.ActivityPhaseEnum;
 import boot.mybatis.common.model.dto.PhaseDTO;
 import boot.mybatis.common.model.entity.Phase;
@@ -75,6 +75,8 @@ public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements
 
         createPhase(dto);
         if (exFlag) {
+            // 没有 SpringAsyncConfiguration 也是可以捕获这个异常的
+            // 可以之定义 SpringAsyncConfiguration 去子线程内部的异常
             throw new RuntimeException("模拟异常");
         }
     }

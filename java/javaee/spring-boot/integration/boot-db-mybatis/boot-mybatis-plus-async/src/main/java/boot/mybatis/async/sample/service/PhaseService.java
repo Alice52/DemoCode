@@ -1,4 +1,4 @@
-package boot.mybatis.async.service;
+package boot.mybatis.async.sample.service;
 
 import boot.mybatis.common.model.dto.PhaseDTO;
 import boot.mybatis.common.model.entity.Phase;

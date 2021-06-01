@@ -1,4 +1,4 @@
-package boot.mybatis.async.mapper;
+package boot.mybatis.async.sample.mapper;
 
 import boot.mybatis.common.model.entity.Phase;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

@@ -1,4 +1,4 @@
-package boot.mybatis.async.config;
+package boot.mybatis.async.sample.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;

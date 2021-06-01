@@ -1,4 +1,4 @@
-package boot.mybatis.async.config;
+package boot.mybatis.async.sample.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

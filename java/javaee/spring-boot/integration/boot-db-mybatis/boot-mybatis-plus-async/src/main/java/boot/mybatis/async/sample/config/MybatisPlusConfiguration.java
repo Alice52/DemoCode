@@ -1,4 +1,4 @@
-package boot.mybatis.async.config;
+package boot.mybatis.async.sample.config;
 
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;

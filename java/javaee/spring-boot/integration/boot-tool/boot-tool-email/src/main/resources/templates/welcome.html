@@ -13,6 +13,7 @@
         #welcome {
             text-align: center;
         }
+
     </style>
 </head>
 <body>
@@ -20,7 +21,7 @@
     <h3>欢迎使用 <span th:text="${project}"></span> - Powered By <span th:text=" ${author}"></span></h3>
     <span th:text="${url}"></span>
     <div style="text-align: center; padding: 10px">
-        <a style="text-decoration: none;" href="#" th:href="@{${url}}" target="_bank">
+        <a href="#" style="text-decoration: none;" target="_bank" th:href="@{${url}}">
             <strong>spring-boot-demo，入门Spring Boot的首选Demo！:)</strong>
         </a>
     </div>

@@ -1,6 +1,6 @@
-package boot.mybatis.async.controller;
+package boot.mybatis.async.sample.controller;
 
-import boot.mybatis.async.service.PhaseService;
+import boot.mybatis.async.sample.service.PhaseService;
 import boot.mybatis.common.model.dto.PhaseDTO;
 import boot.mybatis.common.model.vo.PhaseVO;
 import boot.mybatis.common.utils.ValidationUtil;
