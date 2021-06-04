@@ -51,7 +51,7 @@ public class LimitRequestAspect {
             throws Throwable {
 
         if (limitRequest.count() == 0 || limitRequest.time() == 0) {
-            joinPoint.proceed();
+            return joinPoint.proceed();
         }
 
         // 获取 request
