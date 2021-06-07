@@ -1,12 +1,10 @@
 package boot.mybatis.async.sample.controller;
 
-import cn.edu.ntu.common.api.exception.handler.DefaultHandler;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -28,8 +26,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RestController("/async")
 public class CompFutureController {
-
-    @Resource private DefaultHandler defaultHandler;
 
     /** 一定会执行 */
     @GetMapping("/log")
