@@ -2,6 +2,7 @@ package cn.edu.ntu.javaee.springboot.quartz.quickstart.component;
 
 import cn.edu.ntu.javaee.springboot.quartz.quickstart.job.SimpleJob;
 import org.quartz.*;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
  * @create 2020-12-23 21:21 <br>
  * @project springboot <br>
  */
-// @Component
+@Component
 public class JobInit {
 
     @Resource Scheduler scheduler;

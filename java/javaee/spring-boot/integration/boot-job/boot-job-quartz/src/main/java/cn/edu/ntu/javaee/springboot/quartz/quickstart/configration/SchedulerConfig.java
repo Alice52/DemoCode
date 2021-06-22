@@ -3,6 +3,12 @@ package cn.edu.ntu.javaee.springboot.quartz.quickstart.configration;
 import cn.edu.ntu.javaee.springboot.quartz.quickstart.job.SimpleJob;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Un-Recommend.
@@ -14,10 +20,10 @@ import org.springframework.context.annotation.Bean;
  * @create 2019-09-22 0:58
  * @function
  */
-// @Configuration
+@Configuration
 public class SchedulerConfig {
 
-    private static final String DEFAULT_CRON = "* * * * * ? *";
+    private static final String DEFAULT_CRON = "* * * * * ? 2012,2020,2025";
     private String CORN_ADD_USER = DEFAULT_CRON;
 
     @Bean
@@ -53,6 +59,21 @@ public class SchedulerConfig {
 
     @Bean
     public Trigger batchAddUsersTrigger() {
+        // CronScheduleBuilder cronScheduleBuilder =
+        // CronScheduleBuilder.cronSchedule(CORN_ADD_USER);
+        Trigger trigger =
+                SimpleScheduleBuilder.simpleSchedule()
+                        .withIntervalInSeconds(2)
+                        .repeatForever()
+                        .build();
+
+        List<Trigger> collect =
+                Stream.of(trigger)
+                        .filter(
+                                x ->
+                                        !(x instanceof CronTrigger)
+                                                || x.getFireTimeAfter(new Date()) != null)
+                        .collect(Collectors.toList());
 
         return TriggerBuilder.newTrigger()
                 .forJob("batchAddUsersJob")
