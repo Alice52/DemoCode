@@ -35,6 +35,15 @@ public class JobController {
     }
 
     /** 保存定时任务 */
+    @GetMapping("/manual")
+    public ResponseEntity<ApiResponse> triggerManual() throws SchedulerException {
+
+        jobService.triggerManual();
+
+        return new ResponseEntity<>(ApiResponse.msg("操作成功"), HttpStatus.CREATED);
+    }
+
+    /** 保存定时任务 */
     @PostMapping
     public ResponseEntity<ApiResponse> addJob(@Valid JobForm form) {
         try {

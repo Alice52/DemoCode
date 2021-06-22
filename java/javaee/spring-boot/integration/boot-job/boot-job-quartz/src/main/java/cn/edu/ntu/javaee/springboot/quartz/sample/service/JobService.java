@@ -68,4 +68,6 @@ public interface JobService {
      * @return
      */
     Map<String, String> listAllAvailableJobs();
+
+    void triggerManual() throws SchedulerException;
 }
