@@ -169,4 +169,14 @@ public class JobServiceImpl implements JobService {
 
         return map;
     }
+
+    @Override
+    public void triggerManual() throws SchedulerException {
+
+        JobKey jobKey =
+                JobKey.jobKey(
+                        "cn.edu.ntu.javaee.springboot.quartz.sample.job.DailyEmailJob", "auto");
+
+        scheduler.triggerJob(jobKey);
+    }
 }
