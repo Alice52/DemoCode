@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Primary;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -16,7 +17,8 @@ import javax.annotation.Resource;
  * @author zack
  * @project boot-job-quartz
  */
-@ComponentScan("cn.edu.ntu.javaee.springboot.quartz.quickstart")
+@Primary
+@ComponentScan("cn.edu.ntu.javaee.springboot.quartz.cluster.configuration")
 @SpringBootApplication
 public class QuartzApplication {
 
