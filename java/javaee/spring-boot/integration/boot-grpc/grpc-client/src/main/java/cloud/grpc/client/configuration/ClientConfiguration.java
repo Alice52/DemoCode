@@ -1,6 +1,6 @@
-package cloud.grpc.nacos.configuration;
+package cloud.grpc.client.configuration;
 
-import cloud.grpc.nacos.interceptor.LogGrpcInterceptor;
+import cloud.grpc.client.interceptor.LogGrpcInterceptor;
 import net.devh.boot.grpc.client.interceptor.GrpcGlobalClientInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

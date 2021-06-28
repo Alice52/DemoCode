@@ -1,6 +1,6 @@
-package cloud.grpc.nacos.controller;
+package cloud.grpc.client.controller;
 
-import cloud.grpc.nacos.service.GrpcClientService;
+import cloud.grpc.client.service.GrpcClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

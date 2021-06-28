@@ -1,4 +1,4 @@
-package cloud.grpc.nacos;
+package cloud.grpc.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
