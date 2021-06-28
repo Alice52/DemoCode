@@ -24,6 +24,7 @@
         <module>boot-job</module>
         <module>boot-tool</module>
         <module>boot-security</module>
+        <module>boot-grpc</module>
     </modules>
 
     <properties>

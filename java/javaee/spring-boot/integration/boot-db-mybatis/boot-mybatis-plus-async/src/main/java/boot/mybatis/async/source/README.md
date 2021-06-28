@@ -12,5 +12,5 @@
    <task:executor id="myExecutor" pool-size="5"/>
    <bean id="exceptionHandler" class="com.abc.MyAsynExceptionHandler"/>
    ```
-   - TaskNamespaceHandler: 
+    - TaskNamespaceHandler:
 3.
