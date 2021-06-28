@@ -1,4 +1,4 @@
-package cloud.grpc.nacos.interceptor;
+package cloud.grpc.server.interceptor;
 
 import io.grpc.Metadata;
 import io.grpc.ServerCall;

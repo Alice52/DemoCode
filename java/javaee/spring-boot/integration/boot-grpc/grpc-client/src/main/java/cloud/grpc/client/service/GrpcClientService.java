@@ -1,4 +1,4 @@
-package cloud.grpc.nacos.service;
+package cloud.grpc.client.service;
 
 import cloud.nacos.grpc.api.HelloReply;
 import cloud.nacos.grpc.api.HelloRequest;
