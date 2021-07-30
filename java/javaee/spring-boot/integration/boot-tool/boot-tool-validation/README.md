@@ -7,7 +7,7 @@
 2. use `@Validated` to decorate class, and **annotated in interface**
 
    - turn on the parameter verification function for the methods in this class[对本类中的方法开启参数验证功能]
-   - then use validation annotation in method parameter, and remove annotation in impl class
+   - then use validation annotation in method parameter, **and remove annotation in impl class**
 
 3. @Valid
 
@@ -64,16 +64,22 @@
 
 4. 校验级联属性
 
-   - @Valid
+   - 对象嵌套必须使用 @Valid: `private @Valid PkPaperDTO paperDTO;`
 
-5. `一个 service 中的不同方法之间相互调用的 validation`
+5. List 对象校验 & List 字段校验
+
+   - List 字段校验: `@Size(message = "xx", min = 1)`
+   - List 中的对象校验: `List<@Valid PkSubjectDTO> subjectDTOS`
+   - @Valid 没有分组功能, 可以自定义注解: `extends ConstraintValidator`
+
+6. `一个 service 中的不同方法之间相互调用的 validation`
 
    - 必须是有接口
    - 必须是 public 且非 final 非 static 的方法
    - 先获取到 service proxy 对象
    - proxy.method()
 
-6. `坑`
+7. `坑`
    - **注解一般不会处理 null 的情况, 可以通过校验**
 
 ## issue
