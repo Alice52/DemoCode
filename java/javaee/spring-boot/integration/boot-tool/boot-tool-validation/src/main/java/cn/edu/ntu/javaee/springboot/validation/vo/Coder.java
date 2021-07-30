@@ -65,8 +65,6 @@ public class Coder {
     public interface Common {}
 
     public interface PrimaryCoder {}
-    ;
 
     public interface MiddleCoder {}
-    ;
 }
