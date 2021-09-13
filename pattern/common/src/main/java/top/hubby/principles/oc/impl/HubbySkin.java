@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import top.hubby.principles.oc.AbstractSkin;
 
 /**
- * @author zack <br/>
- * @create 2021-09-13<br/>
- * @project pattern <br/>
+ * @author zack <br>
+ * @create 2021-09-13<br>
+ * @project pattern <br>
  */
 @Slf4j
 public class HubbySkin extends AbstractSkin {
