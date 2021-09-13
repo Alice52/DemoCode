@@ -15,6 +15,12 @@ public class Rectangle implements Quadrilateral {
     private double length;
     private double width;
 
+    public static void resize(top.hubby.principles.rr.before.Rectangle rectangle) {
+        while (rectangle.getWidth() <= rectangle.getLength()) {
+            rectangle.setWidth(rectangle.getWidth() + 1);
+        }
+    }
+
     @Override
     public double getLength() {
         return length;
@@ -23,11 +29,5 @@ public class Rectangle implements Quadrilateral {
     @Override
     public double getWidth() {
         return width;
-    }
-
-    public static void resize(top.hubby.principles.rr.before.Rectangle rectangle) {
-        while (rectangle.getWidth() <= rectangle.getLength()) {
-            rectangle.setWidth(rectangle.getWidth() + 1);
-        }
     }
 }
