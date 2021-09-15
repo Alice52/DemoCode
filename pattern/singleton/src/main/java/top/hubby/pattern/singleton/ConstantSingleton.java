@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ConstantSingleton {
 
-    public static final ConstantSingleton instance = new ConstantSingleton();
+    public static /*final*/ ConstantSingleton instance = new ConstantSingleton();
 
     private ConstantSingleton() {}
 
