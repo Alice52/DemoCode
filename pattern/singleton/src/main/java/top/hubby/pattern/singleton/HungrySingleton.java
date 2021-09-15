@@ -2,6 +2,8 @@ package top.hubby.pattern.singleton;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.ObjectStreamException;
+
 /**
  * @author zack <br>
  * @create 2021-09-13<br>
@@ -20,5 +22,9 @@ public class HungrySingleton {
 
     public static HungrySingleton getInstance() {
         return instance;
+    }
+
+    private Object readResolve() throws ObjectStreamException {
+        return getInstance();
     }
 }
