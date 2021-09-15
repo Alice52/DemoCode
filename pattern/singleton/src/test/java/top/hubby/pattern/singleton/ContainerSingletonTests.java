@@ -4,9 +4,6 @@ import cn.hutool.core.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author asd <br>
  * @create 2021-09-15 10:54 AM <br>
@@ -21,11 +18,11 @@ public class ContainerSingletonTests {
 
         for (int i = 0; i < CONCURRENT_COUNT; i++) {
             new Thread(
-                    () -> {
-                        ContainerSingleton.registerInstance("zack", new Object());
-                        Object instance = ContainerSingleton.getInstance("zack");
-                        log.info("instance: {}", instance);
-                    })
+                            () -> {
+                                ContainerSingleton.registerInstance("zack", new Object());
+                                Object instance = ContainerSingleton.getInstance("zack");
+                                log.info("instance: {}", instance);
+                            })
                     .start();
         }
 
