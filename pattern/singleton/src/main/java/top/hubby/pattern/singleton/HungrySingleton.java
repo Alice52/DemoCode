@@ -11,6 +11,10 @@ import java.io.ObjectStreamException;
  */
 @Slf4j
 public class HungrySingleton {
+    //    private static HungrySingleton instance;
+    //    static {
+    //        instance = new HungrySingleton();
+    //    }
 
     private static HungrySingleton instance = new HungrySingleton();
 
