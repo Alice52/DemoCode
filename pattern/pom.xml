@@ -10,6 +10,7 @@
     <modules>
         <module>singleton</module>
         <module>common</module>
+        <module>builder</module>
     </modules>
 
     <packaging>pom</packaging>
