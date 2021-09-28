@@ -22,6 +22,7 @@
         <module>boot-mybatis-mapper</module>
         <module>boot-mybatis-sharding-jdbc</module>
         <module>boot-mybatis-plus-multi-datasource</module>
+        <module>boot-mybatis-plus-rwa</module>
     </modules>
 
     <properties>

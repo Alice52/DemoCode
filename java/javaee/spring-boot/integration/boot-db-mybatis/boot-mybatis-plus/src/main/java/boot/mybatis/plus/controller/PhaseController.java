@@ -22,7 +22,8 @@ import java.util.List;
 @Slf4j
 @Api(tags = {"活动阶段信息"})
 @RestController
-@RequestMapping("/mcdonalds/phase")
+@RequestMapping("/hubby/phase")
+@Deprecated
 public class PhaseController {
     @Resource private PhaseService phaseService;
 

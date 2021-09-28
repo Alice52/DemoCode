@@ -32,10 +32,6 @@ public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements
 
     @Resource private ActivityService activityService;
 
-    private static LambdaQueryWrapper<Phase> buildQueryWrapper() {
-        return buildQueryWrapper(null);
-    }
-
     private static LambdaQueryWrapper<Phase> buildQueryWrapper(String type) {
         LambdaQueryWrapper<Phase> queryWrapper = Wrappers.<Phase>query().lambda();
         Optional.ofNullable(type).ifPresent(t -> queryWrapper.eq(Phase::getType, type));
