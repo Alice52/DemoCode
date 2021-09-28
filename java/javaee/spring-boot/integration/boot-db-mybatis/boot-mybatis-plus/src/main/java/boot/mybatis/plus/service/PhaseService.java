@@ -3,14 +3,13 @@ package boot.mybatis.plus.service;
 import boot.mybatis.common.model.dto.PhaseDTO;
 import boot.mybatis.common.model.entity.Phase;
 import boot.mybatis.common.model.vo.PhaseVO;
-import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Validated
-public interface PhaseService extends IService<Phase> {
+public interface PhaseService extends IBaseService<Phase> {
 
     /**
      * 获取指定的阶段信息

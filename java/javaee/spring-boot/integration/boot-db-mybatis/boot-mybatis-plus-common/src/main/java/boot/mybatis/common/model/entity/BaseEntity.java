@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 public class BaseEntity<T extends Model> extends Model implements Serializable {
     protected static final long serialVersionUID = 1L;
 
+    @TableField(select = false)
     @TableLogic private Boolean isDeleted;
 
     /**

@@ -1,0 +1,64 @@
+server:
+  # https://blog.csdn.net/zhangjunli/article/details/89207038
+  undertow:
+    io-threads: 4
+    worker-threads: 32
+    accesslog:
+      dir: logs/access/
+      enabled: true
+      pattern: '%h %l %u %t "%r" %s %b %D "%{i,Referer}" "%{i,User-Agent}"'
+      prefix: ${spring.application.name}_access
+      suffix: .log
+      rotate: true
+
+# 加解密根密码
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Spring 相关
+spring:
+  application:
+    name: boot-mybatis-plus
+  jackson:
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    master:
+      url: jdbc:mysql://139.224.35.121:3306/day45?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      username: root
+      password: root
+    slave:
+      url: jdbc:mysql://1.15.243.13:3306/day45?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      username: root
+      password: root
+
+
+# mybatis-plus
+mybatis-plus:
+  # typeEnumsPackage:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: AUTO
+      field-strategy: NOT_NULL
+      table-underline: true
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+logging:
+  level:
+    root: info
+    boot.mybatis.plus: debug

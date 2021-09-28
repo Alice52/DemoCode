@@ -58,7 +58,7 @@ public class CompFutureController {
     @GetMapping("/exception-v0")
     @Deprecated
     public void testAsyncExceptionV0() {
-        CompletableFuture.runAsync(() -> throwException());
+        CompletableFuture.runAsync(this::throwException);
     }
 
     @SneakyThrows
