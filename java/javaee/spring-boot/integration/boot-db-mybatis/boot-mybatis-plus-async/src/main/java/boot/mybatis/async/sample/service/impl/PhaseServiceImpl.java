@@ -1,5 +1,6 @@
 package boot.mybatis.async.sample.service.impl;
 
+import boot.mybatis.async.sample.component.SpringUtil;
 import boot.mybatis.async.sample.mapper.PhaseMapper;
 import boot.mybatis.async.sample.service.PhaseService;
 import boot.mybatis.common.constants.enums.ActivityPhaseEnum;
@@ -14,6 +15,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -31,6 +35,7 @@ import java.util.concurrent.Future;
  * @create 2021-04-09 10:22 <br>
  * @project integration <br>
  */
+@Slf4j
 @Service
 public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements PhaseService {
 
@@ -45,11 +50,12 @@ public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements
         return Wrappers.<Phase>query().lambda();
     }
 
-    @Async("asyncPoolExecutor")
+    @Async
     @Override
     public void createPhase(PhaseDTO dto) {
 
-        validateDuplicateByCodeOrName(dto);
+        log.info("createPhase Thread-Id: {}", Thread.currentThread().getId());
+        // validateDuplicateByCodeOrName(dto);
 
         Phase phase = new Phase();
         BeanUtil.copyProperties(dto, phase, "status");
@@ -57,7 +63,7 @@ public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements
         baseMapper.insert(phase);
     }
 
-    @Async("asyncPoolExecutor")
+    @Async
     @Override
     public Future<PhaseVO> getPhase(Long id) {
 
@@ -68,12 +74,16 @@ public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements
         return AsyncResult.forValue(phaseVO);
     }
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @Async("asyncPoolExecutor")
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void asyncTask4Transaction(PhaseDTO dto, Boolean exFlag) {
+        log.info("asyncTask4Transaction Thread-Id: {}", Thread.currentThread().getId());
+        SpringUtil.getBean(PhaseService.class).createPhase(dto);
 
-        createPhase(dto);
         if (exFlag) {
             // 没有 SpringAsyncConfiguration 也是可以捕获这个异常的
             // 可以之定义 SpringAsyncConfiguration 去子线程内部的异常
