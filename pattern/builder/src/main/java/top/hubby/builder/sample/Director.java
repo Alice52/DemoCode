@@ -1,6 +1,8 @@
 package top.hubby.builder.sample;
 
 import lombok.extern.slf4j.Slf4j;
+import top.hubby.builder.sample.builder.Builder;
+import top.hubby.builder.sample.product.Bike;
 
 /**
  * @author zack <br>
@@ -15,7 +17,7 @@ public class Director {
         mBuilder = builder;
     }
 
-    public BikeProduct construct() {
+    public Bike construct() {
         mBuilder.buildFrame();
         mBuilder.buildSeat();
         return mBuilder.build();
