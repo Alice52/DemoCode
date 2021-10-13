@@ -11,6 +11,7 @@
         <module>singleton</module>
         <module>common</module>
         <module>builder</module>
+        <module>factory</module>
     </modules>
 
     <packaging>pom</packaging>
