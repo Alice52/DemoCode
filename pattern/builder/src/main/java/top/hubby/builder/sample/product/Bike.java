@@ -1,4 +1,4 @@
-package top.hubby.builder.sample;
+package top.hubby.builder.sample.product;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Data
-public class BikeProduct {
+public class Bike {
     private String frame;
     private String seat;
 }

@@ -2,9 +2,9 @@ package top.hubby.pattern.builder;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import top.hubby.builder.sample.BikeProduct;
+import top.hubby.builder.sample.product.Bike;
 import top.hubby.builder.sample.Director;
-import top.hubby.builder.sample.OfoBuilder;
+import top.hubby.builder.sample.builder.OfoBuilder;
 
 /**
  * @author zack <br>
@@ -18,7 +18,7 @@ public class BuilderTests {
     public void testBuilder() {
         OfoBuilder builder = new OfoBuilder();
         Director director = new Director(builder);
-        BikeProduct bikeProduct = director.construct();
+        Bike bikeProduct = director.construct();
         log.info(bikeProduct.getFrame());
         log.info(bikeProduct.getSeat());
     }

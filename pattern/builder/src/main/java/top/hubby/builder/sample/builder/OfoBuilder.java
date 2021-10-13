@@ -1,4 +1,4 @@
-package top.hubby.builder.sample;
+package top.hubby.builder.sample.builder;
 
 import lombok.extern.slf4j.Slf4j;
 
