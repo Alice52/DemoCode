@@ -1,6 +1,7 @@
 package cn.edu.ntu.javase.generic;
 
 import cn.edu.ntu.javase.common.model.Person;
+import cn.hutool.json.JSONObject;
 
 import java.util.Objects;
 

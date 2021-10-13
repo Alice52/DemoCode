@@ -1,7 +1,6 @@
 package top.hubby.principles.ocp;
 
 import lombok.extern.slf4j.Slf4j;
-import top.hubby.principles.ocp.Computer;
 
 /**
  * @author asd <br>
