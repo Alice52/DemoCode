@@ -21,7 +21,7 @@ public class WeakRefer {
         log.info("o: {}", o);
         log.info("softReference: {}", weakReference.get());
 
-        o = null;
+        o = null; // 不置空的话是不会被回收的
         System.gc();
         // null
         log.info("o: {}", o);
