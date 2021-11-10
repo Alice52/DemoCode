@@ -1,6 +1,7 @@
 package cn.edu.ntu.javase.jvm.reference;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.WeakHashMap;
@@ -39,7 +40,7 @@ public class WeakHashMapUsage {
      *
      * <pre>
      *    1. WeakHashMap 如果 Key 的引用被置空 GC则回收该 K-V
-     *    2. WeakHashMap 如果 Key 的引用被置空 GC 会回收不了
+     *    2. WeakHashMap 如果 Val 的引用被置空 GC 会回收不了
      * </pre>
      */
     public static void testWeakHashMap() {
@@ -59,5 +60,20 @@ public class WeakHashMapUsage {
         key = null;
         System.gc();
         log.info("map: {}", map);
+    }
+
+    @Test
+    public void testWeakHashMapV2() throws InterruptedException {
+        WeakHashMap<String, String> map = new WeakHashMap<>(16);
+        map.put("key", "val");
+
+        // {key=val}
+        log.info("{}", map);
+
+        System.gc();
+        Thread.sleep(5000);
+
+        // {key=val}
+        log.info("{}", map);
     }
 }
