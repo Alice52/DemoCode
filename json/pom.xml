@@ -33,6 +33,11 @@
 
         <!-- tools-->
         <openjdk.jmh.version>1.19</openjdk.jmh.version>
+
+        <!-- log -->
+        <slf4j.api.version>1.7.25</slf4j.api.version>
+        <logback.core.version>1.2.3</logback.core.version>
+        <logback.classic.version>1.2.3</logback.classic.version>
     </properties>
 
 
@@ -92,6 +97,23 @@
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-generator-annprocess</artifactId>
                 <version>${openjdk.jmh.version}</version>
+            </dependency>
+
+            <!-- logger -->
+            <dependency>
+                <artifactId>slf4j-api</artifactId>
+                <groupId>org.slf4j</groupId>
+                <version>${slf4j.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.classic.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
