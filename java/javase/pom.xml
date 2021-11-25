@@ -21,6 +21,7 @@
         <module>javase-enumeration</module>
         <module>javas-jhm</module>
         <module>javase-agent</module>
+        <module>javase-annotation</module>
     </modules>
     <packaging>pom</packaging>
 
