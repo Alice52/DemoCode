@@ -16,6 +16,7 @@
         <module>boot-job-quartz</module>
         <module>boot-job-scheduler</module>
         <module>boot-job-xxl-job</module>
+        <module>boot-job-delay</module>
     </modules>
 
     <dependencies>
