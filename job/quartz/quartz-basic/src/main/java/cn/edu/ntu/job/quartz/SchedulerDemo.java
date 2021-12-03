@@ -52,7 +52,7 @@ public class SchedulerDemo {
                         .withIdentity(
                                 "cron-trigger1",
                                 "cron-group1") // arg1: trigger name  arg2: group name [not same
-                                               // with job group]
+                        // with job group]
                         .withSchedule(CronScheduleBuilder.cronSchedule(CORN_ADD_USER))
                         .build();
 
