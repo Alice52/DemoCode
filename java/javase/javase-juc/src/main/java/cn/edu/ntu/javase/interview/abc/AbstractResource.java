@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.interview.queue;
+package cn.edu.ntu.javase.interview.abc;
 
 /**
  * @author zack <br>
@@ -7,7 +7,7 @@ package cn.edu.ntu.javase.interview.queue;
  */
 public abstract class AbstractResource {
 
-    final int MAX_COUNT = 2;
+    final int MAX_COUNT = 1;
     volatile int number = 0;
 
     public abstract void produce();

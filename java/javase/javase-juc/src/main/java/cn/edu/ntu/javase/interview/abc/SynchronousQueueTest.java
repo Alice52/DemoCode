@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.interview.queue;
+package cn.edu.ntu.javase.interview.abc;
 
 import lombok.extern.slf4j.Slf4j;
 

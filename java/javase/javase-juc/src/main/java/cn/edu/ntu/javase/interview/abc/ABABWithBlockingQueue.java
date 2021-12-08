@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.interview.queue;
+package cn.edu.ntu.javase.interview.abc;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +19,9 @@ public class ABABWithBlockingQueue {
     @SneakyThrows
     public static void main(String[] args) {
 
-        ResourceWithBlockingQueue r = new ResourceWithBlockingQueue(new ArrayBlockingQueue<>(3));
+        ResourceWithBlockingQueue r = new ResourceWithBlockingQueue(new ArrayBlockingQueue<>(1));
 
         new Thread(() -> r.produce(), "AA").start();
-        new Thread(() -> r.produce(), "AA1").start();
-        new Thread(() -> r.produce(), "AA2").start();
         new Thread(() -> r.consume(), "BB").start();
 
         TimeUnit.SECONDS.sleep(5);

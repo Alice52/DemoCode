@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.interview.queue;
+package cn.edu.ntu.javase.interview.abc;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +18,8 @@ public class ABABWithLock {
     @SneakyThrows
     public static void main(String[] args) {
         ResourceWithLock withLock = new ResourceWithLock();
-        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(() -> withLock.produce()).start());
-        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(() -> withLock.consume()).start());
+        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(withLock::produce).start());
+        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(withLock::consume).start());
     }
 }
 
