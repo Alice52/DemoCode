@@ -31,7 +31,7 @@ public class SubThreadExceptionTest {
 
     @Test
     public void testTryCatch() {
-        new Thread(new ChildThread4TryCatch()).start();
+        new Thread(new top.hubby.juc.ChildThread4TryCatch()).start();
         // 如果执行验证逻辑之后还没有停止, 可以手动停止主线程
         while (Thread.activeCount() > 1) {
             Thread.yield();
@@ -40,7 +40,7 @@ public class SubThreadExceptionTest {
 
     @Test
     public void testUncaughtExceptionHandler() {
-        new Thread(new ChildThread4UncaughtExceptionHandler()).start();
+        new Thread(new top.hubby.juc.ChildThread4UncaughtExceptionHandler()).start();
         while (Thread.activeCount() > 1) {
             Thread.yield();
         }
@@ -48,7 +48,7 @@ public class SubThreadExceptionTest {
 
     @Test
     public void testUncaughtExceptionHandlerDefault() {
-        new Thread(new ChildThread4UncaughtExceptionHandlerDefault()).start();
+        new Thread(new top.hubby.juc.ChildThread4UncaughtExceptionHandlerDefault()).start();
         while (Thread.activeCount() > 1) {
             Thread.yield();
         }
@@ -58,7 +58,7 @@ public class SubThreadExceptionTest {
     public void testFuture() {
 
         ExecutorService executorService = Executors.newFixedThreadPool(8);
-        Future future = executorService.submit(new ChildThread4Future());
+        Future future = executorService.submit(new top.hubby.juc.ChildThread4Future());
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {

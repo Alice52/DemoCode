@@ -1,9 +1,9 @@
 package cn.edu.ntu.javase.interview.tl;
 
-import java.util.concurrent.TimeUnit;
-
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author zack <br>
