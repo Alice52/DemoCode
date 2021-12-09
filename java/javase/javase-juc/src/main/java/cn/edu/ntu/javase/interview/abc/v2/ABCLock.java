@@ -30,11 +30,26 @@ public class ABCLock {
     }
 
     private void printABC(int targetNum) {
-        for (int i = 0; i < 10; ) {
+        int i = 0;
+        while (i < 10) {
             lock.lock();
             if (num % 3 == targetNum) {
                 num++;
                 i++;
+                log.info(Thread.currentThread().getName());
+            }
+            lock.unlock();
+        }
+    }
+
+    private void printA(int targetNum) {
+        while (true) {
+            lock.lock();
+            if (num >= 10) {
+                break;
+            }
+            if (num % 3 == targetNum) {
+                num++;
                 log.info(Thread.currentThread().getName());
             }
             lock.unlock();

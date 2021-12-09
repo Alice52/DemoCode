@@ -39,6 +39,10 @@ public class ABCABCWithLock {
                 .start();
         new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> resource.print15()), "CCC")
                 .start();
+
+        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(resource::print5, "AAA" + i).start());
+        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(resource::print10, "BBB" + i).start());
+        IntStream.rangeClosed(1, 5).forEach(i -> new Thread(resource::print15, "CCC" + i).start());
     }
 }
 
