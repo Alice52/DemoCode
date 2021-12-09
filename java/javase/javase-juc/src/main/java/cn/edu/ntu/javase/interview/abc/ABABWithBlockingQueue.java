@@ -22,7 +22,7 @@ public class ABABWithBlockingQueue {
         ResourceWithBlockingQueue r = new ResourceWithBlockingQueue(new ArrayBlockingQueue<>(1));
 
         new Thread(() -> r.produce(), "AA").start();
-        new Thread(() -> r.consume(), "BB").start();
+        new Thread(r::consume, "BB").start();
 
         TimeUnit.SECONDS.sleep(5);
         r.stop();
