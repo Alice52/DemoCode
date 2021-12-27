@@ -2,7 +2,7 @@ package top.hubby.practice.metrics.test.v2;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import top.hubby.practice.metrics.controller.MetricsCollector;
+import top.hubby.practice.metrics.controller.v1.MetricsCollector;
 import top.hubby.practice.metrics.model.RequestInfo;
 import top.hubby.practice.metrics.service.v2.ConsoleReporter;
 import top.hubby.practice.metrics.service.v2.EmailReporter;

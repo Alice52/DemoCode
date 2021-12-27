@@ -1,9 +1,10 @@
-package top.hubby.practice.metrics.controller;
+package top.hubby.practice.metrics.controller.v1;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import top.hubby.practice.metrics.model.RequestInfo;
 import top.hubby.practice.metrics.store.MetricsStorage;
+import top.hubby.practice.metrics.store.impl.RedisMetricsStorage;
 
 /**
  * @author asd <br>
@@ -13,6 +14,10 @@ import top.hubby.practice.metrics.store.MetricsStorage;
 @Slf4j
 public class MetricsCollector {
     private MetricsStorage metricsStorage;
+
+    public MetricsCollector() {
+        this(new RedisMetricsStorage());
+    }
 
     public MetricsCollector(MetricsStorage metricsStorage) {
         this.metricsStorage = metricsStorage;

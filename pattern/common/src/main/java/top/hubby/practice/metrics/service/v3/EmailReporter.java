@@ -1,8 +1,10 @@
 package top.hubby.practice.metrics.service.v3;
 
 import lombok.extern.slf4j.Slf4j;
+import top.hubby.practice.metrics.service.v2.view.EmailViewer;
 import top.hubby.practice.metrics.service.v2.view.StatViewer;
 import top.hubby.practice.metrics.store.MetricsStorage;
+import top.hubby.practice.metrics.store.impl.RedisMetricsStorage;
 import top.hubby.practice.metrics.support.v2.Aggregator;
 
 import java.util.Calendar;
@@ -23,6 +25,10 @@ public class EmailReporter extends ScheduledReporter {
     private Aggregator aggregator;
     private StatViewer viewer;
     private ScheduledExecutorService executor;
+
+    public EmailReporter() {
+        this(new RedisMetricsStorage(), new Aggregator(), new EmailViewer());
+    }
 
     public EmailReporter(MetricsStorage metricsStorage, Aggregator aggregator, StatViewer viewer) {
         super(metricsStorage, aggregator, viewer);

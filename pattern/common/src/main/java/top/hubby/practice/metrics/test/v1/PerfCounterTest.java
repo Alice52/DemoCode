@@ -1,7 +1,7 @@
 package top.hubby.practice.metrics.test.v1;
 
 import lombok.extern.slf4j.Slf4j;
-import top.hubby.practice.metrics.controller.MetricsCollector;
+import top.hubby.practice.metrics.controller.v1.MetricsCollector;
 import top.hubby.practice.metrics.model.RequestInfo;
 import top.hubby.practice.metrics.service.v1.ConsoleReporter;
 import top.hubby.practice.metrics.service.v1.EmailReporter;
