@@ -21,7 +21,8 @@ public class BaseEntity<T extends Model> extends Model implements Serializable {
     protected static final long serialVersionUID = 1L;
 
     @TableField(select = false)
-    @TableLogic private Boolean isDeleted;
+    @TableLogic
+    private Boolean isDeleted;
 
     /**
      * FieldFill.INSERT will work in create:

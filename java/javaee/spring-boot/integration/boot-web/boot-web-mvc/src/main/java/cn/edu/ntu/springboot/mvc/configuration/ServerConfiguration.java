@@ -42,7 +42,7 @@ public class ServerConfiguration {
 
     @Bean
     @Order(2)
-    public FilterRegistrationBean onceFilter(OnceFilter onceFilter) {
+    public FilterRegistrationBean myOnceFilter(OnceFilter onceFilter) {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(onceFilter);
         registrationBean.setUrlPatterns(Arrays.asList("/*"));
