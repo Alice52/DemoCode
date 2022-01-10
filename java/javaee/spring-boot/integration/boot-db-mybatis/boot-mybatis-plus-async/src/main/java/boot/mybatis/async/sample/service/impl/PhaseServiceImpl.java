@@ -40,6 +40,7 @@ import java.util.concurrent.Future;
 public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements PhaseService {
 
     @Resource private AsyncTaskExecutor asyncTaskExecutor;
+    @Autowired private ApplicationContext applicationContext;
 
     private static LambdaQueryWrapper<Phase> buildOneQueryWrapper() {
         return buildQueryWrapper();
@@ -73,9 +74,6 @@ public class PhaseServiceImpl extends ServiceImpl<PhaseMapper, Phase> implements
 
         return AsyncResult.forValue(phaseVO);
     }
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Async("asyncPoolExecutor")
     @Transactional(rollbackFor = Exception.class)

@@ -6,11 +6,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * @author asd <br/>
- * @create 2021-09-28 2:21 PM <br/>
- * @project boot-security-shiro <br/>
+ * @author asd <br>
+ * @create 2021-09-28 2:21 PM <br>
+ * @project boot-security-shiro <br>
  */
-public interface IBaseService <T extends BaseEntity> extends IService<T> {
+public interface IBaseService<T extends BaseEntity> extends IService<T> {
 
     /**
      * build common lambda query wrapper.

@@ -41,6 +41,6 @@ public class MoreImplAutowireTestController {
         userService.helloWorld();
         LOG.info("aaa");
 
-        userServices.forEach(x -> x.helloWorld());
+        userServices.forEach(IUserService::helloWorld);
     }
 }

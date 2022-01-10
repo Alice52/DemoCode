@@ -17,6 +17,7 @@
         <module>boot-web-limit</module>
         <module>boot-web-flux</module>
         <module>boot-web-container</module>
+        <module>boot-web-mvc</module>
     </modules>
 
     <dependencies>
