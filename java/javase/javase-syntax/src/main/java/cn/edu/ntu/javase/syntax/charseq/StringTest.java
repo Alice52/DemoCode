@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.syntax;
+package cn.edu.ntu.javase.syntax.charseq;
 
 import cn.hutool.core.lang.Assert;
 import lombok.extern.slf4j.Slf4j;

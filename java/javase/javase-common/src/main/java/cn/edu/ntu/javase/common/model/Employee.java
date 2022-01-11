@@ -1,10 +1,12 @@
 package cn.edu.ntu.javase.common.model;
 
+import java.io.Serializable;
+
 /**
  * @author zack <br>
  * @create 2020-04-04 15:30 <br>
  */
-public class Employee {
+public class Employee implements Serializable {
     private String name;
     private int age;
     private double salary;
