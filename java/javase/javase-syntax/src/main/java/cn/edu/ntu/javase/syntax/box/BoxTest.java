@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.syntax;
+package cn.edu.ntu.javase.syntax.box;
 
 import java.util.HashMap;
 import java.util.Map;

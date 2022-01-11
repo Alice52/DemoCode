@@ -1,10 +1,12 @@
 package cn.edu.ntu.javase.common.model;
 
+import java.io.Serializable;
+
 /**
  * @author zack <br>
  * @create 2020-04-04 15:29 <br>
  */
-public class Address {
+public class Address  implements Serializable {
     private String city;
     private String province;
 
