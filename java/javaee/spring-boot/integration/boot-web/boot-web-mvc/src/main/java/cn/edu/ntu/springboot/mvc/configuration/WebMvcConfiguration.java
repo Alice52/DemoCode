@@ -32,8 +32,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns(
-                        "/", "/index.html", "/user/login", "/static/**", "/webjars/**");
+                .excludePathPatterns("/", "/cors.html", "/user/login", "/static/**", "/webjars/**");
     }
 
     @Bean

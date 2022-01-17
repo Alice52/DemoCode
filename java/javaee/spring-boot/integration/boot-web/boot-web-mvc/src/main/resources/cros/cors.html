@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS跨域请求</title>
+    <!--导入Jquery-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+<button id="btn">跨域从服务端获取内容</button>
+<div id="content"></div>
+
+<script>
+    // 非简单请求:
+    $.ajax({
+        type: "get",
+        url: "http://localhost:8080/cors/test",
+        headers: {secret:"kkjtjnbgjlfrfgv", token: "abc123"}
+        // headers: {secret:"kkjtjnbgjlfrfgv", xxx: "abc123"}
+    });
+
+    // 简单请求:
+    $("#btn").click(function () {
+        $.get("http://localhost:8080/cors/test", function (result) {
+            $("#content").append(result).append("<br/>");
+        });
+
+        // 同域请求
+        $.get("http://localhost:63342");
+        $.post("http://localhost:63342");
+    });
+
+
+
+
+</script>
+</body>
+</html>
