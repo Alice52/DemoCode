@@ -56,7 +56,7 @@ public class ServerConfiguration {
         return registrationBean;
     }
 
-    @Bean
+    // @Bean
     public WebServerFactoryCustomizer embeddedServletContainerCustomizer() {
         return (factory) -> {
             ConfigurableWebServerFactory configurableWebServerFactory =
