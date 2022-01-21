@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.java8.lambda;
+package cn.edu.ntu.javase.java8.function;
 
 import org.junit.Test;
 
