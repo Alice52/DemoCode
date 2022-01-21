@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.java8.reference;
+package cn.edu.ntu.javase.java8.function;
 
 import cn.edu.ntu.javase.common.model.Employee;
 import cn.edu.ntu.javase.java8.function.CreateEmployee;

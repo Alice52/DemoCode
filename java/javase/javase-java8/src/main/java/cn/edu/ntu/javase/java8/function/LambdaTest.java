@@ -1,4 +1,4 @@
-package cn.edu.ntu.javase.java8.lambda;
+package cn.edu.ntu.javase.java8.function;
 
 import cn.edu.ntu.javase.common.model.Employee;
 import lombok.extern.slf4j.Slf4j;
