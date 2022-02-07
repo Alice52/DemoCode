@@ -1,6 +1,7 @@
 package cn.edu.ntu.javase.syntax.instance;
 
 import cn.edu.ntu.javase.common.model.Person;
+import cn.edu.ntu.javase.common.model.Student;
 import cn.hutool.core.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -26,7 +27,7 @@ import java.util.List;
  *
  * @author zack <br>
  * @create 2021-06-01 14:07 <br>
- * @project javase <br>
+ * @project javase-syntax <br>
  */
 @Slf4j
 public class InstanceTest {
@@ -34,11 +35,13 @@ public class InstanceTest {
     @Test
     public void testInstanceOf() {
         assert new Person() instanceof Person;
+        assert new Student() instanceof Person;
     }
 
     @Test
     public void testIsAssignableFrom() {
         assert Person.class.isAssignableFrom(Person.class);
+        assert Person.class.isAssignableFrom(Student.class);
     }
 
     /************************************************

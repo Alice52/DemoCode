@@ -42,6 +42,7 @@ public class SupportTests {
 
         String uuidStr = "1-2-3-4-5";
         String personCatUuidStr = "1-2-3-4-5_YourBatman";
+        // String personCatUuidStr = "1-2-3-4-5_YourBatman";
 
         PropertyEditor customEditor = propertyEditorRegistry.findCustomEditor(UUID.class, null);
         // 抛异常：java.lang.NumberFormatException: For input string: "5_YourBatman"

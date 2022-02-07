@@ -28,7 +28,7 @@ public class PropertyEditorTests {
         value = (Boolean) editor.getValue();
     }
 
-    /** @see StringToBooleanConverter */
+    /** @see org.springframework.core.convert.support.StringToBooleanConverter */
     @Test
     public void testCustomBooleanEditor() {
         PropertyEditor editor = new CustomBooleanEditor(true);
