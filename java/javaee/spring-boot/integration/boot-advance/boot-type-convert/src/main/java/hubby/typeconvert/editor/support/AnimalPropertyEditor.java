@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.beans.PropertyEditorSupport;
 
 /**
+ * this is for get-custom-editor between parent and child.
+ *
  * @author asd <br>
  * @create 2022-01-19 4:37 PM <br>
  * @project boot-typeconvert <br>

@@ -1,5 +1,6 @@
 package cn.edu.ntu.javase.java8.function;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Function;
@@ -27,5 +28,11 @@ public class CurryingAndPartials {
         UnaryOperator<String> hi = sum.apply("Hi ");
         log.info(hi.apply("Ho"));
         log.info(hi.apply("Hey"));
+
+
+
+        String str = "水浒传|三国演义|西游记|红楼梦";
+        String[] split = StrUtil.split().split("|");
+log.info("{}", split);
     }
 }
