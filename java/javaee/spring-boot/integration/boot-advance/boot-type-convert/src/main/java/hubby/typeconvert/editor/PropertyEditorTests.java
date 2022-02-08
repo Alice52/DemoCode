@@ -1,6 +1,5 @@
 package hubby.typeconvert.editor;
 
-import com.sun.beans.editors.BooleanEditor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.propertyeditors.CharsetEditor;
@@ -8,6 +7,7 @@ import org.springframework.beans.propertyeditors.CustomBooleanEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 
 import java.beans.PropertyEditor;
+import java.beans.PropertyEditorManager;
 import java.text.SimpleDateFormat;
 
 /**
@@ -20,7 +20,8 @@ public class PropertyEditorTests {
 
     @Test
     public void testBooleanEditor() {
-        BooleanEditor editor = new BooleanEditor();
+        PropertyEditor editor = PropertyEditorManager.findEditor(Boolean.class);
+        // BooleanEditor editor = new BooleanEditor();
         editor.setAsText(null);
         Boolean value = (Boolean) editor.getValue();
 
