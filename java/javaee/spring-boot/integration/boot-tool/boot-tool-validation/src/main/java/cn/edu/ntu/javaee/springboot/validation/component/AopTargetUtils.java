@@ -5,6 +5,7 @@ import org.springframework.aop.framework.AopProxy;
 import org.springframework.aop.support.AopUtils;
 
 import java.lang.reflect.Field;
+import java.util.stream.Stream;
 
 /**
  * @author zack <br>
@@ -30,6 +31,11 @@ public class AopTargetUtils {
             proxy = getCglibProxyTargetObject(proxy);
         }
         return getTarget(proxy);
+    }
+
+    public static void main(String[] args) {
+
+        Stream<Object> objectStream = Stream.of(null, null);
     }
 
     private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
