@@ -34,6 +34,7 @@ public class InstanceTest {
 
     @Test
     public void testInstanceOf() {
+        assert null instanceof Person == false;
         assert new Person() instanceof Person;
         assert new Student() instanceof Person;
     }
