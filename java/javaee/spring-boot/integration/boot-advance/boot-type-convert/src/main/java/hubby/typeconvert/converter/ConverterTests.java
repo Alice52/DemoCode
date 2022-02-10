@@ -14,7 +14,6 @@ import org.springframework.core.convert.support.DefaultConversionService;
  */
 @Slf4j
 public class ConverterTests {
-
     @Test
     public void testObjectToObjectConverter() {
 
@@ -28,5 +27,10 @@ public class ConverterTests {
 
         Customer c2 = conversionService.convert(customer, Customer.class);
         assert c2 == customer;
+    }
+
+    @Test
+    public void name() {
+        String a = null + "" + null;
     }
 }
