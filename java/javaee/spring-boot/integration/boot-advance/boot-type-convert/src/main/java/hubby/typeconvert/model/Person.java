@@ -19,17 +19,17 @@ public class Person {
     private String name;
     private Cat cat;
 
+    public Person(Customer customer) {
+        this.id = customer.getId();
+        this.name = customer.getName();
+    }
+
     /** 方法名称可以是：valueOf、of、from */
     public static Person valueOf(Customer customer) {
         Person person = new Person();
         person.setId(customer.getId());
         person.setName("YourBatman-".concat(customer.getName()));
         return person;
-    }
-
-    public Person(Customer customer) {
-        this.id = customer.getId();
-        this.name = customer.getName();
     }
 
     /** 根据 ID 定位一个Person实例 */
