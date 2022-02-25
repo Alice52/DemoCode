@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * @author asd <br>
@@ -19,9 +23,29 @@ public class Person {
     private String name;
     private Cat cat;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate newBirthday;
+
+    public Person(LocalDate newBirthday) {
+        this.newBirthday = newBirthday;
+    }
+
+    public Person(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public Person(Customer customer) {
         this.id = customer.getId();
         this.name = customer.getName();
+    }
+
+    public Person(Long id, String name, Cat cat) {
+        this.id = id;
+        this.name = name;
+        this.cat = cat;
     }
 
     /** 方法名称可以是：valueOf、of、from */
