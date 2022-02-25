@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Parser;
+import org.springframework.format.datetime.standard.Jsr310DateTimeFormatAnnotationFormatterFactory;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.util.NumberUtils;
 
@@ -18,6 +19,13 @@ import java.util.Locale;
  */
 @Slf4j
 public class ParserTest {
+
+    @Test
+    public void test5() {
+        FormattingConversionService formattingConversionService = new FormattingConversionService();
+        // string --> person: LongParser[只能将 string 转成 Long] 处理
+        formattingConversionService.addFormatterForFieldAnnotation(new Jsr310DateTimeFormatAnnotationFormatterFactory());
+    }
 
     @Test
     public void test4() {
