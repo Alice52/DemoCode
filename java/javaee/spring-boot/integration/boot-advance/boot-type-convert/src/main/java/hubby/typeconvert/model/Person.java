@@ -1,6 +1,7 @@
 package hubby.typeconvert.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +17,16 @@ import java.util.Date;
  */
 @Slf4j
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Person {
     private Long id;
     private String name;
     private Cat cat;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date secBirthday;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;

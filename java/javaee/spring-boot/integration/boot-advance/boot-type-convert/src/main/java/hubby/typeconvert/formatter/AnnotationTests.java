@@ -31,7 +31,8 @@ public class AnnotationTests {
 
     @Test
     public void testLocalDate() throws NoSuchFieldException, ParseException {
-        AnnotationFormatterFactory annotationFormatterFactory = new Jsr310DateTimeFormatAnnotationFormatterFactory();
+        AnnotationFormatterFactory annotationFormatterFactory =
+                new Jsr310DateTimeFormatAnnotationFormatterFactory();
 
         // 找到该field
         Field field = Person.class.getDeclaredField("newBirthday");
@@ -51,7 +52,7 @@ public class AnnotationTests {
         father = new Person((LocalDate) output);
         log.info("{}", father);
     }
-    
+
     @Test
     public void testDateAnno() throws Exception {
         AnnotationFormatterFactory annotationFormatterFactory =
@@ -80,16 +81,19 @@ public class AnnotationTests {
                     @Override
                     public Parser<?> getParser(DateTimeFormat annotation, Class<?> fieldType) {
                         if (fieldType.isAssignableFrom(Calendar.class)) {
-                            return (Parser<Calendar>) (text, locale) -> {
-                                // 先翻译为Date
-                                Formatter<Date> formatter = getFormatter(annotation, fieldType);
-                                Date date = formatter.parse(text, locale);
+                            return (Parser<Calendar>)
+                                    (text, locale) -> {
+                                        // 先翻译为Date
+                                        Formatter<Date> formatter =
+                                                getFormatter(annotation, fieldType);
+                                        Date date = formatter.parse(text, locale);
 
-                                // 再翻译为Calendar
-                                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-                                calendar.setTime(date);
-                                return calendar;
-                            };
+                                        // 再翻译为Calendar
+                                        Calendar calendar =
+                                                Calendar.getInstance(TimeZone.getDefault());
+                                        calendar.setTime(date);
+                                        return calendar;
+                                    };
                         }
                         return super.getParser(annotation, fieldType);
                     }

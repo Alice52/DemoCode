@@ -23,8 +23,8 @@ public class ParserTest {
     @Test
     public void test5() {
         FormattingConversionService formattingConversionService = new FormattingConversionService();
-        // string --> person: LongParser[只能将 string 转成 Long] 处理
-        formattingConversionService.addFormatterForFieldAnnotation(new Jsr310DateTimeFormatAnnotationFormatterFactory());
+        formattingConversionService.addFormatterForFieldAnnotation(
+                new Jsr310DateTimeFormatAnnotationFormatterFactory());
     }
 
     @Test
