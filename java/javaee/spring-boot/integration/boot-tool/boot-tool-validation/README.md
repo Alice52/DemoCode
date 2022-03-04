@@ -120,3 +120,4 @@
 2. [BeanCurrentlyInCreationException](https://blog.csdn.net/f641385712/article/details/92797058)
 3. [bug：exposeProxy](https://blog.csdn.net/f641385712/article/details/93475774)
 4. issue: https://github.com/Alice52/project/issues/24
+5. issue: https://github.com/Alice52/java-ocean/issues/242
