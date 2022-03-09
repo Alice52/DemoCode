@@ -5,9 +5,7 @@ import org.testng.annotations.Test;
 import top.hubby.jdk.model.Person;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 /**
@@ -17,17 +15,10 @@ import java.util.Set;
  */
 @Slf4j
 public class ValidateParamTests {
-    private Validator obtainValidator() {
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        return validatorFactory.getValidator();
-    }
-
-
-
 
     @Test
     public void test1() {
-        Validator validator = obtainValidator();
+        Validator validator = ValidatorUtil.obtainValidator();
 
         Person person = new Person();
         person.setAge(-1);
