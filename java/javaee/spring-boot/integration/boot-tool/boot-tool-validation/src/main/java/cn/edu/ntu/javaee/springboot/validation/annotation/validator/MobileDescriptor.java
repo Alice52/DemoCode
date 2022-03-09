@@ -1,7 +1,7 @@
 package cn.edu.ntu.javaee.springboot.validation.annotation.validator;
 
 import cn.edu.ntu.javaee.springboot.validation.annotation.Mobile;
-import com.github.xiaoymin.knife4j.core.util.StrUtil;
+import cn.hutool.core.util.StrUtil;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

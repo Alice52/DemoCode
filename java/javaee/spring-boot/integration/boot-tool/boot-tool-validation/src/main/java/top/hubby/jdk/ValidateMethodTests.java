@@ -5,13 +5,14 @@ import org.testng.annotations.Test;
 import top.hubby.jdk.model.Person;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
+import javax.validation.Valid;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.executable.ExecutableValidator;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,7 +23,68 @@ import java.util.Set;
 @Slf4j
 public class ValidateMethodTests {
 
+    @Test
+    public void testMethodV3() throws NoSuchMethodException {
+
+        PersonService service = new PersonService();
+        ArrayList<String> list = new ArrayList<>();
+        list.add("zac");
+        service.getOneV3(list);
+    }
+
+    @Test
+    public void testMethodV2() throws NoSuchMethodException {
+
+        PersonService service = new PersonService();
+        service.getOneV2(-1, null);
+    }
+
+    @Test
+    public void testMethodV1() {
+
+        PersonService service = new PersonService();
+        service.getOneV1(-1, null);
+    }
+
+    @Test
+    public void test1() {
+        Validator validator = ValidatorUtil.obtainValidator();
+
+        Person person = new Person();
+        person.setAge(-1);
+        Set<ConstraintViolation<Person>> result = validator.validate(person);
+
+        // 输出校验结果
+        result.stream()
+                .map(v -> v.getPropertyPath() + " " + v.getMessage() + ": " + v.getInvalidValue())
+                .forEach(System.out::println);
+    }
+
     public class PersonService {
+
+        public Person getOneV3(List<@Valid @Email String> emails) throws NoSuchMethodException {
+            // 校验逻辑
+            Method currMethod = this.getClass().getMethod("getOneV3", List.class);
+            Set<ConstraintViolation<PersonService>> validResult =
+                    ValidatorUtil.obtainExecutableValidator()
+                            .validateParameters(this, currMethod, new Object[] {emails});
+            if (!validResult.isEmpty()) {
+                // ... 输出错误详情validResult
+                validResult.stream()
+                        .map(
+                                v ->
+                                        v.getPropertyPath()
+                                                + " "
+                                                + v.getMessage()
+                                                + ": "
+                                                + v.getInvalidValue())
+                        .forEach(System.out::println);
+                throw new IllegalArgumentException("参数错误");
+            }
+
+            return null;
+        }
+
         /**
          *
          *
@@ -34,12 +96,12 @@ public class ValidateMethodTests {
          * @param name
          * @return
          */
-        public Person getOneV2(@NotNull @Min(1) Integer id, String name)
+        public Person getOneV2(@NotNull @Min(1) Integer id, @NotNull String name)
                 throws NoSuchMethodException {
             // 校验逻辑
-            Method currMethod = this.getClass().getMethod("getOne", Integer.class, String.class);
+            Method currMethod = this.getClass().getMethod("getOneV2", Integer.class, String.class);
             Set<ConstraintViolation<PersonService>> validResult =
-                    obtainExecutableValidator()
+                    ValidatorUtil.obtainExecutableValidator()
                             .validateParameters(this, currMethod, new Object[] {id, name});
             if (!validResult.isEmpty()) {
                 // ... 输出错误详情validResult
@@ -81,28 +143,5 @@ public class ValidateMethodTests {
 
             return null;
         }
-    }
-
-    private Validator obtainValidator() {
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        return validatorFactory.getValidator();
-    }
-    // 用于方法校验的校验器
-    private ExecutableValidator obtainExecutableValidator() {
-        return obtainValidator().forExecutables();
-    }
-
-    @Test
-    public void test1() {
-        Validator validator = obtainValidator();
-
-        Person person = new Person();
-        person.setAge(-1);
-        Set<ConstraintViolation<Person>> result = validator.validate(person);
-
-        // 输出校验结果
-        result.stream()
-                .map(v -> v.getPropertyPath() + " " + v.getMessage() + ": " + v.getInvalidValue())
-                .forEach(System.out::println);
     }
 }
