@@ -1,6 +1,7 @@
 package cn.edu.ntu.javase.jvm;
 
 import cn.edu.ntu.javase.common.model.Person;
+import cn.edu.ntu.javase.jvm.model.PaddedAtomicLong;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.openjdk.jol.info.ClassLayout;
@@ -46,7 +47,7 @@ public class MemoryStruct {
         // Integer a = new Integer(1);
         boolean b;
         // 对象则只占4个字节, 是指向对的一个指针
-        String s = "hello46541";
+        // String s = "hello46541";
     }
 
     @Test
@@ -54,6 +55,20 @@ public class MemoryStruct {
         T o = new T();
         log.info(ClassLayout.parseInstance(o).toPrintable());
         o.hashCode();
+        log.info(ClassLayout.parseInstance(o).toPrintable());
+    }
+
+    @Test
+    public void testObject() {
+        Object o = new Object();
+        log.info(ClassLayout.parseInstance(o).toPrintable());
+        o.hashCode();
+        log.info(ClassLayout.parseInstance(o).toPrintable());
+    }
+
+    @Test
+    public void testPaddedAtomicLong() {
+        PaddedAtomicLong o = new PaddedAtomicLong();
         log.info(ClassLayout.parseInstance(o).toPrintable());
     }
 }
