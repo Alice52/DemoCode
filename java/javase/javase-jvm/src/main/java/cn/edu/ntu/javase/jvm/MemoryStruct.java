@@ -9,6 +9,7 @@ import org.openjdk.jol.info.ClassLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
 
 /**
@@ -63,6 +64,12 @@ public class MemoryStruct {
         Object o = new Object();
         log.info(ClassLayout.parseInstance(o).toPrintable());
         o.hashCode();
+        log.info(ClassLayout.parseInstance(o).toPrintable());
+    }
+
+    @Test
+    public void testAtomicLong() {
+        AtomicLong o = new AtomicLong();
         log.info(ClassLayout.parseInstance(o).toPrintable());
     }
 
