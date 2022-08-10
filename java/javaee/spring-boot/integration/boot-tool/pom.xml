@@ -13,7 +13,6 @@
     <artifactId>boot-tool</artifactId>
 
     <modules>
-        <module>boot-tool-encrypt</module>
         <module>boot-tool-validation</module>
         <module>boot-tool-mapstruct</module>
         <module>boot-tool-email</module>
