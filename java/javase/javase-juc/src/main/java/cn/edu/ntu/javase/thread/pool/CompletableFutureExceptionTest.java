@@ -67,23 +67,6 @@ public class CompletableFutureExceptionTest {
 
     @SneakyThrows
     @Test
-    public void checkAsync() {
-
-        CompletableFuture<RuntimeException> supplyAsync =
-                CompletableFuture.supplyAsync(
-                        () -> {
-                            log.info("thread 2 supply async start ... ");
-                            return new RuntimeException("thread-2");
-                        });
-        Optional.ofNullable(supplyAsync.get())
-                .ifPresent(
-                        x -> {
-                            throw x;
-                        });
-    }
-
-    @SneakyThrows
-    @Test
     public void checkAsyncAllof() {
 
         CompletableFuture<Void> runAsync =
@@ -119,5 +102,37 @@ public class CompletableFutureExceptionTest {
                         });
 
         runAsync.get();
+    }
+
+    @SneakyThrows
+    @Test
+    @Deprecated
+    public void checkAsync() {
+
+        CompletableFuture<RuntimeException> supplyAsync =
+                CompletableFuture.supplyAsync(
+                        () -> {
+                            log.info("thread 2 supply async start ... ");
+                            return new RuntimeException("thread-2");
+                        });
+        Optional.ofNullable(supplyAsync.get())
+                .ifPresent(
+                        x -> {
+                            throw x;
+                        });
+    }
+
+    @SneakyThrows
+    @Test
+    public void checkAsyncJoin() {
+
+        CompletableFuture<Void> supplyAsync =
+                CompletableFuture.runAsync(
+                        () -> {
+                            log.info("thread 2 supply async start ... ");
+                            throw new RuntimeException("thread-2");
+                        });
+
+        CompletableFuture.allOf(supplyAsync).join();
     }
 }
