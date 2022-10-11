@@ -52,6 +52,7 @@ def rename_cell_folder(folder_name):
             _file = all_file_name[i]
             if '.flv' in _file:
                 old_file_path = os.path.join(folder_name, _file)
+                decode_bili(old_file_path)
                 suffix = _file[_file.rfind('_'):]  # _10.flv
                 if len(suffix) <= 1:
                     new_file_path = os.path.join(folder_name, str(prefix + file_name + '.flv'))
@@ -61,6 +62,7 @@ def rename_cell_folder(folder_name):
                 os.rename(old_file_path, new_file_path.zfill(3))
             if '.mp4' in _file:
                 old_file_path = os.path.join(folder_name, _file)
+                decode_bili(old_file_path)
                 suffix = _file[_file.rfind('_'):]  # _10.flv
                 if len(suffix) <= 1:
                     new_file_path = os.path.join(folder_name, str(prefix + file_name + '.flv'))
@@ -90,6 +92,18 @@ def get_cell_folder(dir_name, cell_folders):
         get_cell_folder(os.path.join(dir_name, _dir), cell_folders)
     return cell_folders
 
+def decode_bili(name):
+    """
+    just decode video for v2.14.79.0
+    :param name: full video name
+    :return:
+    """
+    with open(name, mode='rb+') as f:
+        old = f.readlines()
+        while old[0].startswith(b'\xff'):
+            old[0] = old[0][1:]
+        f.seek(0) # rewind
+        f.writelines(old)
 
 if __name__ == "__main__":
     try:
