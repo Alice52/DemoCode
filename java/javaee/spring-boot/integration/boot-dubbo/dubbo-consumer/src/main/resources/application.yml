@@ -1,0 +1,8 @@
+server:
+  port: 9091
+
+spring:
+  dubbo:
+    application:
+      name: dubbo-consumer
+      registry: zookeeper://1.15.129.214:2181
