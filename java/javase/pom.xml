@@ -22,6 +22,7 @@
         <module>javas-jhm</module>
         <module>javase-agent</module>
         <module>javase-annotation</module>
+        <module>javase-annotation-processor</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -31,6 +32,7 @@
         <java.version>8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <compiler.level>1.8</compiler.level>
 
         <jol-core.version>0.9</jol-core.version>
         <junit.version>4.12</junit.version>
