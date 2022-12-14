@@ -25,13 +25,13 @@ public class VolatileAtomicV0 {
 
         for (int i = 0; i < 50; i++) {
             new Thread(
-                            () ->
-                                    IntStream.rangeClosed(1, 1000)
-                                            .forEach(
-                                                    x -> {
-                                                        number++;
-                                                        atomicInteger.addAndGet(1);
-                                                    }))
+                    () ->
+                            IntStream.rangeClosed(1, 1000)
+                                    .forEach(
+                                            x -> {
+                                                number++;
+                                                atomicInteger.addAndGet(1);
+                                            }))
                     .start();
         }
 

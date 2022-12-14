@@ -55,9 +55,9 @@ public class WebAgent {
                 ctClass.getDeclaredMethod(
                         "service",
                         pool.get(
-                                new String[] {
-                                    "javax.servlet.http.HttpServletRequest",
-                                    "javax.servlet.http.HttpServletResponse"
+                                new String[]{
+                                        "javax.servlet.http.HttpServletRequest",
+                                        "javax.servlet.http.HttpServletResponse"
                                 }));
 
         CtMethod copyMethod = CtNewMethod.copy(method, ctClass, new ClassMap());
@@ -126,7 +126,8 @@ public class WebAgent {
         private String header;
         private long userTime;
 
-        public WebTraceInfo() {}
+        public WebTraceInfo() {
+        }
 
         public WebTraceInfo(
                 long begin,

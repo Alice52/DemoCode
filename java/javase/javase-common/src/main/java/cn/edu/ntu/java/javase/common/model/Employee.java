@@ -19,7 +19,8 @@ public class Employee implements Serializable {
         this.address = address;
     }
 
-    public Employee() {}
+    public Employee() {
+    }
 
     public Employee(String name, int age, double salary) {
 

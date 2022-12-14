@@ -43,14 +43,6 @@ public class MemoryStruct {
         log.info(ClassLayout.parseInstance(list).toPrintable());
     }
 
-    private static class T {
-        // same as int a;
-        // Integer a = new Integer(1);
-        boolean b;
-        // 对象则只占4个字节, 是指向对的一个指针
-        // String s = "hello46541";
-    }
-
     @Test
     public void testObjectStruct() {
         T o = new T();
@@ -77,5 +69,13 @@ public class MemoryStruct {
     public void testPaddedAtomicLong() {
         PaddedAtomicLong o = new PaddedAtomicLong();
         log.info(ClassLayout.parseInstance(o).toPrintable());
+    }
+
+    private static class T {
+        // same as int a;
+        // Integer a = new Integer(1);
+        boolean b;
+        // 对象则只占4个字节, 是指向对的一个指针
+        // String s = "hello46541";
     }
 }

@@ -35,7 +35,7 @@ public class SpiUsageTest {
                 (Handler)
                         Proxy.newProxyInstance(
                                 DispatcherInvocationHandler.class.getClassLoader(),
-                                new Class[] {Handler.class},
+                                new Class[]{Handler.class},
                                 invocationHandler);
         // call handle method
         proxy.handle("Test");

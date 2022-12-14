@@ -25,7 +25,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class SeqParallelPool {
 
-    /** 原始需求: 富贵, 旺财各自独立运行, 但是需要保持各自的顺序 */
+    /**
+     * 原始需求: 富贵, 旺财各自独立运行, 但是需要保持各自的顺序
+     */
     @Test
     public void targetLogic() {
         CoderDoSomeThing rich1 = new CoderDoSomeThing("富贵", "启动Idea");
@@ -41,7 +43,9 @@ public class SeqParallelPool {
         CoderDoSomeThing www5 = new CoderDoSomeThing("旺财", "心态崩了，卸载Idea");
     }
 
-    /** 富贵, 旺财 确实在并行, 但是各自的顺序没有保证 */
+    /**
+     * 富贵, 旺财 确实在并行, 但是各自的顺序没有保证
+     */
     @SneakyThrows
     @Test
     @Deprecated

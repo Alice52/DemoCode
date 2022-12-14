@@ -12,7 +12,7 @@ import org.junit.Test;
 public class MathTest {
 
     @Test
-    public void testCeil(/*向上取整*/ ) {
+    public void testCeil(/*向上取整*/) {
 
         log.info("ceil(-1.1): {}", Math.ceil(-1.1));
         log.info("ceil(-1.5): {}", Math.ceil(-1.5));
@@ -24,7 +24,7 @@ public class MathTest {
     }
 
     @Test
-    public void testRound(/*四舍五入*/ ) {
+    public void testRound(/*四舍五入*/) {
 
         log.info("round(-1.1): {}", Math.round(-1.1));
         log.info("round(-1.5): {}", Math.round(-1.5));

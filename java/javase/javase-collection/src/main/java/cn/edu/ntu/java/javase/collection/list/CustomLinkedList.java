@@ -15,8 +15,11 @@ public class CustomLinkedList<E> {
     transient Node<E> last;
     transient int modCount = 0;
 
-    /** Constructs an empty list. */
-    public CustomLinkedList() {}
+    /**
+     * Constructs an empty list.
+     */
+    public CustomLinkedList() {
+    }
 
     /**
      * 尾插法

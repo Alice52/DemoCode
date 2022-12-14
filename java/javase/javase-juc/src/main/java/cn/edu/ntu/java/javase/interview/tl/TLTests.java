@@ -18,25 +18,25 @@ public class TLTests {
         ThreadLocal<String> tl = new ThreadLocal<String>();
 
         new Thread(
-                        () -> {
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                                log.info("ThreadLocal content: {}", tl.get());
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        })
+                () -> {
+                    try {
+                        TimeUnit.SECONDS.sleep(2);
+                        log.info("ThreadLocal content: {}", tl.get());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                })
                 .start();
 
         new Thread(
-                        () -> {
-                            try {
-                                TimeUnit.SECONDS.sleep(1);
-                                tl.set("zack");
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        })
+                () -> {
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                        tl.set("zack");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                })
                 .start();
 
         while (Thread.activeCount() > 2) {

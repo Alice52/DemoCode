@@ -46,7 +46,7 @@ public class ProxyStrategyTest {
                                 // Get an array of Classes of interfaces implemented by the proxied
                                 // object:
                                 // target.getClass().getInterfaces()
-                                new Class<?>[] {Handler.class},
+                                new Class<?>[]{Handler.class},
                                 // Create an InvocationHandler object(usually using an anonymous
                                 // inner class)
                                 invocationHandler);

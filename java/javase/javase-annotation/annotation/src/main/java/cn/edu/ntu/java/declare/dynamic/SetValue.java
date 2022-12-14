@@ -17,10 +17,6 @@ import java.util.Map;
  */
 public class SetValue {
 
-    @Tag
-    public void tag() {
-    }
-
     /**
      * 在每一个类执行之前, 设置注解的属性
      *
@@ -44,9 +40,12 @@ public class SetValue {
         Assert.assertEquals("setAnnotation", value);
     }
 
-
     @SneakyThrows
     public static void main(String[] args) {
         beforeClass();
+    }
+
+    @Tag
+    public void tag() {
     }
 }

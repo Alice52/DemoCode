@@ -13,7 +13,8 @@ public class Person implements Serializable {
     private String name;
     private int age;
 
-    public Person() {}
+    public Person() {
+    }
 
     public Person(String name, int age) {
         this.name = name;
@@ -41,7 +42,9 @@ public class Person implements Serializable {
         return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
     }
 
-    /** test for Reflect */
+    /**
+     * test for Reflect
+     */
     public void testReflect() {
         System.out.println("Reflect");
     }

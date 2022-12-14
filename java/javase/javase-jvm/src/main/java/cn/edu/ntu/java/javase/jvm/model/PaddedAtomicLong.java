@@ -1,8 +1,5 @@
 package cn.edu.ntu.java.javase.jvm.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -18,7 +15,9 @@ public class PaddedAtomicLong extends AtomicLong {
      */
     public volatile long p1, p2, p3, p4, p5 = 7L;
 
-    /** Constructors from {@link AtomicLong} */
+    /**
+     * Constructors from {@link AtomicLong}
+     */
     public PaddedAtomicLong() {
         super();
     }
@@ -27,7 +26,9 @@ public class PaddedAtomicLong extends AtomicLong {
         super(initialValue);
     }
 
-    /** To prevent GC optimizations for cleaning unused padded references */
+    /**
+     * To prevent GC optimizations for cleaning unused padded references
+     */
     public long sumPaddingToPreventOptimization() {
         return p1 + p2 + p3 + p4 + p5;
     }

@@ -18,7 +18,9 @@ public class ChannelTest {
     private static final String TEST_DATA_PATH = "test-data.md";
     private static final String TEST_DATA_PATH_NEW = "test-data-new.md";
 
-    /** 功能：测试 channel 的分散写入、聚集读取 */
+    /**
+     * 功能：测试 channel 的分散写入、聚集读取
+     */
     @Test
     public void testCopyWithChannelAndRandomAccessFile() throws IOException {
 
@@ -62,7 +64,9 @@ public class ChannelTest {
         }
     }
 
-    /** 功能：利用Channel(方法1 getChannel() read/write) + 非直接缓冲区实现文件的复制 */
+    /**
+     * 功能：利用Channel(方法1 getChannel() read/write) + 非直接缓冲区实现文件的复制
+     */
     @Test
     public void testCopyWithChannelAndBuffer() throws IOException {
         FileChannel inChannel = null;
@@ -95,7 +99,9 @@ public class ChannelTest {
         }
     }
 
-    /** 功能：Channel中的数据传输 + 至二级缓冲区 */
+    /**
+     * 功能：Channel中的数据传输 + 至二级缓冲区
+     */
     @Test
     public void testChannelTransfer() throws IOException {
         FileChannel inChannel = null;
@@ -118,7 +124,9 @@ public class ChannelTest {
         }
     }
 
-    /** 功能：利用Channel(方法1 open()) + 非直接缓冲区实现文件的复制 */
+    /**
+     * 功能：利用Channel(方法1 open()) + 非直接缓冲区实现文件的复制
+     */
     @Test
     public void testCopyWithChannel() throws Exception {
         // 1.获取通道

@@ -47,10 +47,14 @@ public class MemoryLeakTest {
             onDestroy();
         }
 
-        /** This is for subClass overwrite. */
+        /**
+         * This is for subClass overwrite.
+         */
         abstract void onCreate();
 
-        /** This is for subClass overwrite. */
+        /**
+         * This is for subClass overwrite.
+         */
         abstract void onDestroy();
     }
 

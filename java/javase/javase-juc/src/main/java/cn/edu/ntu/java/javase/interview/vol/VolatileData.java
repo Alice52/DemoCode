@@ -46,7 +46,9 @@ public class VolatileData {
         number++;
     }
 
-    /** atomicInteger 前不需要 volatile, 可以保证原子性 */
+    /**
+     * atomicInteger 前不需要 volatile, 可以保证原子性
+     */
     public void plusAtomicInteger() {
         atomicInteger.getAndIncrement(); // i++
     }

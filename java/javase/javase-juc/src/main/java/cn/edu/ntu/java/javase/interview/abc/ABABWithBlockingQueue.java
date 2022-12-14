@@ -31,7 +31,9 @@ public class ABABWithBlockingQueue {
 
 @Slf4j
 class ResourceWithBlockingQueue {
-    /** 是否进行生产消费 */
+    /**
+     * 是否进行生产消费
+     */
     private volatile boolean flag = true;
 
     private AtomicInteger number = new AtomicInteger(0);
@@ -76,7 +78,9 @@ class ResourceWithBlockingQueue {
         }
     }
 
-    /** 停止生产消费 */
+    /**
+     * 停止生产消费
+     */
     public void stop() {
         flag = false;
     }

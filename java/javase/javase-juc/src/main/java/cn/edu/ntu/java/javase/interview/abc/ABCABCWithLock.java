@@ -22,7 +22,9 @@ public class ABCABCWithLock {
         // testShareResourceWith1Condition();
     }
 
-    /** A B C 顺序执行10次 */
+    /**
+     * A B C 顺序执行10次
+     */
     public static void testShareResourceWith1Condition() {
         ShareResourceWith1Condition data = new ShareResourceWith1Condition();
         new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> data.executeA(i)), "AAA").start();
@@ -30,7 +32,9 @@ public class ABCABCWithLock {
         new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> data.executeC(i)), "CCC").start();
     }
 
-    /** A B C 顺序执行10次 */
+    /**
+     * A B C 顺序执行10次
+     */
     public static void testResourceWithMoreCondition() {
         ResourceWithMoreCondition resource = new ResourceWithMoreCondition();
         new Thread(() -> IntStream.rangeClosed(0, 9).forEach(i -> resource.print5()), "AAA")
@@ -49,7 +53,9 @@ public class ABCABCWithLock {
 @Slf4j
 class ResourceWithMoreCondition {
 
-    /** 1 - A; 2 - B; 3 - C; */
+    /**
+     * 1 - A; 2 - B; 3 - C;
+     */
     volatile int flag = 1;
 
     private Lock lock = new ReentrantLock();
@@ -123,7 +129,9 @@ class ResourceWithMoreCondition {
 @Deprecated
 @Slf4j
 class ShareResourceWith1Condition {
-    /** flag: A-1; B-2; C-3; */
+    /**
+     * flag: A-1; B-2; C-3;
+     */
     private int flag = 1;
 
     private Lock lock = new ReentrantLock();

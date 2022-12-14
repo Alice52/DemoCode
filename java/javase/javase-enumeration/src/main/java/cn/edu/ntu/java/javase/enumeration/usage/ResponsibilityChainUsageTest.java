@@ -4,7 +4,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Message Type */
+/**
+ * Message Type
+ */
 enum MessageType {
     TEXT,
     BIN,
@@ -13,9 +15,13 @@ enum MessageType {
     UNKNOWN;
 }
 
-/** implements MessageHandlers based on enum */
+/**
+ * implements MessageHandlers based on enum
+ */
 enum MessageHandlers implements MessageHandler {
-    /** text handler */
+    /**
+     * text handler
+     */
     TEXT_HANDLER(MessageType.TEXT) {
         @Override
         boolean doHandle(Message message) {
@@ -23,7 +29,9 @@ enum MessageHandlers implements MessageHandler {
             return true;
         }
     },
-    /** bin handler */
+    /**
+     * bin handler
+     */
     BIN_HANDLER(MessageType.BIN) {
         @Override
         boolean doHandle(Message message) {
@@ -31,7 +39,9 @@ enum MessageHandlers implements MessageHandler {
             return true;
         }
     },
-    /** xml handler */
+    /**
+     * xml handler
+     */
     XML_HANDLER(MessageType.XML) {
         @Override
         boolean doHandle(Message message) {
@@ -39,7 +49,9 @@ enum MessageHandlers implements MessageHandler {
             return true;
         }
     },
-    /** json handler */
+    /**
+     * json handler
+     */
     JSON_HANDLER(MessageType.JSON) {
         @Override
         boolean doHandle(Message message) {
@@ -74,7 +86,9 @@ enum MessageHandlers implements MessageHandler {
     }
 }
 
-/** define message handler */
+/**
+ * define message handler
+ */
 interface MessageHandler {
     /**
      * handle difference type message.
@@ -109,7 +123,9 @@ public class ResponsibilityChainUsageTest {
     }
 }
 
-/** define message */
+/**
+ * define message
+ */
 class Message {
     private final MessageType type;
 
@@ -122,7 +138,9 @@ class Message {
     }
 }
 
-/** message handle chain */
+/**
+ * message handle chain
+ */
 class MessageHandlerChain {
     public boolean handle(Message message) {
         for (MessageHandler handler : MessageHandlers.values()) {

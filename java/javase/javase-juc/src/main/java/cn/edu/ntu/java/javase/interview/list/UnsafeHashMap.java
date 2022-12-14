@@ -37,15 +37,15 @@ public class UnsafeHashMap {
                 .forEach(
                         i ->
                                 new Thread(
-                                                () -> {
-                                                    String key = UUID.randomUUID().toString();
-                                                    unsafeMap.put(key, key);
-                                                    log.info("map: {}", unsafeMap); // exception
-                                                    log.info(
-                                                            "map: {}",
-                                                            unsafeMap.get(key)); // unsafe
-                                                },
-                                                "AAA" + i)
+                                        () -> {
+                                            String key = UUID.randomUUID().toString();
+                                            unsafeMap.put(key, key);
+                                            log.info("map: {}", unsafeMap); // exception
+                                            log.info(
+                                                    "map: {}",
+                                                    unsafeMap.get(key)); // unsafe
+                                        },
+                                        "AAA" + i)
                                         .start());
     }
 }

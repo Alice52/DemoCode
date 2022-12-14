@@ -42,7 +42,7 @@ public class MapReduceTests {
         IntStream.rangeClosed(1, 100)
                 .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
                 .boxed()
-                .map(b -> new int[] {a, b, (int) Math.sqrt(a * a + b * b)})
+                .map(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)})
                 .forEach(
                         arr ->
                                 System.out.println(

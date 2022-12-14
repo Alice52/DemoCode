@@ -30,16 +30,20 @@ public class JmhCompilerControl {
         new Runner(opt).run();
     }
 
-    public void targetBlank() {}
+    public void targetBlank() {
+    }
 
     @CompilerControl(CompilerControl.Mode.DONT_INLINE)
-    public void targetDontInline() {}
+    public void targetDontInline() {
+    }
 
     @CompilerControl(CompilerControl.Mode.INLINE)
-    public void targetInline() {}
+    public void targetInline() {
+    }
 
     @Benchmark
-    public void baseline() {}
+    public void baseline() {
+    }
 
     @Benchmark
     public void dontInline() {

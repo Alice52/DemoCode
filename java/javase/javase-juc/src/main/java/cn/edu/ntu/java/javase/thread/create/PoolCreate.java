@@ -38,7 +38,8 @@ public class PoolCreate {
      *        - 只会使用唯一的线程来工作
      * </pre>
      */
-    @Deprecated private static ExecutorService service = Executors.newScheduledThreadPool(10);
+    @Deprecated
+    private static ExecutorService service = Executors.newScheduledThreadPool(10);
 
     private static ThreadPoolExecutor executor =
             initThreadPoolExecutor(
@@ -79,37 +80,36 @@ public class PoolCreate {
      *      - 余下的 30 个使用 handler 进行拒绝
      *   </pre>
      *
-     * @param corePoolSize: 一直存在[除非线程池销毁或者设置{@code allowCoreThreadTimeOut}], 线程池创建好之后就准备就绪的线程数量,
-     *     等到接受异步任务去执行
+     * @param corePoolSize:    一直存在[除非线程池销毁或者设置{@code allowCoreThreadTimeOut}], 线程池创建好之后就准备就绪的线程数量,
+     *                         等到接受异步任务去执行
      * @param maximumPoolSize: 最多线程数量, 控制资源
-     * @param keepAliveTime: 当前线程数大于核心线程数后, 如果线程空闲大于 keepAliveTime 就会释放该线程, 释放的线程时 <code>
-     *      maximumPoolSize - corePoolSize </code>
-     * @param unit: keepAliveTime 的时间单位
-     * @param blockingQueue: 用于存放 Runnable 对象; 如果任务很多, 则多出来的将任务放入queue里, 只要有线程空闲了就会从queue里取出任务执行,
-     *     容量默认是 Integer 的最大值[一定要限制]
-     *     <pre>
-     *      1. {@link SynchronousQueue } 没有容量:
-     *            - 每一个插入操作都需要等待相应的删除操作, 反之亦然;
-     *            - 不会真的保存任务, 总是将任务直接交给线程执行, 没有空闲线程则创建新的线程, 线程数量达到最大值则使用 rejectHandler;
-     *            - 使用时建议设置很大的 pool-size
-     *      2. {@link ArrayBlockingQueue(int size) }:
-     *            - 如果有新的任务进来则就交给空闲线程执行;
-     *            - 无空闲则创建新的线程执行,
-     *            - 若大于最大线程数, 则加入 queue
-     *            - queue 满了则 reject-handler
-     *      3. {@link LinkedBlockingDeque(int capacity)}:
-     *            - 默认是容量无限的: 使用时一定要设置容量
-     *            - 如果有新的任务进来则就交给空闲线程执行;
-     *            - 无空闲则创建新的线程执行,
-     *            - 若大于最大线程数, 则加入 queue
-     *            - queue 满了则 reject-handler
-     *       4. {@link java.util.PriorityQueue(int capacity) }: 控制任务执行顺序
-     *    </pre>
-     *
-     * @param threadFactory: 线程创建工厂
-     * @param handler: 如果队列满了, 就使用指定的策略拒绝向 queue 里放任务 - DiscardOldestPolicy: 丢弃最老的任务 -
-     *     [默认]AbortPolicy: 直接丢弃新的任务, throw exception - CallerRunsPolicy: 转为同步调用 - DiscardPolicy:
-     *     直接丢弃新的任务, 不 throw exception
+     * @param keepAliveTime:   当前线程数大于核心线程数后, 如果线程空闲大于 keepAliveTime 就会释放该线程, 释放的线程时 <code>
+     *                         maximumPoolSize - corePoolSize </code>
+     * @param unit:            keepAliveTime 的时间单位
+     * @param blockingQueue:   用于存放 Runnable 对象; 如果任务很多, 则多出来的将任务放入queue里, 只要有线程空闲了就会从queue里取出任务执行,
+     *                         容量默认是 Integer 的最大值[一定要限制]
+     *                         <pre>
+     *                              1. {@link SynchronousQueue } 没有容量:
+     *                                    - 每一个插入操作都需要等待相应的删除操作, 反之亦然;
+     *                                    - 不会真的保存任务, 总是将任务直接交给线程执行, 没有空闲线程则创建新的线程, 线程数量达到最大值则使用 rejectHandler;
+     *                                    - 使用时建议设置很大的 pool-size
+     *                              2. {@link ArrayBlockingQueue(int size) }:
+     *                                    - 如果有新的任务进来则就交给空闲线程执行;
+     *                                    - 无空闲则创建新的线程执行,
+     *                                    - 若大于最大线程数, 则加入 queue
+     *                                    - queue 满了则 reject-handler
+     *                              3. {@link LinkedBlockingDeque(int capacity)}:
+     *                                    - 默认是容量无限的: 使用时一定要设置容量
+     *                                    - 如果有新的任务进来则就交给空闲线程执行;
+     *                                    - 无空闲则创建新的线程执行,
+     *                                    - 若大于最大线程数, 则加入 queue
+     *                                    - queue 满了则 reject-handler
+     *                               4. {@link java.util.PriorityQueue(int capacity) }: 控制任务执行顺序
+     *                            </pre>
+     * @param threadFactory:   线程创建工厂
+     * @param handler:         如果队列满了, 就使用指定的策略拒绝向 queue 里放任务 - DiscardOldestPolicy: 丢弃最老的任务 -
+     *                         [默认]AbortPolicy: 直接丢弃新的任务, throw exception - CallerRunsPolicy: 转为同步调用 - DiscardPolicy:
+     *                         直接丢弃新的任务, 不 throw exception
      * @return ThreadPoolExecutor Instance
      */
     public static ThreadPoolExecutor initThreadPoolExecutor(

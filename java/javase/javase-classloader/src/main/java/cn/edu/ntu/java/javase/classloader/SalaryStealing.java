@@ -24,7 +24,7 @@ public class SalaryStealing {
         cal(salary);
 
         // v2
-        URLClassLoader loader = new URLClassLoader(new URL[] {new URL("")});
+        URLClassLoader loader = new URLClassLoader(new URL[]{new URL("")});
         calV2(salary, loader);
 
         // v3: hot load

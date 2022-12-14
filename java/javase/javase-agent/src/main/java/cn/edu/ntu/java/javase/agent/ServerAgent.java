@@ -1,7 +1,7 @@
 package cn.edu.ntu.java.javase.agent;
 
-import cn.edu.ntu.java.javase.agent.common.WildcardMatcher;
 import cn.edu.ntu.java.javase.agent.common.TraceSession;
+import cn.edu.ntu.java.javase.agent.common.WildcardMatcher;
 import javassist.*;
 import javassist.bytecode.AccessFlag;
 
@@ -131,7 +131,8 @@ public class ServerAgent {
         private long begin;
         private Object[] args;
 
-        public TraceInfo() {}
+        public TraceInfo() {
+        }
 
         public TraceInfo(long begin, Object[] args) {
             this.begin = begin;

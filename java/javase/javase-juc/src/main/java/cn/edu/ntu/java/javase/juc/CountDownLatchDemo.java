@@ -18,11 +18,11 @@ public class CountDownLatchDemo {
         CountDownLatch cdl = new CountDownLatch(count);
         for (int i = 0; i < count; i++) {
             new Thread(
-                            () -> {
-                                LOG.info(Thread.currentThread().getName() + " leave room.");
-                                cdl.countDown();
-                            },
-                            String.valueOf(i))
+                    () -> {
+                        LOG.info(Thread.currentThread().getName() + " leave room.");
+                        cdl.countDown();
+                    },
+                    String.valueOf(i))
                     .start();
         }
         cdl.await();
@@ -32,8 +32,8 @@ public class CountDownLatchDemo {
     public static void closeDoor(int count) {
         for (int i = 0; i < count; i++) {
             new Thread(
-                            () -> LOG.info(Thread.currentThread().getName() + " leave room."),
-                            String.valueOf(i))
+                    () -> LOG.info(Thread.currentThread().getName() + " leave room."),
+                    String.valueOf(i))
                     .start();
         }
         LOG.info("no person in room, can close door!");

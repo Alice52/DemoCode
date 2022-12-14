@@ -4,7 +4,9 @@ import cn.edu.ntu.java.annotations.SeData;
 import com.sun.tools.javac.code.Flags;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree;
-import com.sun.tools.javac.util.*;
+import com.sun.tools.javac.util.List;
+import com.sun.tools.javac.util.ListBuffer;
+import com.sun.tools.javac.util.Name;
 
 import java.lang.annotation.Annotation;
 
@@ -14,7 +16,7 @@ import java.lang.annotation.Annotation;
  * @create 2022-12-14 00:28 <br/>
  * @project javas-jhm <br/>
  */
-public class DataProcessorV2 extends BaseProcessor{
+public class DataProcessorV2 extends BaseProcessor {
 
     @Override
     protected Class<? extends Annotation> anno() {
@@ -34,7 +36,7 @@ public class DataProcessorV2 extends BaseProcessor{
      * @param jcVariableDecl
      * @return
      */
-    private  JCTree.JCMethodDecl addGetterMethod(JCTree.JCVariableDecl jcVariableDecl) {
+    private JCTree.JCMethodDecl addGetterMethod(JCTree.JCVariableDecl jcVariableDecl) {
         //方法的访问级别
         JCTree.JCModifiers modifiers = treeMaker.Modifiers(Flags.PUBLIC);
         //方法名称

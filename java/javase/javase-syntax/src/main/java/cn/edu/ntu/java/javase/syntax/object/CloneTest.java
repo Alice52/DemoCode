@@ -63,7 +63,9 @@ public class CloneTest {
         Assert.isTrue(clone.get(0) == list.get(0));
     }
 
-    /** 需要 Address & Employee 实现序列化接口 */
+    /**
+     * 需要 Address & Employee 实现序列化接口
+     */
     @Test
     public void whenModifyingOriginalObject_thenSerializableShouldNotChange() {
 
@@ -76,7 +78,9 @@ public class CloneTest {
         Assert.isFalse(deepCopy.getAddress().getCity().equals(pm.getAddress().getCity()));
     }
 
-    /** 不需要 Address & Employee 实现序列化接口 */
+    /**
+     * 不需要 Address & Employee 实现序列化接口
+     */
     @Test
     public void whenModifyingOriginalObject_thenGsonCloneShouldNotChange() {
         Address address = new Address("xuzhou", "jiangsu");

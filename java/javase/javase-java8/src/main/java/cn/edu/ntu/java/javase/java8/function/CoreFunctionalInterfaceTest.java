@@ -27,7 +27,9 @@ public class CoreFunctionalInterfaceTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(CoreFunctionalInterfaceTest.class);
 
-    /** Consumer<T>: void accept(T t) */
+    /**
+     * Consumer<T>: void accept(T t)
+     */
     public void consume(double money, Consumer<Double> consumer) {
         consumer.accept(money);
     }

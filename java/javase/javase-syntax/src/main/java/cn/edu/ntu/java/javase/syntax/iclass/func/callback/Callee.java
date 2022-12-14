@@ -9,25 +9,25 @@ import lombok.extern.slf4j.Slf4j;
 public class Callee extends MyIncrement {
     private int i = 0;
 
+    public static void main(String[] args) {
+        Callee callee = new Callee();
+        callee.increment();
+        Incrementable callbackReference = callee.getCallbackReference();
+        callbackReference.increment();
+    }
+
     private void incr() {
         i++;
         log.info("{}", i);
-    }
-
-    private class Closure implements Incrementable {
-        public void increment() {
-            incr();
-        }
     }
 
     public Incrementable getCallbackReference() {
         return new Closure();
     }
 
-    public static void main(String[] args) {
-        Callee callee = new Callee();
-        callee.increment();
-        Incrementable callbackReference = callee.getCallbackReference();
-        callbackReference.increment();
+    private class Closure implements Incrementable {
+        public void increment() {
+            incr();
+        }
     }
 }

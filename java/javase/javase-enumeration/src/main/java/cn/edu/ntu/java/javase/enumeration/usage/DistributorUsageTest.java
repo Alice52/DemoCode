@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import java.util.EnumMap;
 import java.util.Map;
 
-/** message type */
+/**
+ * message type
+ */
 enum OperationType {
     LOGIN,
     ENTER_ROOM,
@@ -15,7 +17,9 @@ enum OperationType {
     LOGOUT
 }
 
-/** Operation handler */
+/**
+ * Operation handler
+ */
 interface OperationHandler {
     /**
      * handle difference operation.
@@ -39,7 +43,9 @@ public class DistributorUsageTest {
     }
 }
 
-/** message */
+/**
+ * message
+ */
 class Operation {
     private final OperationType type;
 
@@ -52,7 +58,9 @@ class Operation {
     }
 }
 
-/** Implements Operation Dispatcher based on EnumMap */
+/**
+ * Implements Operation Dispatcher based on EnumMap
+ */
 class OperationDispatcher {
 
     private static final Logger LOG = LoggerFactory.getLogger(OperationDispatcher.class);

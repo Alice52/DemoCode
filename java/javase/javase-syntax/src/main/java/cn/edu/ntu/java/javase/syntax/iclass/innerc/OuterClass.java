@@ -7,9 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public class OuterClass {
 
+    private static int sop;
     int a = 1;
     private int op;
-    private static int sop;
     private InnerClass innerClass = new InnerClass();
 
 

@@ -23,6 +23,7 @@ public class RunnableShareVariable {
     public static class AppleRunnable implements Runnable {
         // 这个变量是共享的: new AppleRunnable() 多个时彼此独立
         private int appleCount = 500;
+
         // 一次拿一个
         @SneakyThrows
         private synchronized boolean getApple() {
@@ -37,7 +38,9 @@ public class RunnableShareVariable {
             }
         }
 
-        /** 不停的拿, 拿到没有结束 */
+        /**
+         * 不停的拿, 拿到没有结束
+         */
         @Override
         public void run() {
             boolean flag = getApple();

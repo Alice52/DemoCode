@@ -48,11 +48,11 @@ public class WaitWake {
         TimeUnit.SECONDS.sleep(2);
 
         new Thread(
-                        () -> {
-                            log.info(" to do notify");
-                            LockSupport.unpark(threadA);
-                        },
-                        "BB")
+                () -> {
+                    log.info(" to do notify");
+                    LockSupport.unpark(threadA);
+                },
+                "BB")
                 .start();
     }
 
@@ -70,36 +70,36 @@ public class WaitWake {
         ReentrantLock lock = new ReentrantLock();
         Condition condition = lock.newCondition();
         new Thread(
-                        () -> {
-                            lock.lock();
-                            try {
-                                log.info("come in");
-                                condition.await();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
+                () -> {
+                    lock.lock();
+                    try {
+                        log.info("come in");
+                        condition.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
 
-                                lock.lock();
-                            }
-                            log.info("wake");
-                        },
-                        "AA")
+                        lock.lock();
+                    }
+                    log.info("wake");
+                },
+                "AA")
                 .start();
 
         new Thread(
-                        () -> {
-                            lock.lock();
-                            try {
-                                TimeUnit.SECONDS.sleep(2);
-                                log.info(" to do notify");
-                                condition.signal();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
-                                lock.unlock();
-                            }
-                        },
-                        "BB")
+                () -> {
+                    lock.lock();
+                    try {
+                        TimeUnit.SECONDS.sleep(2);
+                        log.info(" to do notify");
+                        condition.signal();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        lock.unlock();
+                    }
+                },
+                "BB")
                 .start();
     }
 
@@ -117,33 +117,33 @@ public class WaitWake {
         Object lock = new Object();
 
         new Thread(
-                        () -> {
-                            synchronized (lock) {
-                                try {
-                                    log.info("come in");
-                                    lock.wait();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                log.info("wake");
-                            }
-                        },
-                        "AA")
+                () -> {
+                    synchronized (lock) {
+                        try {
+                            log.info("come in");
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        log.info("wake");
+                    }
+                },
+                "AA")
                 .start();
 
         new Thread(
-                        () -> {
-                            synchronized (lock) {
-                                try {
-                                    TimeUnit.SECONDS.sleep(2);
-                                    log.info(" to do notify");
-                                    lock.notify();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        },
-                        "BB")
+                () -> {
+                    synchronized (lock) {
+                        try {
+                            TimeUnit.SECONDS.sleep(2);
+                            log.info(" to do notify");
+                            lock.notify();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                "BB")
                 .start();
     }
 }

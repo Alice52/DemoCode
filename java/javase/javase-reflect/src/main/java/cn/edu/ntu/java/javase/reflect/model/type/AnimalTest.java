@@ -10,7 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ServiceLoader;
 
 /**
  * @author zack <br>
@@ -21,10 +24,10 @@ public class AnimalTest {
     private static final Logger LOG = LoggerFactory.getLogger(AnimalTest.class);
 
     private static final String[] ANIMAL_TYPES =
-            new String[] {
-                "cn.edu.ntu.javase.reflect.model.impl.Cat",
-                "cn.edu.ntu.javase.reflect.model.impl.Dog",
-                "cn.edu.ntu.javase.reflect.model.impl.Elephant"
+            new String[]{
+                    "cn.edu.ntu.javase.reflect.model.impl.Cat",
+                    "cn.edu.ntu.javase.reflect.model.impl.Dog",
+                    "cn.edu.ntu.javase.reflect.model.impl.Elephant"
             };
 
     @Test

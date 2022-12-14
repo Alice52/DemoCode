@@ -50,7 +50,9 @@ public class CharsetTest {
         }
     }
 
-    /** 打印Charset中有多少种字符集 */
+    /**
+     * 打印Charset中有多少种字符集
+     */
     @Test
     public void testCharset() {
 

@@ -9,5 +9,5 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Inherited
 public @interface Serial {
-  String value() default "";
+    String value() default "";
 }

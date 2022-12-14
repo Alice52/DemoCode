@@ -48,7 +48,7 @@ public class DataProcessor extends AbstractProcessor {
                     public void visitClassDef(JCTree.JCClassDecl jcClassDecl) {
                         jcClassDecl.defs.stream().filter(tree -> tree.getKind().equals(Tree.Kind.VARIABLE))
                                 .map(tree -> (JCTree.JCVariableDecl) tree)
-                                 //.filter(x -> !x.getModifiers().getTree().toString().contains("final"))
+                                //.filter(x -> !x.getModifiers().getTree().toString().contains("final"))
                                 .forEach(jcVariableDecl -> {
                                     //添加get方法
                                     jcClassDecl.defs = jcClassDecl.defs.prepend(addGetterMethod(jcVariableDecl));
@@ -69,7 +69,7 @@ public class DataProcessor extends AbstractProcessor {
      * @param jcVariableDecl
      * @return
      */
-    private  JCTree.JCMethodDecl addGetterMethod(JCTree.JCVariableDecl jcVariableDecl) {
+    private JCTree.JCMethodDecl addGetterMethod(JCTree.JCVariableDecl jcVariableDecl) {
         //方法的访问级别
         JCTree.JCModifiers modifiers = treeMaker.Modifiers(Flags.PUBLIC);
         //方法名称

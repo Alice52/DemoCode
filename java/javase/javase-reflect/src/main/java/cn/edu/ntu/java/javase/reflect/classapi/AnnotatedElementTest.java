@@ -23,13 +23,16 @@ public class AnnotatedElementTest {
 
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface TestAnn1 {}
+    public @interface TestAnn1 {
+    }
 
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface TestAnn2 {}
+    public @interface TestAnn2 {
+    }
 
     @TestAnn1
     @TestAnn2
-    public class A {}
+    public class A {
+    }
 }

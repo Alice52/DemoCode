@@ -8,7 +8,9 @@ import java.util.List;
 import static cn.edu.ntu.java.javase.collection.ObjectFactory.persons;
 import static cn.edu.ntu.java.javase.collection.ObjectFactory.students;
 
-/** @author zack */
+/**
+ * @author zack
+ */
 public class ListWithGeneric {
 
     @Deprecated

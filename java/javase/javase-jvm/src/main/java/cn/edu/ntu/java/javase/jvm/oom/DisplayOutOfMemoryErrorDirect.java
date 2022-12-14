@@ -14,8 +14,6 @@ import java.util.OptionalLong;
 @Slf4j
 public class DisplayOutOfMemoryErrorDirect {
     /**
-     *
-     *
      * <pre>
      *     1. -Xms20m -Xmx20m -XX:MaxDirectMemorySize=5m
      *     2. java.lang.OutOfMemoryError: Direct buffer memory

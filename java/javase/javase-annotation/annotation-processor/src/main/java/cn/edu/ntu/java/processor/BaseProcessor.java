@@ -71,7 +71,7 @@ public abstract class BaseProcessor extends AbstractProcessor {
 
                                                         log.info("aaa: {}", x);
                                                     }
-                                                        );
+                                            );
                                         });
 
                         super.visitClassDef(jcClassDecl);

@@ -6,4 +6,5 @@ import cn.edu.ntu.java.annotations.Serial;
  * @author alice52
  */
 @Serial
-public class SerialTest {}
+public class SerialTest {
+}

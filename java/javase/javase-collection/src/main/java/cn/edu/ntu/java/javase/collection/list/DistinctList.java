@@ -22,7 +22,9 @@ public class DistinctList {
         numbers.forEach(System.out::println);
     }
 
-    /** Use LinkedHashSet to make sure sequence and unique */
+    /**
+     * Use LinkedHashSet to make sure sequence and unique
+     */
     public static void distinctByLinkedHashSet() {
         LinkedHashSet<Integer> hashSet = new LinkedHashSet<>(numbers);
         ArrayList<Integer> distinctNumbers = new ArrayList<>(hashSet);
@@ -61,7 +63,9 @@ public class DistinctList {
         numbers.addAll(result);
     }
 
-    /** i and j must start from zero */
+    /**
+     * i and j must start from zero
+     */
     @Deprecated
     public static void distinctForce() {
         for (int i = 0; i < numbers.size(); i++) {

@@ -15,7 +15,7 @@ public class ReflectionUtils {
     /**
      * 功能: 通过反射, 获取定义 Class 时声明的父类的泛型参数的类型 如: public EmployeeDao extends BaseDao<Employee,String>
      *
-     * @param clazz:子类对应的 class 对象
+     * @param clazz:子类对应的           class 对象
      * @param index:子类继承父类时传入的泛型索引, 从0开始
      */
     public static Class<?> getSupperClassGenericType(Class<?> clazz, int index) {
@@ -88,9 +88,9 @@ public class ReflectionUtils {
     /**
      * 自己定义的执行对象方法的方法1:invoke2(String className,String methodName, Object...args)
      *
-     * @param className: 调用方法所在的对象的全类名
+     * @param className:  调用方法所在的对象的全类名
      * @param methodName: 方法名, 该方法可能是私有方法, 也可能是父类的(私有)方法
-     * @param args: 方法所需的参数
+     * @param args:       方法所需的参数
      */
     public static Object invoke(String className, String methodName, Object... args) {
         try {
@@ -114,9 +114,9 @@ public class ReflectionUtils {
     /**
      * 自己定义的执行对象方法的方法1:invoke(Object obj,String methodName, Object...args)
      *
-     * @param obj: 调用方法所在的对象实例
+     * @param obj:        调用方法所在的对象实例
      * @param methodName: 方法名, 该方法可能是私有方法；
-     * @param args: 方法所需的参数
+     * @param args:       方法所需的参数
      */
     public static Object invoke(Object obj, String methodName, Object... args) throws Exception {
         // 1.找到这个方法
@@ -136,7 +136,7 @@ public class ReflectionUtils {
      *
      * @param clazz:
      * @param methodName: 方法名, 该方法可能是私有方法；
-     * @param args: 方法所需的参数
+     * @param args:       方法所需的参数
      */
     public static Object invoke(Class<?> clazz, String methodName, Object... args)
             throws Exception {

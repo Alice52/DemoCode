@@ -34,32 +34,32 @@ public class SpinLock {
         SpinLock lock = new SpinLock();
 
         new Thread(
-                        () -> {
-                            try {
-                                lock.Lock();
-                                TimeUnit.SECONDS.sleep(5);
-                            } catch (InterruptedException e) {
-                            } finally {
-                                lock.UnLock();
-                            }
-                        },
-                        "AAA")
+                () -> {
+                    try {
+                        lock.Lock();
+                        TimeUnit.SECONDS.sleep(5);
+                    } catch (InterruptedException e) {
+                    } finally {
+                        lock.UnLock();
+                    }
+                },
+                "AAA")
                 .start();
 
         // 保证 AAA 先获取到锁
         TimeUnit.SECONDS.sleep(1);
 
         new Thread(
-                        () -> {
-                            try {
-                                lock.Lock();
-                                TimeUnit.SECONDS.sleep(1);
-                            } catch (InterruptedException e) {
-                            } finally {
-                                lock.UnLock();
-                            }
-                        },
-                        "BBB")
+                () -> {
+                    try {
+                        lock.Lock();
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                    } finally {
+                        lock.UnLock();
+                    }
+                },
+                "BBB")
                 .start();
     }
 

@@ -20,7 +20,8 @@ public class ForkJoinTest extends RecursiveTask<Long> {
     private long start;
     private long end;
 
-    public ForkJoinTest() {}
+    public ForkJoinTest() {
+    }
 
     public ForkJoinTest(long start, long end) {
         this.start = start;

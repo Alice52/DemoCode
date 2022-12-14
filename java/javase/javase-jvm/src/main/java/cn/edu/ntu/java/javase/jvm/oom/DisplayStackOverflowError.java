@@ -14,7 +14,9 @@ public class DisplayStackOverflowError {
         stackOverflowError();
     }
 
-    /** java.lang.StackOverflowError */
+    /**
+     * java.lang.StackOverflowError
+     */
     private static void stackOverflowError() {
         stackOverflowError();
     }

@@ -5,16 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Deprecated
 public class MoreInherit {
-    private class test1 extends Example1 {
-        public String name() {
-            return super.name();
-        }
-    }
-
-    private class test2 extends Example2 {
-        public String address() {
-            return super.address();
-        }
+    public static void main(String args[]) {
+        MoreInherit mi = new MoreInherit();
+        log.info("姓名:" + mi.name());
+        log.info("地址:" + mi.age());
     }
 
     public String name() {
@@ -25,9 +19,15 @@ public class MoreInherit {
         return new test2().address();
     }
 
-    public static void main(String args[]) {
-        MoreInherit mi = new MoreInherit();
-        log.info("姓名:" + mi.name());
-        log.info("地址:" + mi.age());
+    private class test1 extends Example1 {
+        public String name() {
+            return super.name();
+        }
+    }
+
+    private class test2 extends Example2 {
+        public String address() {
+            return super.address();
+        }
     }
 }

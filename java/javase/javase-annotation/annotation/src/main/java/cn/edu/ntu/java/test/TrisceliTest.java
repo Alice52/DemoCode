@@ -8,6 +8,6 @@ import cn.edu.ntu.java.annotations.TrisceliVersion;
 public class TrisceliTest {
 
     @TrisceliVersion
-    private static final String version="";
+    private static final String version = "";
 }
 

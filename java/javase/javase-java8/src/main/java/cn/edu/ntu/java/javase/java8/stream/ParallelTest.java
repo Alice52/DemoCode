@@ -77,7 +77,7 @@ public class ParallelTest {
         log.info(
                 "parallel stream without box add consume time: "
                         + testCompareParallel(
-                                ParallelTest::testParallelStreamWithoutBox, 10000000));
+                        ParallelTest::testParallelStreamWithoutBox, 10000000));
         log.info(
                 "parallel stream built in add consume time: "
                         + testCompareParallel(ParallelTest::testParallelBuiltin, 10000000));

@@ -5,17 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class OuterClass {
+    private static int sop;
     int a = 1;
     private int op;
-    private static int sop;
     private InnerClass innerClass = new InnerClass();
 
     @Data
     public static class InnerClass {
-        int a = 2;
-
         static int sp;
-
+        int a = 2;
         private int ip;
 
         public void accessOp() {

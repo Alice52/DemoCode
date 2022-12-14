@@ -4,9 +4,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** implements state machine based on enum */
+/**
+ * implements state machine based on enum
+ */
 enum OrderState implements IOrderState {
-    /** CREATED state when order is created */
+    /**
+     * CREATED state when order is created
+     */
     CREATED {
         @Override
         public void cancel(OrderStateContext context) {
@@ -19,9 +23,10 @@ enum OrderState implements IOrderState {
             context.setState(CONFIRMED);
         }
     },
-    /** CONFIRMED state when order is confirm */
+    /**
+     * CONFIRMED state when order is confirm
+     */
     CONFIRMED {
-
         /** allow cancel operation and set state to CANCELED */
         @Override
         public void cancel(OrderStateContext context) {
@@ -40,13 +45,19 @@ enum OrderState implements IOrderState {
             context.setState(PAYED);
         }
     },
-    /** Canceled is freeze state when order is cancel() */
+    /**
+     * Canceled is freeze state when order is cancel()
+     */
     CANCELED {},
 
-    /** Canceled is freeze state when order is overtime() */
+    /**
+     * Canceled is freeze state when order is overtime()
+     */
     OVERTIME {},
 
-    /** CREATED state when order is pay() */
+    /**
+     * CREATED state when order is pay()
+     */
     PAYED {
         @Override
         public void cancel(OrderStateContext context) {
@@ -76,20 +87,30 @@ enum OrderState implements IOrderState {
 }
 
 interface IOrderState {
-    /** @param context */
+    /**
+     * @param context
+     */
     void cancel(OrderStateContext context);
 
-    /** @param context */
+    /**
+     * @param context
+     */
     void confirm(OrderStateContext context);
 
-    /** @param context */
+    /**
+     * @param context
+     */
     void timeout(OrderStateContext context);
 
-    /** @param context */
+    /**
+     * @param context
+     */
     void pay(OrderStateContext context);
 }
 
-/** State Context: for change order state */
+/**
+ * State Context: for change order state
+ */
 interface OrderStateContext {
     /**
      * this method is to change order state.
@@ -131,11 +152,15 @@ public class StateMachineUsageTest {
     }
 }
 
-/** order implements */
+/**
+ * order implements
+ */
 class Order {
     private OrderState state;
 
-    /** this is subClass and use it to change order state */
+    /**
+     * this is subClass and use it to change order state
+     */
     private StateContext stateContext = new StateContext();
 
     public Order() {
@@ -150,27 +175,37 @@ class Order {
         this.state = state;
     }
 
-    /** transfer request operation to enum state to handle */
+    /**
+     * transfer request operation to enum state to handle
+     */
     public void cancel() {
         this.state.cancel(stateContext);
     }
 
-    /** transfer request operation to enum state to handle */
+    /**
+     * transfer request operation to enum state to handle
+     */
     public void confirm() {
         this.state.confirm(stateContext);
     }
 
-    /** transfer request operation to enum state to handle */
+    /**
+     * transfer request operation to enum state to handle
+     */
     public void timeout() {
         this.state.timeout(stateContext);
     }
 
-    /** transfer request operation to enum state to handle */
+    /**
+     * transfer request operation to enum state to handle
+     */
     public void pay() {
         this.state.pay(stateContext);
     }
 
-    /** subClass: implements OrderStateContext to change Order state */
+    /**
+     * subClass: implements OrderStateContext to change Order state
+     */
     private class StateContext implements OrderStateContext {
 
         @Override
