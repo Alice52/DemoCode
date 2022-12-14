@@ -14,8 +14,7 @@ public class CustomAction extends RecursiveAction {
     private long start;
     private long end;
 
-    public CustomAction() {
-    }
+    public CustomAction() {}
 
     public CustomAction(long start, long end) {
         this.start = start;

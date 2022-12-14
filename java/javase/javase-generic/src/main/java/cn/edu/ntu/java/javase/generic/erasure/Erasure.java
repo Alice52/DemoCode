@@ -8,13 +8,11 @@ package cn.edu.ntu.java.javase.generic.erasure;
 public class Erasure<T> {
     T object;
 
-    public Erasure() {
-    }
+    public Erasure() {}
 
     public Erasure(T object) {
         this.object = object;
     }
 
-    public void add(T object) {
-    }
+    public void add(T object) {}
 }

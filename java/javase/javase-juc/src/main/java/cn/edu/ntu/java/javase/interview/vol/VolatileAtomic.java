@@ -17,13 +17,13 @@ public class VolatileAtomic {
         // 2. 50个线程执行 plus 方法 1k 次: 理论上 number 需要是 5w[证明原子性]
         for (int i = 0; i < 50; i++) {
             new Thread(
-                    () -> {
-                        for (int j = 0; j < 1000; j++) {
-                            data.plusOneForAtomicTest();
-                            data.plusAtomicInteger();
-                        }
-                    },
-                    "A" + i)
+                            () -> {
+                                for (int j = 0; j < 1000; j++) {
+                                    data.plusOneForAtomicTest();
+                                    data.plusAtomicInteger();
+                                }
+                            },
+                            "A" + i)
                     .start();
         }
 

@@ -9,5 +9,4 @@ import lombok.extern.slf4j.Slf4j;
  * @see Thread.State
  */
 @Slf4j
-public class ThreadStateTests {
-}
+public class ThreadStateTests {}

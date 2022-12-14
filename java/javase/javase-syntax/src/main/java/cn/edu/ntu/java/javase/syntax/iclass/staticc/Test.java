@@ -1,6 +1,5 @@
 package cn.edu.ntu.java.javase.syntax.iclass.staticc;
 
-
 import lombok.val;
 
 public class Test {

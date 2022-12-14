@@ -25,9 +25,7 @@ public class Test {
         testPriority();
     }
 
-    /**
-     * 设置优先级, 但是不一定准, 所以不用
-     */
+    /** 设置优先级, 但是不一定准, 所以不用 */
     private static void testPriority() {
         Thread priority = new JoinSleepThread();
         priority.start();
@@ -159,9 +157,7 @@ public class Test {
         // thread.run();
     }
 
-    /**
-     * 在 sleep 的时间内一定不会执行
-     */
+    /** 在 sleep 的时间内一定不会执行 */
     public static class JoinSleepThread extends Thread {
         @SneakyThrows
         @Override

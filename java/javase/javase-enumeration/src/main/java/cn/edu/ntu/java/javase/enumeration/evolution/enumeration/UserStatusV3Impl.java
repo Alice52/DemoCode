@@ -9,18 +9,14 @@ import org.slf4j.LoggerFactory;
  * @create 2020-01-31 18:05 <br>
  */
 public enum UserStatusV3Impl implements CodeBasedEnum {
-    /**
-     * arg code is no relative with ordinal
-     */
+    /** arg code is no relative with ordinal */
     ENABLE(1) {
         @Override
         public int code() {
             return 5;
         }
     },
-    /**
-     * DISABLE: code = 10
-     */
+    /** DISABLE: code = 10 */
     DISABLE(0) {
         @Override
         public int code() {

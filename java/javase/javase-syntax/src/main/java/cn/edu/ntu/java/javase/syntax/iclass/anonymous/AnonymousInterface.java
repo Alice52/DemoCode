@@ -10,8 +10,7 @@ import java.util.function.Consumer;
  * - anonymous inner class can define property，and can only used in local, <br>
  * - and cannot used in outer class due to no class name.<br>
  * 4. even cannot create or get anonymous instance.<br>
- * 5. anonymous just define implements and it will not execute besides call interface method.
- * <br>
+ * 5. anonymous just define implements and it will not execute besides call interface method. <br>
  * 6. create anonymous for each interface method call.<br>
  */
 interface AnonymousInterface {

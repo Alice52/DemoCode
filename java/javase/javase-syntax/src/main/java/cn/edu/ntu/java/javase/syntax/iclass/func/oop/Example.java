@@ -10,5 +10,4 @@ public class Example {
             System.out.println("这是一个测试");
         }
     }
-
 }

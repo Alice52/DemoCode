@@ -19,9 +19,7 @@ public class SoftRefer {
         testMemoryOutMemory();
     }
 
-    /**
-     * -XX:+PrintGCDetails -Xmx10m -Xms10m
-     */
+    /** -XX:+PrintGCDetails -Xmx10m -Xms10m */
     public static void testMemoryOutMemory() {
         Object o = new Object();
         SoftReference<Object> softReference = new SoftReference<>(o);

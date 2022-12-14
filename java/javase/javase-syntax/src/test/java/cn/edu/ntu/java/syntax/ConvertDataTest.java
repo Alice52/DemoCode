@@ -17,7 +17,7 @@ public class ConvertDataTest {
     @Test
     public void testConvertFromBytes() {
 
-        String str = ConvertData.convert(new byte[]{1, 2, 'f', 'e', 'z'});
+        String str = ConvertData.convert(new byte[] {1, 2, 'f', 'e', 'z'});
         log.info(str);
     }
 

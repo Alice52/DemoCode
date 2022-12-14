@@ -4,5 +4,4 @@ public class Example2 {
     public String address() {
         return "longjiazuo";
     }
-
 }

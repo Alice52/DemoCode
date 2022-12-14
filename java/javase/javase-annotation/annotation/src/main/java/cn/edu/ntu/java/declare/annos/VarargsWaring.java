@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 
-
 /**
  * 将抑制与varargs使用相关的未检查的警告
  *

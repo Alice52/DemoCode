@@ -8,13 +8,9 @@ import org.slf4j.LoggerFactory;
  * @create 2020-01-31 17:55 <br>
  */
 public enum UserStatusV2 {
-    /**
-     * now name is ENABLE
-     */
+    /** now name is ENABLE */
     ENABLE("可用"),
-    /**
-     * now name is DISABLE
-     */
+    /** now name is DISABLE */
     DISABLE("禁用");
 
     private static final Logger LOG = LoggerFactory.getLogger(UserStatusV2.class);

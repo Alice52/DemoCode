@@ -21,7 +21,8 @@ public class CollectTests {
     @Test
     public void testCollect() {
 
-        List<String> collect = StreamTest.EMPLOYEES.stream().map(Employee::getName).collect(toList());
+        List<String> collect =
+                StreamTest.EMPLOYEES.stream().map(Employee::getName).collect(toList());
         collect.forEach(System.out::println);
 
         HashSet<String> collect1 =

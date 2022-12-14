@@ -7,8 +7,7 @@ package cn.edu.ntu.java.javase.common.model;
 public class Student extends Person {
     private String school;
 
-    public Student() {
-    }
+    public Student() {}
 
     public Student(int age, String name, String school) {
         super(name, age);

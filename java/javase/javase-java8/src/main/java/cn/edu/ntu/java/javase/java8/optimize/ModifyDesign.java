@@ -60,9 +60,7 @@ public class ModifyDesign {
         System.out.println(emps2);
     }
 
-    /**
-     * 优化1: 使用 设计模式进行优化: 策略设计模式-接口 *
-     */
+    /** 优化1: 使用 设计模式进行优化: 策略设计模式-接口 * */
     public List<Employee> filterEmployee(List<Employee> employees, FilterInterface<Employee> fe) {
         List<Employee> emps = new ArrayList<>();
 
@@ -74,9 +72,7 @@ public class ModifyDesign {
         return emps;
     }
 
-    /**
-     * 过滤工资大于 5000 的员工*
-     */
+    /** 过滤工资大于 5000 的员工* */
     @Test
     public void testFilterEmployee3() {
 
@@ -95,9 +91,7 @@ public class ModifyDesign {
         emps2.forEach(System.out::println);
     }
 
-    /**
-     * 优化2: 使用 Stream 进行优化*
-     */
+    /** 优化2: 使用 Stream 进行优化* */
     @Test
     public void testFilterEmployee4() {
         EMPLOYEES.stream().filter((e) -> e.getSalary() > 5000).forEach(System.out::println);

@@ -21,7 +21,7 @@ public class List2Array {
         ArrayList<Integer> integers = new ArrayList<>(Arrays.asList(1, 2, 3));
 
         Object[] objects = integers.toArray();
-        Integer[] array = integers.toArray(new Integer[]{});
+        Integer[] array = integers.toArray(new Integer[] {});
         Arrays.stream(array).forEach(System.out::println);
     }
 }

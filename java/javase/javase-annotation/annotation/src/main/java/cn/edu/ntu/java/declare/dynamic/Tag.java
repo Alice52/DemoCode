@@ -18,5 +18,4 @@ public @interface Tag {
      * @return tag
      */
     String value() default "";
-
 }

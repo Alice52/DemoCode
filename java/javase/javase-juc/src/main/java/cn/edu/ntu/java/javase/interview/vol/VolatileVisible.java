@@ -18,21 +18,21 @@ public class VolatileVisible {
 
         // 2. 第一个线程: 3秒之后修改为 60
         new Thread(
-                () -> {
-                    log.info("thread: {} come in", Thread.currentThread().getName());
+                        () -> {
+                            log.info("thread: {} come in", Thread.currentThread().getName());
 
-                    try {
-                        TimeUnit.SECONDS.sleep(3);
-                    } catch (InterruptedException e) {
-                    }
-                    log.info(
-                            "thread: {} update number value to: {}",
-                            Thread.currentThread().getName(),
-                            data.number);
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException e) {
+                            }
+                            log.info(
+                                    "thread: {} update number value to: {}",
+                                    Thread.currentThread().getName(),
+                                    data.number);
 
-                    data.addTo60();
-                },
-                "AAA")
+                            data.addTo60();
+                        },
+                        "AAA")
                 .start();
 
         /**

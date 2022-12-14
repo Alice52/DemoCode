@@ -21,6 +21,8 @@ import java.util.Map;
 public class ErasureTest {
 
     /**
+     *
+     *
      * <pre>
      *     Map map = new HashMap(); // Map<Object, Object> map
      *     map.put("name", "hollis");
@@ -35,6 +37,8 @@ public class ErasureTest {
     }
 
     /**
+     *
+     *
      * <pre>
      *     getDeclaredMethod("add",Object.class): otherwise it will throw exception
      * </pre>

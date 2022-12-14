@@ -42,32 +42,32 @@ public class LockUpgrade {
         // 3. 轻量级锁: 多个线程加锁竞争[轻度](两个线程对同一个对象加锁就会升级为轻量级锁)
         // 3.1 指向 monitor, 且会把对象分带年龄存入其他的地方, 解锁的时候会写回来
         new Thread(
-                () -> {
-                    synchronized (p1) {
-                        // 00011111 11011100 11110100 01000000
-                        log.info(
-                                "轻量级锁状态(00): {}",
-                                ClassLayout.parseInstance(p1).toPrintable());
-                        // 不释放锁, 下面的锁会默认自旋10次[会有自适应调节], 升级为重量级锁
-                        try {
-                            TimeUnit.SECONDS.sleep(5);
-                        } catch (InterruptedException e) {
-                        }
-                    }
-                })
+                        () -> {
+                            synchronized (p1) {
+                                // 00011111 11011100 11110100 01000000
+                                log.info(
+                                        "轻量级锁状态(00): {}",
+                                        ClassLayout.parseInstance(p1).toPrintable());
+                                // 不释放锁, 下面的锁会默认自旋10次[会有自适应调节], 升级为重量级锁
+                                try {
+                                    TimeUnit.SECONDS.sleep(5);
+                                } catch (InterruptedException e) {
+                                }
+                            }
+                        })
                 .start();
 
         // 4. 重量级锁: 重度竞争[自适应自旋(默认10次)], 轻量级锁会升级为重量级锁
         // 4.1 指向 monitor, 且会把对象分带年龄存入其他的地方, 解锁的时候会写回来
         new Thread(
-                () -> {
-                    synchronized (p1) {
-                        // 00011100 10101000 11110100 11111010
-                        log.info(
-                                "重量级锁状态(10): {}",
-                                ClassLayout.parseInstance(p1).toPrintable());
-                    }
-                })
+                        () -> {
+                            synchronized (p1) {
+                                // 00011100 10101000 11110100 11111010
+                                log.info(
+                                        "重量级锁状态(10): {}",
+                                        ClassLayout.parseInstance(p1).toPrintable());
+                            }
+                        })
                 .start();
 
         TimeUnit.SECONDS.sleep(15);

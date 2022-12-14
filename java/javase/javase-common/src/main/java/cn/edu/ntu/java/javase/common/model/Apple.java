@@ -8,8 +8,7 @@ public class Apple {
     private String color;
     private int weight;
 
-    public Apple() {
-    }
+    public Apple() {}
 
     public Apple(String color, int weght) {
         this.color = color;

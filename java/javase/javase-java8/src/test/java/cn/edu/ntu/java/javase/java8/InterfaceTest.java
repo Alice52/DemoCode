@@ -55,11 +55,9 @@ public class InterfaceTest {
         }
     }
 
-    static class DD implements AA, BB {
-    }
+    static class DD implements AA, BB {}
 
-    static class EE extends CC implements BB {
-    }
+    static class EE extends CC implements BB {}
 
     // static class DDD implements AA, BBB{} //error
 }

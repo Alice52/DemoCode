@@ -9,5 +9,4 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2020-01-30 12:33
  */
 @Slf4j
-public class ObjectTest {
-}
+public class ObjectTest {}

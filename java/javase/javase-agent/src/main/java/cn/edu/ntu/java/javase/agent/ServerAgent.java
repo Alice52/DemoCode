@@ -131,8 +131,7 @@ public class ServerAgent {
         private long begin;
         private Object[] args;
 
-        public TraceInfo() {
-        }
+        public TraceInfo() {}
 
         public TraceInfo(long begin, Object[] args) {
             this.begin = begin;

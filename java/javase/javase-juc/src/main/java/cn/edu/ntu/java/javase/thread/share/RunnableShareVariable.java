@@ -38,9 +38,7 @@ public class RunnableShareVariable {
             }
         }
 
-        /**
-         * 不停的拿, 拿到没有结束
-         */
+        /** 不停的拿, 拿到没有结束 */
         @Override
         public void run() {
             boolean flag = getApple();

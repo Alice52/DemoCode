@@ -7,7 +7,5 @@ import cn.edu.ntu.java.annotations.TrisceliVersion;
  */
 public class TrisceliTest {
 
-    @TrisceliVersion
-    private static final String version = "";
+    @TrisceliVersion private static final String version = "";
 }
-

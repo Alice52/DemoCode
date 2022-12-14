@@ -39,9 +39,7 @@ public class ReflectAndGeneric {
     }
 }
 
-/**
- * 构造器的调用顺序：先调用父类的构造器，再调用子类的构造器<br>
- */
+/** 构造器的调用顺序：先调用父类的构造器，再调用子类的构造器<br> */
 class Dao<T, PK> {
     private Class<T> clazz;
 

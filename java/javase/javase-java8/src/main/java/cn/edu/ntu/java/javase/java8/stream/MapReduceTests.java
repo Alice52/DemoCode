@@ -42,7 +42,7 @@ public class MapReduceTests {
         IntStream.rangeClosed(1, 100)
                 .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
                 .boxed()
-                .map(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)})
+                .map(b -> new int[] {a, b, (int) Math.sqrt(a * a + b * b)})
                 .forEach(
                         arr ->
                                 System.out.println(
@@ -123,7 +123,8 @@ public class MapReduceTests {
 
     @Test
     public void testReduceV2() {
-        Double reduce1 = StreamTest.EMPLOYEES.stream().map(Employee::getSalary).reduce(0.0, (x, y) -> x + y);
+        Double reduce1 =
+                StreamTest.EMPLOYEES.stream().map(Employee::getSalary).reduce(0.0, (x, y) -> x + y);
         log.info(reduce1.toString());
 
         List<Employee> list = new ArrayList<>();

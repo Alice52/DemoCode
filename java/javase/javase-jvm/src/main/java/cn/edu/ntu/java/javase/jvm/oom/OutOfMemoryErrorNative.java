@@ -25,14 +25,14 @@ public class OutOfMemoryErrorNative {
         try {
             while (true) {
                 new Thread(
-                        () -> {
-                            try {
-                                TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        },
-                        "AA" + ++i)
+                                () -> {
+                                    try {
+                                        TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                },
+                                "AA" + ++i)
                         .start();
                 OptionalInt.of(i).ifPresent(System.out::println);
             }

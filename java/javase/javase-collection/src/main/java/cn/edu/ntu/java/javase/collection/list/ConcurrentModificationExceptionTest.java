@@ -24,21 +24,19 @@ public class ConcurrentModificationExceptionTest {
         //        });
     }
 
-    /**
-     * 同时读写一个 List 会出现 ConcurrentModificationException 异常
-     */
+    /** 同时读写一个 List 会出现 ConcurrentModificationException 异常 */
     public static void threadSafe() {
         ArrayList<String> unsafeList = new ArrayList<>();
         IntStream.rangeClosed(1, 1000)
                 .forEach(
                         i ->
                                 new Thread(
-                                        () -> {
-                                            String uuid = UUID.fastUUID().toString();
-                                            unsafeList.add(uuid);
-                                            log.info("{}", unsafeList);
-                                        },
-                                        "AAA" + i)
+                                                () -> {
+                                                    String uuid = UUID.fastUUID().toString();
+                                                    unsafeList.add(uuid);
+                                                    log.info("{}", unsafeList);
+                                                },
+                                                "AAA" + i)
                                         .start());
     }
 }

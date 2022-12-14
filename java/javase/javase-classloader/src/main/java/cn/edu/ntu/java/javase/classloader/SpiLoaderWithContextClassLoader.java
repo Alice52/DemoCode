@@ -19,9 +19,7 @@ public class SpiLoaderWithContextClassLoader {
         spiV1();
     }
 
-    /**
-     * 每次使用的时候都需要加载, 可以使用V2 对上下文进行切换不需要每次都加载
-     */
+    /** 每次使用的时候都需要加载, 可以使用V2 对上下文进行切换不需要每次都加载 */
     public static void spiV1() {
         // load(class, loader) 进行制定类加载器进行加载
         ServiceLoader<SpiInterface> spis =
@@ -35,9 +33,7 @@ public class SpiLoaderWithContextClassLoader {
         Optional.ofNullable(spi).ifPresent(System.out::println);
     }
 
-    /**
-     * 调整类加载器的上下文环境
-     */
+    /** 调整类加载器的上下文环境 */
     public static void spiV2() {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
 

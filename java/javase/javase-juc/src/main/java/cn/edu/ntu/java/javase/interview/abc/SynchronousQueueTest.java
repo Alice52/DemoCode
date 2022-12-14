@@ -22,37 +22,37 @@ public class SynchronousQueueTest {
         OptionalInt.of(bq.remainingCapacity()).ifPresent(System.out::println);
 
         new Thread(
-                () -> {
-                    try {
-                        log.info("put 50");
-                        bq.offer(50, 1, TimeUnit.SECONDS);
+                        () -> {
+                            try {
+                                log.info("put 50");
+                                bq.offer(50, 1, TimeUnit.SECONDS);
 
-                        log.info("put 51");
-                        bq.offer(51, 1, TimeUnit.SECONDS);
+                                log.info("put 51");
+                                bq.offer(51, 1, TimeUnit.SECONDS);
 
-                        log.info("put 52");
-                        bq.offer(52, 1, TimeUnit.SECONDS);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                },
-                "AA")
+                                log.info("put 52");
+                                bq.offer(52, 1, TimeUnit.SECONDS);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        "AA")
                 .start();
 
         new Thread(
-                () -> {
-                    try {
-                        Optional.of(bq.poll(1, TimeUnit.SECONDS))
-                                .ifPresent(System.out::println);
-                        Optional.of(bq.poll(1, TimeUnit.SECONDS))
-                                .ifPresent(System.out::println);
-                        Optional.of(bq.poll(1, TimeUnit.SECONDS))
-                                .ifPresent(System.out::println);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                },
-                "BB")
+                        () -> {
+                            try {
+                                Optional.of(bq.poll(1, TimeUnit.SECONDS))
+                                        .ifPresent(System.out::println);
+                                Optional.of(bq.poll(1, TimeUnit.SECONDS))
+                                        .ifPresent(System.out::println);
+                                Optional.of(bq.poll(1, TimeUnit.SECONDS))
+                                        .ifPresent(System.out::println);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        "BB")
                 .start();
     }
 }

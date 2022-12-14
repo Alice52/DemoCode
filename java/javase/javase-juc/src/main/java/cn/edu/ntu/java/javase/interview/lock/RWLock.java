@@ -6,5 +6,4 @@ package cn.edu.ntu.java.javase.interview.lock;
  * @project javase <br>
  * @see cn.edu.ntu.java.javase.juc.RWLock
  */
-public class RWLock {
-}
+public class RWLock {}

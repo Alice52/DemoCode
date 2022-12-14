@@ -19,56 +19,56 @@ public class ABASolutionTest {
     public static void main(String[] args) {
 
         new Thread(
-                () -> {
-                    // 需要 sleep 一下, 使得 BBB 可以拿到最初的版本号
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e) {
-                    }
+                        () -> {
+                            // 需要 sleep 一下, 使得 BBB 可以拿到最初的版本号
+                            try {
+                                TimeUnit.SECONDS.sleep(1);
+                            } catch (InterruptedException e) {
+                            }
 
-                    int stamp = atomicReference.getStamp();
-                    log.info(
-                            "thread name: {}, version: {}",
-                            Thread.currentThread().getName(),
-                            stamp);
-                    atomicReference.compareAndSet(100, 101, stamp, ++stamp);
-                    log.info(
-                            "thread name: {}, version: {}",
-                            Thread.currentThread().getName(),
-                            atomicReference.getStamp());
-                    atomicReference.compareAndSet(101, 100, stamp, ++stamp);
-                    log.info(
-                            "thread name: {}, version: {}",
-                            Thread.currentThread().getName(),
-                            atomicReference.getStamp());
-                },
-                "AAA")
+                            int stamp = atomicReference.getStamp();
+                            log.info(
+                                    "thread name: {}, version: {}",
+                                    Thread.currentThread().getName(),
+                                    stamp);
+                            atomicReference.compareAndSet(100, 101, stamp, ++stamp);
+                            log.info(
+                                    "thread name: {}, version: {}",
+                                    Thread.currentThread().getName(),
+                                    atomicReference.getStamp());
+                            atomicReference.compareAndSet(101, 100, stamp, ++stamp);
+                            log.info(
+                                    "thread name: {}, version: {}",
+                                    Thread.currentThread().getName(),
+                                    atomicReference.getStamp());
+                        },
+                        "AAA")
                 .start();
 
         new Thread(
-                () -> {
-                    try {
-                        int stamp = atomicReference.getStamp();
-                        log.info(
-                                "thread name: {}, version: {}",
-                                Thread.currentThread().getName(),
-                                stamp);
+                        () -> {
+                            try {
+                                int stamp = atomicReference.getStamp();
+                                log.info(
+                                        "thread name: {}, version: {}",
+                                        Thread.currentThread().getName(),
+                                        stamp);
 
-                        // 保证AAA线程完成一次ABA操作
-                        TimeUnit.SECONDS.sleep(3);
-                        boolean success =
-                                atomicReference.compareAndSet(100, 102, stamp, ++stamp);
+                                // 保证AAA线程完成一次ABA操作
+                                TimeUnit.SECONDS.sleep(3);
+                                boolean success =
+                                        atomicReference.compareAndSet(100, 102, stamp, ++stamp);
 
-                        log.info(
-                                "thread name: {}, change 100 to 102 success: {}, version: {}",
-                                Thread.currentThread().getName(),
-                                success,
-                                atomicReference.getStamp());
+                                log.info(
+                                        "thread name: {}, change 100 to 102 success: {}, version: {}",
+                                        Thread.currentThread().getName(),
+                                        success,
+                                        atomicReference.getStamp());
 
-                    } catch (InterruptedException e) {
-                    }
-                },
-                "BBB")
+                            } catch (InterruptedException e) {
+                            }
+                        },
+                        "BBB")
                 .start();
 
         // 等待 AAA, BBB 线程执行结束

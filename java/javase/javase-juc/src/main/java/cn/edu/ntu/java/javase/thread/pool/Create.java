@@ -8,5 +8,4 @@ import cn.edu.ntu.java.javase.thread.create.PoolCreate;
  * @project javase <br>
  * @see PoolCreate
  */
-public class Create {
-}
+public class Create {}

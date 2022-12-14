@@ -81,9 +81,7 @@ public class LambdaTest {
                 };
     }
 
-    /**
-     * 定制排序 Employee: 年龄-姓名*
-     */
+    /** 定制排序 Employee: 年龄-姓名* */
     @Test
     public void lambdaDemo() {
         Collections.sort(

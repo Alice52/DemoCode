@@ -13,8 +13,5 @@ public class HelloAnnotationUsage {
     private String anno;
 
     @HelloAnnotation(age = 12, major = "method")
-    public void test(@HelloAnnotation(age = 12, major = "parameter") String anno) {
-    }
+    public void test(@HelloAnnotation(age = 12, major = "parameter") String anno) {}
 }
-
-

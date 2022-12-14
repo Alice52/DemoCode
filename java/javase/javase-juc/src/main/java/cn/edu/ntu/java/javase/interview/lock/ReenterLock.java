@@ -43,9 +43,7 @@ public class ReenterLock {
         log.info("thread: {} synchronized -- set", Thread.currentThread().getName());
     }
 
-    /**
-     * Lock 只要成对出现就可以, 次数无关
-     */
+    /** Lock 只要成对出现就可以, 次数无关 */
     private static void m0() {
         lock.lock();
         lock.lock();

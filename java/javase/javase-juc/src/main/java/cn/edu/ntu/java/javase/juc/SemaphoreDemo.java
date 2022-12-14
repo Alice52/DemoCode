@@ -31,24 +31,24 @@ public class SemaphoreDemo {
 
         for (int i = 0; i < PARK_NUMBER * 2; i++) {
             new Thread(
-                    () -> {
-                        try {
-                            semaphore.acquire();
-                            LOG.info(
-                                    Thread.currentThread().getName()
-                                            + " get access to park");
+                            () -> {
+                                try {
+                                    semaphore.acquire();
+                                    LOG.info(
+                                            Thread.currentThread().getName()
+                                                    + " get access to park");
 
-                            TimeUnit.SECONDS.sleep(
-                                    new Random()
-                                            .nextInt(10)); // park random second, then leave
-                            LOG.info(Thread.currentThread().getName() + " leave park");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } finally {
-                            semaphore.release();
-                        }
-                    },
-                    String.valueOf(i))
+                                    TimeUnit.SECONDS.sleep(
+                                            new Random()
+                                                    .nextInt(10)); // park random second, then leave
+                                    LOG.info(Thread.currentThread().getName() + " leave park");
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    semaphore.release();
+                                }
+                            },
+                            String.valueOf(i))
                     .start();
         }
     }

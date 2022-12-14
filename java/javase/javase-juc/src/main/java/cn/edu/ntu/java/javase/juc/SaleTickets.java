@@ -27,8 +27,8 @@ public class SaleTickets {
         tickets.setNumber(NUMBER);
 
         new Thread(
-                () -> IntStream.rangeClosed(1, NUMBER * 2).forEach(i -> tickets.sale()),
-                "seller01")
+                        () -> IntStream.rangeClosed(1, NUMBER * 2).forEach(i -> tickets.sale()),
+                        "seller01")
                 .start();
         new Thread(() -> IntStream.rangeClosed(1, NUMBER).forEach(i -> tickets.sale()), "seller02")
                 .start();

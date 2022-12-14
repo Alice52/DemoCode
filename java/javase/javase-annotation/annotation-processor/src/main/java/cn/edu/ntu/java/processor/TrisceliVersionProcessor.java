@@ -17,9 +17,7 @@ import javax.tools.Diagnostic;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * {@link AbstractProcessor} 就属于 Pluggable Annotation Processing API
- */
+/** {@link AbstractProcessor} 就属于 Pluggable Annotation Processing API */
 public class TrisceliVersionProcessor extends AbstractProcessor {
 
     private JavacTrees javacTrees;

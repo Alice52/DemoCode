@@ -139,9 +139,7 @@ public class SocketTest {
         serverSocket.close();
     }
 
-    /**
-     * 客户端的Socket
-     */
+    /** 客户端的Socket */
     @Test
     public void testClientSocket() throws Exception {
         // 1.创建Socket对象：ip+port;同时会自动向服务器端发出请求
@@ -158,9 +156,7 @@ public class SocketTest {
         socket.close();
     }
 
-    /**
-     * 服务器端的Socket
-     */
+    /** 服务器端的Socket */
     @Test
     public void testServerSockeet() throws IOException {
         // 1.创建ServerSocket:

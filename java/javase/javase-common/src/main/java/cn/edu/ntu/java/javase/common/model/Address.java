@@ -10,8 +10,7 @@ public class Address implements Serializable {
     private String city;
     private String province;
 
-    public Address() {
-    }
+    public Address() {}
 
     public Address(String city, String province) {
         this.city = city;

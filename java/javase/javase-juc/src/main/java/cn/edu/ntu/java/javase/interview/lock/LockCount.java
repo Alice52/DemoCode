@@ -18,29 +18,29 @@ public class LockCount {
         ReentrantLock lock = new ReentrantLock();
 
         new Thread(
-                () -> {
-                    lock.lock();
-                    lock.lock();
-                    try {
-                        log.info("execute ...");
-                    } finally {
-                        lock.unlock();
-                        lock.unlock();
-                    }
-                },
-                "AA")
+                        () -> {
+                            lock.lock();
+                            lock.lock();
+                            try {
+                                log.info("execute ...");
+                            } finally {
+                                lock.unlock();
+                                lock.unlock();
+                            }
+                        },
+                        "AA")
                 .start();
 
         new Thread(
-                () -> {
-                    lock.lock();
-                    try {
-                        log.info("execute ...");
-                    } finally {
-                        lock.unlock();
-                    }
-                },
-                "B")
+                        () -> {
+                            lock.lock();
+                            try {
+                                log.info("execute ...");
+                            } finally {
+                                lock.unlock();
+                            }
+                        },
+                        "B")
                 .start();
     }
 }

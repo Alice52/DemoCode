@@ -17,8 +17,7 @@ public class CustomTask extends RecursiveTask<Long> {
     private long start;
     private long end;
 
-    public CustomTask() {
-    }
+    public CustomTask() {}
 
     public CustomTask(long start, long end) {
         this.start = start;

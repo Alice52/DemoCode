@@ -1,6 +1,5 @@
 package cn.edu.ntu.java.declare.dynamic;
 
-
 import lombok.SneakyThrows;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -11,7 +10,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Map;
 
-
 /**
  * @author alice2
  */
@@ -20,7 +18,7 @@ public class SetValue {
     /**
      * 在每一个类执行之前, 设置注解的属性
      *
-     * @throws NoSuchFieldException   if any
+     * @throws NoSuchFieldException if any
      * @throws IllegalAccessException if any
      */
     @BeforeClass
@@ -46,6 +44,5 @@ public class SetValue {
     }
 
     @Tag
-    public void tag() {
-    }
+    public void tag() {}
 }

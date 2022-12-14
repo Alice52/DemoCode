@@ -34,7 +34,7 @@ public abstract class BaseProcessor extends AbstractProcessor {
     public TreeMaker treeMaker;
     public Names names;
 
-    public List<Function<JCTree.JCVariableDecl, JCTree.JCMethodDecl>> customs = new ArrayList<>();
+    public List<Function<JCTree.JCVariableDecl, JCTree.JCMethodDecl>> c = new ArrayList<>();
 
     protected abstract Class<? extends Annotation> anno();
 
@@ -42,6 +42,7 @@ public abstract class BaseProcessor extends AbstractProcessor {
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
+        initCustom();
         super.init(processingEnv);
         this.trees = JavacTrees.instance(processingEnv);
         Context context = ((JavacProcessingEnvironment) processingEnv).getContext();
@@ -55,26 +56,14 @@ public abstract class BaseProcessor extends AbstractProcessor {
         TreeTranslator translator =
                 new TreeTranslator() {
                     @Override
-                    public void visitClassDef(JCTree.JCClassDecl jcClassDecl) {
-
-                        jcClassDecl.defs.stream()
+                    public void visitClassDef(JCTree.JCClassDecl f) {
+                        f.defs.stream()
                                 .filter(jcTree1 -> jcTree1.getKind().equals(Tree.Kind.VARIABLE))
                                 .map(jcTree2 -> (JCTree.JCVariableDecl) jcTree2)
                                 .forEach(
-                                        jcVariableDecl -> {
-                                            customs.forEach(
-                                                    x -> {
-                                                        jcClassDecl.defs =
-                                                                jcClassDecl.defs.prepend(
-                                                                        x.apply(
-                                                                                jcVariableDecl));
+                                        fi -> c.forEach(x -> f.defs = f.defs.prepend(x.apply(fi))));
 
-                                                        log.info("aaa: {}", x);
-                                                    }
-                                            );
-                                        });
-
-                        super.visitClassDef(jcClassDecl);
+                        super.visitClassDef(f);
                     }
                 };
 

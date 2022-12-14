@@ -1,6 +1,5 @@
 package cn.edu.ntu.java.processor;
 
-
 import cn.edu.ntu.java.annotations.Serial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

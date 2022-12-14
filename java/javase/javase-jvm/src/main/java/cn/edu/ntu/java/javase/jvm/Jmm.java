@@ -16,15 +16,15 @@ public class Jmm {
         TResource resource = new TResource();
 
         new Thread(
-                () -> {
-                    try {
-                        TimeUnit.SECONDS.sleep(3);
-                        resource.addTo100();
-                    } catch (InterruptedException e) {
-                        LOG.info("occurs exception: {}", e);
-                    }
-                },
-                "AA")
+                        () -> {
+                            try {
+                                TimeUnit.SECONDS.sleep(3);
+                                resource.addTo100();
+                            } catch (InterruptedException e) {
+                                LOG.info("occurs exception: {}", e);
+                            }
+                        },
+                        "AA")
                 .start();
 
         // notice

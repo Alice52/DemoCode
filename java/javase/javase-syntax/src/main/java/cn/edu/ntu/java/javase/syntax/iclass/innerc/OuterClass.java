@@ -12,7 +12,6 @@ public class OuterClass {
     private int op;
     private InnerClass innerClass = new InnerClass();
 
-
     public class InnerClass {
         // inner class cannot contains static properties.
         // private static int p;

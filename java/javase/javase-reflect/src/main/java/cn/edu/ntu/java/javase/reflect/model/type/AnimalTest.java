@@ -24,10 +24,10 @@ public class AnimalTest {
     private static final Logger LOG = LoggerFactory.getLogger(AnimalTest.class);
 
     private static final String[] ANIMAL_TYPES =
-            new String[]{
-                    "cn.edu.ntu.javase.reflect.model.impl.Cat",
-                    "cn.edu.ntu.javase.reflect.model.impl.Dog",
-                    "cn.edu.ntu.javase.reflect.model.impl.Elephant"
+            new String[] {
+                "cn.edu.ntu.javase.reflect.model.impl.Cat",
+                "cn.edu.ntu.javase.reflect.model.impl.Dog",
+                "cn.edu.ntu.javase.reflect.model.impl.Elephant"
             };
 
     @Test

@@ -51,16 +51,16 @@ public class UnsafeArrayList {
                 .forEach(
                         i ->
                                 new Thread(
-                                        () -> {
-                                            String uuid = UUID.fastUUID().toString();
-                                            // unsafeList.add(uuid);
-                                            // log.info("unsafeList: {}", unsafeList);
-                                            safeVector.add(uuid);
-                                            log.info("safeVector: {}", safeVector);
-                                            safeList.add(uuid);
-                                            log.info("safeList: {}", safeList);
-                                        },
-                                        "AAA" + i)
+                                                () -> {
+                                                    String uuid = UUID.fastUUID().toString();
+                                                    // unsafeList.add(uuid);
+                                                    // log.info("unsafeList: {}", unsafeList);
+                                                    safeVector.add(uuid);
+                                                    log.info("safeVector: {}", safeVector);
+                                                    safeList.add(uuid);
+                                                    log.info("safeList: {}", safeList);
+                                                },
+                                                "AAA" + i)
                                         .start());
 
         while (Thread.activeCount() > 2) {
