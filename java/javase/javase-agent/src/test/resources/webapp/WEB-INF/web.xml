@@ -6,7 +6,7 @@
          id="WebApp_ID" version="3.0">
     <servlet>
         <servlet-name>user</servlet-name>
-        <servlet-class>cn.edu.ntu.javase.agent.UserServlet</servlet-class>
+        <servlet-class>cn.edu.ntu.java.javase.agent.UserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>user</servlet-name>

@@ -43,7 +43,7 @@
                         <manifestEntries>
                             <project-name>${project.name}</project-name>
                             <project-version>${project.version}</project-version>
-                            <Premain-Class>cn.edu.ntu.javase.agent.IntegrationAgent</Premain-Class>
+                            <Premain-Class>cn.edu.ntu.java.javase.agent.IntegrationAgent</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                             <Can-Retransform-Classes>true</Can-Retransform-Classes>
                             <Boot-Class-Path>javassist-3.27.0-GA.jar</Boot-Class-Path>

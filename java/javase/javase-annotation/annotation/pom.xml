@@ -13,16 +13,15 @@
 
 
     <dependencies>
-
         <dependency>
             <groupId>cn.edu.ntu.java</groupId>
-            <artifactId>javase-common</artifactId>
+            <artifactId>annotation-processor</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>cn.edu.ntu.java</groupId>
-            <artifactId>annotation-processor</artifactId>
+            <artifactId>javase-common</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
