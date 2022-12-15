@@ -2,6 +2,8 @@ package cn.edu.ntu.java.processor;
 
 import com.sun.source.tree.Tree;
 import com.sun.tools.javac.api.JavacTrees;
+import com.sun.tools.javac.code.Symtab;
+import com.sun.tools.javac.code.Types;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.TreeMaker;
@@ -33,8 +35,9 @@ public abstract class BaseProcessor extends AbstractProcessor {
     public JavacTrees trees;
     public TreeMaker treeMaker;
     public Names names;
-
     public List<Function<JCTree.JCVariableDecl, JCTree.JCMethodDecl>> c = new ArrayList<>();
+    private Types types;
+    private Symtab syms;
 
     protected abstract Class<? extends Annotation> anno();
 
@@ -48,6 +51,8 @@ public abstract class BaseProcessor extends AbstractProcessor {
         Context context = ((JavacProcessingEnvironment) processingEnv).getContext();
         this.treeMaker = TreeMaker.instance(context);
         this.names = Names.instance(context);
+        this.types = Types.instance(context);
+        this.syms = Symtab.instance(context);
     }
 
     @Override

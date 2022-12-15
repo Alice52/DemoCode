@@ -57,6 +57,7 @@ public class DataProcessorV2 extends BaseProcessor {
         List<JCTree.JCTypeParameter> methodGenericParams = List.nil();
         List<JCTree.JCVariableDecl> parameters = List.nil();
         List<JCTree.JCExpression> throwsClauses = List.nil();
+
         // 构建方法
         return treeMaker.MethodDef(
                 modifiers,

@@ -1,2 +1,4 @@
 cn.edu.ntu.java.processor.DataProcessor
 cn.edu.ntu.java.processor.DataProcessorV2
+cn.edu.ntu.java.processor.TrisceliVersionProcessor
+cn.edu.ntu.java.processor.SerialProcessor

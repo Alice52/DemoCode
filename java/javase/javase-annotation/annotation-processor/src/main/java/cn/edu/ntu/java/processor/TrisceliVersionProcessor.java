@@ -48,26 +48,39 @@ public class TrisceliVersionProcessor extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         HashSet<String> set = new HashSet<>();
-        set.add(TrisceliVersion.class.getName()); // 支持解析的注解
+        // 支持解析的注解
+        set.add(TrisceliVersion.class.getName());
         return set;
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        for (TypeElement t : annotations) {
-            for (Element e :
-                    roundEnv.getElementsAnnotatedWith(t)) { // 获取到给定注解的element（element可以是一个类、方法、包等）
-                // JCVariableDecl 为字段/变量定义语法树节点
-                JCTree.JCVariableDecl jcv = (JCTree.JCVariableDecl) javacTrees.getTree(e);
-                String varType = jcv.vartype.type.toString();
-                if (!"java.lang.String".equals(varType)) { // 限定变量类型必须是String类型，否则抛异常
-                    printErrorMessage(e, "Type '" + varType + "'" + " is not support.");
-                }
-                jcv.init = treeMaker.Literal(getVersion()); // 给这个字段赋值，也就是getVersion的返回值
-            }
-        }
+
+        roundEnv.getElementsAnnotatedWith(TrisceliVersion.class).stream()
+                .map(element -> javacTrees.getTree(element))
+                .map(x -> (JCTree.JCVariableDecl) x)
+                .forEach(jcv -> jcv.init = treeMaker.Literal(getVersion()));
+
         return true;
     }
+
+    //    @Override
+    //    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv)
+    // {
+    //        for (TypeElement t : annotations) {
+    //            // 获取到给定注解的element（element可以是一个类、方法、包等）
+    //            for (Element e : roundEnv.getElementsAnnotatedWith(t)) {
+    //                // JCVariableDecl 为字段/变量定义语法树节点
+    //                JCTree.JCVariableDecl jcv = (JCTree.JCVariableDecl) javacTrees.getTree(e);
+    //                String varType = jcv.vartype.type.toString();
+    //                if (!"java.lang.String".equals(varType)) { // 限定变量类型必须是String类型，否则抛异常
+    //                    printErrorMessage(e, "Type '" + varType + "'" + " is not support.");
+    //                }
+    //                jcv.init = treeMaker.Literal(getVersion()); // 给这个字段赋值，也就是getVersion的返回值
+    //            }
+    //        }
+    //        return true;
+    //    }
 
     /**
      * 利用 processingEnv 内的 Messager 对象输出一些日志
