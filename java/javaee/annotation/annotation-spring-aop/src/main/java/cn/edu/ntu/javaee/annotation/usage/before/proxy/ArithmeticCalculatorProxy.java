@@ -46,41 +46,41 @@ public class ArithmeticCalculatorProxy {
     }
 
     //  /** mock up Proxy work */
-    //  class $Proxy0 extends Proxy implements ArithmeticCalculator {
-    //
-    //    /**
-    //     * Constructs a new {@code Proxy} instance from a subclass (typically, a dynamic proxy
-    // class)
-    //     * with the specified value for its invocation handler.
-    //     *
-    //     * @param h the invocation handler for this proxy instance
-    //     * @throws NullPointerException if the given invocation handler, {@code h}, is {@code
-    // null}.
-    //     */
-    //    protected $Proxy0(InvocationHandler h) {
-    //      super(h);
-    //    }
-    //
-    //    private Method METHOD_NAME;
-    //
-    //    @Override
-    //    public int add(int a, int b) throws Throwable {
-    //      return (int) h.invoke(this, METHOD_NAME, new Object[] {a, b});
-    //    }
-    //
-    //    @Override
-    //    public int sub(int a, int b) {
-    //      return 0;
-    //    }
-    //
-    //    @Override
-    //    public int mul(int a, int b) {
-    //      return 0;
-    //    }
-    //
-    //    @Override
-    //    public int div(int a, int b) {
-    //      return 0;
-    //    }
-    //  }
+    class $Proxy0 extends Proxy implements ArithmeticCalculator {
+
+     /**
+        * Constructs a new {@code Proxy} instance from a subclass (typically, a dynamic proxy
+    class)
+        * with the specified value for its invocation handler.
+        *
+        * @param h the invocation handler for this proxy instance
+        * @throws NullPointerException if the given invocation handler, {@code h}, is {@code
+    null}.
+        */
+       protected $Proxy0(InvocationHandler h) {
+         super(h);
+       }
+
+       private Method METHOD_NAME;
+
+       @Override
+       public int add(int a, int b) throws Throwable {
+         return (int) h.invoke(this, METHOD_NAME, new Object[] {a, b});
+       }
+
+       @Override
+       public int sub(int a, int b) {
+         return 0;
+       }
+
+       @Override
+       public int mul(int a, int b) {
+         return 0;
+       }
+
+       @Override
+       public int div(int a, int b) {
+         return 0;
+       }
+     }
 }
