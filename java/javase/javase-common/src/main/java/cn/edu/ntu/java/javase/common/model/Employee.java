@@ -12,6 +12,16 @@ public class Employee implements Serializable {
     private double salary;
     private Address address;
 
+    /*
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            Employee clone = (Employee) super.clone();
+            clone.address = (Address) clone.address.clone();
+
+            return clone;
+        }
+    */
+
     public Employee(String name, int age, double salary, Address address) {
         this.name = name;
         this.age = age;

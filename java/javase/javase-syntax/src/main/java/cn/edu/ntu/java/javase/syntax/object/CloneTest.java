@@ -23,7 +23,29 @@ public class CloneTest {
     // *******************************************
     // 浅克隆
     // *******************************************
+    @Test
+    public void testShadowClone4Map() {
+        HashMap<String, Address> map = new HashMap<>();
+        map.put("xuzhou", new Address("xuzhou", "jiangsu"));
+        map.put("nanjing", new Address("nanjing", "jiangsu"));
 
+        HashMap<String, Address> clone = (HashMap<String, Address>) map.clone();
+        Assert.isTrue(clone.get("nanjing") == map.get("nanjing"));
+    }
+
+    @Test
+    public void testShadowClone4List() {
+        ArrayList<Address> list = new ArrayList<>();
+        list.add(new Address("xuzhou", "jiangsu"));
+        list.add(new Address("nanjing", "jiangsu"));
+
+        ArrayList<Address> clone = (ArrayList<Address>) list.clone();
+        Assert.isTrue(clone.get(0) == list.get(0));
+    }
+
+    // *******************************************
+    // 深克隆1: 序列化(小推荐)
+    // *******************************************
     public static <T> T deepClone(T object) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -38,31 +60,6 @@ public class CloneTest {
             return null;
         }
     }
-
-    @Test
-    public void testShadowClone4Map() {
-        HashMap<String, Address> map = new HashMap<>();
-        map.put("xuzhou", new Address("xuzhou", "jiangsu"));
-        map.put("nanjing", new Address("nanjing", "jiangsu"));
-
-        HashMap<String, Address> clone = (HashMap<String, Address>) map.clone();
-        Assert.isTrue(clone.get("nanjing") == map.get("nanjing"));
-    }
-
-    // *******************************************
-    // 深克隆
-    // *******************************************
-
-    @Test
-    public void testShadowClone4List() {
-        ArrayList<Address> list = new ArrayList<>();
-        list.add(new Address("xuzhou", "jiangsu"));
-        list.add(new Address("nanjing", "jiangsu"));
-
-        ArrayList<Address> clone = (ArrayList<Address>) list.clone();
-        Assert.isTrue(clone.get(0) == list.get(0));
-    }
-
     /** 需要 Address & Employee 实现序列化接口 */
     @Test
     public void whenModifyingOriginalObject_thenSerializableShouldNotChange() {
@@ -76,6 +73,9 @@ public class CloneTest {
         Assert.isFalse(deepCopy.getAddress().getCity().equals(pm.getAddress().getCity()));
     }
 
+    // *******************************************
+    // 深克隆2: json(obj-str-obj)(小推荐)
+    // *******************************************
     /** 不需要 Address & Employee 实现序列化接口 */
     @Test
     public void whenModifyingOriginalObject_thenGsonCloneShouldNotChange() {
@@ -89,11 +89,7 @@ public class CloneTest {
         Assert.isFalse(deepCopy.getAddress().getCity().equals(pm.getAddress().getCity()));
     }
 
-    /**
-     * 不需要 Address & Employee 实现序列化接口
-     *
-     * @throws IOException
-     */
+    /** 不需要 Address & Employee 实现序列化接口 */
     @Test
     public void whenModifyingOriginalObject_thenJacksonCopyShouldNotChange() throws IOException {
         Address address = new Address("xuzhou", "jiangsu");
@@ -104,4 +100,14 @@ public class CloneTest {
         address.setCity("shanghai");
         Assert.isFalse(deepCopy.getAddress().getCity().equals(pm.getAddress().getCity()));
     }
+
+    // *******************************************
+    // 深克隆3: 递归 clone(小推荐), 逻辑上判断后复制
+    // *******************************************
+
+    // *******************************************
+    // 深克隆4: 重写最外层对象的 clone(不推荐)
+    // @see Employee#clone()
+    // *******************************************
+
 }
