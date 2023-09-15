@@ -1,8 +1,11 @@
 package cn.edu.ntu.java.javase.jvm;
 
+
 import cn.edu.ntu.java.javase.common.model.Person;
 import cn.edu.ntu.java.javase.jvm.model.PaddedAtomicLong;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.junit.Test;
 import org.openjdk.jol.info.ClassLayout;
 
@@ -19,6 +22,15 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 public class MemoryStruct {
+
+    @Test
+    public void testListStruct() { // 24 bytes
+
+        ArrayList<String> list = new ArrayList<>(1);
+        list.add("2955733203817413420");
+
+        log.info(ClassLayout.parseInstance("2955733203817413420").toPrintable());
+    }
 
     @Test
     public void testMapStruct() {

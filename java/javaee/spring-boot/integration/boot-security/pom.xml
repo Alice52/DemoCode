@@ -14,12 +14,6 @@
 
     <modules>
         <module>boot-security2</module>
-        <module>boot-security-oauth2</module>
-        <module>boot-security-shiro</module>
-        <module>boot-security-social</module>
-        <module>boot-security-justauth</module>
-        <module>boot-security-https</module>
-        <module>boot-security-jwt</module>
     </modules>
 
     <properties>

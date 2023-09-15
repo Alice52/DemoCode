@@ -24,9 +24,7 @@
         <module>boot-job</module>
         <module>boot-tool</module>
         <module>boot-security</module>
-        <module>boot-grpc</module>
         <module>boot-event</module>
-        <module>boot-advance</module>
         <module>boot-dubbo</module>
     </modules>
 
